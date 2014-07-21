@@ -1,0 +1,1 @@
+MidwifeClient.ApplicationAdapter = DS.FixtureAdapter;
