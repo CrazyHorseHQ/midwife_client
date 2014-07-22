@@ -1,0 +1,22 @@
+<div class="well">
+  <h1>Midwife</h1>
+
+  <table>
+    <tbody>
+      {{#each model.attributes}}
+      <tr>
+        <td>
+          <strong>{{this.key}}:&nbsp</strong>
+        </td>
+        <td>
+          {{this.value}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  {{#link-to 'midwife.edit' model}}Edit{{/link-to}}
+</div>
+
+{{outlet}}
