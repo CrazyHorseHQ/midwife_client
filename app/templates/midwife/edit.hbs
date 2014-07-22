@@ -1,5 +1,13 @@
 <h1>Midwife</h1>
 
+{{#if controllers.midwife.model.errors.messages}}
+  {{#each controllers.midwife.model.errors.messages}}
+    <div class="error">
+      {{this}}
+    </div>
+  {{/each}}
+{{/if}}
+
 <table>
   <tbody>
     {{#each buffer}}

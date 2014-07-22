@@ -3,12 +3,15 @@ MidwifeClient.MidwifeEditController = Ember.ObjectController.extend({
   actions: {
     save: function(){
       self = this
+      model = self.get('controllers.midwife.model')
       this.get('buffer').forEach(function(attr){
-        console.log(attr)
-        self.get('controllers.midwife.model').set(attr.key, attr.value);
+        model.set(attr.key, attr.value);
       });
-      this.transitionToRoute('midwife',this.get('model'));
+
+      model.save().then(function () {
+        log("success")
+      }, function(response) {
+      });
     }
   }
 });
-
