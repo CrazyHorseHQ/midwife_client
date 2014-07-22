@@ -1,0 +1,11 @@
+<div class="well">
+  <h1>Midwives</h1>
+
+  <ul>
+   {{#each model}}
+      <li>{{#link-to 'midwife' this}}{{this.id}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+</div>
+
+{{outlet}}
