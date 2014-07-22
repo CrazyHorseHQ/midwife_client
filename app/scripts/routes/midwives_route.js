@@ -3,4 +3,3 @@ MidwifeClient.MidwivesRoute = Ember.Route.extend({
     return this.get('store').find('midwife');
   }
 });
-

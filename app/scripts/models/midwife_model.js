@@ -1,5 +1,8 @@
 /*global Ember*/
-MidwifeClient.Midwife = DS.Model.extend({});
+MidwifeClient.Midwife = DS.Model.extend({
+  name: DS.attr(),
+  login_name: DS.attr()
+});
 
 // probably should be mixed-in...
 MidwifeClient.Midwife.reopen({
@@ -9,7 +12,6 @@ MidwifeClient.Midwife.reopen({
       return Em.Object.create({
         model: model,
         key: key,
-        val: model.get('data')[key],
         valueBinding: 'model.' + key });
     });
   }.property()
