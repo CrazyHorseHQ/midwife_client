@@ -1,0 +1,9 @@
+<h1>Appointments</h1>
+
+<ul>
+ {{#each model}}
+ <li>{{#link-to 'appointment' this}}{{this.id}}{{/link-to}}</li>
+  {{/each}}
+</ul>
+
+{{outlet}}
