@@ -2,7 +2,8 @@
 MidwifeClient.Midwife = DS.Model.extend({
   name: DS.attr(),
   loginName: DS.attr(),
-  active: DS.attr()
+  active: DS.attr(),
+  password: "********"
 });
 
 // probably should be mixed-in...

@@ -9,9 +9,8 @@ MidwifeClient.MidwifeEditController = Ember.ObjectController.extend({
       });
 
       model.save().then(function () {
-        log("success")
-      }, function(response) {
-      });
+        self.transitionToRoute('midwife', model);
+      }, function () {});
     }
   }
 });
