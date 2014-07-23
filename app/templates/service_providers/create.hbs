@@ -1,0 +1,17 @@
+<div class="well">
+  <h2>Add Service Provider</h2>
+
+  {{#if controllers.service_provider.model.errors.messages}}
+    {{#each controllers.service_provider.model.errors.messages}}
+      <div class="error">
+        {{this}}
+      </div>
+    {{/each}}
+  {{/if}}
+
+  {{#em-form model=model}}
+    {{em-input property="name" label="Full Name" placeholder="Enter a name..."}}
+    {{em-input property="username" label="Username" placeholder="Enter a username..."}}
+    {{em-input property="password" label="Password" placeholder="And password..." type="password"}}
+  {{/em-form}}
+</div>

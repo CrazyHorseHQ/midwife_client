@@ -1,0 +1,11 @@
+<div class="well">
+  <h1>Service Providers</h1>
+
+  <ul>
+   {{#each model}}
+      <li>{{#link-to 'service_provider' this}}{{name}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+</div>
+
+{{outlet}}

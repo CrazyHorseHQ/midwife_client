@@ -1,7 +1,7 @@
-MidwifeClient.Router.map(function () {
+SmartClient.Router.map(function () {
 
-  this.resource('midwives', function(){
-    this.resource('midwife', { path: '/:midwife_id' }, function(){
+  this.resource('service_providers', function(){
+    this.resource('service_provider', { path: '/:service_provider_id' }, function(){
       this.route('edit');
     });
     this.route('create');

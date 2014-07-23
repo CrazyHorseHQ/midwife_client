@@ -1,13 +1,12 @@
-/*global Ember*/
-MidwifeClient.Midwife = DS.Model.extend({
+SmartClient.ServiceProvider = DS.Model.extend({
   name: DS.attr(),
-  loginName: DS.attr(),
+  username: DS.attr(),
   active: DS.attr(),
   password: "********"
 });
 
 // probably should be mixed-in...
-MidwifeClient.Midwife.reopen({
+SmartClient.ServiceProvider.reopen({
   attributes: function(){
     var model = this;
     return Ember.keys(this.get('data')).map(function(key){

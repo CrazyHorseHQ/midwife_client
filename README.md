@@ -1,4 +1,4 @@
-midwife_client
+smart_client
 ==============
 
 Setup
@@ -8,7 +8,7 @@ Setup
 * ```npm install -g yo```
 * ```npm install -g grunt```
 
-```cd midwife_client && npm install && bower install```
+```cd smart_client && npm install && bower install```
 
 Running the client
 ------------------

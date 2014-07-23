@@ -1,6 +1,6 @@
-MidwifeClient.MidwifeEditRoute = Ember.Route.extend({
+SmartClient.ServiceProviderEditRoute = Ember.Route.extend({
   model: function(params) {
-    return this.get('store').find('midwife', this.modelFor('midwife').id);
+    return this.get('store').find('service_provider', this.modelFor('service_provider').id);
   },
   setupController: function(controller, model){
     controller.set('model', model);
