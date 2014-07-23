@@ -13,6 +13,7 @@
   {{/each}}
 </table>
 
-{{#link-to 'appointment.edit' model}}Change{{/link-to}}
+{{#link-to 'appointment.edit' model}}Change{{/link-to}} | 
+<a href="#" {{action "delete" this}}>Delete</a>
 
 {{outlet}}
