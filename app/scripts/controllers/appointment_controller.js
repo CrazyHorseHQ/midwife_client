@@ -1,4 +1,4 @@
-MidwifeClient.AppointmentController = Ember.ObjectController.extend({
+SmartClient.AppointmentController = Ember.ObjectController.extend({
   // Implement your controller here.
   needs: 'appointment',
   actions: {

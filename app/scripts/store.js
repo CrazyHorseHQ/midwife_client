@@ -1,3 +1,3 @@
-MidwifeClient.ApplicationAdapter = DS.ActiveModelAdapter.extend({
+SmartClient.ApplicationAdapter = DS.ActiveModelAdapter.extend({
   host: 'http://127.0.0.1:5000',
 });

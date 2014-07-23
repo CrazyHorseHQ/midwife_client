@@ -1,4 +1,4 @@
-var MidwifeClient = window.MidwifeClient = Ember.Application.create();
+var SmartClient = window.SmartClient = Ember.Application.create();
 window.log = function (msg) {
   console.log(msg);
 };

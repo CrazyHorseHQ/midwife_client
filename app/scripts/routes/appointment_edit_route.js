@@ -1,4 +1,4 @@
-MidwifeClient.AppointmentEditRoute = Ember.Route.extend({
+SmartClient.AppointmentEditRoute = Ember.Route.extend({
   model: function(params) {
     return this.get('store').find('appointment', this.modelFor('appointment').id);
   },

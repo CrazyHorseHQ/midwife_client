@@ -1,2 +1,2 @@
-MidwifeClient.AppointmentsView = Ember.View.extend({
+SmartClient.AppointmentsView = Ember.View.extend({
 });
