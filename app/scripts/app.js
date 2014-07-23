@@ -1,4 +1,7 @@
 var MidwifeClient = window.MidwifeClient = Ember.Application.create();
+window.log = function (msg) {
+  console.log(msg);
+};
 
 /* Order and include as you please. */
 require('scripts/controllers/*');

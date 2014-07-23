@@ -1,7 +1,8 @@
 /*global Ember*/
 MidwifeClient.Midwife = DS.Model.extend({
   name: DS.attr(),
-  login_name: DS.attr()
+  loginName: DS.attr(),
+  active: DS.attr()
 });
 
 // probably should be mixed-in...
