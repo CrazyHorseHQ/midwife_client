@@ -5,7 +5,7 @@ MidwifeClient.Appointment = DS.Model.extend({
   date: DS.attr(),
   time: DS.attr(),
   midwife_id: DS.attr(),
-  patient_id: DS.attr(),
+  service_user_id: DS.attr(),
   priority: DS.attr(),
   visit_type: DS.attr()
 });
