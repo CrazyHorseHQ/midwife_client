@@ -1,5 +1,6 @@
 <h1>Appointments</h1>
 
+{{#link-to 'appointments.create'}}New{{/link-to}}
 <ul>
  {{#each model}}
  <li>{{#link-to 'appointment' this}}{{this.id}}{{/link-to}}</li>
