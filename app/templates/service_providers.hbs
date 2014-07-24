@@ -1,6 +1,10 @@
 <div class="well">
   <h1>Service Providers</h1>
 
+  <button type="button" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-plus"></span> {{#link-to 'service_providers.create'}}Add{{/link-to}}
+  </button>
+
   <ul>
    {{#each model}}
       <li>{{#link-to 'service_provider' this}}{{name}}{{/link-to}}</li>

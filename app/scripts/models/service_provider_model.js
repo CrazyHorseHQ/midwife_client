@@ -2,7 +2,7 @@ SmartClient.ServiceProvider = DS.Model.extend({
   name: DS.attr(),
   username: DS.attr(),
   active: DS.attr(),
-  password: "********"
+  password: DS.attr()
 });
 
 // probably should be mixed-in...
