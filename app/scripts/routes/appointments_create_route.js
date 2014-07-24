@@ -1,4 +1,4 @@
-MidwifeClient.AppointmentsCreateRoute = Ember.Route.extend({
+SmartClient.AppointmentsCreateRoute = Ember.Route.extend({
   model: function(params) {
     return this.get('store').createRecord('appointment', {});
   },
