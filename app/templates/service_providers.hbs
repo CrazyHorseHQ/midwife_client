@@ -7,7 +7,7 @@
 
   <ul>
    {{#each model}}
-      <li>{{#link-to 'service_provider' this}}{{name}}{{/link-to}}</li>
+      <li>{{#link-to 'service_provider' this}}{{name}}{{/link-to}} | <a href="#" {{action activate this}}>{{activated_text}}</a></li>
     {{/each}}
   </ul>
 </div>

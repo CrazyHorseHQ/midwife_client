@@ -2,7 +2,11 @@ SmartClient.ServiceProvider = DS.Model.extend({
   name: DS.attr(),
   username: DS.attr(),
   active: DS.attr(),
-  password: DS.attr()
+  password: DS.attr(),
+
+  activated_text: function () {
+    return this.get('active') ? "Deactivate" : "Activate"
+  }.property("active")
 });
 
 // probably should be mixed-in...

@@ -1,3 +1,8 @@
 SmartClient.ServiceProvidersController = Ember.ObjectController.extend({
-  // Implement your controller here.
+  actions: {
+    activate: function (model) {
+      model.toggleProperty('active');
+      model.save()
+    }
+  }
 });
