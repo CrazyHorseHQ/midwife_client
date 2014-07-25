@@ -1,9 +1,47 @@
 <h1>Appointments</h1>
 
 {{#link-to 'appointments.create'}}New{{/link-to}}
+
+<br/>
+Filters: 
+<span class="filters">
+  Post-Natal only: {{view Ember.Checkbox checkedBinding="postNatalOnly"}} | 
+  Emergency only: {{view Ember.Checkbox checkedBinding="emergencyOnly"}} |
+  Service Provider: 
+  {{view Ember.Select 
+          content=service_providers 
+          prompt="Filter by Service Provider"
+          value=selectedSP
+          name=selectedSP
+          }}
+  <button {{action 'clearFilters'}} type="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-remove"></span>
+    Clear
+  </button>
+</span>
+<br/>
+<br/>
+
+Dates:
+<div class="btn-group">
+  {{#each dates}}
+    <button 
+      {{action 'filterByDate' this}} type="button" class="btn btn-default
+">
+ {{this}}
+</button>
+  {{/each}}
+</div>
+<br/>
+<br/>
+
 <ul>
  {{#each model}}
- <li>{{#link-to 'appointment' this}}{{this.id}}{{/link-to}}</li>
+ <li>
+    {{#link-to 'appointment' this}}
+      {{this.date}} {{this.time}} : {{this.id}}
+       | {{this.visit_type}} | {{this.service_user_id}}
+    {{/link-to}}</li>
   {{/each}}
 </ul>
 

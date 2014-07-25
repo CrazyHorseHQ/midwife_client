@@ -6,7 +6,12 @@ SmartClient.Appointment = DS.Model.extend({
   service_provider_id: DS.attr(),
   service_user_id: DS.attr(),
   priority: DS.attr(),
-  visit_type: DS.attr()
+  visit_type: DS.attr(),
+
+  // Allow deletion if entry is in the future
+  canDelete: function() {
+    return this.get('date') > moment().format('YYYY-MM-DD')
+  }.property('date')
 });
 
 // probably should be mixed-in...

@@ -1,7 +1,7 @@
 <h1>Add Appointment</h1>
 
-{{#if controllers.appointment.model.errors.messages}}
-  {{#each controllers.appointment.model.errors.messages}}
+{{#if model.errors.messages}}
+  {{#each model.errors.messages}}
     <div class="error">
       {{this}}
     </div>
