@@ -26,11 +26,11 @@ Dates:
 <div class="btn-group">
   {{#each dates}}
     <button 
-      {{action 'filterByDate' this}} 
+      {{action 'filterByDate' this.date}} 
       type="button" 
-      {{bind-attr class=":btn :btn-default (this.fmt() == selectedDate):btn-info"}}>
- {{this}}
-</button>
+      {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
+        {{this.date}}
+    </button>
   {{/each}}
 </div>
 <br/>

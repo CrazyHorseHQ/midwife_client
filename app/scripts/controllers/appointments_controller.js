@@ -1,9 +1,14 @@
 SmartClient.AppointmentsController = Ember.ArrayController.extend({
   // Helpers to get the filters
   dates: function() { 
-    dates = this.get('all').mapBy('date').toArray().uniq();
+    var self = this;
+    var dates = this.get('all').mapBy('date').toArray().uniq();
     dates.unshiftObject('All');
-    return dates;
+    var datesList = dates.map(function(d) {
+      var selected = (d == self.get('selectedDate') || (d == 'All' && !self.get('selectedDate')));
+      return Ember.Object.create({selected: selected, date: d});
+    });
+    return datesList;
   }.property('model.date'),
 
   service_providers: function() { 
