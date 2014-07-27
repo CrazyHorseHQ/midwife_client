@@ -10,8 +10,13 @@ SmartClient.Appointment = DS.Model.extend({
 
   // Allow deletion if entry is in the future
   canDelete: function() {
-    return this.get('date') > moment().format('YYYY-MM-DD')
-  }.property('date')
+    return this.get('date') > moment().format('YYYY-MM-DD');
+  }.property('date'),
+
+  // 
+  calendarDateTime: function() {
+    return moment(this.get('date')+this.get('time'), "YYYY-MM-DDhh:mm:ss").calendar();
+  }.property('date'),
 });
 
 // probably should be mixed-in...
