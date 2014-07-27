@@ -1,6 +1,13 @@
 SmartClient.AppointmentsCreateController = Ember.ObjectController.extend({
   needs: 'appointment',
-  visit_typeL: ['ante-natal', 'post-natal'],
+  visit_types: [
+    {id: 'ante-natal', name: 'Ante-Natal'}, 
+    {id: 'post-natal', name: 'Post-Natal'}
+  ],
+  priorities: [
+    {id: 'other', name: 'Other'}, 
+    {id: 'emergency', name: 'Emergency'}
+  ],
 
   actions: {
     submit: function () {

@@ -14,6 +14,6 @@
   {{em-input property="time" label="Time" placeholder="HH:MM:SS"}}
   {{em-input property="service_provider_id" label="Service Provider" placeholder="Select service provider name..."}}
   {{em-input property="service_user_id" label="Service User" placeholder="Select a service user"}}
-  {{em-input property="priority" label="Priority" placeholder="Other|Emergency"}}
-  {{em-input property="visit_type" label="Time" placeholder="Ante- or Post-natal"}}
+  {{em-select property="priority" label="Priority" content=priorities optionValuePath="content.id" optionLabelPath="content.name"}}
+  {{em-select property="visit_type" label="Visit" content=visit_types optionValuePath="content.id" optionLabelPath="content.name"}}
 {{/em-form}}
