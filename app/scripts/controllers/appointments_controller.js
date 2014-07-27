@@ -15,6 +15,10 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return this.get('all').mapBy('service_provider_id').toArray().uniq();
   }.property('model.service_provider_id'),
 
+  categories: function() { 
+    return this.get('all').mapBy('appointment_category_id').toArray().uniq();
+  }.property('model.appointment_category_id'),
+
   all: function() {
     return this.get('store').all('appointment');
   }.property('model.@each'),
@@ -24,10 +28,11 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   emergencyOnly: false,
   selectedDate: false,
   selectedSP: false,
+  selectedCategory: false,
 
   filterDidChange: function() {
     this.applyFilters();
-  }.observes('postNatalOnly', 'emergencyOnly', 'selectedDate', 'selectedSP'),
+  }.observes('postNatalOnly', 'emergencyOnly', 'selectedDate', 'selectedSP', 'selectedCategory'),
 
   // Filter helpers
   postNatalFilter: function(content) {
@@ -46,6 +51,10 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return this.filterHelper(content, 'service_provider_id', sp);
   },
 
+  categoryFilter: function(content, category) {
+    return this.filterHelper(content, 'appointment_category_id', category);
+  },
+
   filterHelper: function(content, key, value) {
     return content.filter(function(item) {
       return item.get(key) == value;
@@ -56,6 +65,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   applyFilters: function() {
     var selectedDate = this.get('selectedDate');
     var selectedSP = this.get('selectedSP');
+    var selectedCategory = this.get('selectedCategory');
     var postNatal = this.get('postNatalOnly');
     var emergency = this.get('emergencyOnly');
     var appointments = this.get('all');
@@ -67,6 +77,10 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
     if (selectedSP) {
       appointments = this.spFilter(appointments, selectedSP);
+    }
+
+    if (selectedCategory) {
+      appointments = this.categoryFilter(appointments, selectedCategory);
     }
 
     if (postNatal) {
@@ -95,6 +109,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       //TODO FIXME how to change the checkbox state from here? or from the view?
       this.set('selectedDate', false);
       this.set('selectedSP', false);
+      this.set('selectedCategory', false);
       this.set('postNatal', false);
       this.set('emergency', false);
       this.applyFilters();
