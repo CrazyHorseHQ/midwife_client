@@ -1,0 +1,17 @@
+<div class="well">
+  <h1>Service Users</h1>
+
+  {{#link-to 'service_users.create'}}
+    <button type="button" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-plus"></span> Add
+    </button>
+  {{/link-to}}
+
+  <ul>
+   {{#each model}}
+   <li>{{#link-to 'service_user' this}}{{this.name}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+</div>
+
+{{outlet}}

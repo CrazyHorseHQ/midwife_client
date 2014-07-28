@@ -1,0 +1,23 @@
+<div class="well">
+  <h2>Add Service User</h2>
+
+  {{#if model.errors.messages}}
+    {{#each model.errors.messages}}
+      <div class="error">
+        {{this}}
+      </div>
+    {{/each}}
+  {{/if}}
+
+  {{#em-form model=model}}
+    {{em-input property="name" label="Full Name" placeholder="Enter a full name"}}
+    {{em-input property="email" label="Email" placeholder="Enter an email..."}}
+    {{em-text property="address" label="Address" placeholder=""}}
+    {{em-text property="directions" label="Directions" placeholder=""}}
+    {{em-input property="hospital_number" label="Hospital Number" placeholder=""}}
+    {{em-input property="home_phone" label="Home Phone" placeholder=""}}
+    {{em-input property="mobile_phone" label="Personal Phone" placeholder=""}}
+    {{em-input property="partner_phone" label="Partner Phone" placeholder=""}}
+    {{em-input property="estimated_delivery_date" label="EDD" placeholder="" type="date"}}
+  {{/em-form}}
+</div>
