@@ -19,7 +19,18 @@ Filters:
   </div>
   <br/>
 
-  Emergency only: {{view Ember.Checkbox checkedBinding="emergencyOnly"}} |
+  Priority:
+  <div class="btn-group">
+    {{#each priorities}}
+      <button
+        {{action 'filterByPriority' this.id}}
+        type="button"
+        {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
+          {{this.name}}
+      </button>
+    {{/each}}
+  </div>
+  <br/>
   Service Provider:
   {{view Ember.Select
           content=service_providers

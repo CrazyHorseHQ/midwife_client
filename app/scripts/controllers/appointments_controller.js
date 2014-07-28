@@ -28,28 +28,37 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     });
   }.property('model.visit_type'),
 
+  priorities: function(){
+    var self = this;
+    var priorities = self.get('all').mapBy('priority').toArray().uniq()
+    return priorities.map(function(p) {
+      var selected = (p == self.get('selectedPriority'));
+      return Ember.Object.create({id: p, name: p.capitalize(), selected: selected});
+    });
+  }.property('model.priority'),
+
   all: function() {
     return this.get('store').all('appointment');
   }.property('model.@each'),
 
   // Filter toggles and trigger
   selectedVisitType: false,
-  emergencyOnly: false,
+  selectedPriority: false,
   selectedDate: false,
   selectedSP: false,
   selectedCategory: false,
 
   filterDidChange: function() {
     this.applyFilters();
-  }.observes('selectedVisitType', 'emergencyOnly', 'selectedDate', 'selectedSP', 'selectedCategory'),
+  }.observes('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedCategory'),
 
   // Filter helpers
   visitTypeFilter: function(content, visitType) {
     return this.filterHelper(content, 'visit_type', visitType);
   },
 
-  emergencyFilter: function(content) {
-    return this.filterHelper(content, 'priority', 'emergency');
+  priorityFilter: function(content, priority) {
+    return this.filterHelper(content, 'priority', priority);
   },
 
   dateFilter: function(content, date) {
@@ -76,7 +85,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     var selectedSP = this.get('selectedSP');
     var selectedCategory = this.get('selectedCategory');
     var selectedVisitType = this.get('selectedVisitType');
-    var emergency = this.get('emergencyOnly');
+    var selectedPriority = this.get('selectedPriority');
     var appointments = this.get('all');
     this.set('content', appointments);
 
@@ -96,8 +105,8 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       appointments = this.visitTypeFilter(appointments, selectedVisitType);
     }
 
-    if (emergency) {
-      appointments = this.emergencyFilter(appointments);
+    if (selectedPriority) {
+      appointments = this.priorityFilter(appointments, selectedPriority);
     }
 
     this.set('content', appointments);
@@ -118,13 +127,17 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       this.set('selectedVisitType', type);
     },
 
+    filterByPriority: function(priority) {
+      this.set('selectedPriority', priority);
+    },
+
     clearFilters: function() {
       //TODO FIXME how to change the checkbox state from here? or from the view?
       this.set('selectedDate', false);
       this.set('selectedSP', false);
       this.set('selectedCategory', false);
       this.set('selectedVisitType', false);
-      this.set('emergency', false);
+      this.set('selectedPriority', false);
       this.applyFilters();
     }
   }
