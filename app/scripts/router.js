@@ -7,6 +7,13 @@ SmartClient.Router.map(function () {
     this.route('create');
   });
 
+  this.resource('service_users', function(){
+    this.resource('service_user', { path: '/:service_user_id' }, function(){
+      this.route('edit');
+    });
+    this.route('create');
+  });
+
   this.resource('appointments', function(){
     this.resource('appointment', { path: '/:appointment_id' }, function(){
       this.route('edit');

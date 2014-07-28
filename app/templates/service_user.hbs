@@ -1,0 +1,22 @@
+<div class="well">
+  <h1>Service User</h1>
+
+  <table>
+    <tbody>
+      {{#each model.attributes}}
+      <tr>
+        <td>
+          <strong>{{this.key}}:</strong>
+        </td>
+        <td>
+          {{this.value}}
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  {{#link-to 'service_user.edit' model}}Change{{/link-to}}
+</div>
+
+{{outlet}}
