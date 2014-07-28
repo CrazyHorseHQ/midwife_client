@@ -4,9 +4,33 @@
 
 <br/>
 Filters:
+<br/>
 <span class="filters">
-  Post-Natal only: {{view Ember.Checkbox checkedBinding="postNatalOnly"}} |
-  Emergency only: {{view Ember.Checkbox checkedBinding="emergencyOnly"}} |
+  Visit Type:
+  <div class="btn-group">
+    {{#each visit_types}}
+      <button
+        {{action 'filterByVisitType' this.id}}
+        type="button"
+        {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
+          {{this.name}}
+      </button>
+    {{/each}}
+  </div>
+  <br/>
+
+  Priority:
+  <div class="btn-group">
+    {{#each priorities}}
+      <button
+        {{action 'filterByPriority' this.id}}
+        type="button"
+        {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
+          {{this.name}}
+      </button>
+    {{/each}}
+  </div>
+  <br/>
   Service Provider:
   {{view Ember.Select
           content=service_providers
