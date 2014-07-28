@@ -3,10 +3,14 @@ SmartClient.AppointmentEditController = Ember.ObjectController.extend({
   actions: {
     save: function(){
       self = this
+      model = self.get('controllers.appointment.model')
       this.get('buffer').forEach(function(attr){
-        self.get('controllers.appointment.model').set(attr.key, attr.value);
+        model.set(attr.key, attr.value);
       });
-      this.transitionToRoute('appointment',this.get('model'));
+
+      model.save().then(function () {
+        self.transitionToRoute('appointment', model);
+      }, function () {});
     }
   }
 });
