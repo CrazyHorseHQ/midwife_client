@@ -3,19 +3,19 @@
 {{#link-to 'appointments.create'}}New{{/link-to}}
 
 <br/>
-Filters: 
+Filters:
 <span class="filters">
-  Post-Natal only: {{view Ember.Checkbox checkedBinding="postNatalOnly"}} | 
+  Post-Natal only: {{view Ember.Checkbox checkedBinding="postNatalOnly"}} |
   Emergency only: {{view Ember.Checkbox checkedBinding="emergencyOnly"}} |
-  Service Provider: 
-  {{view Ember.Select 
-          content=service_providers 
+  Service Provider:
+  {{view Ember.Select
+          content=service_providers
           prompt="Filter by Service Provider"
           value=selectedSP
           name=selectedSP
           }}
   Category:
-  {{view Ember.Select 
+  {{view Ember.Select
           content=categories
           prompt="Filter by Category"
           value=selectedCategory
@@ -32,9 +32,9 @@ Filters:
 Dates:
 <div class="btn-group">
   {{#each dates}}
-    <button 
-      {{action 'filterByDate' this.date}} 
-      type="button" 
+    <button
+      {{action 'filterByDate' this.date}}
+      type="button"
       {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
         {{this.date}}
     </button>
