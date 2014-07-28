@@ -6,7 +6,7 @@ SmartClient.ServiceUser = DS.Model.extend({
   directions: DS.attr(),
   hospital_number: DS.attr(),
   home_phone: DS.attr(),
-  service_user_phone: DS.attr(),
+  mobile_phone: DS.attr(),
   partner_phone: DS.attr(),
   estimated_delivery_date: DS.attr()
 });

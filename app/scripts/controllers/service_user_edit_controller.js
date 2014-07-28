@@ -3,11 +3,14 @@ SmartClient.ServiceUserEditController = Ember.ObjectController.extend({
   actions: {
     save: function(){
       self = this
+      model = self.get('controllers.service_user.model')
       this.get('buffer').forEach(function(attr){
-        self.get('controllers.service_user.model').set(attr.key, attr.value);
+        model.set(attr.key, attr.value);
       });
-      this.transitionToRoute('service_user',this.get('model'));
+
+      model.save().then(function () {
+        self.transitionToRoute('service_user', model);
+      }, function () {});
     }
   }
 });
-
