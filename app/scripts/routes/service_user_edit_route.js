@@ -7,7 +7,7 @@ SmartClient.ServiceUserEditRoute = Ember.Route.extend({
     buffer = []
 
     model.get('attributes').forEach(function(attr) {
-      if (['id'].indexOf(attr.get('key')) == -1) {
+      if (['id', 'gestation_period'].indexOf(attr.get('key')) == -1) {
         buffer.push({ key: attr.get('key'), value: attr.get('value') })
       }
     });
