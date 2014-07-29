@@ -1,6 +1,5 @@
 SmartClient.Appointment = DS.Model.extend({
   //model attr here
-  appointment_category_id: DS.attr(),
   date: DS.attr(),
   time: DS.attr(),
   service_provider_id: DS.attr(),

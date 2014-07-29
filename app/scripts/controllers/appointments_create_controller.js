@@ -1,11 +1,11 @@
 SmartClient.AppointmentsCreateController = Ember.ObjectController.extend({
   needs: 'appointment',
   visit_types: [
-    {id: 'ante-natal', name: 'Ante-Natal'}, 
+    {id: 'ante-natal', name: 'Ante-Natal'},
     {id: 'post-natal', name: 'Post-Natal'}
   ],
   priorities: [
-    {id: 'other', name: 'Other'}, 
+    {id: 'other', name: 'Other'},
     {id: 'emergency', name: 'Emergency'}
   ],
 
@@ -14,7 +14,6 @@ SmartClient.AppointmentsCreateController = Ember.ObjectController.extend({
       var self = this
 
       var new_apt = this.store.createRecord('appointment', {
-        appointment_category_id: self.get('appointment_category_id'),
         date: self.get('date'),
         time: self.get('time'),
         service_provider_id: self.get('service_provider_id'),
@@ -24,7 +23,6 @@ SmartClient.AppointmentsCreateController = Ember.ObjectController.extend({
       });
 
       new_apt.save().then(function () {
-        self.set('appointment_category_id', '')
         self.set('date', '')
         self.set('time', '')
         self.set('service_provider_id', '')
