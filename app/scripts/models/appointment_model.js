@@ -13,7 +13,7 @@ SmartClient.Appointment = DS.Model.extend({
     return this.get('date') > moment().format('YYYY-MM-DD');
   }.property('date'),
 
-  // 
+  //
   calendarDateTime: function() {
     return moment(this.get('date')+this.get('time'), "YYYY-MM-DDhh:mm:ss").calendar();
   }.property('date'),
