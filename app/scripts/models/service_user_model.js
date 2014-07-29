@@ -9,6 +9,7 @@ SmartClient.ServiceUser = DS.Model.extend({
   mobile_phone: DS.attr(),
   partner_phone: DS.attr(),
   estimated_delivery_date: DS.attr(),
+  dob: DS.attr(),
 
   gestation_period: function () {
     return moment(this.get('estimated_delivery_date')).add('w', 2).subtract('w', 43)

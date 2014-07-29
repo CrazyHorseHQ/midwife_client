@@ -12,7 +12,8 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
         home_phone: self.get('home_phone'),
         mobile_phone: self.get('mobile_phone'),
         partner_phone: self.get('partner_phone'),
-        estimated_delivery_date: self.get('estimated_delivery_date')
+        estimated_delivery_date: self.get('estimated_delivery_date'),
+        dob: self.get('dob')
       });
 
       new_service_user.save().then(function () {
@@ -25,6 +26,7 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
         self.set('mobile_phone', '')
         self.set('partner_phone', '')
         self.set('estimated_delivery_date', '')
+        self.set('dob', '')
         self.transitionToRoute('service_users');
       }, function () {
         new_service_user.deleteRecord()
