@@ -17,6 +17,9 @@
             <div>
                 <div class="col-md-3">
                     <div class="well sidebar-nav">
+                        {{view Ember.TextField valueBinding='keyword' placeholder='Hospital Number or Name'}}<button {{action 'search' keyword}}>Search</button>
+                    </div>
+                    <div class="well sidebar-nav">
                         <strong>Options</strong>
                         <ul class="list-group">
                         {{#each item in controller}}
@@ -27,6 +30,7 @@
                 </div>
                 <div class="col-md-9">
                     {{outlet}}
+                    {{outlet results}}
                 </div>
             </div>
         </div>

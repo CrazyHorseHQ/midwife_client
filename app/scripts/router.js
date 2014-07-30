@@ -28,4 +28,6 @@ SmartClient.Router.map(function () {
     this.resource('tag', {path: '/:tag_id'}, function(){});
     this.route('create');
   });
+
+  this.route('results', {path: '/results/:keyword'})
 });
