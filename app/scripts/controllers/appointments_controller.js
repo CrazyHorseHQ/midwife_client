@@ -15,10 +15,6 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return this.get('all').mapBy('service_provider_id').toArray().uniq();
   }.property('model.service_provider_id'),
 
-  categories: function() {
-    return this.get('all').mapBy('appointment_category_id').toArray().uniq();
-  }.property('model.appointment_category_id'),
-
   visit_types: function(){
     var self = this;
     var visit_types = self.get('all').mapBy('visit_type').toArray().uniq()
@@ -46,11 +42,10 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   selectedPriority: false,
   selectedDate: false,
   selectedSP: false,
-  selectedCategory: false,
 
   filterDidChange: function() {
     this.applyFilters();
-  }.observes('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedCategory'),
+  }.observes('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP'),
 
   // Filter helpers
   visitTypeFilter: function(content, visitType) {
@@ -69,10 +64,6 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return this.filterHelper(content, 'service_provider_id', sp);
   },
 
-  categoryFilter: function(content, category) {
-    return this.filterHelper(content, 'appointment_category_id', category);
-  },
-
   filterHelper: function(content, key, value) {
     return content.filter(function(item) {
       return item.get(key) == value;
@@ -83,7 +74,6 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   applyFilters: function() {
     var selectedDate = this.get('selectedDate');
     var selectedSP = this.get('selectedSP');
-    var selectedCategory = this.get('selectedCategory');
     var selectedVisitType = this.get('selectedVisitType');
     var selectedPriority = this.get('selectedPriority');
     var appointments = this.get('all');
@@ -95,10 +85,6 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
     if (selectedSP) {
       appointments = this.spFilter(appointments, selectedSP);
-    }
-
-    if (selectedCategory) {
-      appointments = this.categoryFilter(appointments, selectedCategory);
     }
 
     if (selectedVisitType) {
@@ -135,7 +121,6 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       //TODO FIXME how to change the checkbox state from here? or from the view?
       this.set('selectedDate', false);
       this.set('selectedSP', false);
-      this.set('selectedCategory', false);
       this.set('selectedVisitType', false);
       this.set('selectedPriority', false);
       this.applyFilters();
