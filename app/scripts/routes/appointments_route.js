@@ -4,6 +4,7 @@ SmartClient.AppointmentsRoute = Ember.Route.extend({
   },
   setupController: function(controller, model) {
     controller.set('content', model);
+    controller.set('tags', this.get('store').find('tag'));
   }
 });
 

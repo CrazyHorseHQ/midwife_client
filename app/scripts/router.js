@@ -17,8 +17,8 @@ SmartClient.Router.map(function () {
   this.resource('appointments', function(){
     this.resource('appointment', { path: '/:appointment_id' }, function(){
       this.route('edit');
-      this.resource('tags', function() {
-        this.resource('tag', {path: '/:tag_id'}, function() {})
+      this.resource('appointment.tags', {path: '/tags'}, function() {
+        this.resource('appointment.tag', {path: '/:tag_id'}, function() {})
       });
     });
     this.route('create');
