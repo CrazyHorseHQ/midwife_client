@@ -1,13 +1,7 @@
 <div class="well">
-  <h3>Search results for {{keyword}}</h3>
+  <h3>Search results for {{model.keyword}}</h3>
 
-  {{#if model}}
-    {{#if model.name}}
-      <li>{{#link-to 'service_user' model}}{{model.name}}{{/link-to}}</li>
-    {{else}}
-      <h4>Searching...</h4>
-    {{/if}}
-  {{else}}
-    <h4>No results</h4>
-  {{/if}}
+  {{#each}}
+    <li>{{#link-to 'service_user' this}}{{name}}{{/link-to}}</li>
+  {{/each}}
 </div>
