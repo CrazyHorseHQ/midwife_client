@@ -1,4 +1,4 @@
-SmartClient.AppointmentsRoute = Ember.Route.extend({
+SmartClient.AppointmentsRoute = SmartClient.AuthenticatedRoute.extend({
   model: function() {
     return this.get('store').find('appointment');
   },

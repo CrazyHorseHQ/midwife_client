@@ -12,6 +12,7 @@ require('scripts/adapters/*');
 require('scripts/controllers/*');
 require('scripts/store');
 require('scripts/models/*');
+require('scripts/routes/authenticated_route.js');
 require('scripts/routes/*');
 require('scripts/components/*');
 require('scripts/views/*');
