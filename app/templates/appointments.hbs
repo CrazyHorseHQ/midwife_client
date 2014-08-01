@@ -31,6 +31,19 @@ Filters:
     {{/each}}
   </div>
   <br/>
+  Tags:
+  <div class="btn-group">
+    {{#each tags}}
+      <button
+        {{action 'filterByTag' this.id}}
+        type="button"
+        class="btn btn-default
+        {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
+          {{this.name}}
+      </button>
+    {{/each}}
+  </div>
+  <br/>
   Service Provider:
   {{view Ember.Select
           content=service_providers

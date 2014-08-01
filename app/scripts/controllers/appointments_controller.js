@@ -42,10 +42,11 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   selectedPriority: false,
   selectedDate: false,
   selectedSP: false,
+  selectedTag: false,
 
   filterDidChange: function() {
     this.applyFilters();
-  }.observes('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP'),
+  }.observes('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedTag'),
 
   // Filter helpers
   visitTypeFilter: function(content, visitType) {
@@ -58,6 +59,12 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
   dateFilter: function(content, date) {
     return this.filterHelper(content, 'date', date);
+  },
+
+  tagFilter: function(content, tag) {
+    return content.filter(function(item) {
+      return item.get('tags').contains(parseInt(tag));
+    });
   },
 
   spFilter: function(content, sp) {
@@ -76,6 +83,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     var selectedSP = this.get('selectedSP');
     var selectedVisitType = this.get('selectedVisitType');
     var selectedPriority = this.get('selectedPriority');
+    var selectedTag = this.get('selectedTag');
     var appointments = this.get('all');
     this.set('content', appointments);
 
@@ -93,6 +101,10 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
     if (selectedPriority) {
       appointments = this.priorityFilter(appointments, selectedPriority);
+    }
+
+    if (selectedTag) {
+      appointments = this.tagFilter(appointments, selectedTag);
     }
 
     this.set('content', appointments);
@@ -117,12 +129,17 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       this.set('selectedPriority', priority);
     },
 
+    filterByTag: function(tag) {
+      this.set('selectedTag', tag);
+    },
+
     clearFilters: function() {
       //TODO FIXME how to change the checkbox state from here? or from the view?
       this.set('selectedDate', false);
       this.set('selectedSP', false);
       this.set('selectedVisitType', false);
       this.set('selectedPriority', false);
+      this.set('selectedTag', false);
       this.applyFilters();
     }
   }
