@@ -17,6 +17,10 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
       } else {
         alert("Please type a hospital number, date of birth or name")
       }
+    },
+    logout: function() {
+      this.controllerFor('login').reset();
+      this.transitionTo('login');
     }
   }
 });

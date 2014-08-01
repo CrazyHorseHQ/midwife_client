@@ -1,11 +1,9 @@
 SmartClient.ApplicationAdapter = DS.ActiveModelAdapter.extend({
   host: 'http://127.0.0.1:5000',
-  /*
+  auth_token: null,
   headers: function() {
     return {
-      "API_KEY": this.get("session.authToken"),
-      "ANOTHER_HEADER": "Some header value"
+      "AUTH_TOKEN": this.get('auth_token'),
     };
-  }.property("session.authToken")
-  */
+  }.property()
 });
