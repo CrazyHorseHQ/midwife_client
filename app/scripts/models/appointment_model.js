@@ -6,6 +6,7 @@ SmartClient.Appointment = DS.Model.extend({
   service_user_id: DS.attr(),
   priority: DS.attr(),
   visit_type: DS.attr(),
+  visit_logs: DS.attr(),
   tags: DS.attr(),
 
   // Allow deletion if entry is in the future
