@@ -28,7 +28,7 @@ SmartClient.LoginController = Ember.ObjectController.extend({
         self.set('token', result.get('token'));
         var loggedin_user = self.get('store').find('service_provider', result.get('id'));
         self.set('loggedin_user', loggedin_user);
-        self.transitionTo(self.get('attemptedTransition'));
+        self.transitionToRoute(self.get('attemptedTransition'));
       });
     }
   }
