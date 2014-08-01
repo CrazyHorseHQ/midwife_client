@@ -8,6 +8,7 @@ SmartClient.Router.map(function () {
   });
 
   this.route('login');
+  this.route('logout');
 
   this.resource('service_providers', function(){
     this.resource('service_provider', { path: '/:service_provider_id' }, function(){

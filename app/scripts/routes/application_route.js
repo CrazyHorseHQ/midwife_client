@@ -19,9 +19,12 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
       }
     },
     logout: function() {
-      localStorage.clear();
-      this.controllerFor('login').reset();
-      this.transitionTo('login');
+      var self = this;
+      this.store.createRecord('logout').save().then(function(result){
+        localStorage.clear();
+        self.controllerFor('login').reset();
+        self.transitionTo('login');
+      });
     }
   }
 });
