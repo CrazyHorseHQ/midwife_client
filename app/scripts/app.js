@@ -3,6 +3,9 @@ window.log = function (msg) {
   console.log(msg);
 };
 
+// no need to plurarise login
+Ember.Inflector.inflector.uncountable('login');
+
 /* Order and include as you please. */
 require('scripts/controllers/*');
 require('scripts/store');
