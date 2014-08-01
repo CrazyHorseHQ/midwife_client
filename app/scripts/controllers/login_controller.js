@@ -12,8 +12,17 @@ SmartClient.LoginController = Ember.ObjectController.extend({
   tokenChanged: (function() {
     if (Ember.isEmpty(this.get('token'))) {
       this.reset();
+    } else {
+      localStorage.setItem('authToken', this.get('token'));
     }
   }).observes('token'),
+
+  loggedinUserChanged: (function() {
+    if (!Ember.isEmpty(this.get('token')) && !Ember.isEmpty(this.get('loggedin_user'))) {
+      var json_obj = JSON.stringify(this.get('loggedin_user').toJSON({"includeId": true}));
+      localStorage.setItem('loggedinUser', json_obj);
+    }
+  }).observes('loggedin_user'),
 
   // Implement your controller here.
   actions: {
@@ -26,9 +35,10 @@ SmartClient.LoginController = Ember.ObjectController.extend({
       // Setup the token and logged in user info
       login.save().then(function(result){
         self.set('token', result.get('token'));
-        var loggedin_user = self.get('store').find('service_provider', result.get('id'));
-        self.set('loggedin_user', loggedin_user);
-        self.transitionToRoute(self.get('attemptedTransition'));
+        self.get('store').find('service_provider', result.get('id')).then(function(loggedin_user) {
+          self.set('loggedin_user', loggedin_user);
+          self.transitionToRoute(self.get('attemptedTransition'))
+        });
       });
     }
   }
