@@ -1,5 +1,4 @@
 SmartClient.TagsCreateController = Ember.ObjectController.extend({
-  needs: 'tag',
   actions: {
     submit: function(){
       var self = this;
