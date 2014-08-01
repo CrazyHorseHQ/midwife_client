@@ -1,4 +1,4 @@
-SmartClient.ServiceUsersRoute = Ember.Route.extend({
+SmartClient.ServiceUsersRoute = SmartClient.AuthenticatedRoute.extend({
   model: function() {
     return this.get('store').find('service_user');
   }

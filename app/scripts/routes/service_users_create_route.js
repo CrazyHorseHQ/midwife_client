@@ -1,1 +1,1 @@
-SmartClient.ServiceUsersCreateRoute = Ember.Route.extend({});
+SmartClient.ServiceUsersCreateRoute = SmartClient.AuthenticatedRoute.extend({});
