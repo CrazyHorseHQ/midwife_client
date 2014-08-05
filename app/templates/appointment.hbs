@@ -1,6 +1,10 @@
 <div class="well">
   <h1>Appointment</h1>
 
+  {{render 'appointment.tags' model.tags}}
+  <br/>
+  <br/>
+
   <table>
     <tbody>
       {{#each model.attributes}}
