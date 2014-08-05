@@ -1,4 +1,4 @@
-SmartClient.TagsRoute = Ember.Route.extend({
+SmartClient.TagsRoute = SmartClient.AuthenticatedRoute.extend({
   model: function() {
     return this.get('store').find('tag');
   },

@@ -1,4 +1,4 @@
-SmartClient.ServiceProviderEditRoute = Ember.Route.extend({
+SmartClient.ServiceProviderEditRoute = SmartClient.AuthenticatedRoute.extend({
   model: function(params) {
     return this.get('store').find('service_provider', this.modelFor('service_provider').id);
   },

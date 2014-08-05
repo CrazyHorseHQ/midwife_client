@@ -1,0 +1,11 @@
+<h1>Login</h1>
+
+{{#if token}}
+  You are already logged in as {{loggedin_user.name}}. If this is not you - please logout.
+{{else}}
+  {{#em-form model=model}}
+    {{em-input property="username" label="Username" placeholder="Your username" type="text"}}
+    {{em-input property="password" label="Password" placeholder="********" type="password"}}
+  {{/em-form}}
+{{/if}}
+

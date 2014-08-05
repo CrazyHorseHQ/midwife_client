@@ -20,6 +20,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     var visit_types = self.get('all').mapBy('visit_type').toArray().uniq()
     return visit_types.map(function(vt) {
       var selected = (vt == self.get('selectedVisitType'));
+      // TODO see if model.toJSON can be used here.
       return Ember.Object.create({id: vt, name: vt.capitalize(), selected: selected});
     });
   }.property('model.visit_type'),
