@@ -1,18 +1,12 @@
 /*global Ember*/
 SmartClient.ServiceUser = DS.Model.extend({
-  name: DS.attr(),
-  email: DS.attr(),
-  address: DS.attr(),
-  directions: DS.attr(),
-  hospital_number: DS.attr(),
-  home_phone: DS.attr(),
-  mobile_phone: DS.attr(),
-  partner_phone: DS.attr(),
-  estimated_delivery_date: DS.attr(),
-  dob: DS.attr(),
+  personal_fields: DS.attr(),
+  clinical_fields: DS.attr(),
 
   gestation_period: function () {
-    return moment(this.get('estimated_delivery_date')).add('w', 2).subtract('w', 43)
+    var earliest_conception = moment(this.get('clinical_fields').estimated_delivery_date).add('w', 2).subtract('w', 43)
+
+    return moment(this.get('clinical_fields').estimated_delivery_date).diff(earliest_conception, 'weeks') + " weeks"
   }.property()
 });
 
@@ -20,8 +14,14 @@ SmartClient.ServiceUser = DS.Model.extend({
 SmartClient.ServiceUser.reopen({
   attributes: function(){
     var model = this;
-    attrs = Ember.keys(this.get('data')).map(function(key){
-      return Em.Object.create({ model: model, key: key, valueBinding: 'model.' + key });
+    var attrs = [];
+
+    attrs = Ember.keys(this.get('data').clinical_fields).map(function(key){
+      return Em.Object.create({ model: model, key: key, parentKey: 'clinical_fields', valueBinding: 'model.clinical_fields.' + key });
+    });
+
+    Ember.keys(this.get('data').personal_fields).map(function(key){
+      attrs.push(Em.Object.create({ model: model, key: key, parentKey: 'personal_fields', valueBinding: 'model.personal_fields.' + key }));
     });
 
     attrs.push(Em.Object.create({ model: model, key: 'gestation_period', valueBinding: 'model.gestation_period' }));

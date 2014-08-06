@@ -5,7 +5,7 @@ SmartClient.ServiceUserEditController = Ember.ObjectController.extend({
       self = this
       model = self.get('controllers.service_user.model')
       this.get('buffer').forEach(function(attr){
-        model.set(attr.key, attr.value);
+        model.set(attr.parentKey + "." + attr.key, attr.value);
       });
 
       model.save().then(function () {

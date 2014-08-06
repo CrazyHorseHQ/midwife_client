@@ -4,16 +4,21 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
       var self = this
 
       var new_service_user = this.store.createRecord('service_user', {
-        name: self.get('name'),
-        email: self.get('email'),
-        address: self.get('address'),
-        directions: self.get('directions'),
-        hospital_number: self.get('hospital_number'),
-        home_phone: self.get('home_phone'),
-        mobile_phone: self.get('mobile_phone'),
-        partner_phone: self.get('partner_phone'),
-        estimated_delivery_date: self.get('estimated_delivery_date'),
-        dob: self.get('dob')
+        personal_fields: {
+          name: self.get('name'),
+          email: self.get('email'),
+          address: self.get('address'),
+          directions: self.get('directions'),
+          home_phone: self.get('home_phone'),
+          mobile_phone: self.get('mobile_phone'),
+          partner_phone: self.get('partner_phone'),
+          dob: self.get('dob')
+        },
+        clinical_fields: {
+          hospital_number: self.get('hospital_number'),
+          estimated_delivery_date: self.get('estimated_delivery_date'),
+          blood_type: self.get('blood_type')
+        }
       });
 
       new_service_user.save().then(function () {
@@ -27,6 +32,7 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
         self.set('partner_phone', '')
         self.set('estimated_delivery_date', '')
         self.set('dob', '')
+        self.set('blood_type', '')
         self.transitionToRoute('service_users');
       }, function () {
         new_service_user.deleteRecord()
