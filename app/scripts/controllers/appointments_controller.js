@@ -38,6 +38,11 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return this.get('store').all('appointment');
   }.property('model.@each'),
 
+  currentSPId: function() {
+    var currentUser = JSON.parse(localStorage.getItem('loggedinUser'));
+    return currentUser["id"];
+  }.property(),
+
   // Filter toggles and trigger
   selectedVisitType: false,
   selectedPriority: false,
@@ -132,6 +137,12 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
     filterByTag: function(tag) {
       this.set('selectedTag', tag);
+    },
+
+    // TODO ideally this would be a separate view...
+    myAppointments: function() {
+      this.set('selectedSP', this.get('currentSPId'));
+      this.applyFilters();
     },
 
     clearFilters: function() {
