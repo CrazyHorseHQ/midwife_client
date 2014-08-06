@@ -4,74 +4,8 @@
 <br/>
 {{#link-to 'appointments.create'}}New{{/link-to}}
 
-<br/>
-Filters:
-<br/>
-<span class="filters">
-  Visit Type:
-  <div class="btn-group">
-    {{#each visit_types}}
-      <button
-        {{action 'filterByVisitType' this.id}}
-        type="button"
-        {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
-          {{this.name}}
-      </button>
-    {{/each}}
-  </div>
-  <br/>
+{{outlet filters}}
 
-  Priority:
-  <div class="btn-group">
-    {{#each priorities}}
-      <button
-        {{action 'filterByPriority' this.id}}
-        type="button"
-        {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
-          {{this.name}}
-      </button>
-    {{/each}}
-  </div>
-  <br/>
-  Tags:
-  <div class="btn-group">
-    {{#each tags}}
-      <button
-        {{action 'filterByTag' this.id}}
-        type="button"
-        class="btn btn-default
-        {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
-          {{this.name}}
-      </button>
-    {{/each}}
-  </div>
-  <br/>
-  Service Provider:
-  {{view Ember.Select
-          content=service_providers
-          prompt="Filter by Service Provider"
-          value=selectedSP
-          name=selectedSP
-          }}
-  <button {{action 'clearFilters'}} type="button" class="btn btn-default">
-    <span class="glyphicon glyphicon-remove"></span>
-    Clear
-  </button>
-</span>
-<br/>
-<br/>
-
-Dates:
-<div class="btn-group">
-  {{#each dates}}
-    <button
-      {{action 'filterByDate' this.date}}
-      type="button"
-      {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
-        {{this.date}}
-    </button>
-  {{/each}}
-</div>
 <br/>
 <br/>
 
