@@ -7,7 +7,8 @@ SmartClient.Appointment = DS.Model.extend({
   priority: DS.attr(),
   visit_type: DS.attr(),
   visit_logs: DS.attr(),
-  tags: DS.attr(),
+  tag_ids: DS.attr(),
+  tags: DS.hasMany('Tag', {async: true}),
 
   // Allow deletion if entry is in the future
   canDelete: function() {

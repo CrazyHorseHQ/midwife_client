@@ -1,6 +1,6 @@
 SmartClient.AppointmentTagRoute = Ember.Route.extend({
   model: function(params) {
-    return this.modelFor('appointment').get('tags', params.tag_id);
+    return this.modelFor('appointment').get('tag_ids', params.tag_id);
   },
 
   setupController: function(controller, model) {

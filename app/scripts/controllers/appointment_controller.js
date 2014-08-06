@@ -4,16 +4,16 @@ SmartClient.AppointmentController = Ember.ObjectController.extend({
 
   // TODO FIXME do a better way of separating this two.
   selectedTags: (function() {
-    var ids = this.get('model').get('tags');
+    var ids = this.get('model').get('tags').mapBy('id');
     return this.get('allTags').filter(function(item) {
-      return ids.contains(parseInt(item.get('id')));
+      return ids.contains(item.get('id'));
     })
   }).property('model.tags.@each', 'allTags.@each'),
 
   remainingTags: (function() {
-    var ids = this.get('model').get('tags');
+    var ids = this.get('model').get('tags').mapBy('id');
     return this.get('allTags').filter(function(item) {
-      return !ids.contains(parseInt(item.get('id')));
+      return !ids.contains(item.get('id'));
     })
   }).property('model.tags.@each', 'allTags.@each'),
 
@@ -41,11 +41,11 @@ SmartClient.AppointmentController = Ember.ObjectController.extend({
         appointment_id: appointment.get('id')
       });
       appointmentTagAdapter.destroyRecord(self.get('store'), 'appointment_tag', apt_tag).then(function(){
-        var tags = appointment.get('tags');
+        var tags = appointment.get('tag_ids');
         tags = tags.filter(function(tag){
           return tag != tag_id
         });
-        appointment.set('tags', tags);
+        appointment.set('tag_ids', tags);
       });
     },
     delete: function(){

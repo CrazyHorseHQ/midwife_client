@@ -69,7 +69,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
   tagFilter: function(content, tag) {
     return content.filter(function(item) {
-      return item.get('tags').contains(parseInt(tag));
+      return item.get('tags').mapBy('id').contains(tag);
     });
   },
 
