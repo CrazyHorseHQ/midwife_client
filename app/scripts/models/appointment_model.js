@@ -30,5 +30,5 @@ SmartClient.Appointment.reopen({
         key: key,
         valueBinding: 'model.' + key });
     });
-  }.property()
+  }.property(),
 });
