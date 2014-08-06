@@ -8,9 +8,9 @@ Ember.Inflector.inflector.uncountable('login');
 Ember.Inflector.inflector.uncountable('logout');
 
 /* Order and include as you please. */
+require('scripts/store');
 require('scripts/adapters/*');
 require('scripts/controllers/*');
-require('scripts/store');
 require('scripts/models/*');
 require('scripts/routes/authenticated_route.js');
 require('scripts/routes/*');

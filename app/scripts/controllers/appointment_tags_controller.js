@@ -34,16 +34,16 @@ SmartClient.AppointmentTagsController = Ember.ArrayController.extend({
     },
     untag: function(tag_id) {
       var self = this;
+      // FIXME this has a really hacky feeling for me...
       var appointment = self.get('controllers.appointment').get('model');
-      var apt_tag = self.store.find('appointment.tag', {
+      var appointmentTagAdapter = this.container.lookup('adapter:appointment_tag');
+      var apt_tag = self.store.createRecord('appointment.tag', {
         tag_id: tag_id,
         appointment_id: appointment.get('id')
-      }).then(function(record){
-        console.log(record);
-        apt_tag.destroyRecord();
-        apt_tag.save().then(function() {
-          self.transitionToRoute('appointment', appointment);
-        }, function() {});
+      });
+      appointmentTagAdapter.destroyRecord(self.get('store'), 'appointment_tag', apt_tag).then(function(){
+        //Why is this not working?
+        self.transitionToRoute('appointment', appointment);
       });
     },
   }
