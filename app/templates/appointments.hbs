@@ -76,7 +76,7 @@ Dates:
 <ul>
  {{#each model}}
  <li>
-    {{#link-to 'appointment' this}}
+    {{#link-to 'appointment' this.id}}
       {{this.calendarDateTime}} : {{this.id}}
        | {{this.visit_type}} | {{this.service_user_id}}
     {{/link-to}}</li>

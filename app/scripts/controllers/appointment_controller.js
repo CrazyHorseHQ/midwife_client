@@ -8,18 +8,14 @@ SmartClient.AppointmentController = Ember.ObjectController.extend({
     return this.get('allTags').filter(function(item) {
       return ids.contains(parseInt(item.get('id')));
     })
-  }).property('model.tags.@each'),
+  }).property('model.tags.@each', 'allTags.@each'),
 
   remainingTags: (function() {
     var ids = this.get('model').get('tags');
     return this.get('allTags').filter(function(item) {
       return !ids.contains(parseInt(item.get('id')));
     })
-  }).property('model.tags.@each', 'allTags'),
-
-  allTags: function() {
-    return this.get('store').all('tag');
-  }.property(),
+  }).property('model.tags.@each', 'allTags.@each'),
 
   actions: {
     tag: function(tag_id) {
