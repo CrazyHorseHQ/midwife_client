@@ -42,7 +42,9 @@ Filters:
   <br/>
   Service Provider:
   {{view Ember.Select
-          content=service_providers_select
+          content=service_providers
+          optionValuePath="content.id"
+          optionLabelPath="content.name"
           prompt="Filter by Service Provider"
           value=selectedSP
           }}

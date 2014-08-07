@@ -11,10 +11,6 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return datesList;
   }.property('model.date'),
 
-  service_providers_select: function() {
-    return this.get('service_providers').mapBy('name');
-  }.property('service_providers.@each'),
-
   visit_types: function(){
     var self = this;
     var visit_types = self.get('all').mapBy('visit_type').toArray().uniq()
@@ -75,7 +71,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
   spFilter: function(content, sp) {
     return content.filter(function(item) {
-      return item.get('service_provider').get('name') == sp;
+      return item.get('service_provider').get('id') == sp;
     });
   },
 
