@@ -11,7 +11,7 @@
 {{#em-form model=model}}
   {{em-input property="date" label="Date" placeholder="YYYY-MM-DD" type="date"}}
   {{em-input property="time" label="Time" placeholder="HH:MM:SS" type="time"}}
-  {{em-input property="service_provider_id" label="Service Provider" placeholder="Select service provider name..."}}
+  {{em-select property="service_provider_id" label="Service Provider" content=service_providers optionLabelPath="content.name" optionValuePath="content.id" prompt="Select Service Provider"}}
   {{em-input property="service_user_id" label="Service User" placeholder="Select a service user"}}
   {{em-select property="priority" label="Priority" content=priorities optionValuePath="content.id" optionLabelPath="content.name"}}
   {{em-select property="visit_type" label="Visit" content=visit_types optionValuePath="content.id" optionLabelPath="content.name"}}
