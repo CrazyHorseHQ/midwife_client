@@ -8,7 +8,7 @@ SmartClient.ServiceUserEditRoute = SmartClient.AuthenticatedRoute.extend({
 
     model.get('attributes').forEach(function(attr) {
       if (['id', 'gestation_period'].indexOf(attr.get('key')) == -1) {
-        buffer.push({ key: attr.get('key'), value: attr.get('value') })
+        buffer.push({ key: attr.get('key'), value: attr.get('value'), parentKey: attr.get('parentKey') })
       }
     });
     controller.set('buffer', buffer)
