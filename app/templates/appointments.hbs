@@ -1,8 +1,26 @@
 <h1>Appointments</h1>
 
-<a href="#" {{action myAppointments}}>My appointments only</a>
+<ul class="nav nav-tabs" role="tablist">
+  <li {{bind-attr class="showMyOnly:activeasdf"}}>
+    <a href="#" {{action myAppointments}}>
+      <span class="glyphicon glyphicon-star"></span>
+      My appointments
+    </a>
+  </li>
+  <li>
+    <a href="#" {{action clearFilters}}>
+      <span class="glyphicon glyphicon-th-list"></span>
+      All
+    </a>
+  </li>
+  <li>
+    {{#link-to 'appointments.create'}}
+      <span class="glyphicon glyphicon-plus"></span>
+      New
+    {{/link-to}}
+  </li>
+</ul>
 <br/>
-{{#link-to 'appointments.create'}}New{{/link-to}}
 
 {{outlet filters}}
 

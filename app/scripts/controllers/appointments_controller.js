@@ -45,6 +45,8 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   selectedDate: false,
   selectedSP: false,
   selectedTag: false,
+  showMyOnly: true,
+  showFitlers: false,
 
   filterDidChange: function() {
     this.applyFilters();
@@ -140,18 +142,21 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     // TODO ideally this would be a separate view...
     myAppointments: function() {
       this.set('selectedSP', this.get('currentSPId'));
+      this.set('showMyOnly', true);
+      this.set('showFitlers', false);
       this.applyFilters();
     },
 
     clearFilters: function() {
-      //TODO FIXME how to change the checkbox state from here? or from the view?
+      this.set('showMyOnly', false);
+      this.set('showFitlers', true);
       this.set('selectedDate', false);
       this.set('selectedSP', false);
       this.set('selectedVisitType', false);
       this.set('selectedPriority', false);
       this.set('selectedTag', false);
       this.applyFilters();
-    }
+    },
   }
 });
 
