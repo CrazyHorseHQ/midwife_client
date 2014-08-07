@@ -1,6 +1,4 @@
-SmartClient.LoginAdapter = DS.RESTAdapter.extend({
-  // TODO figure out a way to remove this duplication
-  host: 'http://127.0.0.1:5000',
+SmartClient.LoginAdapter = SmartClient.ApplicationAdapter.extend({
   createRecord: function(store, type, record) {
     var p = this._super(store, type, record);
 
