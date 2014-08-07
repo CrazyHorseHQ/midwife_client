@@ -9,23 +9,21 @@
 <br/>
 <br/>
 
-<ul class="list-group">
+<div class="list-group">
   {{#each}}
-    <li class="list-group-item">
-      {{#link-to 'appointment' this.id}}
+    {{#link-to 'appointment' this.id class="list-group-item"}}
         {{this.calendarDateTime}}
         {{#if this.service_provider}}
           (seen by: {{this.service_provider.name}})
         {{/if}}
+        <span class="badge">{{this.visit_type}}</span>
+        {{#each this.tags}}
+          <span class="label label-success">
+            {{this.name}}
+          </span>&nbsp;
+        {{/each}}
       {{/link-to}}
-      <span class="badge">{{this.visit_type}}</span>
-      {{#each this.tags}}
-        <span class="label label-success">
-          {{this.name}}
-        </span>&nbsp;
-      {{/each}}
-    </li>
   {{/each}}
-</ul>
+</div>
 
 {{outlet}}
