@@ -8,14 +8,14 @@ SmartClient.AppointmentController = Ember.ObjectController.extend({
     return this.get('allTags').filter(function(item) {
       return ids.contains(parseInt(item.get('id')));
     })
-  }).property('model.tags'),
+  }).property('model.tags.@each'),
 
   remainingTags: (function() {
     var ids = this.get('model').get('tags');
     return this.get('allTags').filter(function(item) {
       return !ids.contains(parseInt(item.get('id')));
     })
-  }).property('model.tags', 'allTags'),
+  }).property('model.tags.@each', 'allTags'),
 
   allTags: function() {
     return this.get('store').all('tag');
@@ -30,10 +30,10 @@ SmartClient.AppointmentController = Ember.ObjectController.extend({
         appointment_id: appointment.get('id')
       });
       apt_tag.save().then(function() {
-        var tags = appointment.get('tags');
-        tags.pushObject(tag_id);
-        appointment.set('tags', tags);
-      }, function() {});
+        var tags = self.get('model.tags');
+        tags.pushObject(parseInt(tag_id));
+        self.set('model.tags', tags);
+      });
     },
     untag: function(tag_id) {
       var self = this;
