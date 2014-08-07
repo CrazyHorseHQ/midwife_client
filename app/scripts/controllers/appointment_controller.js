@@ -21,14 +21,13 @@ SmartClient.AppointmentController = Ember.ObjectController.extend({
     tag: function(tag_id) {
       var self = this;
       var appointment = self.get('model');
+      var new_tag = self.store.getById('tag', parseInt(tag_id));
       var apt_tag = self.store.createRecord('appointment.tag', {
         tag_id: tag_id,
         appointment_id: appointment.get('id')
       });
       apt_tag.save().then(function() {
-        var tags = self.get('model.tags');
-        tags.pushObject(parseInt(tag_id));
-        self.set('model.tags', tags);
+        self.get('model.tags').pushObject(new_tag);
       });
     },
     untag: function(tag_id) {
@@ -41,11 +40,8 @@ SmartClient.AppointmentController = Ember.ObjectController.extend({
         appointment_id: appointment.get('id')
       });
       appointmentTagAdapter.destroyRecord(self.get('store'), 'appointment_tag', apt_tag).then(function(){
-        var tags = appointment.get('tag_ids');
-        tags = tags.filter(function(tag){
-          return tag != tag_id
-        });
-        appointment.set('tag_ids', tags);
+        var tag_to_remove = self.store.getById('tag', parseInt(tag_id));
+        appointment.get('tags').removeObject(tag_to_remove);
       });
     },
     delete: function(){
