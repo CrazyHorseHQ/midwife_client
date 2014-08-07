@@ -14,6 +14,9 @@
             </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
+          {{!-- {{#each item in controller}}
+              <li class="list-group-item">{{#link-to item.resource}}{{item.label}}{{/link-to}}</li>
+          {{/each}} --}}
         </div>
     </nav>
     <div class="container" id="main">
@@ -21,7 +24,7 @@
             <div>
                 <div class="col-md-3">
                     <div class="well sidebar-nav">
-                        {{view Ember.TextField valueBinding='keyword' placeholder='Hospital Number or Name'}}<button {{action 'search' keyword}}>Search</button>
+                        {{view Ember.TextField valueBinding='keyword' placeholder='HN/Name/DOB'}}<button {{action 'search' keyword}}>Search</button>
                     </div>
                     <div class="well sidebar-nav">
                         <strong>Options</strong>
