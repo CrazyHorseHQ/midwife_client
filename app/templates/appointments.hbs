@@ -13,7 +13,10 @@
   {{#each}}
     <li class="list-group-item">
       {{#link-to 'appointment' this.id}}
-        {{this.calendarDateTime}} | {{this.service_user_id}}
+        {{this.calendarDateTime}}
+        {{#if this.service_provider}}
+          (seen by: {{this.service_provider.name}})
+        {{/if}}
       {{/link-to}}
       <span class="badge">{{this.visit_type}}</span>
       {{#each this.tags}}

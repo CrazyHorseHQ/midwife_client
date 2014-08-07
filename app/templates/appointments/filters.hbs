@@ -42,10 +42,9 @@ Filters:
   <br/>
   Service Provider:
   {{view Ember.Select
-          content=service_providers
+          content=service_providers_select
           prompt="Filter by Service Provider"
           value=selectedSP
-          name=selectedSP
           }}
   <button {{action 'clearFilters'}} type="button" class="btn btn-default">
     <span class="glyphicon glyphicon-remove"></span>
