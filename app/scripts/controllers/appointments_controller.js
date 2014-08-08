@@ -149,6 +149,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
     filterBySP: function(sp) {
       this.set('selectedSP', sp);
+      this.set('showMyOnly', false);
     },
 
     // TODO ideally this would be a separate view...
