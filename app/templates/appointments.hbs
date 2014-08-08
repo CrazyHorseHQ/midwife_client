@@ -1,13 +1,13 @@
 <h1>Appointments</h1>
 
 <ul class="nav nav-tabs" role="tablist">
-  <li {{bind-attr class="showMyOnly:activeasdf"}}>
+  <li {{bind-attr class="showMyOnly:active"}}>
     <a href="#" {{action myAppointments}}>
       <span class="glyphicon glyphicon-star"></span>
       My appointments
     </a>
   </li>
-  <li>
+  <li {{bind-attr class="noFiltersApplied:active"}}>
     <a href="#" {{action clearFilters}}>
       <span class="glyphicon glyphicon-th-list"></span>
       All

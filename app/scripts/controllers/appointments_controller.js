@@ -42,14 +42,23 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return this.get('service_providers').filterBy('id', this.get('selectedSP'))[0].get('name');
   }.property('selectedSP'),
 
+  noFiltersApplied: function() {
+    return !(
+      this.get('selectedSP') ||
+      this.get('selectedPriority') ||
+      this.get('selectedVisitType') ||
+      this.get('selectedDate') ||
+      this.get('selectedTag')
+    );
+  }.property('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedTag'),
+
   // Filter toggles and trigger
   selectedVisitType: false,
   selectedPriority: false,
   selectedDate: false,
   selectedSP: false,
   selectedTag: false,
-  showMyOnly: true,
-  showFitlers: false,
+  showMyOnly: false,
 
   filterDidChange: function() {
     this.applyFilters();
@@ -146,13 +155,11 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     myAppointments: function() {
       this.set('selectedSP', this.get('currentSPId'));
       this.set('showMyOnly', true);
-      this.set('showFitlers', false);
       this.applyFilters();
     },
 
     clearFilters: function() {
       this.set('showMyOnly', false);
-      this.set('showFitlers', true);
       this.set('selectedDate', false);
       this.set('selectedSP', false);
       this.set('selectedVisitType', false);
