@@ -1,8 +1,4 @@
-<br/>
-Filters:
-<br/>
-<span class="filters">
-  Visit Type:
+<div class="btn-toolbar" role="toolbar">
   <div class="btn-group">
     {{#each visit_types}}
       <button
@@ -13,9 +9,6 @@ Filters:
       </button>
     {{/each}}
   </div>
-  <br/>
-
-  Priority:
   <div class="btn-group">
     {{#each priorities}}
       <button
@@ -26,8 +19,6 @@ Filters:
       </button>
     {{/each}}
   </div>
-  <br/>
-  Tags:
   <div class="btn-group">
     {{#each tags}}
       <button
@@ -39,23 +30,24 @@ Filters:
       </button>
     {{/each}}
   </div>
-  <br/>
-  Service Provider:
-  {{view Ember.Select
-          content=service_providers
-          optionValuePath="content.id"
-          optionLabelPath="content.name"
-          prompt="Filter by Service Provider"
-          value=selectedSP
-          }}
-  <button {{action 'clearFilters'}} type="button" class="btn btn-default">
-    <span class="glyphicon glyphicon-remove"></span>
-    Clear
-  </button>
-  <br/>
-  <br/>
-
-  Dates:
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      {{#if selectedSP}}
+        {{selectedSPName}}
+      {{else}}
+        Service Provider
+      {{/if}}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      {{#each service_providers}}
+        <li><a href="#" {{action filterBySP this.id}}>{{this.name}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+<br/>
+<div class="btn-toolbar" role="toolbar">
   <div class="btn-group">
     {{#each dates}}
       <button
@@ -66,4 +58,4 @@ Filters:
       </button>
     {{/each}}
   </div>
-</span>
+</div>

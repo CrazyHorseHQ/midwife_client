@@ -3,9 +3,8 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   dates: function() {
     var self = this;
     var dates = this.get('all').mapBy('date').toArray().uniq();
-    dates.unshiftObject('All');
     var datesList = dates.map(function(d) {
-      var selected = (d == self.get('selectedDate') || (d == 'All' && !self.get('selectedDate')));
+      var selected = (d == self.get('selectedDate'));
       return Ember.Object.create({selected: selected, date: d});
     });
     return datesList;
@@ -38,6 +37,10 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     var currentUser = JSON.parse(localStorage.getItem('loggedinUser'));
     return currentUser["id"];
   }.property(),
+
+  selectedSPName: function() {
+    return this.get('service_providers').filterBy('id', this.get('selectedSP'))[0].get('name');
+  }.property('selectedSP'),
 
   // Filter toggles and trigger
   selectedVisitType: false,
@@ -120,11 +123,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   //Actions
   actions: {
     filterByDate: function(date) {
-      if (date.fmt() == 'All') {
-        this.set('selectedDate', false);
-      } else {
-        this.set('selectedDate', date.fmt());
-      }
+      this.set('selectedDate', date.fmt());
     },
 
     filterByVisitType: function(type) {
@@ -137,6 +136,10 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
     filterByTag: function(tag) {
       this.set('selectedTag', tag);
+    },
+
+    filterBySP: function(sp) {
+      this.set('selectedSP', sp);
     },
 
     // TODO ideally this would be a separate view...
