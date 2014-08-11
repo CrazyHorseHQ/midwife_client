@@ -1,6 +1,7 @@
 SmartClient.AppointmentEditRoute = SmartClient.AuthenticatedRoute.extend({
   model: function(params) {
-    return this.get('store').find('appointment', this.modelFor('appointment').id);
+    var apt_model = this.modelFor('appointment');
+    return this.get('store').find('appointment', apt_model.appointment.id);
   },
   setupController: function(controller, model){
     controller.set('model', model);

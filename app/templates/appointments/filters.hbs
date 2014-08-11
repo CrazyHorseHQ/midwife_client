@@ -31,7 +31,8 @@
     {{/each}}
   </div>
   <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <button type="button"
+      {{bind-attr class=":btn selectedSP:btn-info:btn-default :dropdown-toggle"}} data-toggle="dropdown">
       {{#if selectedSP}}
         {{selectedSPName}}
       {{else}}
