@@ -32,10 +32,11 @@
     {{#link-to 'appointment' this.id class="list-group-item"}}
         <h4 class="list-group-item-heading">
           {{this.calendarDateTime}}
-          {{#if this.service_provider}}
-            (seen by: {{this.service_provider.name}})
+          {{#if this.isEmergency}}
+            <span class="label label-danger">
+              Emergency
+            </span>&nbsp;
           {{/if}}
-          <span class="badge">{{this.visit_type}}</span>
           {{#each this.tags}}
             <span class="label label-success">
               {{this.name}}
@@ -43,8 +44,10 @@
           {{/each}}
         </h4>
         <p class="list-group-item-text">
-          {{!todo load the details into this outlet}}
-          {{outlet appointmentDetails}}
+          <span class="badge">{{this.visit_type}}</span>
+          {{#if this.service_provider}}
+            (seen by: {{this.service_provider.name}})
+          {{/if}}
         </p>
       {{/link-to}}
   {{/each}}

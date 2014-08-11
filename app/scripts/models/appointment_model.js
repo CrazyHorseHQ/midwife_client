@@ -20,6 +20,10 @@ SmartClient.Appointment = DS.Model.extend({
   calendarDateTime: function() {
     return moment(this.get('date')+this.get('time'), "YYYY-MM-DDhh:mm:ss").calendar();
   }.property('date'),
+
+  isEmergency: function() {
+    return this.get('priority') == 'emergency';
+  }.property('priority'),
 });
 
 // probably should be mixed-in...
