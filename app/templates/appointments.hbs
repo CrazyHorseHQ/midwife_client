@@ -28,7 +28,7 @@
 <br/>
 
 <div class="list-group">
-  {{#each}}
+  {{#each appointment in controller}}
     {{#link-to 'appointment' this.id class="list-group-item"}}
         <h4 class="list-group-item-heading">
           {{this.calendarDateTime}}

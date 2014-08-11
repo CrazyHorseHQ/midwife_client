@@ -1,4 +1,8 @@
 SmartClient.AppointmentsController = Ember.ArrayController.extend({
+  itemController: "appointment",
+  sortProperties: ["date", "time"],
+  sortAscending: true,
+
   // Helpers to get the filters
   dates: function() {
     var self = this;
