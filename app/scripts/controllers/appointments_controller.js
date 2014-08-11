@@ -1,19 +1,18 @@
 SmartClient.AppointmentsController = Ember.ArrayController.extend({
+  itemController: "appointment",
+  sortProperties: ["date", "time"],
+  sortAscending: true,
+
   // Helpers to get the filters
   dates: function() {
     var self = this;
     var dates = this.get('all').mapBy('date').toArray().uniq();
-    dates.unshiftObject('All');
     var datesList = dates.map(function(d) {
-      var selected = (d == self.get('selectedDate') || (d == 'All' && !self.get('selectedDate')));
+      var selected = (d == self.get('selectedDate'));
       return Ember.Object.create({selected: selected, date: d});
     });
     return datesList;
   }.property('model.date'),
-
-  service_providers: function() {
-    return this.get('all').mapBy('service_provider_id').toArray().uniq();
-  }.property('model.service_provider_id'),
 
   visit_types: function(){
     var self = this;
@@ -43,12 +42,27 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return currentUser["id"];
   }.property(),
 
+  selectedSPName: function() {
+    return this.get('service_providers').filterBy('id', this.get('selectedSP'))[0].get('name');
+  }.property('selectedSP'),
+
+  noFiltersApplied: function() {
+    return !(
+      this.get('selectedSP') ||
+      this.get('selectedPriority') ||
+      this.get('selectedVisitType') ||
+      this.get('selectedDate') ||
+      this.get('selectedTag')
+    );
+  }.property('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedTag'),
+
   // Filter toggles and trigger
   selectedVisitType: false,
   selectedPriority: false,
   selectedDate: false,
   selectedSP: false,
   selectedTag: false,
+  showMyOnly: false,
 
   filterDidChange: function() {
     this.applyFilters();
@@ -69,12 +83,14 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
   tagFilter: function(content, tag) {
     return content.filter(function(item) {
-      return item.get('tags').contains(parseInt(tag));
+      return item.get('tags').mapBy('id').contains(tag);
     });
   },
 
   spFilter: function(content, sp) {
-    return this.filterHelper(content, 'service_provider_id', sp);
+    return content.filter(function(item) {
+      return item.get('service_provider').get('id') == sp;
+    });
   },
 
   filterHelper: function(content, key, value) {
@@ -120,11 +136,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   //Actions
   actions: {
     filterByDate: function(date) {
-      if (date.fmt() == 'All') {
-        this.set('selectedDate', false);
-      } else {
-        this.set('selectedDate', date.fmt());
-      }
+      this.set('selectedDate', date.fmt());
     },
 
     filterByVisitType: function(type) {
@@ -139,21 +151,27 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       this.set('selectedTag', tag);
     },
 
+    filterBySP: function(sp) {
+      this.set('selectedSP', sp);
+      this.set('showMyOnly', false);
+    },
+
     // TODO ideally this would be a separate view...
     myAppointments: function() {
       this.set('selectedSP', this.get('currentSPId'));
+      this.set('showMyOnly', true);
       this.applyFilters();
     },
 
     clearFilters: function() {
-      //TODO FIXME how to change the checkbox state from here? or from the view?
+      this.set('showMyOnly', false);
       this.set('selectedDate', false);
       this.set('selectedSP', false);
       this.set('selectedVisitType', false);
       this.set('selectedPriority', false);
       this.set('selectedTag', false);
       this.applyFilters();
-    }
+    },
   }
 });
 

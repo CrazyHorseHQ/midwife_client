@@ -3,11 +3,13 @@ SmartClient.Appointment = DS.Model.extend({
   date: DS.attr(),
   time: DS.attr(),
   service_provider_id: DS.attr(),
+  service_provider: DS.belongsTo('ServiceProvider', {async: true}),
   service_user_id: DS.attr(),
   priority: DS.attr(),
   visit_type: DS.attr(),
   visit_logs: DS.attr(),
-  tags: DS.attr(),
+  tag_ids: DS.attr(),
+  tags: DS.hasMany('Tag', {async: true}),
 
   // Allow deletion if entry is in the future
   canDelete: function() {
@@ -18,6 +20,10 @@ SmartClient.Appointment = DS.Model.extend({
   calendarDateTime: function() {
     return moment(this.get('date')+this.get('time'), "YYYY-MM-DDhh:mm:ss").calendar();
   }.property('date'),
+
+  isEmergency: function() {
+    return this.get('priority') == 'emergency';
+  }.property('priority'),
 });
 
 // probably should be mixed-in...
@@ -30,5 +36,5 @@ SmartClient.Appointment.reopen({
         key: key,
         valueBinding: 'model.' + key });
     });
-  }.property()
+  }.property(),
 });

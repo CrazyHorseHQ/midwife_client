@@ -1,88 +1,56 @@
 <h1>Appointments</h1>
 
-<a href="#" {{action myAppointments}}>My appointments only</a>
+<ul class="nav nav-tabs" role="tablist">
+  <li {{bind-attr class="showMyOnly:active"}}>
+    <a href="#" {{action myAppointments}}>
+      <span class="glyphicon glyphicon-star"></span>
+      My appointments
+    </a>
+  </li>
+  <li {{bind-attr class="noFiltersApplied:active"}}>
+    <a href="#" {{action clearFilters}}>
+      <span class="glyphicon glyphicon-th-list"></span>
+      All
+    </a>
+  </li>
+  <li>
+    {{#link-to 'appointments.create'}}
+      <span class="glyphicon glyphicon-plus"></span>
+      New
+    {{/link-to}}
+  </li>
+</ul>
 <br/>
-{{#link-to 'appointments.create'}}New{{/link-to}}
 
-<br/>
-Filters:
-<br/>
-<span class="filters">
-  Visit Type:
-  <div class="btn-group">
-    {{#each visit_types}}
-      <button
-        {{action 'filterByVisitType' this.id}}
-        type="button"
-        {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
-          {{this.name}}
-      </button>
-    {{/each}}
-  </div>
-  <br/>
+{{outlet filters}}
 
-  Priority:
-  <div class="btn-group">
-    {{#each priorities}}
-      <button
-        {{action 'filterByPriority' this.id}}
-        type="button"
-        {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
-          {{this.name}}
-      </button>
-    {{/each}}
-  </div>
-  <br/>
-  Tags:
-  <div class="btn-group">
-    {{#each tags}}
-      <button
-        {{action 'filterByTag' this.id}}
-        type="button"
-        class="btn btn-default
-        {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
-          {{this.name}}
-      </button>
-    {{/each}}
-  </div>
-  <br/>
-  Service Provider:
-  {{view Ember.Select
-          content=service_providers
-          prompt="Filter by Service Provider"
-          value=selectedSP
-          name=selectedSP
-          }}
-  <button {{action 'clearFilters'}} type="button" class="btn btn-default">
-    <span class="glyphicon glyphicon-remove"></span>
-    Clear
-  </button>
-</span>
 <br/>
 <br/>
 
-Dates:
-<div class="btn-group">
-  {{#each dates}}
-    <button
-      {{action 'filterByDate' this.date}}
-      type="button"
-      {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>
-        {{this.date}}
-    </button>
+<div class="list-group">
+  {{#each appointment in controller}}
+    {{#link-to 'appointment' this.id class="list-group-item"}}
+        <h4 class="list-group-item-heading">
+          {{this.calendarDateTime}}
+          {{#if this.isEmergency}}
+            <span class="label label-danger">
+              Emergency
+            </span>&nbsp;
+          {{/if}}
+          {{#each this.tags}}
+            <span class="label label-success">
+              {{this.name}}
+            </span>&nbsp;
+          {{/each}}
+        </h4>
+        <p class="list-group-item-text">
+          <span class="badge">{{this.visit_type}}</span>
+          {{#if this.service_provider}}
+            (seen by: {{this.service_provider.name}})
+          {{/if}}
+        </p>
+      {{/link-to}}
   {{/each}}
 </div>
-<br/>
-<br/>
-
-<ul>
- {{#each model}}
- <li>
-    {{#link-to 'appointment' this.id}}
-      {{this.calendarDateTime}} : {{this.id}}
-       | {{this.visit_type}} | {{this.service_user_id}}
-    {{/link-to}}</li>
-  {{/each}}
-</ul>
 
 {{outlet}}

@@ -1,39 +1,28 @@
-<div class="well">
-  <h1>Appointment</h1>
-
-  <div class="appointment-tags selected-tags btn-group btn-group-sm">
-    {{#each selectedTags}}
-        <button {{action 'untag' this.id}} type="button" class="btn btn-small btn-primary">
-          {{this.name}}
-        </button>
-    {{/each}}
-  </div>
-  <div class="appointment-tags btn-group btn-group-sm">
-    {{#each remainingTags}}
-        <button {{action 'tag' this.id}} type="button" class="btn btn-small btn-default">
-          {{this.name}}
-        </button>
-    {{/each}}
-  </div>
-  <br/>
-  <br/>
-
-  <table>
-    <tbody>
-      {{#each model.attributes}}
-      <tr>
-        <td>
-          <strong>{{this.key}}:</strong>
-        </td>
-        <td>
-          {{this.value}}
-        </td>
-      </tr>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    {{model.calendarDateTime}}
+    {{model.service_user_id}}
+    {{#if this.isEmergency}}
+      <span class="label label-danger">
+        Emergency
+      </span>&nbsp;
+    {{/if}}
+    <div class="appointment-tags selected-tags btn-group btn-group-sm">
+      {{#each selectedTags}}
+          <button {{action 'untag' this.id}} type="button" class="btn btn-small btn-success">
+            {{this.name}}
+          </button>
       {{/each}}
-    </tbody>
-  </table>
-
-  <div class="well">
+    </div>
+    <div class="appointment-tags btn-group btn-group-sm">
+      {{#each remainingTags}}
+          <button {{action 'tag' this.id}} type="button" class="btn btn-small btn-default">
+            {{this.name}}
+          </button>
+      {{/each}}
+    </div>
+  </div>
+  <div class="panel-body">
     <h4>Visit Notes</h4>
     <ul>
       {{#each model.visit_logs}}
@@ -41,11 +30,10 @@
       {{/each}}
     </ul>
   </div>
-
-  {{#link-to 'appointment.edit' model}}Change{{/link-to}}
-  {{#if model.canDelete}}
-    | <a href="#" {{action "delete"}}>Delete</a>
-  {{/if}}
 </div>
+{{#link-to 'appointment.edit' model}}Change{{/link-to}}
+{{#if model.canDelete}}
+  | <a href="#" {{action "delete"}}>Delete</a>
+{{/if}}
 
 {{outlet}}
