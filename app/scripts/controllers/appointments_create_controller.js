@@ -13,12 +13,13 @@ SmartClient.AppointmentsCreateController = Ember.ObjectController.extend({
     submit: function () {
       var self = this
       var sp = self.get('store').getById('service_provider', self.get('service_provider_id'));
+      var su = self.get('store').getById('service_user', self.get('service_user_id'));
 
       var new_apt = this.store.createRecord('appointment', {
         date: self.get('date'),
         time: self.get('time'),
         service_provider: sp,
-        service_user_id: self.get('service_user_id'),
+        service_user: su,
         priority: self.get('priority'),
         visit_type: self.get('visit_type')
       });

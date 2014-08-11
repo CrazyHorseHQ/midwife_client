@@ -5,6 +5,7 @@ SmartClient.Appointment = DS.Model.extend({
   service_provider_id: DS.attr(),
   service_provider: DS.belongsTo('ServiceProvider', {async: true}),
   service_user_id: DS.attr(),
+  service_user: DS.belongsTo('ServiceUser', {async: true}),
   priority: DS.attr(),
   visit_type: DS.attr(),
   visit_logs: DS.attr(),
