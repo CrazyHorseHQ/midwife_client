@@ -1,9 +1,11 @@
 <div class="panel panel-info">
   <div class="panel-heading">
-    {{model.service_user.personal_fields.name}}
+    <b>{{model.service_user.personal_fields.name}} - {{model.service_user.clinical_fields.hospital_number}}</b>
+    <small>{{model.service_user.gestation_period}}</small>
+    <br/>
     <span class="glyphicon glyphicon-phone"></span>
     {{model.service_user.personal_fields.mobile_phone}}
-    {{model.calendarDateTime}}
+    <br/>
     {{#if this.isEmergency}}
       <span class="label label-danger">
         Emergency
@@ -26,23 +28,41 @@
   </div>
   <div class="panel-body">
     <dl class="dl-horizontal">
-      <dt>Address<dt>
+      <dt>
+        <span class="glyphicon glyphicon-home"></span> Address
+      <dt>
       <dd>
         {{model.service_user.personal_fields.address}}
       </dd>
-      <dt>Directions<dt>
+      <dt>
+        <span class="glyphicon glyphicon-map-marker"></span> Directions
+      </dt>
       <dd>
         {{model.service_user.personal_fields.directions}}
       </dd>
-      <dt>Contact Details</dt>
+      <dt>
+        <span class="glyphicon glyphicon-envelope"></span> Email
+      </dt>
       <dd>
-        <span class="glyphicon glyphicon-phone-alt"></span>
+        {{model.service_user.personal_fields.email}}
+      </dd>
+      <dt>
+        <span class="glyphicon glyphicon-phone-alt"></span> Home phone
+      </dt>
+      <dd>
         {{model.service_user.personal_fields.home_phone}}
       </dd>
-      <dt></dt>
-      <dd>
-      </dd>
-      <dt>Visit Notes</dt>
+      {{#if model.service_user.personal_fields.partner_phone}}
+        <dt>
+          <span class="glyphicon glyphicon-earphone"></span> Partner phone
+        </dt>
+        <dd>
+          {{model.service_user.personal_fields.partner_phone}}
+        </dd>
+      {{/if}}
+      <dt>
+        <span class="glyphicon glyphicon-tasks"></span> Visit Notes
+      </dt>
       <dd>
         <ul>
           {{#each model.visit_logs}}
