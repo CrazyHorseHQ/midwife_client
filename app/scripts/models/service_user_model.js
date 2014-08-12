@@ -2,11 +2,12 @@
 SmartClient.ServiceUser = DS.Model.extend({
   personal_fields: DS.attr(),
   clinical_fields: DS.attr(),
+  appointments: DS.hasMany('Appointment'),
 
   gestation_period: function () {
-    var earliest_conception = moment(this.get('clinical_fields').estimated_delivery_date).add('w', 2).subtract('w', 43)
+    var earliest_conception = moment(this.get('clinical_fields.estimated_delivery_date')).add('w', 2).subtract('w', 43)
 
-    return moment(this.get('clinical_fields').estimated_delivery_date).diff(earliest_conception, 'weeks') + " weeks"
+    return moment(this.get('clinical_fields.estimated_delivery_date')).diff(earliest_conception, 'weeks') + " weeks"
   }.property()
 });
 
@@ -26,6 +27,6 @@ SmartClient.ServiceUser.reopen({
 
     attrs.push(Em.Object.create({ model: model, key: 'gestation_period', valueBinding: 'model.gestation_period' }));
 
-    return attrs
+    return attrs;
   }.property()
 });
