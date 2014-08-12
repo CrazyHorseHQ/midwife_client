@@ -1,6 +1,4 @@
 SmartClient.AppointmentController = Ember.ObjectController.extend({
-  // Implement your controller here.
-  needs: 'appointment',
 
   // TODO FIXME do a better way of separating this two.
   selectedTags: (function() {

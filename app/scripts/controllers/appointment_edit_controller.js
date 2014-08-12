@@ -1,5 +1,7 @@
 SmartClient.AppointmentEditController = Ember.ObjectController.extend({
   needs: 'appointment',
+  content: {},
+
   actions: {
     save: function(){
       self = this
