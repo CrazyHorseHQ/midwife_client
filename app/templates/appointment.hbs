@@ -25,6 +25,17 @@
           </button>
       {{/each}}
     </div>
+    <div class="controls pull-right">
+      {{#link-to 'appointment.edit' model}}
+        <span class="glyphicon glyphicon-pencil"></span> Edit
+      {{/link-to}}
+      {{#if model.canDelete}}
+        |
+        <a href="#" {{action "delete"}}>
+          <span class="glyphicon glyphicon-remove"></span>
+        </a>
+      {{/if}}
+    </div>
   </div>
   <div class="panel-body">
     <dl class="dl-horizontal">
@@ -73,9 +84,5 @@
     </dl>
   </div>
 </div>
-{{#link-to 'appointment.edit' model}}Change{{/link-to}}
-{{#if model.canDelete}}
-  | <a href="#" {{action "delete"}}>Delete</a>
-{{/if}}
 
 {{outlet}}

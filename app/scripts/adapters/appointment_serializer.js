@@ -11,7 +11,6 @@ SmartClient.AppointmentSerializer = DS.ActiveModelSerializer.extend({
     // Delete
     delete json.visit_logs;
 
-    log(json);
     return json;
   },
 });
