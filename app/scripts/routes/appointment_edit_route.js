@@ -5,10 +5,8 @@ SmartClient.AppointmentEditRoute = SmartClient.AuthenticatedRoute.extend({
   },
   setupController: function(controller, model){
     controller.set('content', model);
-    buffer = model.get('attributes').map(function(attr){
-      return { key: attr.get('key'), value: attr.get('value') }
-    });
-    controller.set('buffer', buffer)
+    controller.set('service_providers', this.store.all('service_provider'));
+    controller.set('service_users', this.store.find('service_user'));
   }
 });
 

@@ -1,18 +1,10 @@
-<h1>Appointment</h1>
-
-<table>
-  {{#each buffer}}
-  <tr>
-    <td>
-      <strong>{{key}}:</strong>
-    </td>
-    <td>
-      {{input value=value}}
-    </td>
-  </tr>
-  {{/each}}
-</table>
-
-<button {{action 'save'}}>Update</button>
+{{#em-form model=model}}
+  {{em-input property="date" label="Date" placeholder="YYYY-MM-DD" type="date"}}
+  {{em-input property="time" label="Time" placeholder="HH:MM:SS" type="time"}}
+  {{em-select property="service_provider_id" label="Service Provider" content=service_providers optionLabelPath="content.name" optionValuePath="content.id" value=service_provider.id}}
+  {{em-select property="service_user_id" label="Service user" content=service_users optionLabelPath="content.personal_fields.name" optionValuePath="content.id" selection=service_user}}
+  {{em-select property="priority" label="Priority" content=priorities optionValuePath="content.id" optionLabelPath="content.name" value=priority}}
+  {{em-select property="visit_type" label="Visit" content=visit_types optionValuePath="content.id" optionLabelPath="content.name" value=visit_type}}
+{{/em-form}}
 
 {{outlet}}
