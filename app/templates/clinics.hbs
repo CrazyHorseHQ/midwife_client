@@ -1,0 +1,22 @@
+<h1>Clinics</h1>
+
+<div class="list-group">
+  {{#each clinic in controller}}
+    {{#link-to 'clinic' clinic.id class="list-group-item"}}
+      <strong>{{clinic.name}}</strong>
+      <br/>
+      <span class="glyphicon glyphicon-time"></span> {{clinic.aggr_times}}
+      <div class="pull-right">
+        <span {{bind-attr class=":label clinic.days.monday:label-success:label-default"}}>M</span>
+        <span {{bind-attr class=":label clinic.days.tuesday:label-success:label-default"}}>T</span>
+        <span {{bind-attr class=":label clinic.days.wednesday:label-success:label-default"}}>W</span>
+        <span {{bind-attr class=":label clinic.days.thursday:label-success:label-default"}}>T</span>
+        <span {{bind-attr class=":label clinic.days.friday:label-success:label-default"}}>F</span>
+        <span {{bind-attr class=":label clinic.days.saturday:label-success:label-default"}}>S</span>
+        <span {{bind-attr class=":label clinic.days.sunday:label-success:label-default"}}>S</span>
+      </div>
+    {{/link-to}}
+  {{/each}}
+</div>
+
+{{outlet}}

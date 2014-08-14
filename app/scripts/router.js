@@ -7,6 +7,12 @@ SmartClient.Router.map(function () {
     this.route('create');
   });
 
+  this.resource('clinics', function() {
+    this.resource('clinic', {path: '/:clinic_id'}, function() {
+      this.route('announcements');
+    });
+  });
+
   this.route('login');
   this.route('logout');
 
