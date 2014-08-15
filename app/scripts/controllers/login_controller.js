@@ -1,4 +1,5 @@
 SmartClient.LoginController = Ember.ObjectController.extend({
+  errorMsg: null,
   token: null,
   loggedin_user: null,
   attemptedTransition: null,

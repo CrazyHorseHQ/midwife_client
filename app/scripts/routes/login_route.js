@@ -1,11 +1,11 @@
 SmartClient.LoginRoute = Ember.Route.extend({
   model: function(params) {
+    this.controllerFor('login').set('errorMsg', params.queryParams.errorMsg);
     return this.store.createRecord('Login');
   },
-  setupController: function(controller, context) {
+  setupController: function(controller, model) {
     controller.reset();
-    controller.set('model', this.model());
-    controller.set('content', this.model());
+    controller.set('content', model);
 
     if (localStorage.getItem('authToken')) {
       controller.set('token', localStorage.getItem('authToken'));

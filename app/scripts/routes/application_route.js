@@ -17,7 +17,7 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
       self.store.unloadAll(type);
     });
     localStorage.clear();
-    self.transitionTo('login');
+    self.transitionTo('login', {queryParams: {errorMsg: this.get('error')}});
   },
 
   actions: {
@@ -36,6 +36,7 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
     },
     error: function(error, transition){
       if (error.status == 401) {
+        this.set('error', "Your session is expired.");
         this.destroySession();
       }
     },
