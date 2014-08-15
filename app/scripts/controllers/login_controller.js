@@ -35,6 +35,8 @@ SmartClient.LoginController = Ember.ObjectController.extend({
       // Setup the token and logged in user info
       login.save().then(function(result){
         self.set('token', result.get('token'));
+        localStorage.setItem('authToken', result.get('token'));
+
         self.get('store').find('service_provider', result.get('id')).then(function(loggedin_user) {
           self.set('loggedin_user', loggedin_user);
           self.transitionToRoute(self.get('attemptedTransition'))

@@ -15,8 +15,8 @@ SmartClient.LoginRoute = Ember.Route.extend({
     }
   },
   beforeModel: function(transition) {
-    if (!Ember.isEmpty(this.controllerFor('login').get('token'))) {
-      this.transitionToRoute('appointments');
+    if (localStorage.getItem('authToken')) {
+      this.transitionTo('appointments');
     }
   }
 });
