@@ -16,8 +16,8 @@ SmartClient.ApplicationController = Ember.ArrayController.extend({
 
   isAuthenticated: (function() {
     return !Ember.isEmpty(
-      this.get('currentUser')
+      localStorage.getItem('authToken')
     );
-  }).property('currentUser')
+  }).property()
 });
 

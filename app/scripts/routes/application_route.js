@@ -31,7 +31,7 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
     logout: function() {
       var self = this;
       this.store.createRecord('logout').save().then(function(result){
-        this.destroySession();
+        self.destroySession();
       });
     },
     error: function(error, transition){
