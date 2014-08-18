@@ -1,4 +1,5 @@
 SmartClient.LoginController = Ember.ObjectController.extend({
+  errorMsg: null,
   token: null,
   loggedin_user: null,
   attemptedTransition: null,
@@ -28,13 +29,19 @@ SmartClient.LoginController = Ember.ObjectController.extend({
   actions: {
     submit: function() {
       var self = this;
-      var login = self.get('model');
+      var login = this.store.createRecord('Login');
       login.set('username', self.get('username'));
       login.set('password', self.get('password'));
 
       // Setup the token and logged in user info
       login.save().then(function(result){
         self.set('token', result.get('token'));
+        localStorage.setItem('authToken', result.get('token'));
+
+        adapter = self.get('container').lookup('adapter:application')
+        adapter.set('headers', { 'AUTH_TOKEN': localStorage.getItem('authToken') })
+
+
         self.get('store').find('service_provider', result.get('id')).then(function(loggedin_user) {
           self.set('loggedin_user', loggedin_user);
           self.transitionToRoute(self.get('attemptedTransition'))

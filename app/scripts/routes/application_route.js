@@ -10,6 +10,16 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
     ];
   },
 
+  destroySession: function(){
+    var self = this;
+    // Unload all the important models.
+    ['serviceUser', 'serviceProvider', 'appointment'].forEach(function(type) {
+      self.store.unloadAll(type);
+    });
+    localStorage.clear();
+    self.transitionTo('login', {queryParams: {errorMsg: this.get('error')}});
+  },
+
   actions: {
     search: function (keyword) {
       if (keyword) {
@@ -21,10 +31,14 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
     logout: function() {
       var self = this;
       this.store.createRecord('logout').save().then(function(result){
-        localStorage.clear();
-        self.controllerFor('login').reset();
-        self.transitionTo('login');
+        self.destroySession();
       });
-    }
+    },
+    error: function(error, transition){
+      if (error.status == 401) {
+        this.set('error', "Your session is expired.");
+        this.destroySession();
+      }
+    },
   }
 });
