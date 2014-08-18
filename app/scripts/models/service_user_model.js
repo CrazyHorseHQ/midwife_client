@@ -2,6 +2,8 @@
 SmartClient.ServiceUser = DS.Model.extend({
   personal_fields: DS.attr(),
   clinical_fields: DS.attr(),
+  pregnancies: DS.hasMany('Pregnancy'),
+  babies: DS.hasMany('Baby'),
   appointments: DS.hasMany('Appointment'),
 
   gestation_period: function () {

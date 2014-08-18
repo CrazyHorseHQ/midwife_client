@@ -1,0 +1,13 @@
+{{#if view.isEditing}}
+  {{view view.inputField valueBinding="view.content"}}
+{{else}}
+  {{#if view.isEmpty}}
+    {{view.emptyValue}}
+  {{else}}
+    {{#if view.template}}
+      {{yield}}
+    {{else}}
+      {{view.content}}
+    {{/if}}
+  {{/if}}
+{{/if}}

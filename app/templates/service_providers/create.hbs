@@ -1,17 +1,22 @@
 <div class="well">
   <h2>Add Service Provider</h2>
 
-  {{#if model.errors.messages}}
-    {{#each model.errors.messages}}
+  <div id="sp_errors">
+    {{#each errorMessages}}
       <div class="error">
-        {{this}}
+        {{this.key}}: {{this.value}}
       </div>
     {{/each}}
-  {{/if}}
+  </div>
 
   {{#em-form model=model}}
     {{em-input property="name" label="Full Name" placeholder="Enter a full name"}}
     {{em-input property="username" label="Username" placeholder="Enter a username for login..."}}
+    {{em-input property="email" label="Email" placeholder="Enter an email"}}
     {{em-input property="password" label="Password" placeholder="And a password..." type="password"}}
+    {{em-input property="job_occupation" label="Job Occupation" placeholder="(Doctor, Midwife)"}}
+    {{em-input property="job_level" label="Job Level" placeholder="(Registrar, Consultant, CMM1)"}}
+    {{em-input property="primary_phone" label="Primary Phone" placeholder="First contact phone"}}
+    {{em-input property="secondary_phone" label="Secondary Phone" placeholder="Second contact phone"}}
   {{/em-form}}
 </div>

@@ -11,9 +11,7 @@ SmartClient.Router.map(function () {
   this.route('logout');
 
   this.resource('service_providers', function(){
-    this.resource('service_provider', { path: '/:service_provider_id' }, function(){
-      this.route('edit');
-    });
+    this.resource('service_provider', { path: '/:service_provider_id' });
     this.route('create');
   });
 

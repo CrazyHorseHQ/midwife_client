@@ -1,0 +1,5 @@
+SmartClient.Config = {
+  suFields: {
+
+  }
+};
