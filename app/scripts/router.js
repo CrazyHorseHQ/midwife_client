@@ -17,7 +17,6 @@ SmartClient.Router.map(function () {
 
   this.resource('service_users', function(){
     this.resource('service_user', { path: '/:service_user_id' }, function(){
-      this.route('edit');
       this.resource('appointment.tags', function() {
         this.resource('appointment.tag', {path: '/:tag_id'})
       });
