@@ -22,17 +22,19 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
       });
 
       new_service_user.save().then(function () {
-        self.set('name', '')
-        self.set('email', '')
-        self.set('address', '')
-        self.set('directions', '')
-        self.set('hospital_number', '')
-        self.set('home_phone', '')
-        self.set('mobile_phone', '')
-        self.set('next_of_kin_phone', '')
-        self.set('estimated_delivery_date', '')
-        self.set('dob', '')
-        self.set('blood_group', '')
+        self.setProperties({
+          'name': '',
+          'email': '',
+          'address': '',
+          'directions': '',
+          'hospital_number': '',
+          'home_phone': '',
+          'mobile_phone': '',
+          'next_of_kin_phone': '',
+          'estimated_delivery_date': '',
+          'dob': '',
+          'blood_group': ''
+        });
         self.transitionToRoute('service_users');
       }, function () {
         new_service_user.deleteRecord()
