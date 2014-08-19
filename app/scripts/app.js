@@ -34,7 +34,7 @@ EmberComponents.FocusSupport = Ember.Mixin.create({
   }
 })
 
-SmartClient.InplaceTextField = EmberComponents.InplaceTextArea = EmberComponents.InplaceField.extend({
+SmartClient.InplaceTextArea = EmberComponents.InplaceTextArea = EmberComponents.InplaceField.extend({
   inputField: Ember.TextArea.extend(EmberComponents.FocusSupport)
 })
 

@@ -17,7 +17,7 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
         clinical_fields: {
           hospital_number: self.get('hospital_number'),
           estimated_delivery_date: self.get('estimated_delivery_date'),
-          blood_type: self.get('blood_type')
+          blood_group: self.get('blood_group')
         }
       });
 
@@ -32,7 +32,7 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
         self.set('next_of_kin_phone', '')
         self.set('estimated_delivery_date', '')
         self.set('dob', '')
-        self.set('blood_type', '')
+        self.set('blood_group', '')
         self.transitionToRoute('service_users');
       }, function () {
         new_service_user.deleteRecord()
