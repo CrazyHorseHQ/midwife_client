@@ -9,16 +9,16 @@ SmartClient.ServiceUser = DS.Model.extend({
     pregnancies_content = this.get('pregnancies.content')
     var edd = moment(pregnancies_content[0].get('estimated_delivery_date'))
 
-    log(moment().format() + "<" + moment(edd).format() + ": " + (moment().isBefore(moment(edd), 'd')))
-
     if (moment().isBefore(moment(edd), 'd')) {
       var diff = Math.ceil(edd.diff(moment(), 'd', true))
-      log(diff + " days difference")
+      diff = (280 - diff) // 280 is 4 weeks
 
       if (diff % 7 === 0) {
-        return (diff / 7) + " weeks"
-      } else {
+        return Math.floor(diff / 7) + " weeks"
+      } else if (diff < 7) {
         return (diff % 7) + " days"
+      } else {
+        return Math.floor(diff / 7) + " weeks " + (diff % 7) + " days"
       }
     } else {
       return "T + " + Math.ceil(moment().diff(edd, 'd', true))
