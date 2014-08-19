@@ -1,22 +1,40 @@
 <div class="well">
   <h1>Service User</h1>
 
-  <table>
-    <tbody>
-      {{#each model.attributes}}
-      <tr>
-        <td>
-          <strong>{{this.key}}:</strong>
-        </td>
-        <td>
-          {{this.value}}
-        </td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.name"}}</td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.address"}}</td>
+        </tr>
+      </tbody>
+    </table>
 
-  {{#link-to 'service_user.edit' model}}Change{{/link-to}}
-</div>
+    <button {{action 'save'}} class="btn btn-success">Save</button>
+
+    <div id="su_success" class="alert alert-success" style="display:none">
+      <a href="#" class="close" {{action 'close'}}>&times;</a>
+      <strong>Success</strong>, Service User updated.
+    </div>
+  </div>
+
+  <div class="well">
+    <h4>Pregnancies<h4>
+    {{#each pregnancies}}
+      <li>{{id}}</li>
+      <li>{{estimated_delivery_date}}</li>
+    {{/each}}
+  </div>
+
+  <div class="well">
+    <h4>Babies<h4>
+    {{#each babies}}
+      <li>{{id}}</li>
+    {{/each}}
+  </div>
 
 {{outlet}}
