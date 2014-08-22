@@ -21,9 +21,13 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
   },
 
   actions: {
-    search: function (keyword) {
-      if (keyword) {
-        this.transitionTo('results', keyword)
+    search: function (searchString) {
+      if (searchString) {
+        if (searchString.match(/@[0-9]{2}\/[0-9]{2}\/[0-9]{4}/)) {
+          searchString = searchString.replace(/\//g, "-")
+        }
+
+        this.transitionTo('results', searchString)
       } else {
         alert("Please type a hospital number, date of birth or name")
       }

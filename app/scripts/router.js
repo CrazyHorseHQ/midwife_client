@@ -29,5 +29,5 @@ SmartClient.Router.map(function () {
     this.route('create');
   });
 
-  this.route('results', {path: '/results/:keyword'})
+  this.route('results', {path: '/results/:searchString'})
 });
