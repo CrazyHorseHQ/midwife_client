@@ -1,28 +1,24 @@
 SmartClient.ResultsRoute = Ember.Route.extend({
   model: function (params) {
-    var query_type = 'name';
+    var searchString = params.searchString
+    var options = {}
 
-    if (params.keyword.match(/[hH][0-9]+/)) {
-      query_type = 'hospital_number'
-    } else if (params.keyword.match(/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)) {
-      query_type = 'dob'
+    if (searchString.match(/[hH][0-9]+/)) {
+      options['hospital_number'] = searchString.match(/[hH][0-9]+/)[0]
+
+      searchString = searchString.replace(/[hH][0-9]+/, "").trim()
     }
 
-    var options = {}
-    options[query_type] = params.keyword
-    model = this.store.find('service_user', options)
+    if (searchString.match(/@[0-9]{2}\-[0-9]{2}\-[0-9]{4}/)) {
+      options['dob'] = searchString.match(/[0-9]{2}\-[0-9]{2}\-[0-9]{4}/)[0]
 
-    model.then(function () {
-      model.set('keyword', params.keyword)
-    }, function () {
-      log("error")
-    });
+      searchString = searchString.replace(/@[0-9]{2}\-[0-9]{2}\-[0-9]{4}/, "").trim()
+    }
 
-    return model;
-  },
+    if (searchString) {
+      options['name'] = searchString;
+    }
 
-  setupController: function(controller, model) {
-    controller.set('model', model.get('content'));
-    controller.set('keyword', model.get('keyword'));
+    return this.store.find('service_user', options)
   }
 });
