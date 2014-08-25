@@ -8,8 +8,10 @@
   {{/link-to}}
 
   <ul>
-   {{#each model}}
-      <li>{{#link-to 'service_provider' this}}{{name}}{{/link-to}} | <a href="#" {{action activate this}}>{{activated_text}}</a></li>
+   {{#each sp in model}}
+      <li>
+        {{#link-to 'service_provider' sp}}{{sp.name}}{{/link-to}} {{#if ../controllers.application.currentUser.admin}}| <a href="#" {{action activate sp}}>{{sp.activated_text}}</a>{{/if}}
+      </li>
     {{/each}}
   </ul>
 </div>
