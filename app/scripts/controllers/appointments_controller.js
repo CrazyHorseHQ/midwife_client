@@ -52,21 +52,21 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       this.get('selectedPriority') ||
       this.get('selectedVisitType') ||
       this.get('selectedDate') ||
-      this.get('selectedTag')
+      this.get('selectedServiceOption')
     );
-  }.property('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedTag'),
+  }.property('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedServiceOption'),
 
   // Filter toggles and trigger
   selectedVisitType: false,
   selectedPriority: false,
   selectedDate: false,
   selectedSP: false,
-  selectedTag: false,
+  selectedServiceOption: false,
   showMyOnly: false,
 
   filterDidChange: function() {
     this.applyFilters();
-  }.observes('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedTag'),
+  }.observes('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedServiceOption'),
 
   // Filter helpers
   visitTypeFilter: function(content, visitType) {
@@ -81,9 +81,9 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return this.filterHelper(content, 'date', date);
   },
 
-  tagFilter: function(content, tag) {
+  serviceOptionFilter: function(content, so) {
     return content.filter(function(item) {
-      return item.get('tags').mapBy('id').contains(tag);
+      return item.get('service_options').mapBy('id').contains(so);
     });
   },
 
@@ -105,7 +105,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     var selectedSP = this.get('selectedSP');
     var selectedVisitType = this.get('selectedVisitType');
     var selectedPriority = this.get('selectedPriority');
-    var selectedTag = this.get('selectedTag');
+    var selectedServiceOption = this.get('selectedServiceOption');
     var appointments = this.get('all');
     this.set('content', appointments);
 
@@ -125,8 +125,8 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       appointments = this.priorityFilter(appointments, selectedPriority);
     }
 
-    if (selectedTag) {
-      appointments = this.tagFilter(appointments, selectedTag);
+    if (selectedServiceOption) {
+      appointments = this.serviceOptionFilter(appointments, selectedServiceOption);
     }
 
     this.set('content', appointments);
@@ -147,8 +147,8 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       this.set('selectedPriority', priority);
     },
 
-    filterByTag: function(tag) {
-      this.set('selectedTag', tag);
+    filterByServiceOption: function(so) {
+      this.set('selectedServiceOption', so);
     },
 
     filterBySP: function(sp) {
@@ -169,7 +169,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       this.set('selectedSP', false);
       this.set('selectedVisitType', false);
       this.set('selectedPriority', false);
-      this.set('selectedTag', false);
+      this.set('selectedServiceOption', false);
       this.applyFilters();
     },
   }

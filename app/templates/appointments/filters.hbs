@@ -20,9 +20,9 @@
     {{/each}}
   </div>
   <div class="btn-group">
-    {{#each tags}}
+    {{#each service_options}}
       <button
-        {{action 'filterByTag' this.id}}
+        {{action 'filterByServiceOption' this.id}}
         type="button"
         class="btn btn-default
         {{bind-attr class=":btn :btn-default this.selected:btn-info"}}>

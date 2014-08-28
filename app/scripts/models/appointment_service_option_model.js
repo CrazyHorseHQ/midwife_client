@@ -1,10 +1,11 @@
 /*global Ember*/
-SmartClient.Tag = DS.Model.extend({
-    name: DS.attr('string')
+SmartClient.AppointmentServiceOption = DS.Model.extend({
+    appointment_id: DS.attr(),
+    service_option_id: DS.attr()
 });
 
 // probably should be mixed-in...
-SmartClient.Tag.reopen({
+SmartClient.AppointmentServiceOption.reopen({
   attributes: function(){
     var model = this;
     return Ember.keys(this.get('data')).map(function(key){
@@ -13,6 +14,6 @@ SmartClient.Tag.reopen({
         key: key,
         valueBinding: 'model.' + key });
     });
-  }.property()
+  }.property(),
 });
 
