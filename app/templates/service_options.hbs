@@ -1,7 +1,7 @@
 <div class="well">
   <h4>Service Options</h4>
 
-  {{#each}}
+  {{#each model}}
     <li>{{#link-to 'service_option' this}}{{name}}{{/link-to}}</li>
   {{/each}}
 
