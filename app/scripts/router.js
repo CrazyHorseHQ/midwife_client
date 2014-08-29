@@ -29,5 +29,17 @@ SmartClient.Router.map(function () {
     this.route('create');
   });
 
-  this.route('results', {path: '/results/:searchString'})
+  this.route('results', {path: '/results/:searchString'});
+
+  this.resource('service_options', function () {
+    this.resource('service_option', {path: '/:service_option_id'}, function () {
+      this.resource('clinics', function () {
+        this.resource('clinic', {path: '/:clinic_id'}, function () {
+          this.resource('clinic.appointments', {path: '/appointments'}, function () {
+            this.resource('clinic.appointment', {path: '/:appointment_id'});
+          });
+        });
+      });
+    });
+  });
 });

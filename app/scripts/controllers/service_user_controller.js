@@ -11,6 +11,10 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
     },
     close: function () {
       Ember.$('#su_success').hide()
+    },
+    new_appointment: function (su_id) {
+      //local storage of su_id to retrieve later for booking
+      this.transitionToRoute('service_options')
     }
   }
 });

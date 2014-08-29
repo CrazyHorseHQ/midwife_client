@@ -1,0 +1,5 @@
+{{#each clinic in model}}
+  <li>{{#link-to 'clinic' clinic}}{{clinic.name}}{{/link-to}}</li>
+{{/each}}
+
+{{outlet}}
