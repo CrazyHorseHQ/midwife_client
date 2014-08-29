@@ -1,16 +1,11 @@
-<h1>Service Option</h1>
+<div class="well">
+  {{#link-to 'clinics'}}
+    <button class="btn btn-primary">
+      <i class="icon-white icon-th-list"></i> See clinics
+    </button>
+  {{/link-to}}
 
-<table>
-  {{#each model.attributes}}
-  <tr>
-    <td>
-      <strong>{{this.key}}:</strong>
-    </td>
-    <td>
-      {{this.value}}
-    </td>
-  </tr>
-  {{/each}}
-</table>
+  <h4>{{name}}<h4>
 
-{{outlet}}
+  {{outlet}}
+</div>

@@ -1,9 +1,11 @@
-<h1>Service Options</h1>
+<div class="well">
+  <h3>Choose a Service Option</h3>
 
-<ul>
- {{#each content}}
-     <li>{{#link-to 'service_option' this}}{{this.name}}{{/link-to}}</li>
-  {{/each}}
-</ul>
+  <ul>
+    {{#each so in model}}
+      <li>{{#link-to 'service_option' so}}{{so.name}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+</div>
 
 {{outlet}}
