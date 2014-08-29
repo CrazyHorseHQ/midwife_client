@@ -27,7 +27,9 @@
     {{#if service_user}}
       <li>{{#link-to 'service_user' service_user}}{{time}} | {{service_user.personal_fields.name}} {{service_user.gestation}}{{/link-to}}</li>
     {{else}}
-      <li id="{{unbound time}}" {{action 'appendSearch' time}}>{{time}} | Click to book this slot</li>
+      <li id="search_{{unbound time}}" {{action 'appendSearch' time}}>{{time}} | Click to book this slot
+        {{view Ember.ContainerView elementId=time}}
+      </li>
     {{/if}}
   {{/each}}
 </div>

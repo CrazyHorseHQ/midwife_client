@@ -1,0 +1,18 @@
+<div class="well">
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>Name</td>
+        <td>{{name}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  {{#link-to 'clinics'}}
+    <button class="btn btn-primary">
+      <i class="icon-white icon-tasks"></i> See clinics
+    </button>
+  {{/link-to}}
+</div>
+
+{{outlet}}

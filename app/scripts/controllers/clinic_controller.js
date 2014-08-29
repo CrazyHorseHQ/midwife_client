@@ -15,9 +15,11 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
         store: this.get('store')
       });
 
-      this.createChildView(comp)
+      var selector = time.replace("search_", "").replace(":", "\\\\:");
+      log(selector)
 
-      // comp.appendTo(Ember.$('[id="' + time + '"]'))
+      var containerView = Em.View.views[selector]
+      containerView.pushObject(comp);
     }
   },
 
