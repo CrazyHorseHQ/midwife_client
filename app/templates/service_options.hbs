@@ -1,0 +1,9 @@
+<h1>Service Options</h1>
+
+<ul>
+ {{#each content}}
+     <li>{{#link-to 'service_option' this}}{{this.name}}{{/link-to}}</li>
+  {{/each}}
+</ul>
+
+{{outlet}}

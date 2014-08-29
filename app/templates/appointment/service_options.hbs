@@ -1,0 +1,14 @@
+<div class="appointment-sos selected-sos btn-group btn-group-sm">
+  {{#each selectedServiceOptions}}
+      <button {{action 'remove_so' this.id}} type="button" class="btn btn-small btn-primary">
+        {{this.name}}
+      </button>
+  {{/each}}
+</div>
+<div class="appointment-sos btn-group btn-group-sm">
+  {{#each remainingServiceOptions}}
+      <button {{action 'add_so' this.id}} type="button" class="btn btn-small btn-default">
+        {{this.name}}
+      </button>
+  {{/each}}
+</div>

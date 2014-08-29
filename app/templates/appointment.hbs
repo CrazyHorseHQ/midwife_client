@@ -11,16 +11,16 @@
         Emergency
       </span>&nbsp;
     {{/if}}
-    <div class="appointment-tags selected-tags btn-group btn-group-xs">
-      {{#each selectedTags}}
-          <button {{action 'untag' this.id}} type="button" class="btn btn-small btn-success">
+    <div class="appointment-sos selected-sos btn-group btn-group-xs">
+      {{#each selectedServiceOptions}}
+          <button {{action 'remove_so' this.id}} type="button" class="btn btn-small btn-success">
             {{this.name}}
           </button>
       {{/each}}
     </div>
-    <div class="appointment-tags btn-group btn-group-xs">
-      {{#each remainingTags}}
-          <button {{action 'tag' this.id}} type="button" class="btn btn-small btn-default">
+    <div class="appointment-sos btn-group btn-group-xs">
+      {{#each remainingServiceOptions}}
+          <button {{action 'add_so' this.id}} type="button" class="btn btn-small btn-default">
             {{this.name}}
           </button>
       {{/each}}

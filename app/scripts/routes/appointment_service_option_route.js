@@ -1,6 +1,6 @@
-SmartClient.AppointmentTagRoute = Ember.Route.extend({
+SmartClient.AppointmentServiceOptionRoute = Ember.Route.extend({
   model: function(params) {
-    return this.modelFor('appointment').get('tag_ids', params.tag_id);
+    return this.modelFor('appointment').get('service_option_ids', params.service_option_id);
   },
 
   setupController: function(controller, model) {
@@ -9,7 +9,7 @@ SmartClient.AppointmentTagRoute = Ember.Route.extend({
   serialize: function(model, params) {
     return {
       appointment_id: model.appointment_id,
-      tag_id: model.tag_id
+      service_option_id: model.service_option_id
     };
   }
 });

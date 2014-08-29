@@ -6,7 +6,7 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
       {label: 'Service Providers', resource: 'service_providers'},
       {label: 'Appointments', resource: 'appointments'},
       {label: 'Service Users', resource: 'service_users'},
-      {label: 'Tags', resource: 'tags'}
+      {label: 'Service Options', resource: 'service_options'}
     ];
   },
 

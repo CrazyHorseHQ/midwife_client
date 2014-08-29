@@ -4,7 +4,7 @@ SmartClient.AppointmentRoute = SmartClient.AuthenticatedRoute.extend({
   },
   setupController: function(controller, model) {
     controller.set('content', model);
-    controller.set('allTags', this.store.all('tag'));
+    controller.set('allServiceOptions', this.store.all('service_option'));
   },
 });
 

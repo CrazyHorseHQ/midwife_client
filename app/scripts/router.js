@@ -17,16 +17,15 @@ SmartClient.Router.map(function () {
 
   this.resource('service_users', function(){
     this.resource('service_user', { path: '/:service_user_id' }, function(){
-      this.resource('appointment.tags', function() {
-        this.resource('appointment.tag', {path: '/:tag_id'})
+      this.resource('appointment.service_options', function() {
+        this.resource('appointment.service_option', {path: '/:service_option_id'})
       });
     });
     this.route('create');
   });
 
-  this.resource('tags', function() {
-    this.resource('tag', {path: '/:tag_id'}, function(){});
-    this.route('create');
+  this.resource('service_options', function() {
+    this.resource('service_option', {path: '/:service_option_id'}, function(){});
   });
 
   this.route('results', {path: '/results/:searchString'})

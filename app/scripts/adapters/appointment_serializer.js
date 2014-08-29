@@ -10,7 +10,7 @@ SmartClient.AppointmentSerializer = DS.ActiveModelSerializer.extend({
     json['service_provider_id'] = record.get('service_provider.id');
     // Delete
     delete json.visit_logs;
-    delete json.tag_ids;
+    delete json.service_option_ids;
 
     return json;
   },
