@@ -1,4 +1,7 @@
 SmartClient.ServiceOptionController = Ember.ObjectController.extend({
-  // Implement your controller here.
+  actions: {
+    loadClinics: function () {
+      this.get('store').find("clinic", {ids: model.clinic_ids});
+    }
+  }
 });
-

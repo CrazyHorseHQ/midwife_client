@@ -1,0 +1,37 @@
+<div class="well">
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>Name</td>
+        <td>{{name}}</td>
+      </tr>
+      <tr>
+        <td>Opening Times</td>
+        <td>{{opening_time}} - {{closing_time}}</td>
+      </tr>
+      <tr>
+        <td>Recurring</td>
+        <td>{{recurrence}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  {{#each next_weeks}}
+    <div class="well" {{action 'load_appointments' date on='click'}}>
+      <li>Week {{weekName}}</li>
+      <li>{{formattedDate}}</li>
+    </div>
+  {{/each}}
+
+  {{#each times}}
+    {{#if service_user}}
+      <li>{{#link-to 'service_user' service_user}}{{time}} | {{service_user.personal_fields.name}} {{service_user.gestation}}{{/link-to}}</li>
+    {{else}}
+      <li id="search_{{unbound time}}" {{action 'appendSearch' time}}>{{time}} | Click to book this slot
+        {{view Ember.ContainerView elementId=time}}
+      </li>
+    {{/if}}
+  {{/each}}
+</div>
+
+{{outlet}}

@@ -51,6 +51,7 @@ Ember.Inflector.inflector.uncountable('logout');
 require('scripts/config');
 require('scripts/store');
 require('scripts/adapters/*');
+require('scripts/components/*');
 require('scripts/controllers/*');
 require('scripts/models/*');
 require('scripts/routes/authenticated_route.js');

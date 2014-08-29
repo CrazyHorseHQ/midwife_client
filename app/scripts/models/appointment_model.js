@@ -5,10 +5,7 @@ SmartClient.Appointment = DS.Model.extend({
   service_provider_id: DS.attr(),
   service_provider: DS.belongsTo('ServiceProvider', {async: true}),
   service_user_id: DS.attr(),
-  // !IMPORTANT this is not a typo, Ember Data won't work properly for this relation
-  // for some goddamn reason hard to find...
-  // TODO log a bug with the case on emberjs/data
-  service_user: DS.belongsTo('serviceUser', {async: false}),
+  service_user: DS.belongsTo('serviceUser', {async: true}),
   priority: DS.attr(),
   visit_type: DS.attr(),
   visit_logs: DS.attr(),
