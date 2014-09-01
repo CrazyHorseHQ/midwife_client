@@ -1,49 +1,7 @@
 <div class="well">
   <h1>Service Provider</h1>
 
-  <table class="table">
-    <tbody>
-      <tr>
-        <td>Name</td>
-        <td>{{view SmartClient.InplaceTextField contentBinding="name"}}</td>
-      </tr>
-      <tr>
-        <td>Username</td>
-        <td>{{view SmartClient.InplaceTextField contentBinding="username"}}</td>
-      </tr>
-      <tr>
-        <td>Email</td>
-        <td>{{view SmartClient.InplaceTextField contentBinding="email"}}</td>
-      </tr>
-      <tr>
-        <td>Primary Phone</td>
-        <td>{{view SmartClient.InplaceTextField contentBinding="primary_phone"}}</td>
-      </tr>
-      <tr>
-        <td>Secondary Phone</td>
-        <td>{{view SmartClient.InplaceTextField contentBinding="secondary_phone"}}</td>
-      </tr>
-      <tr>
-        <td>Admin Access</td>
-        <td>{{admin}}</td>
-      </tr>
-      <tr>
-        <td>Active Service Provider</td>
-        <td>{{active}}</td>
-      </tr>
-      <tr>
-        <td>Job Occupation</td>
-        <td>{{view SmartClient.InplaceTextField contentBinding="job_occupation"}}</td>
-      </tr>
-      <tr>
-        <td>Job Level</td>
-        <td>{{view SmartClient.InplaceTextField contentBinding="job_level"}}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <button {{action 'save'}} class="btn btn-success">Save</button>
-
+  {{outlet spData}}
   <div id="sp_success" class="alert alert-success" style="display:none">
     <a href="#" class="close" {{action 'close'}}>&times;</a>
     <strong>Success</strong>, Service Provider updated.

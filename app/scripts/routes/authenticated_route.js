@@ -11,5 +11,9 @@ SmartClient.AuthenticatedRoute = Ember.Route.extend({
   redirectToLogin: function(transition) {
     this.controllerFor('login').set('attemptedTransition', transition);
     return this.transitionTo('login');
-  }
+  },
+
+  currentUser: function(){
+    return JSON.parse(localStorage.getItem('loggedinUser'));
+  },
 });
