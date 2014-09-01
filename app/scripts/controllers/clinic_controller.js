@@ -1,6 +1,8 @@
 SmartClient.ClinicController = Ember.ObjectController.extend({
+  needs: ['application'],
   appointments: [],
   date: "",
+  time: "",
 
   actions: {
     load_appointments: function (date) {
@@ -10,16 +12,30 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
         date: date
       }));
     },
-    appendSearch: function (time) {
-      var comp = SmartClient.AutoSearchComponent.create({
-        store: this.get('store')
+    recordTime: function (time) {
+      this.set('time', time)
+    },
+    bookServiceUser: function (service_user) {
+      var sp = this.get('controllers.application.currentUser')
+      var self = this,
+          model = self.get('model')
+
+      var new_apt = this.get('store').createRecord('appointment', {
+        date: this.get('date'),
+        time: this.get('time'),
+        service_provider: sp,
+        service_user: service_user,
+        priority: 'other',
+        visit_type: 'ante-natal',
+        clinic_id: model.get('id')
       });
 
-      var selector = time.replace("search_", "").replace(":", "\\\\:");
-      log(selector)
-
-      var containerView = Em.View.views[selector]
-      containerView.pushObject(comp);
+      new_apt.save().then(function () {
+        self.set('appointments', self.get('store').find('appointment', {
+          clinic_id: self.get('model').get('id'),
+          date: self.get('date')
+        }));
+      });
     }
   },
 

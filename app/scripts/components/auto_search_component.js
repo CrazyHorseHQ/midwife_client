@@ -2,6 +2,12 @@ SmartClient.AutoSearchComponent = Ember.Component.extend({
   searchString: null,
   store: null,
 
+  actions: {
+    bookServiceUser: function (service_user) {
+      this.sendAction('action', service_user)
+    }
+  },
+
   searchResults: function() {
     var searchString = this.get('searchString');
 
