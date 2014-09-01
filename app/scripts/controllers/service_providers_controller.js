@@ -1,10 +1,15 @@
-SmartClient.ServiceProvidersController = Ember.ObjectController.extend({
+SmartClient.ServiceProvidersController = Ember.ArrayController.extend({
   needs: ["application"],
+  itemController: "serviceProvider",
+  sortProperties: ["name"],
+  sortAscending: true,
 
   actions: {
     activate: function (model) {
-      model.toggleProperty('active');
-      model.save()
+      if (this.get('controllers.application.currentUser.admin')) {
+        model.toggleProperty('active');
+        model.save();
+      }
     }
   }
 });

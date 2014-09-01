@@ -1,13 +1,17 @@
 SmartClient.ServiceProviderController = Ember.ObjectController.extend({
+  needs: "application",
+
   actions: {
     save: function(){
-      var self = this
-      var model = self.get('model')
+      if (this.get('controllers.application.currentUser.admin')) {
+        var self = this
+        var model = self.get('model')
 
-      model.save().then(function () {
-        Ember.$('#sp_success').show()
-        self.transitionToRoute('service_provider', model);
-      }, function () {});
+        model.save().then(function () {
+          Ember.$('#sp_success').show()
+          self.transitionToRoute('service_provider', model);
+        }, function () {});
+      }
     },
     close: function () {
       Ember.$('#sp_success').hide()
