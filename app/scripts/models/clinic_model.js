@@ -5,5 +5,5 @@ SmartClient.Clinic = DS.Model.extend({
   closing_time: DS.attr(),
   recurrence: DS.attr(),
   days: DS.attr(),
-  appointments: DS.hasMany()
+  appointments: DS.hasMany('appointment')
 });
