@@ -15,7 +15,18 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
     recordTime: function (time) {
       this.set('time', time)
     },
-    bookServiceUser: function (service_user) {
+    bookServiceUser: function (service_user, time) {
+      if (!service_user) {
+        service_user = this.get('suModel')
+
+        var willBook = confirm("Confirm booking for " + service_user.get('personal_fields.name') + " at " + time)
+        if (willBook) {
+          this.set('time', time)
+        } else {
+          return;
+        }
+      }
+
       var sp = this.get('controllers.application.currentUser')
       var self = this,
           model = self.get('model')
@@ -78,7 +89,7 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
   next_weeks: function () {
     var collection = [],
         daysOn = [],
-        days = this.get('days')
+        days = this.get('model.days')
 
     for (var day in days) {
       var on = days[day]

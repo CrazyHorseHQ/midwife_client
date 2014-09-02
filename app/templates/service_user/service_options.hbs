@@ -1,0 +1,9 @@
+<div class="well">
+  <h4>Service Options</h4>
+
+  {{#each model}}
+    <li>{{#link-to 'service_user.service_option' this}}{{name}}{{/link-to}}</li>
+  {{/each}}
+
+  {{outlet}}
+</div>
