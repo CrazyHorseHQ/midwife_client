@@ -1,7 +1,6 @@
 SmartClient.ServiceOptionRoute = SmartClient.AuthenticatedRoute.extend({
-  model: function (service_option_id) {
+  model: function (params) {
     sos = this.modelFor('service_options');
-
-    return sos[0];
+    return sos.findBy('id', params.service_option_id);
   }
 });
