@@ -1,4 +1,14 @@
 SmartClient.ServiceUserController = Ember.ObjectController.extend({
+  home_types: [
+    {id: 'house', name: 'house'},
+    {id: 'apartment', name: 'apartment'},
+    {id: 'mobile home', name: 'mobile home'}
+  ],
+  home_counties: [
+    {id: 'Dublin', name: 'Dublin'},
+    {id: 'Wicklow', name: 'Wicklow'}
+  ],
+
   actions: {
     save: function(){
       var self = this

@@ -14,8 +14,20 @@
           <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.name"}}</td>
         </tr>
         <tr>
+          <td>Home type</td>
+          <td>{{view SmartClient.InplaceSelect contentBinding="personal_fields.home_type" selectContent=home_types optionLabelPath="content.name" optionValuePath="content.id"}}</td>
+        </tr>
+        <tr>
           <td>Address</td>
-          <td>{{view SmartClient.InplaceTextArea contentBinding="personal_fields.address"}}</td>
+          <td>{{view SmartClient.InplaceTextArea contentBinding="personal_fields.home_address"}}</td>
+        </tr>
+        <tr>
+          <td>Home Post Code</td>
+          <td>{{view SmartClient.InplaceTextField contentbinding="personal_fields.home_post_code"}}</td>
+        </tr>
+        <tr>
+          <td>Home county</td>
+          <td>{{view SmartClient.InplaceSelect contentBinding="personal_fields.home_county" selectContent=home_counties optionLabelPath="content.name" optionValuePath="content.id"}}</td>
         </tr>
         <tr>
           <td>EDD</td>
