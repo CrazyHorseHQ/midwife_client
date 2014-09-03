@@ -1,4 +1,7 @@
 SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
+  homeTypeOptions: [{type: 'house'}, {type: 'apartment'}, {type: 'mobile home'}],
+  homeCountyOptions: [{type: 'Dublin'}, {type: 'Wicklow'}],
+
   actions: {
     submit: function () {
       var self = this

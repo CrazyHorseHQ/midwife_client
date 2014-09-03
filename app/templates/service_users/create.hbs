@@ -13,6 +13,17 @@
     {{em-input property="name" label="Full Name" placeholder="Enter a full name"}}
     {{em-input property="email" label="Email" placeholder="Enter an email..."}}
     {{em-text property="address" label="Address" placeholder=""}}
+    {{em-select property="home_type" label="Home Type" placeholder="" content=homeTypeOptions
+            optionValuePath="content.type"
+            optionLabelPath="content.type"
+            prompt="Choose a Home Type"
+    }}
+    {{em-select property="home_county" label="Home County" placeholder="" content=homeCountyOptions
+            optionValuePath="content.type"
+            optionLabelPath="content.type"
+            prompt="Choose a County"
+    }}
+    {{em-input property="home_post_code" label="Post Code" placeholder=""}}
     {{em-input property="dob" label="Date Of Birth" placeholder="" type="date"}}
     {{em-text property="directions" label="Directions" placeholder=""}}
     {{em-input property="home_phone" label="Home Phone" placeholder=""}}
