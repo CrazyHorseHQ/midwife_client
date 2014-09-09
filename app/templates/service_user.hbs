@@ -51,8 +51,31 @@
   <div class="well">
     <h4>Pregnancies<h4>
     {{#each pregnancies}}
-      <li>{{id}}</li>
-      <li>{{estimated_delivery_date}}</li>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Estimated Delivery Date</td>
+            <td>{{view SmartClient.InplaceTextField contentBinding="estimated_delivery_date"}}</td>
+          </tr>
+          <tr>
+            <td>Additional Information</td>
+            <td>{{view SmartClient.InplaceTextField contentBinding="additional_info"}}</td>
+          </tr>
+          <tr>
+            <td>Birth Mode</td>
+            <td>{{view SmartClient.InplaceTextField contentBinding="birth_mode"}}</td>
+          </tr>
+          <tr>
+            <td>Perineum</td>
+            <td>{{view SmartClient.InplaceTextField contentBinding="perineum"}}</td>
+          </tr>
+          <tr>
+            <td>Anti D</td>
+            <td>{{view SmartClient.InplaceTextField contentBinding="anti_d"}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button {{action 'savePregnancy' id}} class="btn btn-success">Save Pregnancy Details</button>
     {{/each}}
   </div>
 
