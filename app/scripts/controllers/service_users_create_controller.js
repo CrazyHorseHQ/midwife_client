@@ -4,7 +4,7 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
 
   actions: {
     submit: function () {
-      var self = this
+      var self = this;
 
       var new_service_user = this.store.createRecord('service_user', {
         personal_fields: {
