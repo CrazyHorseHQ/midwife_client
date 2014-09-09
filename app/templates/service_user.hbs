@@ -76,15 +76,49 @@
         </tbody>
       </table>
       <button {{action 'savePregnancy' id}} class="btn btn-success">Save Pregnancy Details</button>
+
+      {{#each babies}}
+        <h5>Baby<h5>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Hospital Number</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="hospital_number"}}</td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="name"}}</td>
+            </tr>
+            <tr>
+              <td>Gender</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="gender"}}</td>
+            </tr>
+            <tr>
+              <td>Weight</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="weight"}}</td>
+            </tr>
+            <tr>
+              <td>Vitamin K</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="vitamin_k"}}</td>
+            </tr>
+            <tr>
+              <td>Hearing</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="hearing"}}</td>
+            </tr>
+            <tr>
+              <td>Newborn Screening Test</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="newborn_screening_test"}}</td>
+            </tr>
+            <tr>
+              <td>Delivery Date Time</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="delivery_date_time"}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button {{action 'saveBaby' id}} class="btn btn-success">Save Baby Details</button>
+
+      {{/each}}
+
     {{/each}}
   </div>
-
-  <div class="well">
-    <h4>Babies<h4>
-    {{#each babies}}
-      <li>{{id}}</li>
-      <li>{{delivery_date_time}}</li>
-    {{/each}}
-  </div>
-
 {{outlet}}
