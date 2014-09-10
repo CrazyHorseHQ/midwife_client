@@ -1,6 +1,5 @@
 SmartClient.LoginRoute = Ember.Route.extend({
   model: function(params) {
-    this.controllerFor('login').set('errorMsg', params.queryParams.errorMsg);
     return this.store.createRecord('Login');
   },
   setupController: function(controller, model) {
@@ -20,4 +19,3 @@ SmartClient.LoginRoute = Ember.Route.extend({
     }
   }
 });
-

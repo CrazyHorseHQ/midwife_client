@@ -1,5 +1,4 @@
 SmartClient.LoginController = Ember.ObjectController.extend({
-  errorMsg: null,
   token: null,
   loggedin_user: null,
   attemptedTransition: null,
@@ -46,6 +45,8 @@ SmartClient.LoginController = Ember.ObjectController.extend({
           self.set('loggedin_user', loggedin_user);
           self.transitionToRoute(self.get('attemptedTransition'))
         });
+      }, function (resp) {
+        self.setErrors(resp, "login_errors")
       });
     }
   }

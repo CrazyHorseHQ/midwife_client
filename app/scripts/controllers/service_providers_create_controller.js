@@ -1,6 +1,4 @@
 SmartClient.ServiceProvidersCreateController = Ember.ObjectController.extend({
-  errorMessages: [],
-
   actions: {
     submit: function () {
       var self = this
@@ -31,19 +29,7 @@ SmartClient.ServiceProvidersCreateController = Ember.ObjectController.extend({
 
         self.transitionToRoute('service_providers');
       }, function (resp) {
-        var errorArray = []
-        Ember.$.each(resp.errors, function (key, value) {
-          errorArray.push({
-            key: key,
-            value: value
-          })
-        })
-
-        self.set('errorMessages', errorArray)
-        new_service_provider.deleteRecord()
-        Ember.$('html, body').animate({
-          scrollTop: Ember.$("#sp_errors").offset().top - 80
-        }, 500);
+        self.setErrors(resp, "sp_errors", new_service_provider)
       });
     }
   }

@@ -45,8 +45,9 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
           'blood_group': ''
         });
         self.transitionToRoute('service_users');
-      }, function () {
-        new_service_user.deleteRecord()
+      }, function (resp) {
+        new_service_user.transitionTo('created.uncommitted')
+        self.setErrors(resp, "su_errors", new_service_user)
       });
     }
   }
