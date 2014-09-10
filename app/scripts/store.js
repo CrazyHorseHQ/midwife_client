@@ -5,6 +5,6 @@ SmartClient.ApplicationAdapter = DS.ActiveModelAdapter.extend({
 // Add the headers
 SmartClient.ApplicationAdapter.reopen({
   headers: {
-    "AUTH_TOKEN": localStorage.getItem('authToken'),
+    "Auth-Token": localStorage.getItem('authToken'),
   }
 });
