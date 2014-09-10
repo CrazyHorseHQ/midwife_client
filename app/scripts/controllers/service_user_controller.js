@@ -19,6 +19,26 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
         self.transitionToRoute('service_user', model);
       }, function () {});
     },
+    savePregnancy: function(pregnancyId) {
+      var self = this
+      var model = self.store.all('pregnancy').findBy('id', pregnancyId)
+
+      model.save().then(function () {
+        Ember.$('#su_success').show()
+        self.transitionToRoute('service_user', self.get('model'));
+      }, function () {});
+    },
+    saveBaby: function(babyId) {
+      var self = this
+      var model = self.store.all('baby').findBy('id', babyId)
+      // Need to be set for validation reasons
+      model.set('service_user', self.get('model'))
+
+      model.save().then(function () {
+        Ember.$('#su_success').show()
+        self.transitionToRoute('service_user', self.get('model'));
+      }, function () {});
+    },
     close: function () {
       Ember.$('#su_success').hide()
     },

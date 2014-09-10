@@ -23,15 +23,11 @@
         </tr>
         <tr>
           <td>Home Post Code</td>
-          <td>{{view SmartClient.InplaceTextField contentbinding="personal_fields.home_post_code"}}</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.home_post_code"}}</td>
         </tr>
         <tr>
           <td>Home county</td>
           <td>{{view SmartClient.InplaceSelect contentBinding="personal_fields.home_county" selectContent=home_counties optionLabelPath="content.name" optionValuePath="content.id"}}</td>
-        </tr>
-        <tr>
-          <td>EDD</td>
-          <td>{{current_edd}}</td>
         </tr>
         <tr>
           <td>Gestation</td>
@@ -51,17 +47,74 @@
   <div class="well">
     <h4>Pregnancies<h4>
     {{#each pregnancies}}
-      <li>{{id}}</li>
-      <li>{{estimated_delivery_date}}</li>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Estimated Delivery Date</td>
+            <td>{{view SmartClient.InplaceTextField contentBinding="estimated_delivery_date"}}</td>
+          </tr>
+          <tr>
+            <td>Additional Information</td>
+            <td>{{view SmartClient.InplaceTextField contentBinding="additional_info"}}</td>
+          </tr>
+          <tr>
+            <td>Birth Mode</td>
+            <td>{{view SmartClient.InplaceTextField contentBinding="birth_mode"}}</td>
+          </tr>
+          <tr>
+            <td>Perineum</td>
+            <td>{{view SmartClient.InplaceTextField contentBinding="perineum"}}</td>
+          </tr>
+          <tr>
+            <td>Anti D</td>
+            <td>{{view SmartClient.InplaceTextField contentBinding="anti_d"}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button {{action 'savePregnancy' id}} class="btn btn-success">Save Pregnancy Details</button>
+
+      {{#each babies}}
+        <h5>Baby<h5>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Hospital Number</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="hospital_number"}}</td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="name"}}</td>
+            </tr>
+            <tr>
+              <td>Gender</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="gender"}}</td>
+            </tr>
+            <tr>
+              <td>Weight</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="weight"}}</td>
+            </tr>
+            <tr>
+              <td>Vitamin K</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="vitamin_k"}}</td>
+            </tr>
+            <tr>
+              <td>Hearing</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="hearing"}}</td>
+            </tr>
+            <tr>
+              <td>Newborn Screening Test</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="newborn_screening_test"}}</td>
+            </tr>
+            <tr>
+              <td>Delivery Date Time</td>
+              <td>{{view SmartClient.InplaceTextField contentBinding="delivery_date_time"}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button {{action 'saveBaby' id}} class="btn btn-success">Save Baby Details</button>
+
+      {{/each}}
+
     {{/each}}
   </div>
-
-  <div class="well">
-    <h4>Babies<h4>
-    {{#each babies}}
-      <li>{{id}}</li>
-      <li>{{delivery_date_time}}</li>
-    {{/each}}
-  </div>
-
 {{outlet}}
