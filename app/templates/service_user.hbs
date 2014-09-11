@@ -2,7 +2,7 @@
   <h1>Service User
     {{#link-to 'service_user.service_options'}}
       <button class="btn btn-primary btn-large pull-right">
-        <i class="icon-white icon-calendar"></i> Book
+        <i class="icon-white icon-calendar"></i> New appointment
       </button>
     {{/link-to}}
   </h1>
@@ -38,13 +38,10 @@
 
     <button {{action 'save'}} class="btn btn-success">Save</button>
 
-    <div id="su_edit_errors">
-      {{#each errorMessages}}
-        <div class="error">
-          {{this.key}}: {{this.value}}
-        </div>
-      {{/each}}
-    </div>
+    {{error-list
+        divId="su_edit_errors"
+        errorMessages=errorMessages
+    }}
 
     <div id="su_success" class="alert alert-success" style="display:none">
       <a href="#" class="close" {{action 'close'}}>&times;</a>
