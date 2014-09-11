@@ -2,6 +2,12 @@
   <h1>Service Provider</h1>
 
   {{outlet spData}}
+
+  {{error-list
+      divId="sp_edit_errors"
+      errorMessages=errorMessages
+  }}
+
   <div id="sp_success" class="alert alert-success" style="display:none">
     <a href="#" class="close" {{action 'close'}}>&times;</a>
     <strong>Success</strong>, Service Provider updated.

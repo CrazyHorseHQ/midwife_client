@@ -10,7 +10,9 @@ SmartClient.ServiceProviderController = Ember.ObjectController.extend({
         model.save().then(function () {
           Ember.$('#sp_success').show()
           self.transitionToRoute('service_provider', model);
-        }, function () {});
+        }, function (resp) {
+          self.setErrors(resp, "sp_edit_errors")
+        });
       }
     },
     close: function () {

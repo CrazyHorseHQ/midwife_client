@@ -14,9 +14,11 @@
             </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-          {{!-- {{#each item in controller}}
-              <li class="list-group-item">{{#link-to item.resource}}{{item.label}}{{/link-to}}</li>
-          {{/each}} --}}
+            <ul class="nav navbar-nav">
+              {{#each item in controller}}
+                <li>{{#link-to item.resource}}{{item.label}}{{/link-to}}</li>
+              {{/each}}
+            </ul>
         </div>
     </nav>
     <div class="container" id="main">

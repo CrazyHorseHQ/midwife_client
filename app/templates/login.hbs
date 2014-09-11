@@ -1,18 +1,15 @@
-{{#if errorMsg}}
-  <div class="alert alert-warning alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-    {{errorMsg}}
-  </div>
-{{/if}}
-
 <h1>Login</h1>
 
 {{#if token}}
   You are already logged in as {{loggedin_user.name}}. If this is not you - please logout.
 {{else}}
+  {{error-list
+      divId="login_errors"
+      errorMessages=errorMessages
+  }}
+
   {{#em-form model=model}}
     {{em-input property="username" label="Username" placeholder="Your username" type="text"}}
     {{em-input property="password" label="Password" placeholder="********" type="password"}}
   {{/em-form}}
 {{/if}}
-
