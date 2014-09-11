@@ -17,7 +17,9 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
       model.save().then(function () {
         Ember.$('#su_success').show()
         self.transitionToRoute('service_user', model);
-      }, function () {});
+      }, function () {
+        self.setErrors(resp, "su_edit_errors")
+      });
     },
     savePregnancy: function(pregnancyId) {
       var self = this

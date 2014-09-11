@@ -38,6 +38,14 @@
 
     <button {{action 'save'}} class="btn btn-success">Save</button>
 
+    <div id="su_edit_errors">
+      {{#each errorMessages}}
+        <div class="error">
+          {{this.key}}: {{this.value}}
+        </div>
+      {{/each}}
+    </div>
+
     <div id="su_success" class="alert alert-success" style="display:none">
       <a href="#" class="close" {{action 'close'}}>&times;</a>
       <strong>Success</strong>, Service User updated.

@@ -2,6 +2,15 @@
   <h1>Service Provider</h1>
 
   {{outlet spData}}
+
+  <div id="sp_edit_errors">
+    {{#each errorMessages}}
+      <div class="error">
+        {{this.key}}: {{this.value}}
+      </div>
+    {{/each}}
+  </div>
+
   <div id="sp_success" class="alert alert-success" style="display:none">
     <a href="#" class="close" {{action 'close'}}>&times;</a>
     <strong>Success</strong>, Service Provider updated.
