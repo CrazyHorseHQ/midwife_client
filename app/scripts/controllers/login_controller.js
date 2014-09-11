@@ -41,6 +41,11 @@ SmartClient.LoginController = Ember.ObjectController.extend({
         adapter = self.get('container').lookup('adapter:application')
         adapter.set('headers', { 'Auth-Token': localStorage.getItem('authToken') })
 
+        $.ajaxSetup({
+          headers: {
+            "Auth-Token": localStorage.getItem('authToken'),
+          }
+        });
 
         self.get('store').find('service_provider', result.get('id')).then(function(loggedin_user) {
           self.set('loggedin_user', loggedin_user);
