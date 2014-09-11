@@ -30,22 +30,6 @@
       </button>
     {{/each}}
   </div>
-  <div class="btn-group">
-    <button type="button"
-      {{bind-attr class=":btn selectedSP:btn-info:btn-default :dropdown-toggle"}} data-toggle="dropdown">
-      {{#if selectedSP}}
-        {{selectedSPName}}
-      {{else}}
-        Service Provider
-      {{/if}}
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-      {{#each service_providers}}
-        <li><a href="#" {{action filterBySP this.id}}>{{this.name}}</a></li>
-      {{/each}}
-    </ul>
-  </div>
 </div>
 <br/>
 <div class="btn-toolbar" role="toolbar">

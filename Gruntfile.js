@@ -273,7 +273,7 @@ module.exports = function (grunt) {
                         ]
                     }
                 ]
-            }, 
+            },
             dist: {
                 files: [
                     {
@@ -384,4 +384,5 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+    grunt.loadNpmTasks('grunt-preprocess');
 };
