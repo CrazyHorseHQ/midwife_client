@@ -5,8 +5,8 @@ SmartClient.AppointmentsCreateController = Ember.ObjectController.extend({
     {id: 'post-natal', name: 'Post-Natal'}
   ],
   priorities: [
-    {id: 'other', name: 'Other'},
-    {id: 'emergency', name: 'Emergency'}
+    {id: 'scheduled', name: 'Scheduled'},
+    {id: 'drop-in', name: 'Drop-In'}
   ],
 
   actions: {

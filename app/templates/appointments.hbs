@@ -33,9 +33,9 @@
         <h4 class="list-group-item-heading">
           <span class="glyphicon glyphicon-calendar"></span>
           {{this.calendarDateTime}}
-          {{#if this.isEmergency}}
+          {{#if this.isDropIn}}
             <span class="label label-danger">
-              Emergency
+              Drop-In
             </span>&nbsp;
           {{/if}}
           {{#each this.service_options}}
