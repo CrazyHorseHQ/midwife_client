@@ -36,7 +36,7 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
         time: this.get('time'),
         service_provider: sp,
         service_user: service_user,
-        priority: 'other',
+        priority: 'scheduled',
         visit_type: 'ante-natal',
         clinic_id: model.get('id')
       });

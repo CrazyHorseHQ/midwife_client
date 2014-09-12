@@ -1,58 +1,30 @@
 <h1>Appointments</h1>
 
-<ul class="nav nav-tabs" role="tablist">
-  <li {{bind-attr class="showMyOnly:active"}}>
-    <a href="#" {{action myAppointments}}>
-      <span class="glyphicon glyphicon-star"></span>
-      My appointments
-    </a>
-  </li>
-  <li {{bind-attr class="noFiltersApplied:active"}}>
-    <a href="#" {{action clearFilters}}>
-      <span class="glyphicon glyphicon-th-list"></span>
-      All
-    </a>
-  </li>
-  <li>
-    {{#link-to 'appointments.create'}}
-      <span class="glyphicon glyphicon-plus"></span>
-      New
-    {{/link-to}}
-  </li>
-</ul>
-<br/>
+{{outlet serviceOptionSelector}}
 
-{{outlet filters}}
-
-<br/>
-<br/>
-
-<div class="list-group">
-  {{#each appointment in controller}}
-    {{#link-to 'appointment' this.id class="list-group-item"}}
-        <h4 class="list-group-item-heading">
-          <span class="glyphicon glyphicon-calendar"></span>
-          {{this.calendarDateTime}}
-          {{#if this.isDropIn}}
-            <span class="label label-danger">
-              Drop-In
-            </span>&nbsp;
-          {{/if}}
-          {{#each this.service_options}}
-            <span class="label label-success">
-              <span class="glyphicon glyphicon-book"></span>
-              {{this.name}}
-            </span>&nbsp;
-          {{/each}}
-        </h4>
-        <p class="list-group-item-text">
-          <span class="badge">{{this.visit_type}}</span>
-          {{#if this.service_provider}}
-            (seen by: {{this.service_provider.name}})
-          {{/if}}
-        </p>
-      {{/link-to}}
-  {{/each}}
-</div>
+{{!#if view.showAppointments}}
+  {{outlet dateFilter}}
+  <br/>
+  <div class="list-group">
+    {{#each appointment in controller}}
+      <li class="list-group-item">
+        <span class="pull=left">
+          {{time}}
+        </span>
+        <span class="pull=left">
+          {{#link-to 'service_user' service_user.id }}
+            {{service_user.personal_fields.name}}
+          {{/link-to}}
+        </span>
+        <span class="">
+          {{service_user.gestation}}
+        </span>
+        {{#link-to 'appointment' this.id class="pull-right"}}
+          <span class="glyphicon glyphicon-info-sign"></span>
+        {{/link-to}}
+      </li>
+    {{/each}}
+  </div>
+{{!/if}}
 
 {{outlet}}
