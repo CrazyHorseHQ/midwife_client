@@ -3,7 +3,6 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
   appointments: [],
   date: "",
   time: "",
-
   actions: {
     load_appointments: function (date) {
       this.set('date', date)
@@ -79,6 +78,7 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
           apt.get('service_user').then(function () {
             times[index].set('service_user', apt.get('service_user'))
           })
+          times[index].set('appointment', apt)
         }
       });
     });
