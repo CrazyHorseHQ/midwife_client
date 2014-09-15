@@ -1,0 +1,79 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Mother</h3>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>Mode Of Birth</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="current_pregnancy.birth_mode"}}</td>
+      </tr>
+      <tr>
+        <td>Perineum</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="current_pregnancy.perineum"}}</td>
+      </tr>
+      <tr>
+        <td>Anti D</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="current_pregnancy.anti_d"}}</td>
+      </tr>
+      <tr>
+        <td>Midwife Notes</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="current_pregnancy.additional_info"}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button {{action 'savePregnancy' current_pregnancy.id}} class="btn btn-success">Save Mother's Details</button>
+
+<hr/>
+
+{{#each current_pregnancy.babies}}
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Baby</h3>
+    </div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Date Of Delivery</td>
+          <td>{{delivery_date}}</td>
+        </tr>
+        <tr>
+          <td>Time Of Delivery</td>
+          <td>{{delivery_time}}</td>
+        </tr>
+        <tr>
+          <td>Days Since Birth</td>
+          <td>{{days_since_birth}}</td>
+        </tr>
+        <tr>
+          <td>Sex Of Baby</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="gender"}}</td>
+        </tr>
+        <tr>
+          <td>Weight</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="weight"}}</td>
+        </tr>
+        <tr>
+          <td>Vitamin K</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="vitamin_k"}}</td>
+        </tr>
+        <tr>
+          <td>Hearing</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="hearing"}}</td>
+        </tr>
+        <tr>
+          <td>Feeding</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="feeding"}}</td>
+        </tr>
+        <tr>
+          <td>NBST</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="newborn_screening_test"}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button {{action 'saveBaby' id}} class="btn btn-success">Save Baby Details</button>
+{{/each}}

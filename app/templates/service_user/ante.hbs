@@ -1,0 +1,32 @@
+<div class="panel panel-info">
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>EDD</td>
+        <td>{{current_pregnancy.estimated_delivery_date}}</td>
+      </tr>
+      <tr>
+        <td>Gestation</td>
+        <td>{{gestation}}</td>
+      </tr>
+      <tr>
+        <td>Blood Group</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="clinical_fields.blood_group"}}</td>
+      </tr>
+      <tr>
+        <td>Rhesus</td>
+        <td>{{view SmartClient.InplaceSelect contentBinding="clinical_fields.rhesus" selection=rhesus_text selectContent=rhesus_types optionLabelPath="content.type" optionValuePath="content.value"}}</td>
+      </tr>
+      <tr>
+        <td>Parity</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="clinical_fields.parity"}}</td>
+      </tr>
+      <tr>
+        <td>Obstetric History</td>
+        <td>{{view SmartClient.InplaceTextArea contentBinding="clinical_fields.previous_obstetric_history"}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button {{action 'save'}} class="btn btn-success">Save</button>
