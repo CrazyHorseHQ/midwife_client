@@ -11,14 +11,20 @@ SmartClient.Baby = DS.Model.extend({
   service_user: DS.belongsTo('serviceUser'),
 
   delivery_date: function () {
-    return moment(this.get('delivery_date_time')).format("dddd, MMMM Do YYYY");
+    return moment(this.get('delivery_date_time')).format("YYYY-MM-DD");
   }.property(),
 
   delivery_time: function () {
-    return moment(this.get('delivery_date_time')).format("h:mm a");
+    return moment(this.get('delivery_date_time')).format("HH:mm");
   }.property(),
 
   days_since_birth: function () {
-    return moment().diff(this.get('delivery_date_time'), 'days')
+    var ddt = this.get('delivery_date_time')
+
+    if (ddt) {
+      return moment().diff(ddt, 'days')
+    } else {
+      return "Delivery date not set"
+    }
   }.property()
 });
