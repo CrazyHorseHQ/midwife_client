@@ -12,8 +12,6 @@ SmartClient.AppointmentsView = Ember.View.extend({
   }.property('dateToday'),
 
   showAppointments: function() {
-    log(this.get('controller.selectedClinic'));
-    log(this.get('controller.selectedServiceOption'));
     return this.get('controller.selectedClinic') && this.get('controller.selectedServiceOption');
   }.property('controller.selectedClinic', 'controller.selectedServiceOption'),
 });
