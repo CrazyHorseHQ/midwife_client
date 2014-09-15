@@ -44,5 +44,23 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
         this.destroySession();
       }
     },
+    //modal window actions
+    openModal: function(modalName, controller, model) {
+      if (Ember.isEmpty(controller)) {
+        controller = this.controllerFor(modalName)
+        controller.set('model', model);
+      }
+      return this.render(modalName, {
+        into: 'application',
+        outlet: 'modal',
+        controller: controller
+      });
+    },
+    closeModal: function() {
+      return this.disconnectOutlet({
+        outlet: 'modal',
+        parentView: 'application'
+      });
+    },
   }
 });

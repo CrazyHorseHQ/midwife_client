@@ -2,36 +2,49 @@
 
 {{outlet serviceOptionSelector}}
 
-{{outlet dateFilter}}
-<br/>
+{{#if showAppointmentsList}}
+  {{outlet dateFilter}}
+  <br/>
 
-{{#view Ember.View controller=controllers.clinic}}
-  <div class="list-group">
-    {{#each times}}
-      {{#if service_user}}
-        <li class="list-group-item">
-          <span class="">
-            {{time}}
-          </span>
-          <span class="">
-            {{#link-to 'service_user' service_user.id }}
-              {{service_user.personal_fields.name}}
-            {{/link-to}}
-          </span>
-          <span class="">
-            {{service_user.gestation}}
-          </span>
-          {{#link-to 'appointment' appointment.id class="pull-right"}}
-            <span class="glyphicon glyphicon-info-sign"></span>
-          {{/link-to}}
-        </li>
-      {{else}}
-        <li class="list-group-item">
-          {{time}} <span class="glyphicon glyphicon-plus-sign"></span> Free Slot
-        </li>
-      {{/if}}
-    {{/each}}
-  </div>
-{{/view}}
+  {{#view Ember.View controller=controllers.clinic}}
+    <table class="table">
+      {{#each times}}
+        {{#if service_user}}
+          <tr>
+            <td>
+              {{time}}
+            </td>
+            <td>
+              {{#link-to 'service_user' service_user.id }}
+                {{service_user.personal_fields.name}}
+              {{/link-to}}
+            </td>
+            <td>
+              {{service_user.gestation}}
+            </td>
+            <td>
+              {{#link-to 'appointment' appointment.id class="pull-right"}}
+                <span class="glyphicon glyphicon-info-sign"></span>
+              {{/link-to}}
+            </td>
+          </tr>
+        {{else}}
+          <tr>
+            <td>
+              {{time}}
+            </td>
+            <td>
+              <div {{action 'openBookModal' 'appointment/book_appointment_modal' controller this.time}}
+                <span class="glyphicon glyphicon-plus-sign"></span> Free Slot
+              </div>
+            <td>
+            <td></td>
+            <td></td>
+          </tr>
+        {{/if}}
+      {{/each}}
+    </table>
+  {{/view}}
+{{/if}}
 
 {{outlet}}

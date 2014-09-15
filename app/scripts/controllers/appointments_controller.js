@@ -19,6 +19,10 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return this.get('service_providers').filterBy('id', this.get('selectedSP'))[0].get('name');
   }.property('selectedSP'),
 
+  showAppointmentsList: function() {
+    return this.get('selectedClinic') && this.get('selectedServiceOption');
+  }.property('selectedClinic', 'selectedServiceOption'),
+
   noFiltersApplied: function() {
     return !(
       this.get('selectedSP') ||

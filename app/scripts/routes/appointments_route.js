@@ -20,5 +20,14 @@ SmartClient.AppointmentsRoute = SmartClient.AuthenticatedRoute.extend({
       controller: controller
     });
   },
+  actions: {
+    openBookModal: function(modalName, controller, time) {
+      controller.set('time', time);
+      this.send('openModal', modalName, controller);
+    },
+    closeBookModal: function() {
+      this.send('closeModal');
+    },
+  },
 });
 
