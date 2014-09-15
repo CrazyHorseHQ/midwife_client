@@ -49,6 +49,11 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
     }
   },
 
+  announcements: function() {
+    var announcements = this.get('model.announcements');
+    return announcements.filterBy('date', this.get('date'));
+  }.property('date', 'model.announcements.@each'),
+
   times: function () {
     if (this.get('appointments').length == 0) {return []}
 

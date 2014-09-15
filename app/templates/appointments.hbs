@@ -7,6 +7,20 @@
   <br/>
 
   {{#view Ember.View controller=controllers.clinic}}
+    {{#each announcements}}
+      {{#if blocking}}
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-warning-sign"></span>
+          {{note}}
+        </div>
+      {{/if}}
+      {{#unless blocking}}
+        <div class="alert alert-info" role="alert">
+          <span class="glyphicon glyphicon-info-sign"></span>
+          {{note}}
+        </div>
+      {{/unless}}
+    {{/each}}
     <table class="table">
       {{#each times}}
         {{#if service_user}}

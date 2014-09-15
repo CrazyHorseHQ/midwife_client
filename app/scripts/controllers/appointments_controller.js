@@ -98,6 +98,7 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     if (selectedClinic && selectedDate) {
       var clinicController = this.get('controllers.clinic')
       clinicController.set('model', this.store.getById('clinic', selectedClinic));
+      clinicController.set('date', selectedDate);
       clinicController.send('load_appointments', selectedDate);
     }
 
