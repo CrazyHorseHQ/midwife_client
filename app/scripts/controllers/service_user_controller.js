@@ -8,6 +8,10 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
     {id: 'Dublin', name: 'Dublin'},
     {id: 'Wicklow', name: 'Wicklow'}
   ],
+  rhesus_types: [
+    {type: 'Positive', value: true},
+    {type: 'Negative', value: false}
+  ],
 
   actions: {
     save: function(){
@@ -16,7 +20,6 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
 
       model.save().then(function () {
         Ember.$('#su_success').show()
-        self.transitionToRoute('service_user', model);
       }, function () {
         self.setErrors(resp, "su_edit_errors")
       });
@@ -27,7 +30,6 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
 
       model.save().then(function () {
         Ember.$('#su_success').show()
-        self.transitionToRoute('service_user', self.get('model'));
       }, function () {});
     },
     saveBaby: function(babyId) {
@@ -38,14 +40,12 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
 
       model.save().then(function () {
         Ember.$('#su_success').show()
-        self.transitionToRoute('service_user', self.get('model'));
       }, function () {});
     },
     close: function () {
       Ember.$('#su_success').hide()
     },
     new_appointment: function (su_id) {
-      //local storage of su_id to retrieve later for booking
       this.transitionToRoute('service_options')
     }
   }

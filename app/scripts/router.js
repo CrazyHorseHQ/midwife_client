@@ -21,6 +21,10 @@ SmartClient.Router.map(function () {
         this.resource('appointment.service_option', {path: '/:service_option_id'})
       });
 
+      this.resource('service_user.personal', {path: '/personal'})
+      this.resource('service_user.ante', {path: '/ante'})
+      this.resource('service_user.post', {path: '/post'})
+
       this.resource('service_user.service_options', {path: '/service_options'}, function() {
         this.resource('service_user.service_option', {path: '/:service_option_id'}, function () {
           this.resource('service_user.clinics', {path: '/clinics'}, function () {

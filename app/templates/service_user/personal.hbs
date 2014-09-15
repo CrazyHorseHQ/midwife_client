@@ -1,0 +1,67 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Contact</h3>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>Hospital Number</td>
+        <td>{{clinical_fields.hospital_number}}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.email"}}</td>
+      </tr>
+      <tr>
+        <td>Mobile Phone</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.mobile_phone"}}</td>
+      </tr>
+      <tr>
+        <td>Home Phone</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.home_phone"}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Address</h3>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>Home type</td>
+        <td>{{view SmartClient.InplaceSelect contentBinding="personal_fields.home_type" selectContent=home_types optionLabelPath="content.name" optionValuePath="content.id"}}</td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>{{view SmartClient.InplaceTextArea contentBinding="personal_fields.home_address"}}</td>
+      </tr>
+      <tr>
+        <td>Home Post Code</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.home_post_code"}}</td>
+      </tr>
+      <tr>
+        <td>Home county</td>
+        <td>{{view SmartClient.InplaceSelect contentBinding="personal_fields.home_county" selectContent=home_counties optionLabelPath="content.name" optionValuePath="content"}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Next Of Kin</h3>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>Phone</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.next_of_kin_phone"}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button {{action 'save'}} class="btn btn-success">Save</button>

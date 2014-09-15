@@ -1,125 +1,46 @@
 <div class="well">
-  <h1>Service User
+  <h1>{{view SmartClient.InplaceTextField contentBinding="personal_fields.name"}}
     {{#link-to 'service_user.service_options'}}
       <button class="btn btn-primary btn-large pull-right">
         <i class="icon-white icon-calendar"></i> New appointment
       </button>
     {{/link-to}}
   </h1>
+  <h5>{{age}}yrs, P:{{clinical_fields.parity}}, G:{{gestation}}<h5>
 
-    <table class="table">
-      <tbody>
-        <tr>
-          <td>Name</td>
-          <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.name"}}</td>
-        </tr>
-        <tr>
-          <td>Home type</td>
-          <td>{{view SmartClient.InplaceSelect contentBinding="personal_fields.home_type" selectContent=home_types optionLabelPath="content.name" optionValuePath="content.id"}}</td>
-        </tr>
-        <tr>
-          <td>Address</td>
-          <td>{{view SmartClient.InplaceTextArea contentBinding="personal_fields.home_address"}}</td>
-        </tr>
-        <tr>
-          <td>Home Post Code</td>
-          <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.home_post_code"}}</td>
-        </tr>
-        <tr>
-          <td>Home county</td>
-          <td>{{view SmartClient.InplaceSelect contentBinding="personal_fields.home_county" selectContent=home_counties optionLabelPath="content.name" optionValuePath="content.id"}}</td>
-        </tr>
-        <tr>
-          <td>Gestation</td>
-          <td>{{gestation}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <hr/>
 
-    <button {{action 'save'}} class="btn btn-success">Save</button>
-
-    {{error-list
-        divId="su_edit_errors"
-        errorMessages=errorMessages
-    }}
-
-    <div id="su_success" class="alert alert-success" style="display:none">
-      <a href="#" class="close" {{action 'close'}}>&times;</a>
-      <strong>Success</strong>, Service User updated.
-    </div>
+  <div class="btn-group btn-group-lg">
+    {{#link-to 'service_user.ante'}}
+      <button type="button" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-fast-backward"></span> Ante-Natal
+      </button>
+    {{/link-to}}
+    {{#link-to 'service_user.personal'}}
+      <button type="button" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-user"></span> Personal
+      </button>
+    {{/link-to}}
+    {{#link-to 'service_user.post'}}
+      <button type="button" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-fast-forward"></span> Post-Natal
+      </button>
+    {{/link-to}}
   </div>
 
-  <div class="well">
-    <h4>Pregnancies<h4>
-    {{#each pregnancies}}
-      <table class="table">
-        <tbody>
-          <tr>
-            <td>Estimated Delivery Date</td>
-            <td>{{view SmartClient.InplaceTextField contentBinding="estimated_delivery_date"}}</td>
-          </tr>
-          <tr>
-            <td>Additional Information</td>
-            <td>{{view SmartClient.InplaceTextField contentBinding="additional_info"}}</td>
-          </tr>
-          <tr>
-            <td>Birth Mode</td>
-            <td>{{view SmartClient.InplaceTextField contentBinding="birth_mode"}}</td>
-          </tr>
-          <tr>
-            <td>Perineum</td>
-            <td>{{view SmartClient.InplaceTextField contentBinding="perineum"}}</td>
-          </tr>
-          <tr>
-            <td>Anti D</td>
-            <td>{{view SmartClient.InplaceTextField contentBinding="anti_d"}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <button {{action 'savePregnancy' id}} class="btn btn-success">Save Pregnancy Details</button>
+  <hr/>
 
-      {{#each babies}}
-        <h5>Baby<h5>
-        <table class="table">
-          <tbody>
-            <tr>
-              <td>Hospital Number</td>
-              <td>{{view SmartClient.InplaceTextField contentBinding="hospital_number"}}</td>
-            </tr>
-            <tr>
-              <td>Name</td>
-              <td>{{view SmartClient.InplaceTextField contentBinding="name"}}</td>
-            </tr>
-            <tr>
-              <td>Gender</td>
-              <td>{{view SmartClient.InplaceTextField contentBinding="gender"}}</td>
-            </tr>
-            <tr>
-              <td>Weight</td>
-              <td>{{view SmartClient.InplaceTextField contentBinding="weight"}}</td>
-            </tr>
-            <tr>
-              <td>Vitamin K</td>
-              <td>{{view SmartClient.InplaceTextField contentBinding="vitamin_k"}}</td>
-            </tr>
-            <tr>
-              <td>Hearing</td>
-              <td>{{view SmartClient.InplaceTextField contentBinding="hearing"}}</td>
-            </tr>
-            <tr>
-              <td>Newborn Screening Test</td>
-              <td>{{view SmartClient.InplaceTextField contentBinding="newborn_screening_test"}}</td>
-            </tr>
-            <tr>
-              <td>Delivery Date Time</td>
-              <td>{{view SmartClient.InplaceTextField contentBinding="delivery_date_time"}}</td>
-            </tr>
-          </tbody>
-        </table>
-        <button {{action 'saveBaby' id}} class="btn btn-success">Save Baby Details</button>
+  {{outlet suFields}}
 
-      {{/each}}
+  {{error-list
+      divId="su_edit_errors"
+      errorMessages=errorMessages
+  }}
 
-    {{/each}}
+  <div id="su_success" class="alert alert-success" style="display:none">
+    <a href="#" class="close" {{action 'close'}}>&times;</a>
+    <strong>Success</strong>, Service User updated.
   </div>
+</div>
+
 {{outlet}}

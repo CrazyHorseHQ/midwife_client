@@ -30,13 +30,13 @@ EmberComponents.InplaceSelectField = EmberComponents.InplaceField.extend({
       content: this.get('selectContent'),
       optionLabelPath: this.get('optionLabelPath'),
       optionValuePath: this.get('optionValuePath'),
-      selectionBinding: this.get('contentBinding')
+      selection: this.get('selection')
     });
     this.set('inputField', select);
   },
 
   focusOut: function () {
-    this.set('content', this.get(this.get('optionValuePath')));
+    this.set('content', this.get(this.get('optionLabelPath')));
     this._super();
   }
 });
