@@ -9,11 +9,25 @@ SmartClient.AppointmentsRoute = SmartClient.AuthenticatedRoute.extend({
   },
   renderTemplate: function(controller) {
     this.render();
-    this.render('appointments/filters', {
-      outlet: 'filters',
+    this.render('appointments/service_option_selector', {
+      outlet: 'serviceOptionSelector',
       into: 'appointments',
       controller: controller
     });
+    this.render('appointments/date_filter', {
+      outlet: 'dateFilter',
+      into: 'appointments',
+      controller: controller
+    });
+  },
+  actions: {
+    openBookModal: function(modalName, controller, time) {
+      controller.set('time', time);
+      this.send('openModal', modalName, controller);
+    },
+    closeBookModal: function() {
+      this.send('closeModal');
+    },
   },
 });
 

@@ -1,0 +1,21 @@
+<div class="btn-toolbar" role="toolbar">
+  <div class="btn-group">
+      <button
+        {{action 'filterByDate' view.dateYesterday}}
+        type="button"
+        {{bind-attr class=":btn :btn-default"}}>
+        <span class="glyphicon glyphicon-step-backward"></span>
+      </button>
+      <button
+        type="button"
+        {{bind-attr class=":btn :btn-disabled"}}>
+        {{view.dateToday}}
+      </button>
+      <button
+        {{action 'filterByDate' view.dateTomorrow}}
+        type="button"
+        {{bind-attr class=":btn :btn-default"}}>
+        <span class="glyphicon glyphicon-step-forward"></span>
+      </button>
+  </div>
+</div>

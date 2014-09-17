@@ -3,7 +3,6 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
   appointments: [],
   date: "",
   time: "",
-
   actions: {
     load_appointments: function (date) {
       this.set('date', date)
@@ -36,7 +35,7 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
         time: this.get('time'),
         service_provider: sp,
         service_user: service_user,
-        priority: 'other',
+        priority: 'scheduled',
         visit_type: 'ante-natal',
         clinic_id: model.get('id')
       });
@@ -49,6 +48,11 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
       });
     }
   },
+
+  announcements: function() {
+    var announcements = this.get('model.announcements');
+    return announcements.filterBy('date', this.get('date'));
+  }.property('date', 'model.announcements.@each'),
 
   times: function () {
     if (this.get('appointments').length == 0) {return []}
@@ -80,6 +84,7 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
           apt.get('service_user').then(function () {
             times[index].set('service_user', apt.get('service_user'))
           })
+          times[index].set('appointment', apt)
         }
       });
     });

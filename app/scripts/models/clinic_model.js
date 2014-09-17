@@ -7,5 +7,6 @@ SmartClient.Clinic = DS.Model.extend({
   type: DS.attr(),
   appointment_interval: DS.attr(),
   days: DS.attr(),
-  appointments: DS.hasMany('appointment')
+  appointments: DS.hasMany('appointment'),
+  announcements: DS.hasMany('announcement',  {async: true })
 });

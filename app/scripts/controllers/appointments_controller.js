@@ -1,38 +1,11 @@
 SmartClient.AppointmentsController = Ember.ArrayController.extend({
+  //queryParams: ['selectedClinic', 'selectedServiceOption'],
+  needs: ['clinic'],
   itemController: "appointment",
   sortProperties: ["date", "time"],
   sortAscending: true,
 
   // Helpers to get the filters
-  dates: function() {
-    var self = this;
-    var dates = this.get('all').mapBy('date').toArray().uniq();
-    var datesList = dates.map(function(d) {
-      var selected = (d == self.get('selectedDate'));
-      return Ember.Object.create({selected: selected, date: d});
-    });
-    return datesList;
-  }.property('model.date'),
-
-  visit_types: function(){
-    var self = this;
-    var visit_types = self.get('all').mapBy('visit_type').toArray().uniq()
-    return visit_types.map(function(vt) {
-      var selected = (vt == self.get('selectedVisitType'));
-      // TODO see if model.toJSON can be used here.
-      return Ember.Object.create({id: vt, name: vt, selected: selected});
-    });
-  }.property('model.visit_type'),
-
-  priorities: function(){
-    var self = this;
-    var priorities = self.get('all').mapBy('priority').toArray().uniq()
-    return priorities.map(function(p) {
-      var selected = (p == self.get('selectedPriority'));
-      return Ember.Object.create({id: p, name: p, selected: selected});
-    });
-  }.property('model.priority'),
-
   all: function() {
     return this.get('store').all('appointment');
   }.property('model.@each'),
@@ -46,37 +19,31 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return this.get('service_providers').filterBy('id', this.get('selectedSP'))[0].get('name');
   }.property('selectedSP'),
 
+  showAppointmentsList: function() {
+    return this.get('selectedClinic') && this.get('selectedServiceOption');
+  }.property('selectedClinic', 'selectedServiceOption'),
+
   noFiltersApplied: function() {
     return !(
       this.get('selectedSP') ||
-      this.get('selectedPriority') ||
-      this.get('selectedVisitType') ||
       this.get('selectedDate') ||
-      this.get('selectedServiceOption')
+      this.get('selectedServiceOption') ||
+      this.get('selectedClinic')
     );
-  }.property('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedServiceOption'),
+  }.property('selectedDate', 'selectedSP', 'selectedServiceOption', 'selectedClinic'),
 
   // Filter toggles and trigger
-  selectedVisitType: false,
-  selectedPriority: false,
-  selectedDate: false,
+  selectedDate: moment().format('YYYY-MM-DD'),
   selectedSP: false,
   selectedServiceOption: false,
+  selectedClinic: false,
   showMyOnly: false,
 
   filterDidChange: function() {
     this.applyFilters();
-  }.observes('selectedVisitType', 'selectedPriority', 'selectedDate', 'selectedSP', 'selectedServiceOption'),
+  }.observes('selectedDate', 'selectedSP', 'selectedServiceOption', 'selectedClinic'),
 
   // Filter helpers
-  visitTypeFilter: function(content, visitType) {
-    return this.filterHelper(content, 'visit_type', visitType);
-  },
-
-  priorityFilter: function(content, priority) {
-    return this.filterHelper(content, 'priority', priority);
-  },
-
   dateFilter: function(content, date) {
     return this.filterHelper(content, 'date', date);
   },
@@ -85,6 +52,10 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
     return content.filter(function(item) {
       return item.get('service_options').mapBy('id').contains(so);
     });
+  },
+
+  clinicFilter: function(content, clinic) {
+    return this.filterHelper(content, 'clinic.id', clinic);
   },
 
   spFilter: function(content, sp) {
@@ -103,9 +74,8 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   applyFilters: function() {
     var selectedDate = this.get('selectedDate');
     var selectedSP = this.get('selectedSP');
-    var selectedVisitType = this.get('selectedVisitType');
-    var selectedPriority = this.get('selectedPriority');
     var selectedServiceOption = this.get('selectedServiceOption');
+    var selectedClinic = this.get('selectedClinic');
     var appointments = this.get('all');
     this.set('content', appointments);
 
@@ -117,16 +87,19 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       appointments = this.spFilter(appointments, selectedSP);
     }
 
-    if (selectedVisitType) {
-      appointments = this.visitTypeFilter(appointments, selectedVisitType);
-    }
-
-    if (selectedPriority) {
-      appointments = this.priorityFilter(appointments, selectedPriority);
-    }
-
     if (selectedServiceOption) {
       appointments = this.serviceOptionFilter(appointments, selectedServiceOption);
+    }
+
+    if (selectedClinic) {
+      appointments = this.clinicFilter(appointments, selectedClinic);
+    }
+
+    if (selectedClinic && selectedDate) {
+      var clinicController = this.get('controllers.clinic')
+      clinicController.set('model', this.store.getById('clinic', selectedClinic));
+      clinicController.set('date', selectedDate);
+      clinicController.send('load_appointments', selectedDate);
     }
 
     this.set('content', appointments);
@@ -139,16 +112,14 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       this.set('selectedDate', date.fmt());
     },
 
-    filterByVisitType: function(type) {
-      this.set('selectedVisitType', type);
-    },
-
-    filterByPriority: function(priority) {
-      this.set('selectedPriority', priority);
-    },
-
     filterByServiceOption: function(so) {
+      //reset the clinic filter when selecting SO.
+      this.set('selectedClinic', false);
       this.set('selectedServiceOption', so);
+    },
+
+    filterByClinic: function(c) {
+      this.set('selectedClinic', c);
     },
 
     filterBySP: function(sp) {
@@ -165,11 +136,10 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
     clearFilters: function() {
       this.set('showMyOnly', false);
-      this.set('selectedDate', false);
+      this.set('selectedDate', moment().format('YYYY-MM-DD'));
       this.set('selectedSP', false);
-      this.set('selectedVisitType', false);
-      this.set('selectedPriority', false);
       this.set('selectedServiceOption', false);
+      this.set('selectedClinic', false);
       this.applyFilters();
     },
   }

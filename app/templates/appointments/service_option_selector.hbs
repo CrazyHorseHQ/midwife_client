@@ -1,0 +1,19 @@
+<div class="list-group">
+  {{#each service_options}}
+    {{#view 'SmartClient.AppointmentsServiceOptionView' service_option=id}}
+      <div class="panel panel-warning">
+        <div class="panel-heading" {{action filterByServiceOption id}}>{{name}}</div>
+
+        {{#view Ember.View isVisibleBinding='view.isSelected'}}
+          {{#if view.isVisible}}
+            <ul class="list-group">
+              {{#each this.clinics}}
+                <li class="list-group-item" {{action filterByClinic id}}>{{name}}</li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        {{/view}}
+      </div>
+    {{/view}}
+  {{/each}}
+</div>
