@@ -1,16 +1,16 @@
 SmartClient.ServiceUserController = Ember.ObjectController.extend({
   home_types: [
-    {id: 'house', name: 'house'},
-    {id: 'apartment', name: 'apartment'},
-    {id: 'mobile home', name: 'mobile home'}
+    {value: 'house', label: 'house'},
+    {value: 'apartment', label: 'apartment'},
+    {value: 'mobile home', label: 'mobile home'}
   ],
   home_counties: [
-    {id: 'Dublin', name: 'Dublin'},
-    {id: 'Wicklow', name: 'Wicklow'}
+    {value: 'Dublin', label: 'Dublin'},
+    {value: 'Wicklow', label: 'Wicklow'}
   ],
   rhesus_types: [
-    {type: 'Positive', value: true},
-    {type: 'Negative', value: false}
+    {label: 'Positive', value: true},
+    {label: 'Negative', value: false}
   ],
 
   actions: {
