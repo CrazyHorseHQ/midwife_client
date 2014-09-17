@@ -61,9 +61,10 @@ SmartClient.ClinicController = Ember.ObjectController.extend({
           moment(this.get('date') + "T" + model.get('opening_time')),
           moment(this.get('date') + "T" + model.get('closing_time'))
         );
+        interval = model.get('appointment_interval');
 
     range.by('minutes', function (mom) {
-      if (mom.minute() % 15 == 0 || mom.minute() == 0) {
+      if (mom.minute() % interval == 0 || mom.minute() == 0) {
         times.push(Ember.Object.create({
           time: mom.format("HH:mm")
         }));
