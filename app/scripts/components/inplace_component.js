@@ -23,24 +23,6 @@ EmberComponents.InplaceField = Ember.View.extend({
   },
 });
 
-EmberComponents.InplaceSelectField = EmberComponents.InplaceField.extend({
-  click: function() {
-    this._super();
-    var select = Ember.Select.create({
-      content: this.get('selectContent'),
-      optionLabelPath: this.get('optionLabelPath'),
-      optionValuePath: this.get('optionValuePath'),
-      selection: this.get('selection')
-    });
-    this.set('inputField', select);
-  },
-
-  focusOut: function () {
-    this.set('content', this.get(this.get('optionLabelPath')));
-    this._super();
-  }
-});
-
 EmberComponents.FocusSupport = Ember.Mixin.create({
   didInsertElement: function () {
     this.$().focus()
@@ -54,8 +36,4 @@ SmartClient.InplaceTextArea = EmberComponents.InplaceTextArea = EmberComponents.
 SmartClient.InplaceTextField = EmberComponents.InplaceTextField = EmberComponents.InplaceField.extend({
   type: 'text',
   inputField: Ember.TextField.extend(EmberComponents.FocusSupport)
-})
-
-SmartClient.InplaceSelect = EmberComponents.InplaceSelect = EmberComponents.InplaceSelectField.extend({
-  inputField: Ember.Select.extend(EmberComponents.FocusSupport)
 })

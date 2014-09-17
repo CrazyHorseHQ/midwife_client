@@ -32,7 +32,7 @@
     <tbody>
       <tr>
         <td>Home type</td>
-        <td>{{view SmartClient.InplaceSelect contentBinding="personal_fields.home_type" selectContent=home_types optionLabelPath="content.name" optionValuePath="content.id"}}</td>
+        <td>{{editable-select selectValue=personal_fields.home_type selectContent=home_types}}</td>
       </tr>
       <tr>
         <td>Address</td>
@@ -44,7 +44,7 @@
       </tr>
       <tr>
         <td>Home county</td>
-        <td>{{view SmartClient.InplaceSelect contentBinding="personal_fields.home_county" selectContent=home_counties optionLabelPath="content.name" optionValuePath="content"}}</td>
+        <td>{{editable-select selectValue=personal_fields.home_county selectContent=home_counties}}</td>
       </tr>
     </tbody>
   </table>

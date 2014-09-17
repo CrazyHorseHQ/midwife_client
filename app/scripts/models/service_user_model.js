@@ -10,12 +10,6 @@ SmartClient.ServiceUser = DS.Model.extend({
     return moment().diff(this.get('personal_fields.dob'), 'years');
   }.property(),
 
-  rhesus_text: function () {
-    var rhesus = this.get('clinical_fields.rhesus')
-
-    return rhesus === true ? 'Positive' : 'Negative'
-  }.property(),
-
   current_pregnancy: function () {
     return this.get('pregnancies').sortBy('created_at').get('firstObject')
   }.property()
