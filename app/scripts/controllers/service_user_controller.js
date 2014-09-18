@@ -38,6 +38,11 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
       // Need to be set for validation reasons
       model.set('service_user', self.get('model'))
 
+      var dd = Ember.$('#delivery_date').val()
+      var dt = Ember.$('#delivery_time').val()
+
+      model.set('delivery_date_time', moment(dd + 'T' + dt).format('YYYY-MM-DD HH:mm:ss'))
+
       model.save().then(function () {
         Ember.$('#su_success').show()
       }, function () {});
