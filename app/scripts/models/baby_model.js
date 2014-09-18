@@ -26,5 +26,9 @@ SmartClient.Baby = DS.Model.extend({
     } else {
       return "Delivery date not set"
     }
-  }.property()
+  }.property(),
+
+  kg_weight: function () {
+    return this.get('weight') / 1000
+  }.property('weight')
 });
