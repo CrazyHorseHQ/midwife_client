@@ -1,4 +1,5 @@
 SmartClient.ServiceUser = DS.Model.extend({
+  hospital_number: DS.attr(),
   personal_fields: DS.attr(),
   clinical_fields: DS.attr(),
   gestation: DS.attr(),

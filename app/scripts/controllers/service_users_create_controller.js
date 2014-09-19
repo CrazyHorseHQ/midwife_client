@@ -7,6 +7,7 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
       var self = this;
 
       var new_service_user = this.store.createRecord('service_user', {
+        hospital_number: self.get('hospital_number'),
         personal_fields: {
           name: self.get('name'),
           email: self.get('email'),
@@ -21,7 +22,6 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
           dob: self.get('dob')
         },
         clinical_fields: {
-          hospital_number: self.get('hospital_number'),
           estimated_delivery_date: self.get('estimated_delivery_date'),
           blood_group: self.get('blood_group')
         }
