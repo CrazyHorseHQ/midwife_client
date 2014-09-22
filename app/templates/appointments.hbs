@@ -23,39 +23,41 @@
     {{/each}}
     <table class="table">
       {{#each times}}
-        {{#if service_user}}
-          <tr>
-            <td>
-              {{time}}
-            </td>
-            <td>
-              {{#link-to 'service_user' service_user.id }}
-                {{service_user.personal_fields.name}}
-              {{/link-to}}
-            </td>
-            <td>
-              {{service_user.gestation}}
-            </td>
-            <td>
-              {{#link-to 'appointment' appointment.id class="pull-right"}}
-                <span class="glyphicon glyphicon-info-sign"></span>
-              {{/link-to}}
-            </td>
-          </tr>
-        {{else}}
-          <tr>
-            <td>
-              {{time}}
-            </td>
-            <td>
-              <div {{action 'openBookModal' 'appointment/book_appointment_modal' controller this.time}}
-                <span class="glyphicon glyphicon-plus-sign"></span> Free Slot
-              </div>
-            <td>
-            <td></td>
-            <td></td>
-          </tr>
-        {{/if}}
+        <tbody>
+          {{#if service_user}}
+            <tr>
+              <td>
+                {{time}}
+              </td>
+              <td>
+                {{#link-to 'service_user' service_user.id }}
+                  {{service_user.personal_fields.name}}
+                {{/link-to}}
+              </td>
+              <td>
+                {{service_user.gestation}}
+              </td>
+              <td>
+                {{#link-to 'appointment' appointment.id class="pull-right"}}
+                  <span class="glyphicon glyphicon-info-sign"></span>
+                {{/link-to}}
+              </td>
+            </tr>
+          {{else}}
+            <tr>
+              <td>
+                {{time}}
+              </td>
+              <td>
+                <div {{action 'openBookModal' 'appointment/book_appointment_modal' controller this.time}}
+                  <span class="glyphicon glyphicon-plus-sign"></span> Free Slot
+                </div>
+              <td>
+              <td></td>
+              <td></td>
+            </tr>
+          {{/if}}
+        </tbody>
       {{/each}}
     </table>
   {{/view}}
