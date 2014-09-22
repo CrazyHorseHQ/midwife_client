@@ -1,0 +1,76 @@
+<h4>Parity: {{clinical_fields.parity}}</h4>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Date Of Birth</h3>
+  </div>
+  <table class="table">
+    <tbody>
+      {{#each parity_list.dobs}}
+        <tr>
+          <td>{{this}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Gestation</h3>
+  </div>
+  <table class="table">
+    <tbody>
+      {{#each parity_list.gestations}}
+        <tr>
+          <td>{{this}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Sex</h3>
+  </div>
+  <table class="table">
+    <tbody>
+      {{#each parity_list.baby_genders}}
+        <tr>
+          <td>{{this}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Weight (kg)</h3>
+  </div>
+  <table class="table">
+    <tbody>
+      {{#each parity_list.weights}}
+        <tr>
+          <td>{{this}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">Mode Of Birth</h3>
+  </div>
+  <table class="table">
+    <tbody>
+      {{#each parity_list.birth_modes}}
+        <tr>
+          <td>{{this}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
