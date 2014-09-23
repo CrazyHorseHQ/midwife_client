@@ -17,6 +17,14 @@
         <td>{{view SmartClient.InplaceTextField contentBinding="current_pregnancy.anti_d"}}</td>
       </tr>
       <tr>
+        <td>Feeding</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="current_pregnancy.feeding"}}</td>
+      </tr>
+      <tr>
+        <td>Last Menstrual Period</td>
+        <td><input id="last_menstrual_period" type="date" value="{{unbound current_pregnancy.last_menstrual_period}}"></td>
+      </tr>
+      <tr>
         <td>Midwife Notes</td>
         <td>{{view SmartClient.InplaceTextField contentBinding="current_pregnancy.additional_info"}}</td>
       </tr>
@@ -64,8 +72,8 @@
           <td>{{view SmartClient.InplaceTextField contentBinding="hearing"}}</td>
         </tr>
         <tr>
-          <td>Feeding</td>
-          <td>{{view SmartClient.InplaceTextField contentBinding="feeding"}}</td>
+          <td>Birth Outcome</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="birth_outcome"}}</td>
         </tr>
         <tr>
           <td>NBST</td>

@@ -6,6 +6,7 @@ SmartClient.Baby = DS.Model.extend({
   vitamin_k: DS.attr(),
   hearing: DS.attr(),
   newborn_screening_test: DS.attr(),
+  birth_outcome: DS.attr(),
   delivery_date_time: DS.attr(),
   pregnancy: DS.belongsTo('pregnancy'),
   service_user: DS.belongsTo('serviceUser'),
