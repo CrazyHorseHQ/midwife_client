@@ -19,7 +19,14 @@
       </tr>
       <tr>
         <td>Parity</td>
-        <td>{{view SmartClient.InplaceTextField contentBinding="clinical_fields.parity"}}</td>
+        <td>
+          {{view SmartClient.InplaceTextField contentBinding="clinical_fields.parity"}}
+          {{#if previous_pregnancies}}
+            {{#link-to 'service_user.parity' this class="pull-right"}}
+              <span class="glyphicon glyphicon-info-sign"></span>
+            {{/link-to}}
+          {{/if}}
+        </td>
       </tr>
       <tr>
         <td>Obstetric History</td>
