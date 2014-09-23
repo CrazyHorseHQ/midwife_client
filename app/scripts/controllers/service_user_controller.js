@@ -28,6 +28,9 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
       var self = this
       var model = self.store.all('pregnancy').findBy('id', pregnancyId)
 
+      var latest_mp = Ember.$('#last_menstrual_period').val()
+      model.set('last_menstrual_period', latest_mp)
+
       model.save().then(function () {
         Ember.$('#su_success').show()
       }, function () {});
