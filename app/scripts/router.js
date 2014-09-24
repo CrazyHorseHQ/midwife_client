@@ -8,9 +8,8 @@ SmartClient.Router.map(function () {
 
   this.route('login');
   this.route('logout');
-  this.resource('resetpasswords', function(){
-    this.resource('resetpassword', { path: '/:token' }, function(){});
-    this.route('create');
+  this.resource('reset_passwords', function(){
+    this.resource('reset_password', { path: '/:token' }, function(){});
   });
 
   this.resource('service_providers', function(){
