@@ -1,6 +1,10 @@
 <h1>Appointments</h1>
 
-{{outlet serviceOptionSelector}}
+{{service-option-selector service_options=service_options
+                          selectedServiceOptionId=selectedServiceOptionId
+                          serviceOptionSelected="filterByServiceOption"
+                          clinicSelected="filterByClinic"
+}}
 
 {{#if showAppointmentsList}}
   {{outlet dateFilter}}
