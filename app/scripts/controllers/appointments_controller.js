@@ -1,5 +1,5 @@
 SmartClient.AppointmentsController = Ember.ArrayController.extend({
-  //queryParams: ['selectedClinic', 'selectedServiceOption'],
+  //queryParams: ['selectedClinicId', 'selectedServiceOptionId'],
   needs: ['clinic'],
   itemController: "appointment",
   sortProperties: ["date", "time"],
@@ -20,28 +20,28 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   }.property('selectedSP'),
 
   showAppointmentsList: function() {
-    return this.get('selectedClinic') && this.get('selectedServiceOption');
-  }.property('selectedClinic', 'selectedServiceOption'),
+    return this.get('selectedClinicId') && this.get('selectedServiceOptionId');
+  }.property('selectedClinicId', 'selectedServiceOptionId'),
 
   noFiltersApplied: function() {
     return !(
       this.get('selectedSP') ||
       this.get('selectedDate') ||
-      this.get('selectedServiceOption') ||
-      this.get('selectedClinic')
+      this.get('selectedServiceOptionId') ||
+      this.get('selectedClinicId')
     );
-  }.property('selectedDate', 'selectedSP', 'selectedServiceOption', 'selectedClinic'),
+  }.property('selectedDate', 'selectedSP', 'selectedServiceOptionId', 'selectedClinicId'),
 
   // Filter toggles and trigger
   selectedDate: moment().format('YYYY-MM-DD'),
   selectedSP: false,
-  selectedServiceOption: false,
-  selectedClinic: false,
+  selectedServiceOptionId: false,
+  selectedClinicId: false,
   showMyOnly: false,
 
   filterDidChange: function() {
     this.applyFilters();
-  }.observes('selectedDate', 'selectedSP', 'selectedServiceOption', 'selectedClinic'),
+  }.observes('selectedDate', 'selectedSP', 'selectedServiceOptionId', 'selectedClinicId'),
 
   // Filter helpers
   dateFilter: function(content, date) {
@@ -74,8 +74,8 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   applyFilters: function() {
     var selectedDate = this.get('selectedDate');
     var selectedSP = this.get('selectedSP');
-    var selectedServiceOption = this.get('selectedServiceOption');
-    var selectedClinic = this.get('selectedClinic');
+    var selectedServiceOptionId = this.get('selectedServiceOptionId');
+    var selectedClinicId = this.get('selectedClinicId');
     var appointments = this.get('all');
     this.set('content', appointments);
 
@@ -87,17 +87,17 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       appointments = this.spFilter(appointments, selectedSP);
     }
 
-    if (selectedServiceOption) {
-      appointments = this.serviceOptionFilter(appointments, selectedServiceOption);
+    if (selectedServiceOptionId) {
+      appointments = this.serviceOptionFilter(appointments, selectedServiceOptionId);
     }
 
-    if (selectedClinic) {
-      appointments = this.clinicFilter(appointments, selectedClinic);
+    if (selectedClinicId) {
+      appointments = this.clinicFilter(appointments, selectedClinicId);
     }
 
-    if (selectedClinic && selectedDate) {
+    if (selectedClinicId && selectedDate) {
       var clinicController = this.get('controllers.clinic')
-      clinicController.set('model', this.store.getById('clinic', selectedClinic));
+      clinicController.set('model', this.store.getById('clinic', selectedClinicId));
       clinicController.set('date', selectedDate);
       clinicController.send('load_appointments', selectedDate);
     }
@@ -114,12 +114,12 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
 
     filterByServiceOption: function(so) {
       //reset the clinic filter when selecting SO.
-      this.set('selectedClinic', false);
-      this.set('selectedServiceOption', so);
+      this.set('selectedClinicId', false);
+      this.set('selectedServiceOptionId', so);
     },
 
     filterByClinic: function(c) {
-      this.set('selectedClinic', c);
+      this.set('selectedClinicId', c);
     },
 
     filterBySP: function(sp) {
@@ -138,8 +138,8 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       this.set('showMyOnly', false);
       this.set('selectedDate', moment().format('YYYY-MM-DD'));
       this.set('selectedSP', false);
-      this.set('selectedServiceOption', false);
-      this.set('selectedClinic', false);
+      this.set('selectedServiceOptionId', false);
+      this.set('selectedClinicId', false);
       this.applyFilters();
     },
   }
