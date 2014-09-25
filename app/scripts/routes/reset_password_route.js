@@ -1,6 +1,10 @@
 SmartClient.ResetPasswordRoute = Ember.Route.extend({
   model: function(params) {
-    return this.get('store').find('reset_password', params.reset_password_id);
+    var model = this.get('store').createRecord('reset_password', {
+      id: params.token
+    });
+    model.transitionTo('saved');
+    return model;
   }
 });
 

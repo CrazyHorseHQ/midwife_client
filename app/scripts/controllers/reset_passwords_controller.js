@@ -16,7 +16,7 @@ SmartClient.ResetPasswordsController = Ember.ObjectController.extend({
 
         self.transitionToRoute('application');
       }, function (resp) {
-        self.setErrors(resp, "sp_errors", new_service_provider)
+        self.setErrors(resp, "rp_errors", new_service_provider)
       });
     }
   },
