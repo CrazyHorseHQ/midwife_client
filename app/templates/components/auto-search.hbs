@@ -2,6 +2,6 @@
 
 <ul>
   {{#each searchResults}}
-    <li {{action 'bookServiceUser' this on='click'}}>{{personal_fields.name}} - {{hospital_number}}</li>
+    <li {{action 'resultSelected' this}}>{{personal_fields.name}} - {{hospital_number}}</li>
   {{/each}}
 </ul>
