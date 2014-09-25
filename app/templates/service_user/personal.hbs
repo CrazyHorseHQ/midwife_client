@@ -46,6 +46,10 @@
         <td>Home county</td>
         <td>{{editable-select selectValue=personal_fields.home_county selectContent=home_counties}}</td>
       </tr>
+      <tr>
+        <td>Directions</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.directions"}}</td>
+      </tr>
     </tbody>
   </table>
 </div>
