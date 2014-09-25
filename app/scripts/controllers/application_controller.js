@@ -18,6 +18,11 @@ SmartClient.ApplicationController = Ember.ArrayController.extend({
     return !Ember.isEmpty(
       localStorage.getItem('authToken')
     );
-  }).property()
-});
+  }).property(),
 
+  actions: {
+    openServiceUser: function (service_user) {
+      this.transitionToRoute('service_user.personal', service_user.id)
+    }
+  }
+});

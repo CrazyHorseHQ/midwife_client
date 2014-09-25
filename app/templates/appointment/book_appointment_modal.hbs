@@ -8,7 +8,7 @@
   </div>
   <div class="modal-body">
     <h5>Booking time: {{time}}</h5>
-    {{auto-search store=store action='bookServiceUser' time=time}}
+    {{auto-search store=store resultSelected='bookServiceUser'}}
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" {{action "closeBookModal"}}>Close</button>

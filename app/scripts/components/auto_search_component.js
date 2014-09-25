@@ -3,8 +3,8 @@ SmartClient.AutoSearchComponent = Ember.Component.extend({
   store: null,
 
   actions: {
-    bookServiceUser: function (service_user) {
-      this.sendAction('action', service_user)
+    resultSelected: function (service_user) {
+      this.sendAction('resultSelected', service_user)
     }
   },
 

@@ -26,7 +26,7 @@
             <div>
                 <div class="col-md-3">
                     <div class="well sidebar-nav">
-                        {{view Ember.TextField valueBinding='keyword' placeholder='HN/Name/DOB'}}<button {{action 'search' keyword}}>Search</button>
+                        {{auto-search store=store resultSelected='openServiceUser'}}
                     </div>
                     <div class="well sidebar-nav">
                         <strong>Options</strong>
