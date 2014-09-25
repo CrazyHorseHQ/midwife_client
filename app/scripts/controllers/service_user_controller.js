@@ -12,6 +12,11 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
     {label: 'Positive', value: true},
     {label: 'Negative', value: false}
   ],
+  feeding_types: [
+    {label: 'Breast', value: 'Breast'},
+    {label: 'Bottle', value: 'Bottle'},
+    {label: 'Mixed', value: 'Mixed'}
+  ],
 
   actions: {
     save: function(){
