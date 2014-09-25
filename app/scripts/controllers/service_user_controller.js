@@ -23,6 +23,14 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
       var self = this
       var model = self.get('model')
 
+      var new_edd = Ember.$('#estimated_delivery_date').val(),
+          currentPregnancyModel = model.get('current_pregnancy');
+
+      if (new_edd != currentPregnancyModel.get('estimated_delivery_date')) {
+        currentPregnancyModel.set('estimated_delivery_date', new_edd)
+        currentPregnancyModel.save()
+      }
+
       model.save().then(function () {
         Ember.$('#su_success').show()
       }, function () {
