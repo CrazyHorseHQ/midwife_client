@@ -6,8 +6,10 @@ SmartClient.EditableSelectComponent = SmartClient.EditableFieldComponent.extend(
   fieldContent: function () {
     var self = this
 
-    return self.get('selectContent').find(function(item, index, enumerable) {
+    var selectedObj = self.get('selectContent').find(function(item, index, enumerable) {
       return item.value == self.get('selectValue')
-    }).label
+    })
+
+    return selectedObj ? selectedObj.label : this.get('emptyValue')
   }.property('selectValue')
 });
