@@ -5,12 +5,11 @@
          content=selectContent
          optionValuePath="content.value"
          optionLabelPath="content.label"
-         prompt="Please select an option"
   }}
 {{else}}
-  {{#if isEmpty}}
-    {{emptyValue}}
-  {{else}}
+  {{#if selectedValues}}
     {{fieldContent}}
+  {{else}}
+    {{emptyValue}}
   {{/if}}
 {{/if}}

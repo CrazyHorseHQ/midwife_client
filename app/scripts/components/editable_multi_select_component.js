@@ -1,17 +1,13 @@
 SmartClient.EditableMultiSelectComponent = SmartClient.EditableFieldComponent.extend({
-  isEmpty: function () {
-    return Ember.isEmpty(this.get('fieldContent'))
-  }.property('selectedValues'),
-
   fieldContent: function () {
-    var self = this
-    var selectedObj = self.get('selectedValues');
-
+    var selectedObj = this.get('selectedValues');
     if (selectedObj) {
-      var values = selectedObj.mapBy('label');
-      return values.toArray().join(',');
-    } else {
-      return this.get('emptyValue')
+      var content = selectedObj.map(function(item, index) {
+        return item.label
+      }).toArray().join(', ');
+      this.set('content', content);
+      return content;
     }
-  }.property('selectedValues'),
+    return this.get('emptyValue');
+  }.property('selectedValues.@each.label'),
 });
