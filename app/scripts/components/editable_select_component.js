@@ -1,15 +1,23 @@
 SmartClient.EditableSelectComponent = SmartClient.EditableFieldComponent.extend({
+  isMultiple: false,
+
   isEmpty: function () {
     return Ember.isEmpty(this.get('fieldContent'))
-  }.property('selectValue'),
+  }.property('selectedValues'),
 
   fieldContent: function () {
     var self = this
+    var selectedObj = self.get('selectedValues');
 
-    var selectedObj = self.get('selectContent').find(function(item, index, enumerable) {
-      return item.value == self.get('selectValue')
-    })
-
-    return selectedObj ? selectedObj.label : this.get('emptyValue')
-  }.property('selectValue')
+    if (selectedObj) {
+      if (self.get('isMultiple')) {
+        var values = selectedObj.mapBy('label');
+        return values.toArray().join(',');
+      } else {
+        return selectedObj.label;
+      }
+    } else {
+      return this.get('emptyValue')
+    }
+  }.property('selectedValues'),
 });
