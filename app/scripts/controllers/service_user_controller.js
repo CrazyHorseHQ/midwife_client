@@ -17,6 +17,14 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
     {label: 'Bottle', value: 'Bottle'},
     {label: 'Mixed', value: 'Mixed'}
   ],
+  birth_modes: [
+    {label: 'Svd', value: 'Svd'},
+    {label: 'Ventose', value: 'Ventose'},
+    {label: 'Forceps', value: 'Forceps'},
+    {label: 'Failed Ventose', value: 'Failed Ventose'},
+    {label: 'Failed Forceps', value: 'Failed Forceps'},
+    {label: 'LSCS', value: 'LSCS'}
+  ],
 
   actions: {
     save: function(){

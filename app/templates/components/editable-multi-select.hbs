@@ -1,0 +1,15 @@
+{{#if isEditing}}
+  {{view Ember.Select
+         multiple=true
+         selectionBinding="selectedValues"
+         content=selectContent
+         optionValuePath="content.value"
+         optionLabelPath="content.label"
+  }}
+{{else}}
+  {{#if selectedValues}}
+    {{fieldContent}}
+  {{else}}
+    {{emptyValue}}
+  {{/if}}
+{{/if}}
