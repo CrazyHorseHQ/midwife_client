@@ -1,7 +1,8 @@
 {{#if isEditing}}
   {{view Ember.Select
+         multiple=true
+         selectionBinding="selectedValues"
          content=selectContent
-         value=selectValue
          optionValuePath="content.value"
          optionLabelPath="content.label"
          prompt="Please select an option"
