@@ -2,11 +2,11 @@ SmartClient.EditableMultiSelectComponent = SmartClient.EditableFieldComponent.ex
   fieldContent: function () {
     var selectedObj = this.get('selectedValues');
     if (selectedObj) {
-      var content = selectedObj.map(function(item, index) {
+      var modes = selectedObj.map(function(item, index) {
         return item.label
       }).toArray().join(', ');
-      this.set('content', content);
-      return content;
+      this.set('selectValue', modes);
+      return modes;
     }
     return this.get('emptyValue');
   }.property('selectedValues.@each.label'),
