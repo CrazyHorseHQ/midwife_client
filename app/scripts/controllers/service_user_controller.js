@@ -25,6 +25,12 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
     {label: 'Failed Forceps', value: 'Failed Forceps'},
     {label: 'LSCS', value: 'LSCS'}
   ],
+  blood_groups: [
+    {label: 'A', value: 'A'},
+    {label: 'B', value: 'B'},
+    {label: 'AB', value: 'AB'},
+    {label: '0', value: '0'}
+  ],
 
   actions: {
     save: function(){
