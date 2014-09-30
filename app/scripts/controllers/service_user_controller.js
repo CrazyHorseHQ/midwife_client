@@ -1,4 +1,6 @@
 SmartClient.ServiceUserController = Ember.ObjectController.extend({
+  needs: "application",
+
   home_types: [
     {value: 'house', label: 'house'},
     {value: 'apartment', label: 'apartment'},
@@ -30,6 +32,14 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
     {label: 'B', value: 'B'},
     {label: 'AB', value: 'AB'},
     {label: '0', value: '0'}
+  ],
+  perineum_choices: [
+    {label: "Intact", value: "Intact"},
+    {label: "1 degree with sutures", value: "1 degree with sutures"},
+    {label: "1 degree without sutures", value: "2 degree without sutures"},
+    {label: "2 degree", value: "2 degree"},
+    {label: "3 degree", value: "3 degree"},
+    {label: "4 degree", value: "4 degree"}
   ],
 
   actions: {
