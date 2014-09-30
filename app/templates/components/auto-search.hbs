@@ -1,11 +1,11 @@
 {{#if navbar}}
   <form class="navbar-form navbar-left" role="search">
     <div class="form-group">
-      {{input type="text" value=searchString placeholder="Search..." class="form-control"}}
+      {{input type="text" value=searchString placeholder=placeholderString class="form-control"}}
     </div>
   </form>
 {{else}}
-  {{input type="text" value=searchString placeholder="Search..."}}
+  {{input type="text" value=searchString placeholder=placeholderString}}
 {{/if}}
 
 <ul class="search-results">
