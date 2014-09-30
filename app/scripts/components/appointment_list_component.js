@@ -19,50 +19,24 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
       this.set('selectedDate', yesterday);
     },
     load_appointments: function (date) {
+      log('sdasfs')
       this.set('selectedDate', date)
     },
     recordTime: function (time) {
       this.set('time', time)
     },
     openBookingModal: function (time) {
-      this.set('time', time)
-      this.sendAction('openBookingModal', 'appointment/book_appointment_modal', this)
+      this.sendAction('openBookingModal', 'components/booking-modal', SmartClient.BookingModalComponent.create({
+        store: this.get('store'),
+        model: this.get('model'),
+        controller: this,
+        selectedDate: this.get('selectedDate'),
+        time: time,
+        suModel: this.get('suModel')
+      }));
     },
     closeBookModal: function () {
       this.sendAction('closeBookModal')
-    },
-    bookServiceUser: function (service_user, time) {
-      if (!service_user) {
-        service_user = this.get('suModel')
-
-        var willBook = confirm("Confirm booking for " + service_user.get('personal_fields.name') + " at " + time)
-        if (willBook) {
-          this.set('time', time)
-        } else {
-          return;
-        }
-      }
-
-      var sp = SmartClient.__container__.lookup('controller:application').get('currentUser')
-      var self = this,
-          model = self.get('model')
-
-      var new_apt = this.get('store').createRecord('appointment', {
-        date: this.get('selectedDate'),
-        time: this.get('time'),
-        service_provider: sp,
-        service_user: service_user,
-        priority: 'scheduled',
-        visit_type: 'ante-natal',
-        clinic_id: model.get('id')
-      });
-
-      new_apt.save().then(function () {
-        self.set('appointments', self.get('store').find('appointment', {
-          clinic_id: self.get('model').get('id'),
-          date: self.get('selectedDate')
-        }));
-      });
     }
   },
 

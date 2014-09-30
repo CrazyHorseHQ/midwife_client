@@ -1,0 +1,27 @@
+{{#modal-dialog action="closeBookModal"}}
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" {{action "closeBookModal"}}>
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title">{{time}} - {{service_user.personal_fields.name}}</h4>
+  </div>
+  <div class="modal-body">
+    {{#unless service_user}}
+      {{auto-search store=store resultSelected='suChosen'}}
+    {{/unless}}
+
+    {{#if service_user}}
+      <button class="btn btn-inverse btn-small active" {{action 'searchAgain'}}><i class="icon-white icon-search"></i> Search again</button>
+
+      <hr/>
+
+      <p>To confirm a booking for {{service_user.personal_fields.name}} at {{time}}, click Book below</p>
+      <p>You can also click the 'Search again' button above to find another person</p>
+    {{/if}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" {{action "closeBookModal"}}>Close</button>
+    <button type="button" class="btn btn-primary" {{action "bookServiceUser"}}>Book</button>
+  </div>
+{{/modal-dialog}}
