@@ -1,0 +1,15 @@
+{{#if isEditing}}
+  {{view Ember.TextField
+         value=content
+  }}
+{{else}}
+  {{#if isEmpty}}
+    {{emptyValue}}
+  {{else}}
+    {{#if customDisplay}}
+      {{customDisplay}}
+    {{else}}
+      {{content}}
+    {{/if}}
+  {{/if}}
+{{/if}}
