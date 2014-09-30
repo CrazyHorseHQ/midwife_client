@@ -1,6 +1,7 @@
 var EmberComponents = window.EmberComponents = Ember.Namespace.create();
 
 EmberComponents.InplaceField = Ember.View.extend({
+  customDisplay: false,
   tagName: 'div',
 
   classNames: ['inplace_field'],
