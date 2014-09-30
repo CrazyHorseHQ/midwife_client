@@ -10,7 +10,13 @@
       </tr>
       <tr>
         <td>Perineum</td>
-        <td>{{view SmartClient.InplaceTextField contentBinding="current_pregnancy.perineum"}}</td>
+        <td>
+          {{#if controllers.application.currentUser.admin}}
+            {{editable-select selectValue=current_pregnancy.perineum selectContent=perineum_choices}}
+          {{else}}
+            {{current_pregnancy.perineum}}
+          {{/if}}
+        </td>
       </tr>
       <tr>
         <td>Anti D</td>
