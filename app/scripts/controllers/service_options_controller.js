@@ -3,10 +3,10 @@ SmartClient.ServiceOptionsController = Ember.ObjectController.extend({
 
   actions: {
     serviceOptionSelected: function (so_id) {
-      this.transitionToRoute('service_option', so_id)
+      this.transitionToRoute(this.get('routeContext') + 'service_option', so_id)
     },
     clinicSelected: function (clinic_id) {
-      this.transitionToRoute('clinic', clinic_id)
+      this.transitionToRoute(this.get('routeContext') + 'clinic', clinic_id)
     }
   }
 });

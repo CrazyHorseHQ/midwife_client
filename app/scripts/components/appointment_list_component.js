@@ -28,7 +28,7 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
         aptComponent: this,
         selectedDate: this.get('selectedDate'),
         time: time,
-        suModel: this.get('suModel')
+        service_user: this.get('service_user')
       }));
     },
     closeBookModal: function () {

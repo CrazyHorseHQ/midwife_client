@@ -7,7 +7,7 @@ SmartClient.ServiceOptionRoute = SmartClient.AuthenticatedRoute.extend({
   setupController: function (controller, model) {
     controller.setProperties({
       model: model,
-      'controllers.service_options.selectedServiceOptionId': model.id
+      'controllers.service_options.selectedServiceOptionId': model.get('id')
     })
   }
 });

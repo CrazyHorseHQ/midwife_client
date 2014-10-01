@@ -11,10 +11,9 @@ SmartClient.ServiceUserClinicRoute = SmartClient.AuthenticatedRoute.extend({
     controller.setProperties({
       model: model,
       suModel: this.modelFor('service_user'),
-      time: ""
     })
 
-    this.render('service_user/clinic', {
+    this.render('clinic', {
       controller: controller
     });
   }
