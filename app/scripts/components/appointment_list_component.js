@@ -1,13 +1,13 @@
 SmartClient.AppointmentListComponent = Ember.Component.extend({
   selectedDate: moment().format("YYYY-MM-DD"),
-  time: "",
+  forceToggle: true,
 
   appointments: function () {
     return this.get('store').find('appointment', {
       clinic_id: this.get('model').get('id'),
       date: this.get('selectedDate')
     });
-  }.property('selectedDate'),
+  }.property('selectedDate', 'forceToggle'),
 
   actions: {
     dateForward: function() {
@@ -18,18 +18,14 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
       var yesterday = moment(this.get('selectedDate'), "YYYY-MM-DD").add(1, 'days').format('YYYY-MM-DD')
       this.set('selectedDate', yesterday);
     },
-    load_appointments: function (date) {
-      log('sdasfs')
+    dateChosen: function (date) {
       this.set('selectedDate', date)
-    },
-    recordTime: function (time) {
-      this.set('time', time)
     },
     openBookingModal: function (time) {
       this.sendAction('openBookingModal', 'components/booking-modal', SmartClient.BookingModalComponent.create({
         store: this.get('store'),
         model: this.get('model'),
-        controller: this,
+        aptComponent: this,
         selectedDate: this.get('selectedDate'),
         time: time,
         suModel: this.get('suModel')
@@ -42,7 +38,10 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
 
   announcements: function() {
     var announcements = this.get('model.announcements');
-    return announcements.filterBy('date', this.get('selectedDate'));
+
+    if (announcements) {
+      return announcements.filterBy('date', this.get('selectedDate'));
+    }
   }.property('selectedDate', 'model.announcements.@each'),
 
   times: function () {

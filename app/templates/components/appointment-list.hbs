@@ -3,7 +3,7 @@
     <p>You can use the buttons below to jump quickly between the next 6 weeks for this clinic:</p>
     <div class="btn-group">
       {{#each next_weeks}}
-        <button type="button" class="btn btn-default" {{action 'load_appointments' date}}>In {{weekName}} weeks time - {{formattedDate}}</button>
+        <button type="button" class="btn btn-default" {{action 'dateChosen' date}}>In {{weekName}} weeks time - {{formattedDate}}</button>
       {{/each}}
     </div>
   {{/if}}

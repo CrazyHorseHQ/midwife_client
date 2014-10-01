@@ -22,7 +22,8 @@ SmartClient.BookingModalComponent = Ember.Component.extend({
       });
 
       new_apt.save().then(function () {
-        self.get('controller').send('load_appointments', self.get('selectedDate'))
+        self.get('aptComponent').sendAction('closeBookModal')
+        self.get('aptComponent').toggleProperty('forceToggle')
       });
     }
   }
