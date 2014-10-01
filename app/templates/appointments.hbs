@@ -6,6 +6,6 @@
                           clinicSelected="filterByClinic"
 }}
 
-{{appointment-list model=model store=store openBookingModal="openBookingModal" closeBookModal="closeBookModal"}}
+{{appointment-list model=selectedClinic store=store showList=showList openBookingModal="openBookingModal" closeBookModal="closeBookModal"}}
 
 {{outlet}}
