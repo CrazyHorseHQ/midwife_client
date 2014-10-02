@@ -11,27 +11,18 @@
 
   {{#em-form model=model}}
     {{em-input property="name" label="Full Name" placeholder="Enter a full name"}}
-    {{em-input property="email" label="Email" placeholder="Enter an email..."}}
-    {{em-text property="address" label="Address" placeholder=""}}
-    {{em-select property="home_type" label="Home Type" placeholder="" content=homeTypeOptions
-            optionValuePath="content.type"
-            optionLabelPath="content.type"
-            prompt="Choose a Home Type"
-    }}
-    {{em-select property="home_county" label="Home County" placeholder="" content=homeCountyOptions
+    {{em-input property="email" label="Email" placeholder="Enter an email"}}
+    {{em-input property="hospital_number" label="Hospital Number" placeholder="Can be left blank until later"}}
+    {{em-text property="address" label="Address" placeholder="Full Address"}}
+    {{em-select property="home_county" label="Home County" content=homeCountyOptions
             optionValuePath="content.type"
             optionLabelPath="content.type"
             prompt="Choose a County"
     }}
-    {{em-input property="home_post_code" label="Post Code" placeholder=""}}
-    {{em-input property="dob" label="Date Of Birth" placeholder="" type="date"}}
-    {{em-text property="directions" label="Directions" placeholder=""}}
-    {{em-input property="home_phone" label="Home Phone" placeholder=""}}
-    {{em-input property="mobile_phone" label="Personal Phone" placeholder=""}}
-    {{em-input property="next_of_kin_phone" label="Partner Phone" placeholder=""}}
-
-    {{em-input property="hospital_number" label="Hospital Number" placeholder=""}}
-    {{em-input property="estimated_delivery_date" label="EDD" placeholder="" type="date"}}
-    {{em-input property="blood_type" label="Blood Type" placeholder=""}}
+    {{em-input property="home_post_code" label="Post Code" placeholder="Post Code if applicable"}}
+    {{em-input property="home_phone" label="Home Phone" placeholder="Primary contact number"}}
+    {{em-input property="mobile_phone" label="Personal Phone" placeholder="Secondary contact number"}}
+    {{em-input property="next_of_kin_name" label="Next Of Kin Name" placeholder="Next of kin's full name"}}
+    {{em-input property="next_of_kin_phone" label="Next Of Kin Phone" placeholder="Next of kin's phone number"}}
   {{/em-form}}
 </div>
