@@ -3,5 +3,9 @@ SmartClient.ServiceUserClinicsRoute = SmartClient.AuthenticatedRoute.extend({
     var so = this.modelFor('serviceUserServiceOption')
 
     return so.get('clinics')
+  },
+
+  renderTemplate: function () {
+    this.render('clinics')
   }
 });

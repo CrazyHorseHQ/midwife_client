@@ -6,65 +6,6 @@
                           clinicSelected="filterByClinic"
 }}
 
-{{#if showAppointmentsList}}
-  {{outlet dateFilter}}
-  <br/>
-
-  {{#view Ember.View controller=controllers.clinic}}
-    {{#each announcements}}
-      {{#if blocking}}
-        <div class="alert alert-danger" role="alert">
-          <span class="glyphicon glyphicon-warning-sign"></span>
-          {{note}}
-        </div>
-      {{/if}}
-      {{#unless blocking}}
-        <div class="alert alert-info" role="alert">
-          <span class="glyphicon glyphicon-info-sign"></span>
-          {{note}}
-        </div>
-      {{/unless}}
-    {{/each}}
-    <table class="table">
-      {{#each times}}
-        <tbody>
-          {{#if service_user}}
-            <tr>
-              <td>
-                {{time}}
-              </td>
-              <td>
-                {{#link-to 'service_user' service_user.id }}
-                  {{service_user.personal_fields.name}}
-                {{/link-to}}
-              </td>
-              <td>
-                {{service_user.gestation}}
-              </td>
-              <td>
-                {{#link-to 'appointment' appointment.id class="pull-right"}}
-                  <span class="glyphicon glyphicon-info-sign"></span>
-                {{/link-to}}
-              </td>
-            </tr>
-          {{else}}
-            <tr>
-              <td>
-                {{time}}
-              </td>
-              <td>
-                <div {{action 'openBookModal' 'appointment/book_appointment_modal' controller this.time}}
-                  <span class="glyphicon glyphicon-plus-sign"></span> Free Slot
-                </div>
-              <td>
-              <td></td>
-              <td></td>
-            </tr>
-          {{/if}}
-        </tbody>
-      {{/each}}
-    </table>
-  {{/view}}
-{{/if}}
+{{appointment-list model=selectedClinic store=store showList=showList openBookingModal="openBookingModal" closeBookModal="closeBookModal"}}
 
 {{outlet}}

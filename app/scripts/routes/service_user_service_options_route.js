@@ -5,9 +5,12 @@ SmartClient.ServiceUserServiceOptionsRoute = SmartClient.AuthenticatedRoute.exte
 
   renderTemplate: function () {
     var controller = this.controllerFor('serviceOptions');
-    controller.set('model', this.modelFor('serviceUserServiceOptions'))
+    controller.setProperties({
+      model: this.modelFor('serviceUserServiceOptions'),
+      routeContext: 'service_user.'
+    })
 
-    this.render('service_user/service_options', {
+    this.render('service_options', {
       controller: controller
     });
   }

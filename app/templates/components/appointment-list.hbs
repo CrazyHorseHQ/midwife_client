@@ -1,0 +1,79 @@
+{{#if showList}}
+  {{#if quickWeek}}
+    <p>You can use the buttons below to jump quickly between the next 6 weeks for this clinic:</p>
+    <div class="btn-group">
+      {{#each next_weeks}}
+        <button type="button" class="btn btn-default" {{action 'dateChosen' date}}>In {{weekName}} weeks time - {{formattedDate}}</button>
+      {{/each}}
+    </div>
+
+    <br/>
+  {{/if}}
+
+  <p>You can use this date picker to see appointments on a particular date</p>
+  <div class="input-group">
+    <span class="input-group-btn">
+      <button type="button" class="glyphicon glyphicon-step-backward btn btn-default" {{action dateForward}}></button>
+    </span>
+    <input class="form-control" type="date" {{bind-attr value="selectedDate"}}>
+    <span class="input-group-btn">
+      <button type="button" class="glyphicon glyphicon-step-forward btn btn-default" {{action dateBackward}}></button>
+    </span>
+  </div>
+
+  <br/>
+
+  {{#each announcements}}
+    {{#if blocking}}
+      <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        {{note}}
+      </div>
+    {{/if}}
+    {{#unless blocking}}
+      <div class="alert alert-info" role="alert">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        {{note}}
+      </div>
+    {{/unless}}
+  {{/each}}
+  <table class="table">
+    {{#each times}}
+      <tbody>
+        {{#if service_user}}
+          <tr>
+            <td>
+              {{time}}
+            </td>
+            <td>
+              {{#link-to 'service_user.personal' service_user.id}}
+                {{service_user.personal_fields.name}}
+              {{/link-to}}
+            </td>
+            <td>
+              {{service_user.gestation}}
+            </td>
+            <td>
+              {{#link-to 'appointment' appointment.id class="pull-right"}}
+                <span class="glyphicon glyphicon-info-sign"></span>
+              {{/link-to}}
+            </td>
+          </tr>
+        {{else}}
+          <tr>
+            <td>
+              {{time}}
+            </td>
+            <td>
+              <div {{action 'openBookingModal' this.time}}
+                <span class="glyphicon glyphicon-plus-sign"></span> Free Slot
+              </div>
+            <td>
+            <td></td>
+            <td></td>
+          </tr>
+        {{/if}}
+      </tbody>
+    {{/each}}
+  </table>
+{{/if}}

@@ -16,23 +16,7 @@
     </tbody>
   </table>
 
-  {{#each next_weeks}}
-    <div class="well" {{action 'load_appointments' date on='click'}}>
-      <li>Week {{weekName}}</li>
-      <li>{{formattedDate}}</li>
-    </div>
-  {{/each}}
-
-  {{#each times}}
-    {{#if service_user}}
-      <li>{{#link-to 'service_user' service_user}}{{time}} | {{service_user.personal_fields.name}} {{service_user.gestation}}{{/link-to}}</li>
-    {{else}}
-      <li {{action 'recordTime' time}}>{{time}} | Click to book this slot</li>
-    {{/if}}
-  {{/each}}
-
-  <h5>Booking time: {{time}}</h5>
-  {{auto-search store=store resultSelected='bookServiceUser'}}
+  {{appointment-list model=model store=store quickWeek=true showList=true service_user=suModel openBookingModal="openBookingModal" closeBookModal="closeBookModal"}}
 </div>
 
 {{outlet}}

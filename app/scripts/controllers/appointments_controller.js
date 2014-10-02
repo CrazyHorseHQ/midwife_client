@@ -1,6 +1,5 @@
 SmartClient.AppointmentsController = Ember.ArrayController.extend({
   //queryParams: ['selectedClinicId', 'selectedServiceOptionId'],
-  needs: ['clinic'],
   itemController: "appointment",
   sortProperties: ["date", "time"],
   sortAscending: true,
@@ -38,6 +37,12 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
   selectedServiceOptionId: false,
   selectedClinicId: false,
   showMyOnly: false,
+
+  selectedClinic: function () {
+    if (this.get('selectedClinicId')) {
+      return this.store.getById('clinic', this.get('selectedClinicId'))
+    }
+  }.property('selectedClinicId'),
 
   filterDidChange: function() {
     this.applyFilters();
@@ -95,13 +100,6 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       appointments = this.clinicFilter(appointments, selectedClinicId);
     }
 
-    if (selectedClinicId && selectedDate) {
-      var clinicController = this.get('controllers.clinic')
-      clinicController.set('model', this.store.getById('clinic', selectedClinicId));
-      clinicController.set('date', selectedDate);
-      clinicController.send('load_appointments', selectedDate);
-    }
-
     this.set('content', appointments);
     return this.get('content');
   },
@@ -116,10 +114,12 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       //reset the clinic filter when selecting SO.
       this.set('selectedClinicId', false);
       this.set('selectedServiceOptionId', so);
+      this.set('showList', false);
     },
 
     filterByClinic: function(c) {
       this.set('selectedClinicId', c);
+      this.set('showList', true);
     },
 
     filterBySP: function(sp) {
@@ -142,6 +142,12 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       this.set('selectedClinicId', false);
       this.applyFilters();
     },
+    openBookingModal: function (modalName, controller) {
+      this.send('openModal', modalName, controller)
+    },
+    closeBookModal: function () {
+      this.send('closeModal')
+    }
   }
 });
 
