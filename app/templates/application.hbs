@@ -35,12 +35,12 @@
       </ul>
     </div>
   </nav>
-  <div class="container" id="main">
-    <div class="row">
-      <div>
-        <div class="col-md-9">
-          {{outlet}}
-        </div>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="col-md-4">{{outlet}}</div>
+      <div class="col-md-8">
+        {{outlet clinic}}
+        {{outlet service_provider}}
       </div>
     </div>
   </div>

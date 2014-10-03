@@ -8,7 +8,11 @@ SmartClient.ServiceProviderRoute = SmartClient.AuthenticatedRoute.extend({
     if (this.currentUser()['admin']) {
       tpl_name = 'editable_details'
     }
-    this.render();
+    this.render('service_provider', {
+      outlet: 'service_provider',
+      into: 'application'
+    });
+
     this.render('service_providers/' + tpl_name, {
       outlet: 'spData',
       into: 'service_provider',

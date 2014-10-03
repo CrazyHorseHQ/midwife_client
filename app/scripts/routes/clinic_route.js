@@ -3,5 +3,12 @@ SmartClient.ClinicRoute = SmartClient.AuthenticatedRoute.extend({
     var clinics_model = this.modelFor('clinics')
 
     return clinics_model.findBy('id', params.clinic_id)
+  },
+
+  renderTemplate: function () {
+    this.render('clinic', {
+      into: 'application',
+      outlet: 'clinic'
+    })
   }
 });

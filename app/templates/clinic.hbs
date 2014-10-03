@@ -1,20 +1,5 @@
 <div class="well">
-  <table class="table">
-    <tbody>
-      <tr>
-        <td>Name</td>
-        <td>{{name}}</td>
-      </tr>
-      <tr>
-        <td>Opening Times</td>
-        <td>{{opening_time}} - {{closing_time}}</td>
-      </tr>
-      <tr>
-        <td>Recurring</td>
-        <td>{{recurrence}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <h2>Appointments for {{name}}</h2>
 
   {{appointment-list model=model store=store quickWeek=true showList=true service_user=suModel openBookingModal="openBookingModal" closeBookModal="closeBookModal"}}
 </div>
