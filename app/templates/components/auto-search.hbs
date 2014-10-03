@@ -8,7 +8,7 @@
   {{input type="text" value=searchString placeholder="Search..."}}
 {{/if}}
 
-<ul>
+<ul class="search-results">
   {{#each searchResults}}
     <li {{action 'resultSelected' this}}>{{personal_fields.name}} - {{hospital_number}}</li>
   {{/each}}
