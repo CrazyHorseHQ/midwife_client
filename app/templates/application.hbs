@@ -1,5 +1,5 @@
 <div>
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -7,10 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Holles Street Service
-      {{#if isAuthenticated}}
-        - Logged in as {{currentUser.name}}
-      {{/if}}
+      <a class="navbar-brand" href="#">SMART
       </a>
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -19,19 +16,21 @@
           <li>{{#link-to item.resource}}{{item.label}}{{/link-to}}</li>
         {{/each}}
         <li>
+          {{auto-search store=store resultSelected='openServiceUser' navbar=true}}
+        </li>
+        <li>
           {{#if isAuthenticated}}
-            <button {{action 'logout'}} class="btn btn-info">
-              <span class="glyphicon glyphicon-log-out"></span> Logout
+            <button {{action 'logout'}} class="btn btn-default navbar-btn">
+              <span class="glyphicon glyphicon-log-out"></span>{{currentUser.name}} Logout
             </button>
           {{else}}
-            <button class="btn btn-default">
+            <button class="btn btn-default navbar-btn">
               {{#link-to 'login'}}
                 <span class="glyphicon glyphicon-log-in"></span> Login
               {{/link-to}}
             </button>
           {{/if}}
         </li>
-        <li>{{auto-search store=store resultSelected='openServiceUser'}}</li>
       </ul>
     </div>
   </nav>

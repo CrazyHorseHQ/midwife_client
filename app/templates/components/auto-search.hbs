@@ -1,4 +1,12 @@
-{{input type="text" value=searchString placeholder="Search..."}}
+{{#if navbar}}
+  <form class="navbar-form navbar-left" role="search">
+    <div class="form-group">
+      {{input type="text" value=searchString placeholder="Search..." class="form-control"}}
+    </div>
+  </form>
+{{else}}
+  {{input type="text" value=searchString placeholder="Search..."}}
+{{/if}}
 
 <ul>
   {{#each searchResults}}
