@@ -4,11 +4,11 @@
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
     </button>
-    <h4 class="modal-title">{{time}} - {{service_user.personal_fields.name}}</h4>
+    <h4 class="modal-title">Appointment Slot - {{time}}</h4>
   </div>
   <div class="modal-body">
     {{#unless service_user}}
-      {{auto-search store=store resultSelected='suChosen'}}
+      {{auto-search store=store resultSelected='suChosen' placeholderString='Hospital Number. Or name with/without date-of-birth'}}
     {{/unless}}
 
     {{#if service_user}}
