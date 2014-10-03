@@ -8,7 +8,11 @@ SmartClient.AppointmentsRoute = SmartClient.AuthenticatedRoute.extend({
     controller.set('service_providers', this.get('store').find('service_provider'));
   },
   renderTemplate: function(controller) {
-    this.render();
+    this.render('appointments', {
+      into: 'application',
+      outlet: 'side_column'
+    });
+
     this.render('appointments/date_filter', {
       outlet: 'dateFilter',
       into: 'appointments',
