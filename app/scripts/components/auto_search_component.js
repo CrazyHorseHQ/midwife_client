@@ -1,6 +1,7 @@
 SmartClient.AutoSearchComponent = Ember.Component.extend({
   searchString: null,
   store: null,
+  navbar: false,
 
   actions: {
     resultSelected: function (service_user) {
