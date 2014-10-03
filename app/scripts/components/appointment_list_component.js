@@ -93,7 +93,11 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
       }
     }
 
-    var current_date = moment().day(daysOn[0])
+    var current_date = moment().day(daysOn[0]);
+    // Adjust the day if we've already passed it in the current week.
+    if (current_date < moment()) {
+      current_date = current_date.add(1, 'week');
+    }
 
     for (var i = 0;i < 6;i++) {
       collection.push({
@@ -102,9 +106,9 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
         formattedDate: current_date.format("dddd, MMMM Do")
       });
 
-      current_date = current_date.day(2 + 7)
+      current_date = current_date.add(1, 'week');
     }
 
     return collection;
-  }.property()
+  }.property('model.days.@each')
 });
