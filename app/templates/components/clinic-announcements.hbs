@@ -1,3 +1,19 @@
+{{#if addMode}}
+  <form class="form-inline" role="form">
+    <div class="form-group">
+      {{input type="text" value=note placeholder="Announcement (e.g. Bring syringes)" class="form-control"}}
+    </div>
+    <div class="form-group">
+      <label>
+      {{input type="checkbox" checked=blocking class="form-control"}}
+        Blocking
+      </label>
+    </div>
+    <button {{action 'addAnnouncement'}} class="btn btn-sm btn-warning">Create Announcement</button>
+  </form>
+{{else}}
+  <p {{action 'toggleAddMode'}}>Add new announcement</p>
+{{/if}}
 {{#each filtered_list}}
   {{#if blocking}}
     <div class="alert alert-danger" role="alert">
