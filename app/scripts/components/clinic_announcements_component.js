@@ -1,7 +1,5 @@
 SmartClient.ClinicAnnouncementsComponent = Ember.Component.extend({
   addMode: false,
-  clinic: false,
-  selectedDate: moment().format("YYYY-MM-DD"),
 
   filtered_list: function() {
     var announcements = this.get('clinic.announcements');
@@ -13,7 +11,19 @@ SmartClient.ClinicAnnouncementsComponent = Ember.Component.extend({
 
   actions: {
     addAnnouncement: function () {
-      this.sendAction('addAnnouncement')
+      var self = this;
+
+      var new_announcement = this.get('store').createRecord('clinic.announcement', {
+        date: this.get('selectedDate'),
+        note: this.get('note'),
+        blocking: this.get('blocking'),
+        clinic: this.get('clinic')
+      });
+
+      new_announcement.save().then(function () {
+        self.toggleProperty('addMode')
+        self.sendAction('addAnnouncement')
+      });
     },
     toggleAddMode: function() {
       this.set('addMode', true);
