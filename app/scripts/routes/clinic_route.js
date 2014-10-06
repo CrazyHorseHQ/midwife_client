@@ -8,7 +8,7 @@ SmartClient.ClinicRoute = SmartClient.AuthenticatedRoute.extend({
   renderTemplate: function () {
     this.render('clinic', {
       into: 'application',
-      outlet: 'clinic'
+      outlet: 'content_column'
     })
   }
 });

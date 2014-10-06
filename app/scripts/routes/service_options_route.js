@@ -8,5 +8,12 @@ SmartClient.ServiceOptionsRoute = SmartClient.AuthenticatedRoute.extend({
       model: model,
       routeContext: ''
     })
+  },
+
+  renderTemplate: function () {
+    this.render('service_options', {
+      into: 'application',
+      outlet: 'side_column'
+    })
   }
 });

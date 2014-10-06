@@ -9,7 +9,7 @@ SmartClient.ServiceProviderRoute = SmartClient.AuthenticatedRoute.extend({
       tpl_name = 'editable_details'
     }
     this.render('service_provider', {
-      outlet: 'service_provider',
+      outlet: 'content_column',
       into: 'application'
     });
 

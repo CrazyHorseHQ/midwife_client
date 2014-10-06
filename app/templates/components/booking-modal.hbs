@@ -4,7 +4,7 @@
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
     </button>
-    <h2 class="modal-title">Appointment Slot - {{time}}</h2>
+    <h2 class="modal-title">Appointment Slot - {{#if service_user}}Summary{{else}}{{time}}{{/if}}</h2>
   </div>
   <div class="modal-body">
     {{#unless service_user}}
@@ -12,16 +12,41 @@
     {{/unless}}
 
     {{#if service_user}}
-      <button class="btn btn-inverse btn-small active" {{action 'searchAgain'}}><i class="icon-white icon-search"></i> Search again</button>
-
-      <hr/>
-
-      <p>To confirm a booking for {{service_user.personal_fields.name}} at {{time}}, click Book below</p>
-      <p>You can also click the 'Search again' button above to find another person</p>
+      <table class="table">
+        <tr>
+          <td>Service User</td>
+          <td>{{service_user.personal_fields.name}}</td>
+        </tr>
+        <tr>
+          <td>Location</td>
+          <td>{{clinic.name}}</td>
+        </tr>
+        <tr>
+          <td>Date</td>
+          <td>{{formattedDate}}</td>
+        </tr>
+        <tr>
+          <td>Time</td>
+          <td>{{time}}</td>
+        </tr>
+        <tr>
+          <td>Email To</td>
+          <td>{{service_user.personal_fields.email}}</td>
+        </tr>
+        <tr>
+          <td>SMS To</td>
+          <td>{{service_user.personal_fields.mobile_phone}}</td>
+        </tr>
+      </table>
     {{/if}}
   </div>
   <div class="modal-footer">
+    {{#if service_user}}
+      <button class="btn btn-inverse btn-small btn-default" {{action 'searchAgain'}}><i class="icon-white icon-search"></i> Search again</button>
+    {{/if}}
     <button type="button" class="btn btn-default" data-dismiss="modal" {{action "closeBookModal"}}>Close</button>
-    <button type="button" class="btn btn-primary" {{action "bookServiceUser"}}>Book</button>
+    {{#if service_user}}
+      <button type="button" class="btn btn-primary" {{action "bookServiceUser"}}>Book</button>
+    {{/if}}
   </div>
 {{/modal-dialog}}

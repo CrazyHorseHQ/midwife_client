@@ -1,4 +1,8 @@
 SmartClient.BookingModalComponent = Ember.Component.extend({
+  formattedDate: function () {
+    return moment(this.get('selectedDate')).format('dddd, Do MMMM YYYY')
+  }.property(),
+
   actions: {
     suChosen: function (service_user) {
       this.set('service_user', service_user)
