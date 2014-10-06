@@ -1,4 +1,4 @@
-SmartClient.ClinicAnnouncementAdapter = SmartClient.ApplicationAdapter.extend({
+SmartClient.AnnouncementAdapter = SmartClient.ApplicationAdapter.extend({
   createRecord: function(store, type, record){
     var data = {
       date: record.get('date'),
