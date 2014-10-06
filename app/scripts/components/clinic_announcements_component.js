@@ -22,6 +22,8 @@ SmartClient.ClinicAnnouncementsComponent = Ember.Component.extend({
       });
 
       new_announcement.save().then(function () {
+        self.set('note', '');
+        self.set('blocking', false);
         self.toggleProperty('addMode')
         self.sendAction('addAnnouncement')
       });
