@@ -1,16 +1,27 @@
 {{#if showList}}
   {{#if quickWeek}}
-    <p>You can use the buttons below to jump quickly between the next 6 weeks for this clinic:</p>
-    <div class="btn-group">
-      {{#each next_weeks}}
-        <button type="button" class="btn btn-default" {{action 'dateChosen' date}}>In {{weekName}} weeks time - {{formattedDate}}</button>
-      {{/each}}
+    <b>You can use the buttons below to jump quickly between the next 6 weeks for this clinic:</b>
+    <div class="btn-toolbar" role="toolbar">
+      <div class="btn-group-justified">
+        {{#each next_weeks.firstThree}}
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" {{action 'dateChosen' date}}>In {{weekName}} wks - {{formattedDate}}</button>
+          </div>
+        {{/each}}
+      </div>
+      <div class="btn-group-justified">
+        {{#each next_weeks.secondThree}}
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" {{action 'dateChosen' date}}>In {{weekName}} wks - {{formattedDate}}</button>
+          </div>
+        {{/each}}
+      </div>
     </div>
 
     <br/>
   {{/if}}
 
-  <p>You can use this date picker to see appointments on a particular date</p>
+  <b>You can use this date picker to see appointments on a particular date</b>
   <div class="input-group">
     <span class="input-group-btn">
       <button type="button" class="glyphicon glyphicon-step-backward btn btn-default" {{action dateForward}}></button>

@@ -102,6 +102,13 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
       current_date = current_date.add(1, 'week');
     }
 
-    return collection;
-  }.property('model.days.@each')
+    return {
+      firstThree: collection.slice(0, 3),
+      secondThree: collection.slice(3)
+    }
+  }.property('model.days.@each'),
+
+  selectedDateFormatted: function () {
+    return moment(this.get('selectedDate')).format("dddd, MMM Do")
+  }.property('selectedDate')
 });
