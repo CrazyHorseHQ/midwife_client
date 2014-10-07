@@ -3,7 +3,7 @@ SmartClient.AnnouncementAdapter = SmartClient.ApplicationAdapter.extend({
     var data = {
       date: record.get('date'),
       note: record.get('note'),
-      blocking: record.get('blocking')
+      blocking: record.getWithDefault('blocking', false)
     };
     return this.ajax("%@/%@".fmt(this.get('host'), this.baseUri(record.get('clinic.id'))), "POST", { data: {announcement: data }});
   },
