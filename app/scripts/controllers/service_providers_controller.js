@@ -5,11 +5,5 @@ SmartClient.ServiceProvidersController = Ember.ArrayController.extend({
   sortAscending: true,
 
   actions: {
-    activate: function (model) {
-      if (this.get('controllers.application.currentUser.admin')) {
-        model.toggleProperty('active');
-        model.save();
-      }
-    }
   }
 });

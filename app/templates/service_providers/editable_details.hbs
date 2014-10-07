@@ -41,5 +41,6 @@
 
 {{#if controllers.application.currentUser.admin}}
   <button {{action 'save'}} class="btn btn-success">Save</button>
+  <button {{action activate model}} {{bind-attr class=":btn active:btn-warning:btn-default"}}>{{activated_text}}</button>
 {{/if}}
 
