@@ -15,7 +15,7 @@
     <span class="input-group-btn">
       <button type="button" class="glyphicon glyphicon-step-backward btn btn-default" {{action dateForward}}></button>
     </span>
-    <input class="form-control" type="date" {{bind-attr value="selectedDate"}}>
+    {{date-field selectedDate=selectedDate}}
     <span class="input-group-btn">
       <button type="button" class="glyphicon glyphicon-step-forward btn btn-default" {{action dateBackward}}></button>
     </span>
