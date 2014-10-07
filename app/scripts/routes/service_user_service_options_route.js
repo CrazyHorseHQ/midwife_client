@@ -5,6 +5,11 @@ SmartClient.ServiceUserServiceOptionsRoute = SmartClient.AuthenticatedRoute.exte
 
   renderTemplate: function () {
     var controller = this.controllerFor('serviceOptions');
+    // reset the selected option
+    controller.setProperties({
+      selectedServiceOptionId: null
+    });
+
     controller.setProperties({
       model: this.modelFor('serviceUserServiceOptions'),
       routeContext: 'service_user.'
