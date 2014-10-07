@@ -35,6 +35,9 @@
   <br/>
   {{clinic-announcements clinic=model selectedDate=selectedDate store=store}}
   <table class="table">
+    <thead>
+      <h3 style="text-align: center;">{{selectedDateFormatted}}</h3>
+    </thead>
     {{#each times}}
       <tbody>
         {{#if service_user}}

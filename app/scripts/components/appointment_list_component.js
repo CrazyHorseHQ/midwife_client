@@ -96,7 +96,7 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
       collection.push({
         weekName: i + 1,
         date: current_date.format("YYYY-MM-DD"),
-        formattedDate: current_date.format("dddd, MMMM Do")
+        formattedDate: current_date.format("dd, MMM Do")
       });
 
       current_date = current_date.add(1, 'week');
