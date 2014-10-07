@@ -17,5 +17,12 @@ SmartClient.LoginRoute = Ember.Route.extend({
     if (localStorage.getItem('authToken')) {
       this.transitionTo('appointments');
     }
+  },
+
+  renderTemplate: function () {
+    this.render('login', {
+      into: 'application',
+      outlet: 'content_column'
+    })
   }
 });
