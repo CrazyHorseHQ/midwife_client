@@ -24,5 +24,10 @@ SmartClient.LoginRoute = Ember.Route.extend({
       into: 'application',
       outlet: 'content_column'
     })
+
+    this.render('logo', {
+      into: 'application',
+      outlet: 'side_column'
+    })
   }
 });
