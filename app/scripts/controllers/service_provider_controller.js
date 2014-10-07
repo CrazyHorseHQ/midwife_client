@@ -17,6 +17,12 @@ SmartClient.ServiceProviderController = Ember.ObjectController.extend({
     },
     close: function () {
       Ember.$('#sp_success').hide()
+    },
+    activate: function (model) {
+      if (this.get('controllers.application.currentUser.admin')) {
+        model.toggleProperty('active');
+        model.save();
+      }
     }
   }
 });

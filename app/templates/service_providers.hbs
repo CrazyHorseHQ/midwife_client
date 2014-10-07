@@ -1,26 +1,21 @@
 <div class="well">
   <h1>Service Providers</h1>
 
-  {{#if controllers.application.currentUser.admin}}
-    {{#link-to 'service_providers.create'}}
-      <button type="button" class="btn btn-default btn-lg">
-        <span class="glyphicon glyphicon-plus"></span> Add
-      </button>
-    {{/link-to}}
-  {{/if}}
-
-  <ul>
+  <div class="list-group">
    {{#each sp in controller}}
-      <li>
-        {{#link-to 'service_provider' sp}}
-          {{sp.name}}
-        {{/link-to}}
-        {{#if controllers.application.currentUser.admin}}
-          | <a href="#" {{action activate sp}}>{{sp.activated_text}}</a>
-        {{/if}}
-      </li>
+      {{#link-to 'service_provider' sp class="list-group-item"}}
+        {{sp.name}}
+          <span class="glyphicon glyphicon-earphone pull-right"> {{sp.primary_phone}}</span>
+      {{/link-to}}
     {{/each}}
-  </ul>
+
+    {{#if controllers.application.currentUser.admin}}
+      {{#link-to 'service_providers.create' class="list-group-item"}}
+        <span class="glyphicon glyphicon-plus"></span> Add
+      {{/link-to}}
+    {{/if}}
+
+  </div>
 </div>
 
 {{outlet}}
