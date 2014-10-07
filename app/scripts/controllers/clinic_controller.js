@@ -1,4 +1,6 @@
 SmartClient.ClinicController = Ember.ObjectController.extend({
+  forceToggle: false,
+
   actions: {
     openBookingModal: function (modalName, controller) {
       this.send('openModal', modalName, controller)

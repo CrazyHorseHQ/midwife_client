@@ -17,5 +17,10 @@ SmartClient.ClinicRoute = SmartClient.AuthenticatedRoute.extend({
       into: 'application',
       outlet: 'content_column'
     })
+  },
+
+  setupController: function (controller, model) {
+    controller.set('model', model)
+    controller.toggleProperty('forceToggle')
   }
 });
