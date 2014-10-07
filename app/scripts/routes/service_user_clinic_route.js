@@ -12,6 +12,7 @@ SmartClient.ServiceUserClinicRoute = SmartClient.AuthenticatedRoute.extend({
       model: model,
       suModel: this.modelFor('service_user'),
     })
+    controller.toggleProperty('forceToggle')
 
     this.render('clinic', {
       into: 'application',
