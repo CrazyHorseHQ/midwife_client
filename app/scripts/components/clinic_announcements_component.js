@@ -12,7 +12,6 @@ SmartClient.ClinicAnnouncementsComponent = Ember.Component.extend({
   actions: {
     addAnnouncement: function () {
       var self = this;
-      log(this.get('blocking'));
 
       var new_announcement = this.get('store').createRecord('announcement', {
         date: this.get('selectedDate'),
