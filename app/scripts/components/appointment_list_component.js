@@ -37,14 +37,6 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
     }
   },
 
-  announcements: function() {
-    var announcements = this.get('model.announcements');
-
-    if (announcements) {
-      return announcements.filterBy('date', this.get('selectedDate'));
-    }
-  }.property('selectedDate', 'model.announcements.@each'),
-
   times: function () {
     var self = this,
         times = [],
