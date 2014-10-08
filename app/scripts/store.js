@@ -1,5 +1,5 @@
 SmartClient.ApplicationAdapter = DS.ActiveModelAdapter.extend({
-  host: 'http://127.0.0.1:5000'
+  host: '@@host'
 });
 
 // Add the headers
