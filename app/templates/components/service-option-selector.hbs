@@ -1,14 +1,22 @@
 <div class="list-group">
   {{#each service_options}}
-    {{#view 'SmartClient.AppointmentsServiceOptionView' serviceOptionId=id}}
+    {{#view 'SmartClient.AppointmentsServiceOptionView' serviceOptionId=id routeCtxt=view.routeContext}}
       <div class="panel panel-info">
         <div class="panel-heading" {{action serviceOptionSelected id}}>{{name}}</div>
 
-        {{#view Ember.View isVisibleBinding='view.isSelected'}}
+        {{#view Ember.View isVisibleBinding='view.isSelected' serviceOptionId=view.serviceOptionId routeCtxt=view.routeCtxt}}
           {{#if view.isVisible}}
             <ul class="list-group">
-              {{#each this.clinics}}
-                <li class="list-group-item" {{action clinicSelected id}}>{{name}}</li>
+              {{#each clinic in this.clinics}}
+                {{#if view.routeCtxt}}
+                  {{#link-to 'service_user.clinic' view.serviceOptionId clinic.id class="list-group-item"}}
+                    {{clinic.name}}
+                  {{/link-to}}
+                {{else}}
+                  {{#link-to 'clinic' clinic.id class="list-group-item"}}
+                    {{clinic.name}}
+                  {{/link-to}}
+                {{/if}}
               {{/each}}
             </ul>
           {{/if}}
