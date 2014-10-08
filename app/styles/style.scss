@@ -14,6 +14,15 @@ html, body {
   color: white;
 }
 
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url('/images/logo.png');
+  height: 151px;
+  width: 177px;
+}
+
 @charset "UTF-8";
 
 /*!
