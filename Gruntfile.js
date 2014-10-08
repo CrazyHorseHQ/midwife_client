@@ -234,27 +234,49 @@ module.exports = function (grunt) {
                 }]
             }
         },
+        config: {
+          dev: {
+            options: {
+              variables: {
+                'environment': 'development',
+                'host': 'http://127.0.0.1:5000'
+              }
+            }
+          },
+          prod: {
+            options: {
+              variables: {
+                'environment': 'production',
+                'host': 'http://54.72.7.91:8888'
+              }
+            }
+          }
+        },
         replace: {
           app: {
             options: {
               variables: {
                 ember: 'bower_components/ember/ember.js',
-                ember_data: 'bower_components/ember-data/ember-data.js'
+                ember_data: 'bower_components/ember-data/ember-data.js',
+                host: '<%= grunt.config.get("host") %>'
               }
             },
             files: [
-              {src: '<%= yeoman.app %>/index.html', dest: '.tmp/index.html'}
+              {src: '<%= yeoman.app %>/index.html', dest: '.tmp/index.html'},
+              {src: '<%= yeoman.app %>/scripts/store.js', dest: '<%= yeoman.app %>/scripts/store.processed.js'}
             ]
           },
           dist: {
             options: {
               variables: {
                 ember: 'bower_components/ember/ember.prod.js',
-                ember_data: 'bower_components/ember-data/ember-data.prod.js'
+                ember_data: 'bower_components/ember-data/ember-data.prod.js',
+                host: '<%= grunt.config.get("host") %>'
               }
             },
             files: [
-              {src: '<%= yeoman.app %>/index.html', dest: '.tmp/index.html'}
+              {src: '<%= yeoman.app %>/index.html', dest: '.tmp/index.html'},
+              {src: '<%= yeoman.app %>/scripts/store.js', dest: '<%= yeoman.app %>/scripts/store.processed.js'}
             ]
           }
         },
@@ -346,6 +368,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
+            'config:dev',
             'replace:app',
             'concurrent:server',
             'neuter:app',
@@ -367,6 +390,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
+        'config:prod',
         'replace:dist',
         'useminPrepare',
         'concurrent:dist',
