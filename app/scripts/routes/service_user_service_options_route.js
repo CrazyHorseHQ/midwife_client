@@ -15,6 +15,12 @@ SmartClient.ServiceUserServiceOptionsRoute = SmartClient.AuthenticatedRoute.exte
       routeContext: 'service_user.'
     })
 
+    this.render('service_user/header', {
+      into: 'application',
+      outlet: 'full_column',
+      controller: this.controllerFor('serviceUser')
+    })
+
     this.render('service_options', {
       into: 'application',
       outlet: 'side_column',

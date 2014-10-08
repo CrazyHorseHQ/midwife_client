@@ -1,0 +1,12 @@
+<div class="well">
+  <h1>{{view SmartClient.InplaceTextField contentBinding="personal_fields.name"}}
+    {{#link-to 'service_user.service_options'}}
+      <button class="btn btn-primary btn-large pull-right">
+        <i class="icon-white icon-calendar"></i> New appointment
+      </button>
+    {{/link-to}}
+  </h1>
+  <h4>{{age}} yrs, P: {{clinical_fields.parity}}, G: {{gestation}}</h4>
+</div>
+
+{{outlet}}
