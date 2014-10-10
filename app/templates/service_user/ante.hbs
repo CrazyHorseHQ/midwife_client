@@ -3,34 +3,36 @@
     <tbody>
       <tr>
         <td>EDD</td>
-        <td><input id="estimated_delivery_date" type="date" value="{{unbound current_pregnancy.estimated_delivery_date}}"></td>
+        <td colspan=2><input id="estimated_delivery_date" type="date" value="{{unbound current_pregnancy.estimated_delivery_date}}"></td>
       </tr>
       <tr>
         <td>Gestation</td>
-        <td>{{gestation}}</td>
+        <td colspan=2>{{gestation}}</td>
       </tr>
       <tr>
         <td>Blood Group</td>
-        <td>{{editable-select selectValue=clinical_fields.blood_group selectContent=blood_groups}}</td>
+        <td colspan=2>{{editable-select selectValue=clinical_fields.blood_group selectContent=blood_groups}}</td>
       </tr>
       <tr>
         <td>Rhesus</td>
-        <td>{{editable-select selectValue=clinical_fields.rhesus selectContent=rhesus_types}}</td>
+        <td colspan=2>{{editable-select selectValue=clinical_fields.rhesus selectContent=rhesus_types}}</td>
       </tr>
       <tr>
         <td>Parity</td>
         <td>
           {{view SmartClient.InplaceTextField contentBinding="clinical_fields.parity"}}
+        </td>
+        <td>
           {{#if previous_pregnancies}}
             {{#link-to 'service_user.parity' this class="pull-right"}}
-              <span class="glyphicon glyphicon-info-sign"></span>
+              <h3 style="display: inline;"><span class="glyphicon glyphicon-info-sign"></span></h3>
             {{/link-to}}
           {{/if}}
         </td>
       </tr>
       <tr>
         <td>Obstetric History</td>
-        <td>{{view SmartClient.InplaceTextArea contentBinding="clinical_fields.previous_obstetric_history"}}</td>
+        <td colspan=2>{{view SmartClient.InplaceTextArea contentBinding="clinical_fields.previous_obstetric_history"}}</td>
       </tr>
     </tbody>
   </table>
