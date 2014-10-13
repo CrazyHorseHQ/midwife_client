@@ -20,16 +20,17 @@
   </br>
 {{/if}}
 {{#each filtered_list}}
-  {{#if blocking}}
-    <div class="alert alert-danger" role="alert">
-      <span class="glyphicon glyphicon-warning-sign"></span>
-      {{note}}
-    </div>
+  {{#if note}}
+    {{#if blocking}}
+      <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        {{note}}
+      </div>
+    {{else}}
+      <div class="alert alert-info" role="alert">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        {{note}}
+      </div>
+    {{/if}}
   {{/if}}
-  {{#unless blocking}}
-    <div class="alert alert-info" role="alert">
-      <span class="glyphicon glyphicon-info-sign"></span>
-      {{note}}
-    </div>
-  {{/unless}}
 {{/each}}

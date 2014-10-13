@@ -9,11 +9,20 @@ SmartClient.ClinicAnnouncementsComponent = Ember.Component.extend({
   }.property('selectedDate', 'clinic.announcements.@each', 'model'),
 
   didInsertElement: function() {
+    this.setupNewNote();
+  },
+
+  setupNewNote: function() {
     this.set('model', this.get('store').createRecord('announcement', {
         date: this.get('selectedDate'),
         clinic: this.get('clinic')
       })
     );
+    var clinic = this.get('clinic');
+    var model = this.get('model');
+    clinic.get('announcements').then(function() {
+      clinic.get('announcements').addObject(model)
+    });
   },
 
   actions: {
@@ -30,6 +39,7 @@ SmartClient.ClinicAnnouncementsComponent = Ember.Component.extend({
         self.set('blocking', false);
         self.toggleProperty('addMode')
         self.sendAction('addAnnouncement')
+        self.setupNewNote();
       });
     },
     toggleAddMode: function() {
