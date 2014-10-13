@@ -5,6 +5,12 @@ SmartClient.ResetPasswordRoute = Ember.Route.extend({
     });
     model.transitionTo('saved');
     return model;
+  },
+  renderTemplate: function () {
+    this.render('reset_password', {
+      into: 'application',
+      outlet: 'full_column'
+    })
   }
 });
 
