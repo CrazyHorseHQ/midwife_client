@@ -9,22 +9,28 @@
         Blocking
       </label>
     </div>
-    <button {{action 'addAnnouncement'}} class="btn btn-sm btn-warning">Create Announcement</button>
+    <div class="form-group pull-right">
+      <button {{action 'addAnnouncement'}} class="btn btn-sm btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+      <button {{action 'toggleAddMode'}} class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-remove"></span></button>
+    </div>
   </form>
 {{else}}
-  <p {{action 'toggleAddMode'}}>Add new announcement</p>
+  <button class="btn btn-sm btn-info" {{action 'toggleAddMode'}}><span class="glyphicon glyphicon-plus"></spna> New Announcement</button>
+  </br>
+  </br>
 {{/if}}
 {{#each filtered_list}}
-  {{#if blocking}}
-    <div class="alert alert-danger" role="alert">
-      <span class="glyphicon glyphicon-warning-sign"></span>
-      {{note}}
-    </div>
+  {{#if note}}
+    {{#if blocking}}
+      <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        {{note}}
+      </div>
+    {{else}}
+      <div class="alert alert-info" role="alert">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        {{note}}
+      </div>
+    {{/if}}
   {{/if}}
-  {{#unless blocking}}
-    <div class="alert alert-info" role="alert">
-      <span class="glyphicon glyphicon-info-sign"></span>
-      {{note}}
-    </div>
-  {{/unless}}
 {{/each}}
