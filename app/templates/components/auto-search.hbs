@@ -1,14 +1,16 @@
 {{#if navbar}}
-  <form class="navbar-form navbar-left" role="search">
-    <div class="form-group">
-      {{input type="text" value=searchString placeholder=placeholderString class="form-control"}}
-    </div>
-  </form>
-  <ul class="search-results">
-    {{#each searchResults}}
-      <li {{action 'resultSelected' this}}>{{personal_fields.name}} - {{hospital_number}}</li>
-    {{/each}}
-  </ul>
+  <div class="search">
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        {{input type="text" value=searchString placeholder=placeholderString class="form-control"}}
+      </div>
+    </form>
+    <ul id="search_results" class="results">
+      {{#each searchResults}}
+        <li {{action 'resultSelected' this}}><a href="">{{personal_fields.name}} - {{hospital_number}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
 {{else}}
   <div class="form-group">
     {{input type="text" value=searchString placeholder=placeholderString class="form-control"}}
@@ -19,4 +21,3 @@
     {{/each}}
   </ul>
 {{/if}}
-
