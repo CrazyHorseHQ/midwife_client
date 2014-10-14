@@ -1,4 +1,6 @@
 {{#if showList}}
+  {{clinic-announcements clinic=model selectedDate=selectedDate store=store}}
+
   {{#if quickWeek}}
     <b>You can use the buttons below to jump quickly between the next 6 weeks for this clinic:</b>
     <div class="btn-toolbar" role="toolbar">
@@ -17,26 +19,19 @@
         {{/each}}
       </div>
     </div>
-
-    <br/>
   {{/if}}
 
-  <b>You can use this date picker to see appointments on a particular date</b>
-  <div class="input-group">
-    <span class="input-group-btn">
-      <button type="button" class="glyphicon glyphicon-step-backward btn btn-default" {{action dateForward}}></button>
-    </span>
-    {{date-field selectedDate=selectedDate}}
-    <span class="input-group-btn">
-      <button type="button" class="glyphicon glyphicon-step-forward btn btn-default" {{action dateBackward}}></button>
-    </span>
-  </div>
+  <a href="" class="pull-right" {{action openPicker}}>Choose a particular date</a>
+  {{date-field selectedDate=selectedDate defaultDate=defaultDate type=showPicker}}
 
   <br/>
-  {{clinic-announcements clinic=model selectedDate=selectedDate store=store}}
   <table class="table">
     <thead>
       <h3 style="text-align: center;">{{selectedDateFormatted}}</h3>
+      <ul class="pager">
+        <li {{action dateForward}}><a href=""><span class="glyphicon glyphicon-step-backward"></span>Prev</a></li>
+        <li {{action dateBackward}}><a href="">Next<span class="glyphicon glyphicon-step-forward"></span></a></li>
+      </ul>
     </thead>
     {{#each times}}
       <tbody>

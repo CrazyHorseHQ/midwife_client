@@ -19,6 +19,6 @@ SmartClient.DateFieldComponent = Ember.TextField.extend({
       format: 'DD/MM/YYYY'
     });
 
-    this.set('value', moment(this.get('selectedDate'), 'YYYY-MM-DD').format('DD/MM/YYYY'))
+    this.set('value', moment(this.get('defaultDate'), 'YYYY-MM-DD').format('DD/MM/YYYY'))
   }
 });

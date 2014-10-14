@@ -1,4 +1,5 @@
 SmartClient.LoginController = Ember.ObjectController.extend({
+  needs: ['application'],
   token: null,
   loggedin_user: null,
   attemptedTransition: null,
@@ -48,6 +49,7 @@ SmartClient.LoginController = Ember.ObjectController.extend({
 
         self.get('store').find('service_provider', result.get('id')).then(function(loggedin_user) {
           self.set('loggedin_user', loggedin_user);
+          self.get('controllers.application').notifyPropertyChange('currentUser')
           self.transitionToRoute(self.get('attemptedTransition'))
         });
       }, function (resp) {
