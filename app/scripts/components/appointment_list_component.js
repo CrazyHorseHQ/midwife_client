@@ -2,6 +2,27 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
   selectedDate: moment().format("YYYY-MM-DD"),
   forceToggle: true,
 
+  defaultDate: function () {
+    var daysOn = [],
+        days = this.get('model.days');
+
+    for (var day in days) {
+      var on = days[day]
+
+      if (on) {
+        daysOn.push(day)
+      }
+    }
+
+    var current_date = moment().day(daysOn[0]);
+    // Adjust the day if we've already passed it in the current week.
+    if (current_date < moment()) {
+      current_date = current_date.add(1, 'week');
+    }
+
+    return current_date.format('YYYY-MM-DD')
+  }.property(),
+
   appointments: function () {
     return this.get('store').find('appointment', {
       clinic_id: this.get('model').get('id'),
@@ -11,12 +32,12 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
 
   actions: {
     dateForward: function() {
-      var tomorrow = moment(this.get('selectedDate'), "YYYY-MM-DD").subtract(1, 'days').format('YYYY-MM-DD')
-      this.set('selectedDate', tomorrow);
+      var next_week = moment(this.get('selectedDate'), "YYYY-MM-DD").subtract(1, 'week').format('YYYY-MM-DD')
+      this.set('selectedDate', next_week);
     },
     dateBackward: function() {
-      var yesterday = moment(this.get('selectedDate'), "YYYY-MM-DD").add(1, 'days').format('YYYY-MM-DD')
-      this.set('selectedDate', yesterday);
+      var previous_week = moment(this.get('selectedDate'), "YYYY-MM-DD").add(1, 'week').format('YYYY-MM-DD')
+      this.set('selectedDate', previous_week);
     },
     dateChosen: function (date) {
       this.set('selectedDate', date)
@@ -75,31 +96,16 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
 
   next_weeks: function () {
     var collection = [],
-        daysOn = [],
-        days = this.get('model.days')
-
-    for (var day in days) {
-      var on = days[day]
-
-      if (on) {
-        daysOn.push(day)
-      }
-    }
-
-    var current_date = moment().day(daysOn[0]);
-    // Adjust the day if we've already passed it in the current week.
-    if (current_date < moment()) {
-      current_date = current_date.add(1, 'week');
-    }
+        currentWeekDate = moment(this.get('defaultDate')).add(1, 'week');
 
     for (var i = 0;i < 6;i++) {
       collection.push({
         weekName: i + 1,
-        date: current_date.format("YYYY-MM-DD"),
-        formattedDate: current_date.format("dd, MMM Do")
+        date: currentWeekDate.format("YYYY-MM-DD"),
+        formattedDate: currentWeekDate.format("dd, MMM Do")
       });
 
-      current_date = current_date.add(1, 'week');
+      currentWeekDate = currentWeekDate.add(1, 'week');
     }
 
     return {
