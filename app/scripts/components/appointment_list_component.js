@@ -1,6 +1,7 @@
 SmartClient.AppointmentListComponent = Ember.Component.extend({
   selectedDate: moment().format("YYYY-MM-DD"),
   forceToggle: true,
+  showPicker: 'hidden',
 
   defaultDate: function () {
     var daysOn = [],
@@ -55,6 +56,9 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
     },
     closeBookModal: function () {
       this.sendAction('closeBookModal')
+    },
+    openPicker: function () {
+      this.set('showPicker', 'text')
     }
   },
 
