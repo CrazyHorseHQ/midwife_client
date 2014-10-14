@@ -7,38 +7,42 @@
     <h2 class="modal-title">Appointment Summary</h2>
   </div>
   <div class="modal-body">
-    {{#with model}}
-      <table class="table">
-        <tr>
-          <td>Service User</td>
-          <td>{{service_user.personal_fields.name}}</td>
-        </tr>
-        <tr>
-          <td>Service Provider</td>
-          <td>{{service_provider.name}}</td>
-        </tr>
-        <tr>
-          <td>Location</td>
-          <td>{{clinic.name}}</td>
-        </tr>
-        <tr>
-          <td>Date</td>
-          <td>{{date}}</td>
-        </tr>
-        <tr>
-          <td>Time</td>
-          <td>{{time}}</td>
-        </tr>
-        <tr>
-          <td>Email To</td>
-          <td>{{service_user.personal_fields.email}}</td>
-        </tr>
-        <tr>
-          <td>SMS To</td>
-          <td>{{service_user.personal_fields.mobile_phone}}</td>
-        </tr>
-      </table>
-    {{/with}}
+    <table class="table">
+      <tr>
+        <td>Service User</td>
+        <td>{{model.service_user.personal_fields.name}}</td>
+      </tr>
+      <tr>
+        <td>Service Provider</td>
+        <td>
+          {{view Ember.Select content=service_providers optionLabelPath="content.id" optionLabelPath="content.name" value=model.service_provider.id}}
+        </td>
+      </tr>
+      <tr>
+        <td>Location</td>
+        <td>{{model.clinic.name}}</td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td>
+          {{model.date}}
+        </td>
+      </tr>
+      <tr>
+        <td>Time</td>
+        <td>
+          {{view Ember.Select content=filteredTimes optionLabelPath="content.time" optionValuePath="content.time" value=formattedTime}}
+        </td>
+      </tr>
+      <tr>
+        <td>Email To</td>
+        <td>{{model.service_user.personal_fields.email}}</td>
+      </tr>
+      <tr>
+        <td>SMS To</td>
+        <td>{{model.service_user.personal_fields.mobile_phone}}</td>
+      </tr>
+    </table>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" {{action "closeModal"}}>Close</button>

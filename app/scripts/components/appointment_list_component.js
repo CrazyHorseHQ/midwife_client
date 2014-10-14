@@ -48,7 +48,9 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
         store: this.get('store'),
         model: appointment,
         aptComponent: this,
+        service_providers: this.get('store').find('service_provider'),
         times: this.get('times'),
+        weeks: this.get('next_weeks'),
       }));
     },
     openBookingModal: function (time) {
