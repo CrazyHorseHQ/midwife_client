@@ -11,10 +11,27 @@ SmartClient.AutoSearchComponent = Ember.Component.extend({
     }
   },
 
+  becameBlurred: function (evt) {
+    setTimeout(function () {
+      Ember.$('#search_results').hide()
+    }, 200)
+  }.on('focusOut'),
+
+  becameFocused: function (evt) {
+    var searchString = this.get('searchString');
+
+    if (searchString && searchString.length > 1) {
+      Ember.$('#search_results').show()
+    }
+  }.on('focusIn'),
+
   searchResults: function() {
     var searchString = this.get('searchString');
 
-    if (!searchString || (searchString && searchString.length < 2)){ return; }
+    if (!searchString || (searchString && searchString.length < 2)){ Ember.$('#search_results').hide();return; }
+    if (this.get('navbar')) {
+      Ember.$('#search_results').show()
+    }
 
     var options = {}
 
