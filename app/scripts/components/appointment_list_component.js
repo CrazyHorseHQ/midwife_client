@@ -44,7 +44,7 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
       this.set('selectedDate', date)
     },
     openAppointmentModal: function (appointment) {
-       this.sendAction('openModal', 'components/appointment-modal', SmartClient.AppointmentModalComponent.create({
+      this.sendAction('openModal', 'components/appointment-modal', SmartClient.AppointmentModalComponent.create({
         store: this.get('store'),
         model: appointment,
         aptComponent: this,
