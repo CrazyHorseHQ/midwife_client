@@ -1,6 +1,6 @@
-{{#modal-dialog action="closeBookModal"}}
+{{#modal-dialog action="closeModal"}}
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" {{action "closeBookModal"}}>
+    <button type="button" class="close" data-dismiss="modal" {{action "closeModal"}}>
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
     </button>
@@ -44,7 +44,7 @@
     {{#if service_user}}
       <button class="btn btn-inverse btn-small btn-default" {{action 'searchAgain'}}><i class="icon-white icon-search"></i> Search again</button>
     {{/if}}
-    <button type="button" class="btn btn-default" data-dismiss="modal" {{action "closeBookModal"}}>Close</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" {{action "closeModal"}}>Close</button>
     {{#if service_user}}
       <button type="button" class="btn btn-primary" {{action "bookServiceUser"}}>Book</button>
     {{/if}}

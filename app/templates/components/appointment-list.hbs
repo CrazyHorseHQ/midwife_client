@@ -48,11 +48,9 @@
             <td>
               {{service_user.gestation}}
             </td>
-            {{!-- <td>
-              {{#link-to 'appointment' appointment.id class="pull-right"}}
-                <span class="glyphicon glyphicon-info-sign"></span>
-              {{/link-to}}
-            </td> --}}
+            <td {{action 'openAppointmentModal'}}
+              <h2><span class="glyphicon glyphicon-edit"></span></h2>
+            </td>
           </tr>
         {{else}}
           <tr>

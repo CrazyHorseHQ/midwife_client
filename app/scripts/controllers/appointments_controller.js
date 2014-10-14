@@ -142,11 +142,11 @@ SmartClient.AppointmentsController = Ember.ArrayController.extend({
       this.set('selectedClinicId', false);
       this.applyFilters();
     },
-    openBookingModal: function (modalName, controller) {
-      this.send('openModal', modalName, controller)
+    openModal: function (modalName, controller) {
+      this.send('openModalWindow', modalName, controller)
     },
-    closeBookModal: function () {
-      this.send('closeModal')
+    closeModal: function () {
+      this.send('closeModalWindow')
     }
   }
 });

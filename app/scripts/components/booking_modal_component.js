@@ -26,7 +26,7 @@ SmartClient.BookingModalComponent = Ember.Component.extend({
       });
 
       new_apt.save().then(function () {
-        self.get('aptComponent').sendAction('closeBookModal')
+        self.get('aptComponent').sendAction('closeModal')
         self.get('aptComponent').toggleProperty('forceToggle')
       });
     }

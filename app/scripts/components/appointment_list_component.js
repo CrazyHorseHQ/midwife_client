@@ -43,8 +43,16 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
     dateChosen: function (date) {
       this.set('selectedDate', date)
     },
+    openAppointmentModal: function (appointment) {
+       this.sendAction('openModal', 'components/appointment-modal', SmartClient.AppointmentModalComponent.create({
+        store: this.get('store'),
+        model: appointment,
+        aptComponent: this,
+        times: this.get('times'),
+      }));
+    },
     openBookingModal: function (time) {
-      this.sendAction('openBookingModal', 'components/booking-modal', SmartClient.BookingModalComponent.create({
+      this.sendAction('openModal', 'components/booking-modal', SmartClient.BookingModalComponent.create({
         store: this.get('store'),
         model: this.get('model'),
         aptComponent: this,
@@ -54,11 +62,11 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
         clinic: this.get('model')
       }));
     },
-    closeBookModal: function () {
-      this.sendAction('closeBookModal')
-    },
     openPicker: function () {
       this.set('showPicker', 'text')
+    },
+    closeModal: function () {
+      this.sendAction('closeModal')
     }
   },
 
