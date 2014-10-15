@@ -57,7 +57,6 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
         model: appointment,
         selected_sp: appointment.get('service_provider'),
         selected_time: selected_time,
-        selected_date: appointment.get('date'),
         aptComponent: this,
         service_providers: this.get('service_providers'),
         times: this.get('times'),
