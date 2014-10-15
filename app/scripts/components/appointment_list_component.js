@@ -22,7 +22,7 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
     }
 
     return current_date.format('YYYY-MM-DD')
-  }.property(),
+  }.property('model.days'),
 
   appointments: function () {
     return this.get('store').find('appointment', {
