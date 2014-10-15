@@ -31,6 +31,10 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
     });
   }.property('selectedDate', 'forceToggle'),
 
+  service_providers: function() {
+     return this.get('store').find('service_provider');
+  }.property(),
+
   actions: {
     dateForward: function() {
       var next_week = moment(this.get('selectedDate'), "YYYY-MM-DD").subtract(1, 'week').format('YYYY-MM-DD')
@@ -43,8 +47,23 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
     dateChosen: function (date) {
       this.set('selectedDate', date)
     },
+    openAppointmentModal: function (appointment) {
+      var selected_time = moment("2010-12-12T" + appointment.get('time')).format("HH:mm");
+
+      this.sendAction('openModal', 'components/appointment-modal', SmartClient.AppointmentModalComponent.create({
+        store: this.get('store'),
+        model: appointment,
+        selected_sp: appointment.get('service_provider'),
+        selected_time: selected_time,
+        selected_date: appointment.get('date'),
+        aptComponent: this,
+        service_providers: this.get('service_providers'),
+        times: this.get('times'),
+        weeks: this.get('next_weeks'),
+      }));
+    },
     openBookingModal: function (time) {
-      this.sendAction('openBookingModal', 'components/booking-modal', SmartClient.BookingModalComponent.create({
+      this.sendAction('openModal', 'components/booking-modal', SmartClient.BookingModalComponent.create({
         store: this.get('store'),
         model: this.get('model'),
         aptComponent: this,
@@ -54,11 +73,11 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
         clinic: this.get('model')
       }));
     },
-    closeBookModal: function () {
-      this.sendAction('closeBookModal')
-    },
     openPicker: function () {
       this.set('showPicker', 'text')
+    },
+    closeModal: function () {
+      this.sendAction('closeModal')
     }
   },
 
