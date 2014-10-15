@@ -21,6 +21,8 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
       current_date = current_date.add(1, 'week');
     }
 
+    this.set('selectedDate', current_date.format('YYYY-MM-DD'));
+
     return current_date.format('YYYY-MM-DD')
   }.property('model.days'),
 
