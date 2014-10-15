@@ -26,8 +26,8 @@ SmartClient.AppointmentModalComponent = Ember.Component.extend({
       });
 
       model.save().then(function () {
-        self.get('aptComponent').sendAction('closeModal')
-        self.get('aptComponent').toggleProperty('forceToggle')
+        self.get('aptComponent').sendAction('closeModal');
+        self.get('aptComponent').notifyPropertyChange('appointments');
       });
     }
   }
