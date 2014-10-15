@@ -15,7 +15,12 @@
       <tr>
         <td>Service Provider</td>
         <td>
-          {{view Ember.Select content=service_providers optionLabelPath="content.id" optionLabelPath="content.name" value=model.service_provider.id}}
+          {{view Ember.Select
+                content=service_providers
+                optionValuePath="content.id"
+                optionLabelPath="content.name"
+                value=selected_sp.id
+                }}
         </td>
       </tr>
       <tr>
@@ -31,7 +36,11 @@
       <tr>
         <td>Time</td>
         <td>
-          {{view Ember.Select content=filteredTimes optionLabelPath="content.time" optionValuePath="content.time" value=formattedTime}}
+          {{view Ember.Select
+                content=filteredTimes
+                optionLabelPath="content.time"
+                optionValuePath="content.time"
+                value=selected_time}}
         </td>
       </tr>
       <tr>

@@ -31,6 +31,10 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
     });
   }.property('selectedDate', 'forceToggle'),
 
+  service_providers: function() {
+     return this.get('store').find('service_provider');
+  }.property(),
+
   actions: {
     dateForward: function() {
       var next_week = moment(this.get('selectedDate'), "YYYY-MM-DD").subtract(1, 'week').format('YYYY-MM-DD')
@@ -44,11 +48,16 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
       this.set('selectedDate', date)
     },
     openAppointmentModal: function (appointment) {
+      var selected_time = moment(appointment.get('time'), "HH:mm:ss").format("HH:mm");
+
       this.sendAction('openModal', 'components/appointment-modal', SmartClient.AppointmentModalComponent.create({
         store: this.get('store'),
         model: appointment,
+        selected_sp: appointment.get('service_provider'),
+        selected_time: selected_time,
+        selected_date: appointment.get('date'),
         aptComponent: this,
-        service_providers: this.get('store').find('service_provider'),
+        service_providers: this.get('service_providers'),
         times: this.get('times'),
         weeks: this.get('next_weeks'),
       }));

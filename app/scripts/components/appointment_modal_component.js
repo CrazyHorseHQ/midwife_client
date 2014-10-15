@@ -3,16 +3,12 @@ SmartClient.AppointmentModalComponent = Ember.Component.extend({
     return moment(this.get('model.date')).format('dddd, Do MMMM YYYY')
   }.property('model.date'),
 
-  formattedTime: function() {
-    return moment(this.get('model.time'), "HH:mm:ss").format("HH:mm");
-  }.property('model.time'),
-
   filteredTimes: function() {
     var times = this.get('times').filter(function(time) {
       return Ember.isEmpty(time.get('appointment'));
     });
     times.push(Ember.Object.create({
-      time: this.get('formattedTime')
+      time: this.get('selected_time')
     }));
     return times.sortBy('time');
   }.property('times'),
@@ -20,16 +16,17 @@ SmartClient.AppointmentModalComponent = Ember.Component.extend({
   actions: {
     updateAppointment: function () {
       var self = this,
-          model = self.get('model')
+          model = self.get('model'),
+          sp = this.get('service_providers').findBy('id', this.get('selected_sp').get('id'));
 
       model.setProperties({
-        date: this.get('selectedDate'),
-        time: this.get('time'),
-        service_provider: this.get('service_provider'),
+        //date: this.get('selectedDate'),
+        time: this.get('selected_time'),
+        service_provider: sp,
       });
 
       model.save().then(function () {
-        self.get('aptComponent').sendAction('closeAppointmentModal')
+        self.get('aptComponent').sendAction('closeModal')
         self.get('aptComponent').toggleProperty('forceToggle')
       });
     }
