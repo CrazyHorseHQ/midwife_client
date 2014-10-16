@@ -6,6 +6,8 @@ var mountFolder = function (connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
 
+var fs = require("fs");
+
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -21,7 +23,8 @@ module.exports = function (grunt) {
     // configurable paths
     var yeomanConfig = {
         app: 'app',
-        dist: 'dist'
+        dist: 'dist',
+        fs: fs
     };
 
     grunt.initConfig({
@@ -239,7 +242,8 @@ module.exports = function (grunt) {
             options: {
               variables: {
                 'environment': 'development',
-                'host': 'http://127.0.0.1:5000'
+                'host': 'http://127.0.0.1:5000',
+                'apiKey': '<%= yeoman.fs.readFileSync(".api_key") %>'
               }
             }
           },
@@ -247,7 +251,8 @@ module.exports = function (grunt) {
             options: {
               variables: {
                 'environment': 'production',
-                'host': 'http://54.72.7.91:8888'
+                'host': 'http://54.72.7.91:8888',
+                'apiKey': '<%= yeoman.fs.readFileSync(".prod_api_key") %>'
               }
             }
           }
@@ -258,12 +263,14 @@ module.exports = function (grunt) {
               variables: {
                 ember: 'bower_components/ember/ember.js',
                 ember_data: 'bower_components/ember-data/ember-data.js',
-                host: '<%= grunt.config.get("host") %>'
+                host: '<%= grunt.config.get("host") %>',
+                apiKey: '<%= grunt.config.get("apiKey") %>'
               }
             },
             files: [
               {src: '<%= yeoman.app %>/index.html', dest: '.tmp/index.html'},
-              {src: '<%= yeoman.app %>/scripts/store.js', dest: '<%= yeoman.app %>/scripts/store.processed.js'}
+              {src: '<%= yeoman.app %>/scripts/store.js', dest: '<%= yeoman.app %>/scripts/store.processed.js'},
+              {src: '<%= yeoman.app %>/scripts/config.js', dest: '<%= yeoman.app %>/scripts/config.processed.js'}
             ]
           },
           dist: {

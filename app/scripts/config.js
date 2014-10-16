@@ -1,5 +1,3 @@
 SmartClient.Config = {
-  suFields: {
-
-  }
+  apiKey: '@@apiKey'
 };
