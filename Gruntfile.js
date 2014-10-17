@@ -278,12 +278,14 @@ module.exports = function (grunt) {
               variables: {
                 ember: 'bower_components/ember/ember.prod.js',
                 ember_data: 'bower_components/ember-data/ember-data.prod.js',
-                host: '<%= grunt.config.get("host") %>'
+                host: '<%= grunt.config.get("host") %>',
+                apiKey: '<%= grunt.config.get("apiKey") %>'
               }
             },
             files: [
               {src: '<%= yeoman.app %>/index.html', dest: '.tmp/index.html'},
-              {src: '<%= yeoman.app %>/scripts/store.js', dest: '<%= yeoman.app %>/scripts/store.processed.js'}
+              {src: '<%= yeoman.app %>/scripts/store.js', dest: '<%= yeoman.app %>/scripts/store.processed.js'},
+              {src: '<%= yeoman.app %>/scripts/config.js', dest: '<%= yeoman.app %>/scripts/config.processed.js'}
             ]
           }
         },
