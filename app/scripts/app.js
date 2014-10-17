@@ -41,7 +41,7 @@ Ember.Inflector.inflector.uncountable('login');
 Ember.Inflector.inflector.uncountable('logout');
 
 /* Order and include as you please. */
-require('scripts/config');
+require('scripts/config.processed');
 require('scripts/store.processed');
 require('scripts/adapters/*');
 require('scripts/components/*');
