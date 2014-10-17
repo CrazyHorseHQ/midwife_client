@@ -8,4 +8,4 @@ test/bower_components
 **.swp
 app/scripts/store.processed.js
 app/scripts/config.processed.js
-.api_key*
+.*api_key
