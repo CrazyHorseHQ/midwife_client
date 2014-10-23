@@ -9,3 +9,4 @@ test/bower_components
 app/scripts/store.processed.js
 app/scripts/config.processed.js
 .*api_key
+*/*processed*

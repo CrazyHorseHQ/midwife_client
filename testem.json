@@ -1,0 +1,18 @@
+{
+    "framework": "qunit",
+    "test_page": ".tmp/index.html",
+    "src_files": [
+        ".tmp/assets/application.js",
+        ".tmp/tests.js",
+        ".tmp/integration_tests.js"
+    ],
+    "launch_in_ci": [
+        "PhantomJS"
+    ],
+    "launch_in_dev": [
+        "Firefox",
+        "Chrome",
+        "PhantomJS"
+    ],
+    "parallel": 3
+}

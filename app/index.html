@@ -7,7 +7,10 @@
         <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/style.css">
         <!-- endbuild -->
-</head>
+        <!-- @if TEST -->
+        <link rel="stylesheet" type="text/css" href="bower_components/qunit/qunit/src/qunit.css">
+        <!-- @endif -->
+    </head>
     <body>
         <!-- build:js(app) scripts/components.js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -42,5 +45,29 @@
         <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"></script>
         <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js"></script>
         <!-- endbuild -->
+
+        <!-- @if TEST -->
+        <script type="text/javascript" src="bower_components/qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="bower_components/sinon/lib/sinon.js"></script>
+        <script type="text/javascript" src="/testem.js"></script>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        <!-- @endif -->
+
+        <!-- @if UNIT_TEST -->
+        <script type="text/javascript" src="bower_components/ic-ajax/dist/globals/main.js"></script>
+        <script type="text/javascript">
+          require('/tests/unit/index')['default'];
+        </script>
+        <!-- @endif -->
+
+        <!-- @if INTEGRATION_TEST -->
+        <script type="text/javascript" src="bower_components/route-recognizer/dist/route-recognizer.js"></script>
+        <script type="text/javascript" src="bower_components/pretender/pretender.js"></script>
+        <script type="text/javascript" src="bower_components/FakeXMLHttpRequest/fake_xml_http_request.js"></script>
+        <script type="text/javascript">
+          window.SmartApp = require('/tests/integration/index')['default'];
+        </script>
+        <!-- @endif -->
 </body>
 </html>
