@@ -78,8 +78,7 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, yeomanConfig.app),
-                            mountFolder(connect, 'tests')
+                            mountFolder(connect, yeomanConfig.app)
                         ];
                     }
                 }
@@ -384,6 +383,11 @@ module.exports = function (grunt) {
                     }
                 ]
             },
+            tests: {
+              files: [
+                {expand: true, src: ['<%= yeoman.app %>/tests/*'], dest: '.tmp/tests', filter: 'isFile'},
+              ]
+            },
             dist: {
                 files: [
                     {
@@ -470,6 +474,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'replace:app',
+        'copy:tests',
         'concurrent:test',
         'connect:test',
         'neuter:app',
