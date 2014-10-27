@@ -1,4 +1,4 @@
-import Factories from 'tests/unit/factories';
+import Factories from 'app/tests/unit/factories';
 
 var qunitModule = window.module;
 window.module = function(name, testEnvironment) {

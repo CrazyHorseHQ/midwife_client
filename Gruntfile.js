@@ -159,11 +159,15 @@ module.exports = function (grunt) {
                 }
             }
         },
-        // not used since Uglify task does concat,
-        // but still available if needed
-        /*concat: {
-            dist: {}
-        },*/
+        concat: {
+          options: {
+            separator: ';'
+          },
+          unit_tests: {
+            src: '<%= yeoman.app %>/tests/unit/**/*.js',
+            dest: '.tmp/tests.js'
+          }
+        },
         // not enabled since usemin task does concat and uglify
         // check index.html to edit your build targets
         // enable this task if you prefer defining your build targets here
@@ -383,11 +387,6 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            tests: {
-              files: [
-                {expand: true, src: ['<%= yeoman.app %>/tests/*'], dest: '.tmp/tests', filter: 'isFile'},
-              ]
-            },
             dist: {
                 files: [
                     {
@@ -444,6 +443,9 @@ module.exports = function (grunt) {
                 },
                 src: '<%= yeoman.app %>/scripts/app.js',
                 dest: '.tmp/scripts/combined-scripts.js'
+            },
+            test: {
+
             }
         }
     });
@@ -474,7 +476,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'replace:app',
-        'copy:tests',
         'concurrent:test',
         'connect:test',
         'neuter:app',
@@ -486,6 +487,7 @@ module.exports = function (grunt) {
         'clean:server',
         'config:test:unit_test',
         'preprocess:unit_test',
+        'concat:unit_tests',
         'test'
     ]);
 

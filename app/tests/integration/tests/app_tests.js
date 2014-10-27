@@ -1,6 +1,6 @@
-module('SmartApp.IntegrationTests.App', {
+module('SmartClient.IntegrationTests.App', {
   setup: function() {
-    SmartApp.reset();
+    SmartClient.reset();
   }
 });
 
