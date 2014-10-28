@@ -44,6 +44,10 @@ module.exports = function (grunt) {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
                 tasks: ['neuter']
             },
+            tests: {
+                files: ['<%= yeoman.app %>/tests/unit/{,*/}*.js'],
+                tasks: ['concat']
+            },
             livereload: {
                 options: {
                     livereload: LIVERELOAD_PORT

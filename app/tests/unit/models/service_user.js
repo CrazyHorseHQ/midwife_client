@@ -3,8 +3,12 @@ describe("App.ServiceUser", function () {
     var jane;
     Ember.run(function () {
       // Won't actually load until the end of the run-block.
-      jane = SmartClient.ServiceUser.find(1);
+      jane = this.store.createRecord('service_user' ,{
+        personal_fields: {
+          dob: moment().subtract(29, 'years').format('YYYY-MM-DD')
+        }
+      });
+      jane.get("age").should.equal(29);
     });
-    jane.get("age").should.equal("29");
   });
 });

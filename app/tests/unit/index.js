@@ -1,14 +1,18 @@
 mocha.setup("bdd");
-chai.should();
+should = chai.should();
+expect = chai.expect;
 
 // Replace our fixture-based store with a REST-based store for testing, so we
 // don't need a server.  We disable simulateRemoteResponse so that objects will
 // appear to load at the end of every Ember.run block instead of waiting for a
 // timer to fire.
-SmartClient.Store = DS.Store.extend({
+SmartClient.ApplicationStore = DS.Store.extend({
   revision: 12,
   adapter: DS.FixtureAdapter.create({ simulateRemoteResponse: false })
 });
+SmartClient.setupForTesting()
+SmartClient.injectTestHelpers()
+SmartClient.rootElement = '#ember-testing';
 
 // Declare some fixture objects to use in our test application.  There's
 // nothing like factory_girl or machinist yet.
@@ -31,7 +35,10 @@ beforeEach(function () {
   // after this.
   // This is broken in some versions of Ember and Ember Data, see:
   // https://github.com/emberjs/data/issues/847
-  Ember.run(function () { SmartClient.reset(); });
+  Ember.run(function () {
+    SmartClient.reset();
+    window.store = SmartClient.__container__.lookup("store:main");
+  });
   // Display an error if asynchronous operations are queued outside of
   // Ember.run.  You need this if you want to stay sane.
   Ember.testing = true;

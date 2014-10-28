@@ -1,3 +1,4 @@
+/*
 // Sample controller test.
 describe("SmartClient.ServiceUserController", function () {
   var model, controller;
@@ -18,3 +19,4 @@ describe("SmartClient.ServiceUserController", function () {
   });
 });
 
+*/
