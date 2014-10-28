@@ -1,3 +1,4 @@
+/*
 import Application from 'app/scripts/app';
 import Router from 'app/scripts/router';
 import TestHelpers from 'tests/integration/helpers';
@@ -36,3 +37,4 @@ App.PretenderServer.unhandledRequest = function(verb, path, request, error) {
 };
 
 export default App;
+*/
