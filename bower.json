@@ -17,6 +17,8 @@
     "pretender": "~0.2.0",
     "ic-ajax": "~2.0.1",
     "sinon": "~1.10.3",
-    "require": "*"
+    "require": "*",
+    "mocha": "~2.0.1",
+    "chai": "~1.9.2"
   }
 }

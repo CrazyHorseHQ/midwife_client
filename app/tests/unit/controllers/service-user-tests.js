@@ -1,16 +1,20 @@
-var subject;
-module('SmartClient.ServiceUserController', {
-  setup: function() {
-    subject = SmartClient.createController('controller:service_user', {});
-  }
+// Sample controller test.
+describe("SmartClient.ServiceUserController", function () {
+  var model, controller;
+
+  beforeEach(function () {
+    Ember.run(function () {
+      // We could also fetch a model from our fixtures.
+      model = SmartClient.ServiceUser.find(1);
+      controller = SmartClient.ServiceUserController.create({ content: model });
+    });
+  });
+
+  it("save a baby to the SU", function () {
+    Ember.run(function () {
+      controller.send('saveBaby');
+    });
+    model.get("babies").should.be([]);
+  });
 });
 
-test('saveBaby', function() {
-  ic.ajax.defineFixture('/service_users/1', {});
-  var adapter = subject.store.adapterFor('service_user');
-  sinon.spy(adapter, 'ajax');
-  //subject.set('model', 'the@email.com')
-  subject.send('saveBaby');
-  //deepEqual("{\"delivery_date_time\":\"2014-12-12 12:12:12\"}", adapter.ajax.getCall(0).args[2].data);
-  adapter.ajax.restore();
-});

@@ -161,10 +161,13 @@ module.exports = function (grunt) {
         },
         concat: {
           options: {
-            separator: ';'
+            separator: '\n\r'
           },
           unit_tests: {
-            src: '<%= yeoman.app %>/tests/unit/**/*.js',
+            src: [
+                    '<%= yeoman.app %>/tests/unit/index.js',
+                    '<%= yeoman.app %>/tests/unit/*/*.js'
+                  ],
             dest: '.tmp/tests.js'
           }
         },
