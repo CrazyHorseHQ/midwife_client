@@ -1,4 +1,4 @@
-describe("App.ServiceUser", function () {
+describe("SmartClient.ServiceUser", function () {
   var subject;
 
   it("has age", function () {
