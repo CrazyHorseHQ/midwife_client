@@ -5,9 +5,9 @@
     {{/link-to}}
   </h1>
 
-  <ul>
+  <ul id="su-list">
     {{#each model}}
-      <li>{{#link-to 'service_user.personal' this}}{{this.personal_fields.name}}{{/link-to}}</li>
+      <li id="su-{{id}}">{{#link-to 'service_user.personal' this}}{{this.personal_fields.name}}{{/link-to}}</li>
     {{/each}}
   </ul>
 </div>

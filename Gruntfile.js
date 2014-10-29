@@ -35,12 +35,18 @@ module.exports = function (grunt) {
                 tasks: ['emberTemplates']
             },
             compass: {
-                files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+                files: [
+                  '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.{scss,sass}',
+                ],
                 tasks: ['compass:server']
             },
             neuter: {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
                 tasks: ['neuter']
+            },
+            tests: {
+                files: ['<%= yeoman.app %>/tests/unit/{,*/}*.js'],
+                tasks: ['concat']
             },
             livereload: {
                 options: {
@@ -49,7 +55,7 @@ module.exports = function (grunt) {
                 files: [
                     '.tmp/scripts/*.js',
                     '<%= yeoman.app %>/*.html',
-                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.{css,scss}',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             }
@@ -75,8 +81,8 @@ module.exports = function (grunt) {
                 options: {
                     middleware: function (connect) {
                         return [
-                            mountFolder(connect, 'test'),
-                            mountFolder(connect, '.tmp')
+                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, yeomanConfig.app)
                         ];
                     }
                 }
@@ -107,7 +113,15 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
-            server: '.tmp'
+            server: {
+              files: [{
+                dot: true,
+                src: [
+                  '.tmp',
+                  '<%= yeoman.app %>/*processed*'
+                ]
+              }]
+            }
         },
         jshint: {
             options: {
@@ -117,8 +131,7 @@ module.exports = function (grunt) {
             all: [
                 'Gruntfile.js',
                 '<%= yeoman.app %>/scripts/{,*/}*.js',
-                '!<%= yeoman.app %>/scripts/vendor/*',
-                'test/spec/{,*/}*.js'
+                '!<%= yeoman.app %>/scripts/vendor/*'
             ]
         },
         mocha: {
@@ -150,11 +163,18 @@ module.exports = function (grunt) {
                 }
             }
         },
-        // not used since Uglify task does concat,
-        // but still available if needed
-        /*concat: {
-            dist: {}
-        },*/
+        concat: {
+          options: {
+            separator: '\n\r'
+          },
+          unit_tests: {
+            src: [
+                    '<%= yeoman.app %>/tests/unit/index.js',
+                    '<%= yeoman.app %>/tests/unit/*/*.js'
+                  ],
+            dest: '.tmp/tests.js'
+          }
+        },
         // not enabled since usemin task does concat and uglify
         // check index.html to edit your build targets
         // enable this task if you prefer defining your build targets here
@@ -255,6 +275,75 @@ module.exports = function (grunt) {
                 'apiKey': '<%= yeoman.fs.readFileSync(".prod_api_key") %>'
               }
             }
+          },
+          test: {
+            options: {
+              variables: {
+                'TEST': true,
+                'environment': 'test',
+                'host': 'http://127.0.0.1:5000', //This should be removed?
+                'apiKey': '<%= yeoman.fs.readFileSync(".api_key") %>'
+              }
+            }
+          },
+          unit_test: {
+            options: {
+              variables: {
+                'TEST': true,
+                'UNIT_TEST': true,
+                'environment': 'test',
+                'host': 'http://127.0.0.1:5000', //This should be removed?
+                'apiKey': '<%= yeoman.fs.readFileSync(".api_key") %>'
+              }
+            }
+          },
+          integration_test: {
+            options: {
+              variables: {
+                'TEST': true,
+                'INTEGRATION_TEST': true,
+                'environment': 'test',
+                'host': 'http://127.0.0.1:5000', //This should be removed?
+                'apiKey': '<%= yeoman.fs.readFileSync(".api_key") %>'
+              }
+            }
+          },
+        },
+        preprocess: {
+          default: {
+            src: '<%= yeoman.app %>/index.html',
+            dest: '<%= yeoman.app %>/index.processed.html',
+            options: {
+              context: {
+                TEST: false,
+                UNIT_TEST: false,
+                INTEGRATION_TEST: false
+              }
+            }
+          },
+          unit_test: {
+            src: '<%= yeoman.app %>/index.html',
+            dest: '<%= yeoman.app %>/index.processed.html',
+            options: {
+              inline: true,
+              context: {
+                TEST: true,
+                UNIT_TEST: true,
+                INTEGRATION_TEST: false
+              }
+            }
+          },
+          integration_test: {
+            src: '<%= yeoman.app %>/index.html',
+            dest: '<%= yeoman.app %>/index.processed.html',
+            inline: true,
+            options: {
+              context: {
+                TEST: true,
+                UNIT_TEST: false,
+                INTEGRATION_TEST: true
+              }
+            }
           }
         },
         replace: {
@@ -268,7 +357,7 @@ module.exports = function (grunt) {
               }
             },
             files: [
-              {src: '<%= yeoman.app %>/index.html', dest: '.tmp/index.html'},
+              {src: '<%= yeoman.app %>/index.processed.html', dest: '.tmp/index.html'},
               {src: '<%= yeoman.app %>/scripts/store.js', dest: '<%= yeoman.app %>/scripts/store.processed.js'},
               {src: '<%= yeoman.app %>/scripts/config.js', dest: '<%= yeoman.app %>/scripts/config.processed.js'}
             ]
@@ -329,7 +418,7 @@ module.exports = function (grunt) {
             ],
             test: [
                 'emberTemplates',
-                'compass'
+                'compass:server'
             ],
             dist: [
                 'emberTemplates',
@@ -361,6 +450,9 @@ module.exports = function (grunt) {
                 },
                 src: '<%= yeoman.app %>/scripts/app.js',
                 dest: '.tmp/scripts/combined-scripts.js'
+            },
+            test: {
+
             }
         }
     });
@@ -378,6 +470,7 @@ module.exports = function (grunt) {
         grunt.task.run([
             'clean:server',
             'config:dev',
+            'preprocess:default',
             'replace:app',
             'concurrent:server',
             'neuter:app',
@@ -389,17 +482,33 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('test', [
-        'clean:server',
         'replace:app',
         'concurrent:test',
         'connect:test',
         'neuter:app',
-        'mocha'
+        'open',
+        'watch'
+    ]);
+
+    grunt.registerTask('unit_test', [
+        'clean:server',
+        'config:test:unit_test',
+        'preprocess:unit_test',
+        'concat:unit_tests',
+        'test'
+    ]);
+
+    grunt.registerTask('integration_test', [
+        'clean:server',
+        'config:test:integration_test',
+        'preprocess:integration_test',
+        'test'
     ]);
 
     grunt.registerTask('build', [
         'clean:dist',
         'config:prod',
+        'preprocess',
         'replace:dist',
         'useminPrepare',
         'concurrent:dist',
