@@ -5,9 +5,9 @@ SmartClient.ApplicationController = Ember.ArrayController.extend({
   currentUser: function() {
     if (localStorage.getItem('loggedinUser')) {
       var json_sp = JSON.parse(localStorage.getItem('loggedinUser'));
-      var sp = this.store.getById('service_provider', json_sp['id']);
+      var sp = this.get('store').getById('service_provider', json_sp['id']);
       if (!sp){
-        sp = this.store.createRecord('ServiceProvider', json_sp);
+        sp = this.get('store').createRecord('ServiceProvider', json_sp);
       }
       return sp;
     }
