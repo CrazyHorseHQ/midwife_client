@@ -16,6 +16,13 @@ SmartClient.rootElement = '#ember-testing';
 
 // Declare some fixture objects to use in our test application.  There's
 // nothing like factory_girl or machinist yet.
+SmartClient.ServiceProvider.FIXTURES = [{
+  id: 1,
+    name: "admin",
+    username: "admin",
+    email: "test@admin.com"
+}];
+
 SmartClient.ServiceUser.FIXTURES = [{
   id: 1,
     hospital_number: "T9876543",
