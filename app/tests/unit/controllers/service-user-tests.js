@@ -53,12 +53,6 @@ describe("SmartClient.ServiceUserController", function () {
       $('body').append('<input id="estimated_delivery_date" class="test-stub" type="hidden" value="2014-12-15"/>');
       // Setup pregnancy
       this.store.find('pregnancy', 1).then(function(pregnancy) {
-        server.autoRespond = true;
-        server.autoRespondAfter = 100;
-        var header = { "Content-Type": "application/json" };
-        var pregPutResponse = '{ "pregnancy": { "id": 1, "estimated_delivery_date": "2014-12-15" } }';
-        server.respondWith("PUT", "/pregnancies/1", [ 201, header, pregPutResponse ]);
-
         controller.send('save');
         pregnancy.get('estimated_delivery_date').should.equal('2014-12-15');
       });
