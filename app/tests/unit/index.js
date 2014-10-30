@@ -23,9 +23,23 @@ SmartClient.ServiceUser.FIXTURES = [{
       dob: "12-31-1985"
     },
     clinical_fields: {},
-    pregnancies: [],
-    babies: [],
-    appointments: []
+    baby_ids: [1],
+    pregnancy_ids: [1],
+}];
+
+SmartClient.Baby.FIXTURES = [{
+  id: 1,
+    hospital_number: "T9876543",
+    delivery_date_time: "",
+    service_user_id: 1
+}];
+
+SmartClient.Pregnancy.FIXTURES = [{
+  id: 1,
+    baby_ids: [1],
+    last_menstrual_period: '',
+    estimated_delivery_date: "2014-12-01",
+    created_at: "2014-10-10",
 }];
 
 // Run before each test case.
@@ -52,6 +66,7 @@ afterEach(function () {
 // Optional: Clean up after our last test so you can try out the app
 // in the jsFiddle.  This isn't normally required.
 after(function () {
+  // cancel out sinon stubs.
   Ember.run(function () { SmartClient.reset(); });
 });
 
