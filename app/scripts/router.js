@@ -1,10 +1,4 @@
 SmartClient.Router.map(function () {
-  this.resource('appointments', function(){
-    this.resource('appointment', { path: '/:appointment_id' }, function(){
-      this.route('edit');
-    });
-  });
-
   this.route('login');
   this.route('logout');
   this.route('reset_passwords');
