@@ -11,7 +11,6 @@ describe("SmartClient.AppointmentsServiceOptionView", function () {
       view = SmartClient.AppointmentsServiceOptionView.create({
         controller: controller,
         context: controller,
-        template: Ember.Handlebars.compile('{{isSelected}}')
       });
       view.appendTo('#mocha-fixture');
     });
