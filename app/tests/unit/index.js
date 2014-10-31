@@ -16,6 +16,23 @@ SmartClient.rootElement = '#ember-testing';
 
 // Declare some fixture objects to use in our test application.  There's
 // nothing like factory_girl or machinist yet.
+SmartClient.Clinic.FIXTURES = [{
+  id: 1,
+    name: "clinic",
+    address: "clinic road",
+    opening_time: "12:00",
+    closing_time: "13:00",
+    days: {},
+    announcement_ids: [1]
+}];
+
+SmartClient.Announcement.FIXTURES = [{
+  id: 1,
+  note: "Note",
+  date: "2014-12-12",
+  blocking: false,
+}];
+
 SmartClient.ServiceProvider.FIXTURES = [{
   id: 1,
     name: "admin",
@@ -69,6 +86,7 @@ beforeEach(function () {
 afterEach(function () {
   Ember.testing = false;
   localStorage.clear();
+  $('#mocha-fixture').children().remove();
 });
 
 // Optional: Clean up after our last test so you can try out the app
