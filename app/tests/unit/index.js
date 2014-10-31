@@ -68,6 +68,7 @@ beforeEach(function () {
 // Run after each test case.
 afterEach(function () {
   Ember.testing = false;
+  localStorage.clear();
 });
 
 // Optional: Clean up after our last test so you can try out the app

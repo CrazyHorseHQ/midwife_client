@@ -29,7 +29,7 @@ SmartClient.LoginController = Ember.ObjectController.extend({
   actions: {
     submit: function() {
       var self = this;
-      var login = this.store.createRecord('Login');
+      var login = this.get('store').createRecord('Login');
       login.set('username', self.get('username'));
       login.set('password', self.get('password'));
 

@@ -2,12 +2,7 @@
 describe("SmartClient.ApplicationController", function () {
   var controller, server;
 
-  after(function() {
-    localStorage.clear();
-  });
-
   beforeEach(function () {
-    localStorage.clear();
     Ember.run(function () {
       controller = SmartClient.ApplicationController.create({
         store: this.store,
