@@ -9,6 +9,7 @@
         <!-- endbuild -->
         <!-- @if TEST -->
         <link rel="stylesheet" type="text/css" href="bower_components/mocha/mocha.css">
+        <link rel="stylesheet" type="text/css" src="bower_components/qunit/qunit/qunit.css">
         <!-- @endif -->
     </head>
     <body>
@@ -74,15 +75,15 @@
         <script type="text/javascript" src="bower_components/sinon/lib/sinon/util/timers_ie.js"></script>
         <script type="text/javascript" src="bower_components/sinon/lib/sinon/util/xdr_ie.js"></script>
         <script type="text/javascript" src="bower_components/sinon/lib/sinon/util/xhr_ie.js"></script>
-        <script type="text/javascript" src="bower_components/mocha/mocha.js"></script>
-        <script type="text/javascript" src="bower_components/chai/chai.js"></script>
         <script type="text/javascript" src="/testem.js"></script>
         <div id="ember-testing"></div>
-        <div id="mocha"></div>
-        <div id="mocha-fixture"></div>
         <!-- @endif -->
 
         <!-- @if UNIT_TEST -->
+        <script type="text/javascript" src="bower_components/mocha/mocha.js"></script>
+        <script type="text/javascript" src="bower_components/chai/chai.js"></script>
+        <div id="mocha"></div>
+        <div id="mocha-fixture"></div>
         <script type="text/javascript" src="bower_components/ic-ajax/dist/globals/main.js"></script>
         <script type="text/javascript" src="tests.js"></script>
         <script type="text/javascript">
@@ -92,11 +93,9 @@
         <!-- @endif -->
 
         <!-- @if INTEGRATION_TEST -->
-        <script type="text/javascript" src="bower_components/route-recognizer/dist/route-recognizer.js"></script>
-        <script type="text/javascript" src="bower_components/pretender/pretender.js"></script>
-        <script type="text/javascript" src="bower_components/FakeXMLHttpRequest/fake_xml_http_request.js"></script>
+        <script type="text/javascript" src="bower_components/qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="int_tests.js"></script>
         <script type="text/javascript">
-          window.SmartApp = require('/tests/integration/index')['default'];
         </script>
         <!-- @endif -->
 </body>

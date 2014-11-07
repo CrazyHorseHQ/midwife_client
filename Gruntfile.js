@@ -45,7 +45,9 @@ module.exports = function (grunt) {
                 tasks: ['neuter']
             },
             tests: {
-                files: ['<%= yeoman.app %>/tests/unit/{,*/}*.js'],
+                files: [
+                  '<%= yeoman.app %>/tests/{unit,integration}/{,*/}*.js'
+                ],
                 tasks: ['concat']
             },
             livereload: {
@@ -166,6 +168,14 @@ module.exports = function (grunt) {
         concat: {
           options: {
             separator: '\n\r'
+          },
+          integration_tests: {
+            src: [
+                    '<%= yeoman.app %>/tests/integration/fixtures/*.js',
+                    '<%= yeoman.app %>/tests/integration/index.js',
+                    '<%= yeoman.app %>/tests/integration/tests/*.js'
+                  ],
+            dest: '.tmp/int_tests.js'
           },
           unit_tests: {
             src: [
@@ -498,10 +508,11 @@ module.exports = function (grunt) {
         'test'
     ]);
 
-    grunt.registerTask('integration_test', [
+    grunt.registerTask('int_test', [
         'clean:server',
         'config:test:integration_test',
         'preprocess:integration_test',
+        'concat:integration_tests',
         'test'
     ]);
 
