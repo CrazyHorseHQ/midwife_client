@@ -22,7 +22,7 @@ Now run ```grunt serve```
 Running another client
 ---------------------
 
-If you're a developer of an app that will consume the API then you will still need an API key, which you can request from [here](http://www.theproduct.works/contact-us) for an API key or email someone you know within the organisation. This API key should be configured in your client and submitted as part of every request. See below for API doc location.
+If you're a developer of an app that will consume the API then you will still need an API key, which you can request from [here](http://www.theproduct.works/contact-us) or email someone you know within the organisation. This API key should be configured in your client and submitted as part of every request. See below for API doc location.
 
 API Documentation
 =================
