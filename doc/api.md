@@ -1,5 +1,5 @@
-- [/login](##POST /login)
-- [/logout](##POST /logout)
+- [/login](##post-/login)
+- [/logout](##post-/logout)
 
 #Authentication
 
