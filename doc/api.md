@@ -1,18 +1,59 @@
 #Introduction
 
-This page serves as the API doc for the SMART API. In it, we've tried to describe all of the requests and resources that the API will serve. We've purposely steered clear of describing each and every field in each and every call—such API docs rapidly grow in our experience—and instead supply examples of each request-response combo as the most effective way to show how to use the API. Many of the fields are self-explanatory but where necessary we provide a description.
+This page serves as the API doc for the SMART API. In it, we've tried to describe all of the requests and resources that the API will serve. We've purposely steered clear of describing each and every field in each and every call—such API docs rapidly grow in our experience—and instead are using examples for each request and response as a way to document the API. The fields are pretty self-explanatory but where necessary we provide a description.
 
 As with anything, this is far from perfect or 100% accurate, so if you spot an inaccuracy or have a question about any of the content, please let us know at [The Product Works](http://www.theproduct.works/about-us/)
 
 #Navigate the doc
 
 - [Authentication](#authentication)
-	- [/login](#post-login)
-	- [/logout](#post-logout)
+    - [/login](#post-login)
+    - [/logout](#post-logout)
 - [User Account Management](#user-account-management)
-    - [/reset_password](#post-reset_password)
-	- [/reset_passwords/:TOKEN](#put-reset_passwords-token)
-
+    - [/reset_passwords](#post-reset_passwords)
+    - [/reset_passwords/:TOKEN](#put-reset_passwordstoken)
+- [Appointments](#appointments)
+    - [GET /appointments](#get-appointments)
+    - [POST /appointments](#post-appointments)
+    - [GET /appointments/:APPOINTMENT_ID](#get-appointmentsappointment_id)
+    - [PUT /appointments/:APPOINTMENT_ID](#put-appointmentsappointment_id)
+    - [DELETE /appointments/:APPOINTMENT_ID](#delete-appointmentsappointment_id)
+- [Service Options](#serviceoptions-resource)
+    - [GET /service_options](#get-service_options)
+    - [GET /service_options/:ID](#get-service_optionsid)
+- [Appointments for a Service Option](#appointment-serviceoptions-resource)
+    - [GET /appointments/:ID/service_options](#get-appointmentsidservice_options)
+    - [POST /appointments/:ID/service_options](#post-appointmentsidservice_options)
+    - [DELETE /appointments/:ID/service_options/:ID](#delete-appointmentsidservice_optionsid)
+- [Clinics](#clinic-resource)
+    - [GET /clinics](#get-clinics)
+    - [GET /clinics/:ID](#get-clinicsid)
+    - [PUT /clinics/:ID](#put-clinicsid)
+    - [DELETE /clinics/:ID](#delete-clinicsid)
+    - [POST /clinics](#post-clinics)
+- [Clinic Announcements](#clinic-announcements-resource)
+    - [GET /clinics/:ID/announcements/:ID](#get-clinicsidannouncementsid)
+    - [POST /clinics/:ID/announcements](#post-clinicsidannouncements)
+    - [DELETE /clinics/:ID/announcements/:ID](#delete-clinicsidannouncementsid)
+- [Service Users](#service-users-resource)
+    - [GET /service_user](#get-service_users)
+    - [GET /service_users/:ID](#get-service_usersid)
+    - [POST /service_users](#post-service_users)
+    - [PUT /service_users/:ID](#put-service_usersid)
+- [Service Providers](#service-providers-resource)
+    - [GET /service_providers](#get-service_providers)
+    - [GET /service_providers/:ID](#get-service_providersid)
+    - [POST /service_providers](#post-service_providers)
+    - [PUT /service-providers](#put-service_providersid)
+- [Pregnancy Information](#pregnancies-resources)
+    - [GET /pregnancies](#get-pregnancies)
+    - [GET /pregnancies/:ID](#GET /pregnancies/:ID)
+    - [POST /pregnancies](#post-pregnancies)
+    - [PUT /pregnancies/:ID](#put-pregnanciesid)
+- [Babies](#baby-resources)
+    - [GET /babies](#get-babiesid)
+    - [POST /babies](#post-babies)
+    - [PUT /babies/:ID](#put-babiesid)
 
 #Authentication
 
@@ -52,11 +93,13 @@ If the ```Auth-Token``` becomes invalid or expired for any reason, such as a ```
 
   {
     "login": {
-      "token": "S3cr3t",
+      "token": "S3cr3tT0k3n",
       "id": 234
     }
   }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 ##POST /logout
 
@@ -73,7 +116,7 @@ If the ```Auth-Token``` becomes invalid or expired for any reason, such as a ```
 
 ```bash
   $ curl -X POST http://54.72.7.91:8888/logout \
-    -H "Auth-Token: S3cr3t"
+    -H "Auth-Token: S3cr3tT0k3n"
 
   {
     "login": {
@@ -81,10 +124,11 @@ If the ```Auth-Token``` becomes invalid or expired for any reason, such as a ```
     }
   }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 # Authorization
-=============
 
 The SMART API will only talk to clients that it knows - strangers aren't welcome! This is achieved by using an [``Api-Key``](https://github.com/TheProductWorks/smart_app#api-key) ("api_key"). A unique api_key is manually generated for a legitimate client and stored securely in an API_key directory in the SMART server backend. Then, when that client makes a request to the API with the api_key, the SMART server will lookup the api_key in its internal directory. If it's valid, then the API will respond nicely; if it's not, then it's 401 all the way!
 
@@ -94,7 +138,9 @@ Note: if you have SMART installed locally, you need to insert a unique string as
 
 __IMPORTANT: the ```Api-Key``` must be included in each API request (other than [/login](#post-login) and [/logout](#post-logout)) and it must match the key stored in the SMART backend.__
 
-----------
+#User Account Management
+
+
 ## POST /reset_passwords
 
 ####Notes
@@ -112,7 +158,7 @@ __IMPORTANT: the ```Api-Key``` must be included in each API request (other than 
 ```
 $ curl -X POST 54.72.7.91:8888/reset_passwords \
   -d "{"email":"sp@sp.com","username":"sp"}" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "reset_password": {
@@ -121,6 +167,7 @@ $ curl -X POST 54.72.7.91:8888/reset_passwords \
   }
 }
 ```
+[Top of page ↑](#introduction)
 
 ----------
 
@@ -141,9 +188,9 @@ $ curl -X POST 54.72.7.91:8888/reset_passwords \
 ####Example:
 
 ```
-$ curl -X PUT 54.72.7.91:8888/reset_passwords/S3cr3tT0k3n \
+$ curl -X PUT 54.72.7.91:8888/reset_passwords/S3cr3tT0k3nT0k3n \
   -d "{"password":"newPwd1234","password_verification":"newPwd1234"}" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "reset_password": {
@@ -152,6 +199,8 @@ $ curl -X PUT 54.72.7.91:8888/reset_passwords/S3cr3tT0k3n \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 #Appointments
@@ -177,8 +226,8 @@ Actions available to act on the Appointments resource. Deals with everything tha
 
 ```
 $ curl -X GET 54.72.7.91:8888/appointments -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
     "appointments": [
@@ -196,6 +245,7 @@ $ curl -X GET 54.72.7.91:8888/appointments -d '{}' \
     ]
 }
 ```
+[Top of page ↑](#introduction)
 
 ----------
 
@@ -219,9 +269,9 @@ $ curl -X GET 54.72.7.91:8888/appointments -d '{}' \
 ```
 $ curl -X POST 54.72.7.91:8888/appointments \
   -d '{"date":"2014-12-12","time":"13:00:00","priority":"scheduled","visit_type":"post-natal","service_provider_id":125,"service_user_id":345,"clinic_id":1}'\
-  -H "Auth-Token: S3cr3t" \
+  -H "Auth-Token: S3cr3tT0k3n" \
   -H "Content-Type: application/json" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -b /tmp/cookies.txt
 
 {
@@ -237,6 +287,7 @@ $ curl -X POST 54.72.7.91:8888/appointments \
     }
 }
 ```
+[Top of page ↑](#introduction)
 
 ----------
 
@@ -252,8 +303,8 @@ Show details of appointment looked up by `Appointment ID`
 
 ```
 $ curl -X GET 54.72.7.91:8888/appointments/1  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
     "appointments": {
@@ -271,6 +322,7 @@ $ curl -X GET 54.72.7.91:8888/appointments/1  -d '{}' \
     },
 }
 ```
+[Top of page ↑](#introduction)
 
 ---------
 
@@ -287,8 +339,8 @@ $ curl -X GET 54.72.7.91:8888/appointments/1  -d '{}' \
 $ curl -X PUT 54.72.7.91:8888/appointments/1 \
   -d '{"date":"2014-12-12","time":"13:00:00","service_provider_id":1}'\
   -H "Content-Type: application/json"\
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -b /tmp/cookies.txt
 
 {
@@ -303,6 +355,7 @@ $ curl -X PUT 54.72.7.91:8888/appointments/1 \
     }
 }
 ```
+[Top of page ↑](#introduction)
 
 ----------
 
@@ -318,8 +371,8 @@ $ curl -X PUT 54.72.7.91:8888/appointments/1 \
 
 ```
 $ curl -X DELETE 54.72.7.91:8888/appointments/1 \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
     "appointments": {
@@ -333,6 +386,8 @@ $ curl -X DELETE 54.72.7.91:8888/appointments/1 \
     }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 #ServiceOptions Resource
@@ -350,8 +405,8 @@ ServiceOptions to be applied to Clinics and Appointments. ServiceOptions are the
 ####Example
 ```bash
 $ curl -X GET 54.72.7.91:8888/service_options  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json'
 
 {
@@ -364,6 +419,8 @@ $ curl -X GET 54.72.7.91:8888/service_options  -d '{}' \
   ]
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## GET /service_options/:ID
@@ -378,8 +435,8 @@ $ curl -X GET 54.72.7.91:8888/service_options  -d '{}' \
 ####Example
 ```bash
 $ curl -X GET 54.72.7.91:8888/service_options/1  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json'
 
 {
@@ -389,10 +446,11 @@ $ curl -X GET 54.72.7.91:8888/service_options/1  -d '{}' \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ---------
 
-Appointment ServiceOptions Resource
-=========================
+#Appointment ServiceOptions Resource
 
 Nested endpoint to list, apply or remove service options from Appointments.
 
@@ -408,8 +466,8 @@ Nested endpoint to list, apply or remove service options from Appointments.
 ####Example
 ```bash
 $ curl -X get 54.72.7.91:8888/appointments/1/service_options  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
     "service_options": [
@@ -421,6 +479,8 @@ $ curl -X get 54.72.7.91:8888/appointments/1/service_options  -d '{}' \
     ]
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## POST /appointments/:ID/service_options
@@ -435,8 +495,8 @@ $ curl -X get 54.72.7.91:8888/appointments/1/service_options  -d '{}' \
 ####Example
 ```bash
 $ curl -X POST 54.72.7.91:8888/appointments/1/service_options \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -d '{"service_option": {"id":1}}' -H 'Content-Type: application/json'
 
 {
@@ -446,7 +506,10 @@ $ curl -X POST 54.72.7.91:8888/appointments/1/service_options \
     }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
+
 ## DELETE /appointments/:ID/service_options/:ID
 
 ####Notes
@@ -459,8 +522,8 @@ $ curl -X POST 54.72.7.91:8888/appointments/1/service_options \
 ####Example
 ```bash
 $ curl -X DELETE 54.72.7.91:8888/appointments/1/service_options/1 \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json'
 
 {
@@ -470,6 +533,8 @@ $ curl -X DELETE 54.72.7.91:8888/appointments/1/service_options/1 \
     }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 #Clinic Resource
@@ -488,8 +553,8 @@ Get all the clinics that are in the system
 ####Example
 ```bash
 $ curl -X GET 54.72.7.91:8888/clinics  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json'
 
 {
@@ -518,6 +583,8 @@ $ curl -X GET 54.72.7.91:8888/clinics  -d '{}' \
   ]
 }
 ```
+[Top of page ↑](#introduction)
+
 ------------
 
 ### Query string params
@@ -537,8 +604,8 @@ Get a specific clinic
 ####Example
 ```bash
 $ curl -X GET 54.72.7.91:8888/clinics/1  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json'
 
 {
@@ -564,6 +631,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1  -d '{}' \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## PUT /clinics/:ID
@@ -578,8 +647,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1  -d '{}' \
 ####Example
 ```bash
 $ curl -X GET 54.72.7.91:8888/clinics/1 \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json' \
   -d '{"clinic": {"name": "New Clinic", "address": "George's Street"}}'
 
@@ -606,6 +675,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1 \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -------------
 
 ## DELETE /clinics/:ID
@@ -621,8 +692,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1 \
 
 ```bash
 $ curl -X GET 54.72.7.91:8888/clinics/1 \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json'
 
 {
@@ -648,6 +719,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1 \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## POST /clinics
@@ -663,8 +736,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1 \
 
 ```bash
 $ curl -X POST 54.72.7.91:8888/clinics \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json' \
   -d '{"clinic": {"name": "New Clinic", "address": "George's Street"}}'
 
@@ -688,6 +761,8 @@ $ curl -X POST 54.72.7.91:8888/clinics \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 #Clinic Announcements Resource
@@ -706,8 +781,8 @@ These announcements/notes are in place to notify the midwives on rota in case th
 ####Example
 ```bash
 $ curl -X GET 54.72.7.91:8888/clinics/1/announcements  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json'
 
 {
@@ -722,6 +797,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1/announcements  -d '{}' \
   ]
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## GET /clinics/:ID/announcements/:ID
@@ -736,8 +813,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1/announcements  -d '{}' \
 ####Example
 ```bash
 $ curl -X GET 54.72.7.91:8888/clinics/1/announcements/2  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json'
 
 {
@@ -749,6 +826,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1/announcements/2  -d '{}' \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## POST /clinics/:ID/announcements
@@ -763,9 +842,9 @@ $ curl -X GET 54.72.7.91:8888/clinics/1/announcements/2  -d '{}' \
 ####Example
 ```bash
 $ curl -X POST 54.72.7.91:8888/clinics/1/announcements \
-  -H "Auth-Token: S3cr3t" \
+  -H "Auth-Token: S3cr3tT0k3n" \
   -H 'Content-Type: application/json' \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -d '{"note": "No bookings please on Monday","date": "2014-08-11","blocking": true}'
 
 {
@@ -780,6 +859,8 @@ $ curl -X POST 54.72.7.91:8888/clinics/1/announcements \
   ]
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ## DELETE /clinics/:ID/announcements/:ID
@@ -794,8 +875,8 @@ $ curl -X POST 54.72.7.91:8888/clinics/1/announcements \
 ####Example
 ```bash
 $ curl -X DELETE 54.72.7.91:8888/clinics/1/announcements/2 \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe" \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H 'Content-Type: application/json'
 
 {
@@ -807,6 +888,8 @@ $ curl -X DELETE 54.72.7.91:8888/clinics/1/announcements/2 \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ---------
 
 #Service Users Resource
@@ -823,8 +906,8 @@ $ curl -X DELETE 54.72.7.91:8888/clinics/1/announcements/2 \
 ####Example
 ```
 $ curl -X GET 54.72.7.91:8888/service_users  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "service_users": [
@@ -855,6 +938,8 @@ $ curl -X GET 54.72.7.91:8888/service_users  -d '{}' \
   "babies": [...],
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ### Query string params
@@ -871,6 +956,8 @@ Exact match lookup for Service User date of birth.
 
 Hospital number lookup.
 
+[Top of page ↑](#introduction)
+
 ----------
 ## GET /service_users/:ID
 
@@ -885,8 +972,8 @@ Hospital number lookup.
 
 ```
 $ curl -X GET 54.72.7.91:8888/service_users/1  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "service_users": [
@@ -917,6 +1004,7 @@ $ curl -X GET 54.72.7.91:8888/service_users/1  -d '{}' \
   "babies": [ ... ],
 }
 ```
+[Top of page ↑](#introduction)
 
 -----------
 
@@ -931,10 +1019,13 @@ $ curl -X GET 54.72.7.91:8888/service_users/1  -d '{}' \
 ####Example
 ```
 $ curl -X POST 54.72.7.91:8888/service_users \
-  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"},"personal_fields":{"home_address":"Scapemanus\nNavan\nCo Meath", "home_post_code": "D2", "home_type": "apartment", "home_county": "Dublin","directions": "Turn left at the thing","dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234","name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
+  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"},"personal_fields":{"home_address":"Scapemanus\nNavan\nCo Meath", \
+  "home_post_code": "D2", "home_type": "apartment", "home_county": "Dublin","directions": "Turn left at the thing", \
+  "dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234", \
+  "name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
   -H "Content-Type: application/json" \
-  -H "Api-Key: 3g3tyh43gswe" \
-  -H "Auth-Token: S3cr3t" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
+  -H "Auth-Token: S3cr3tT0k3n" \
 
 {
   "service_user": {
@@ -961,6 +1052,8 @@ $ curl -X POST 54.72.7.91:8888/service_users \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## PUT /service_users/:ID
@@ -975,10 +1068,13 @@ $ curl -X POST 54.72.7.91:8888/service_users \
 ####Example
 ```
 $ curl -X PUT 54.72.7.91:8888/service_users/1 \
-  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"},"personal_fields":{"home_address":"Scapemanus\nNavan\nCo Meath","directions": "Turn left at the thing","dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234","name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
+  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"}, \
+	 "personal_fields":{"home_address":"Scapemanus\nNavan\nCo Meath","directions": "Turn left at the thing", \
+	 "dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234",   \
+	 "name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
   -H "Content-Type: application/json" \
-  -H "Api-Key: 3g3tyh43gswe" \
-  -H "Auth-Token: S3cr3t" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
+  -H "Auth-Token: S3cr3tT0k3n" \
 
 {
   "service_user": {
@@ -1004,6 +1100,9 @@ $ curl -X PUT 54.72.7.91:8888/service_users/1 \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
+----------
 
 #Service Providers Resource
 
@@ -1014,15 +1113,15 @@ CRUD interface for Service Providers. The API is locked down for Admin users onl
 ####Notes
 * List all service_providers
 
-
 ####Input
+
 ####Output 
 
 ####Example
 ```
 $ curl -X GET 54.72.7.91:8888/service_providers  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "service_providers": [
@@ -1043,6 +1142,7 @@ $ curl -X GET 54.72.7.91:8888/service_providers  -d '{}' \
   ]
 }
 ```
+[Top of page ↑](#introduction)
 
 ## GET /service_providers/:ID
 
@@ -1056,8 +1156,8 @@ $ curl -X GET 54.72.7.91:8888/service_providers  -d '{}' \
 ####Example
 ```
 $ curl -X GET 54.72.7.91:8888/service_providers/1  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "service_provider": {
@@ -1075,6 +1175,8 @@ $ curl -X GET 54.72.7.91:8888/service_providers/1  -d '{}' \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ## POST /service_providers
@@ -1088,10 +1190,13 @@ $ curl -X GET 54.72.7.91:8888/service_providers/1  -d '{}' \
 ####Example
 ```
 $ curl -X POST 54.72.7.91:8888/service_providers \
-  -d '{"service_provider": {"id": 1, "name": "Mary Murray", "username": "Mary M", "email": "caprisun@nmh.ie", "password": "*********", "active": true, "admin": true, "job_occupation": "Community Midwife", "job_level": "Resident", "primary_phone": "0865656777", "secondary_phone": "0865656777"}}'\
+  -d '{"service_provider": {"id": 1, "name": "Mary Murray", "username": "Mary M", \
+     "email": "caprisun@nmh.ie", "password": "*********", "active": true, "admin": true, 
+	 "job_occupation": "Community Midwife", "job_level": "Resident", "primary_phone": "0865656777", \
+	 "secondary_phone": "0865656777"}}'\
   -H "Content-Type: application/json" \
-  -H "Api-Key: 3g3tyh43gswe" \
-  -H "Auth-Token: S3cr3t" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
+  -H "Auth-Token: S3cr3tT0k3n" \
 
 {
   "service_provider": {
@@ -1109,6 +1214,8 @@ $ curl -X POST 54.72.7.91:8888/service_providers \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ## PUT /service_providers/:ID
@@ -1123,10 +1230,13 @@ $ curl -X POST 54.72.7.91:8888/service_providers \
 ####Example
 ```
 $ curl -X PUT 54.72.7.91:8888/service_providers/1 \
-  -d '{"service_provider": {"id": 1, "name": "Mary Murray", "username": "Mary M", "email": "caprisun@nmh.ie", "password": "*********", "active": true, "admin": true, "job_occupation": "Community Midwife", "job_level": "Resident", "primary_phone": "0865656777", "secondary_phone": "0865656777"}}'\
+  -d '{"service_provider": {"id": 1, "name": "Mary Murray", "username": "Mary M", \
+     "email": "caprisun@nmh.ie", "password": "*********", "active": true, "admin": true, \
+	 "job_occupation": "Community Midwife", "job_level": "Resident", "primary_phone": "0865656777", \
+	 "secondary_phone": "0865656777"}}'\
   -H "Content-Type: application/json" \
-  -H "Api-Key: 3g3tyh43gswe" \
-  -H "Auth-Token: S3cr3t" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
+  -H "Auth-Token: S3cr3tT0k3n" \
 
 {
   "service_provider": {
@@ -1144,26 +1254,31 @@ $ curl -X PUT 54.72.7.91:8888/service_providers/1 \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
-#Pregnancies Resource
+#Pregnancies Resources
 
-Create, Query and Update Pregnancy data
+The following API calls detail the requests necessary to get data about pregnancies.
+The API supports the creation, querying and updating of these records
 
 ## GET /pregnancies
 
 #####Notes
 * List all pregnancies
 
-
 ####Input
+* Nothing really (just don't forget that token!)
+
 ####Output 
+Big list of pregnancy records.
 
 ####Example
 ```bash
 $ curl -X GET 54.72.7.91:8888/pregnancies  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "pregnancies": [
@@ -1182,26 +1297,30 @@ $ curl -X GET 54.72.7.91:8888/pregnancies  -d '{}' \
   ]
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ## GET /pregnancies/:ID
 
 #####Notes
-Get data for a specific pregnancy
-
+* Get data for a specific pregnancy
 
 ####Input
+* Internal ID of the pregnancy
+
 ####Output 
+* All the details about the pregnancy. See a [full list of pregnancy fields here](https://github.com/TheProductWorks/smart_client/blob/master/doc/DataFields#pregnancy-fields)
 
 ####Example
 ```bash
-$ curl -X GET 54.72.7.91:8888/pregnancies/1  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+$ curl -X GET 54.72.7.91:8888/pregnancies/54 -d '{}' \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "pregnancy": {
-    "id": 1,
+    "id": 54,
     "service_user_id": 1,
     "estimated_delivery_date": "2014-07-23",
     "additional_info": "N/A",
@@ -1214,6 +1333,8 @@ $ curl -X GET 54.72.7.91:8888/pregnancies/1  -d '{}' \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ## POST /pregnancies
@@ -1221,17 +1342,22 @@ $ curl -X GET 54.72.7.91:8888/pregnancies/1  -d '{}' \
 ####Notes
 * Create a new pregnancy
 
-
 ####Input
+* Any supported details about the pregnancy. See a [full list of pregnancy fields here](https://github.com/TheProductWorks/smart_client/blob/master/doc/DataFields#pregnancy-fields)
+
+
 ####Output 
+* All the details about the pregnancy. See a [full list of pregnancy fields here](https://github.com/TheProductWorks/smart_client/blob/master/doc/DataFields#pregnancy-fields)
 
 ####Example
 ```bash
 $ curl -X POST 54.72.7.91:8888/pregnancies \
-  -d '{"pregnancy": {"service_user_id": 1, "estimated_delivery_date": "2014-07-23", "additional_info": "N/A", "birth_mode": ["Svd"], "perineum": "", "anti_d": "", "feeding": "", "last_menstrual_period": ""}}'
+  -d '{"pregnancy": {"service_user_id": 1, "estimated_delivery_date": "2014-07-23", \
+     "additional_info": "N/A", "birth_mode": ["Svd"], "perineum": "", "anti_d": "", \
+	 "feeding": "", "last_menstrual_period": ""}}'
   -H "Content-Type: application/json" \
-  -H "Api-Key: 3g3tyh43gswe" \
-  -H "Auth-Token: S3cr3t"
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
+  -H "Auth-Token: S3cr3tT0k3n"
 
 {
   "pregnancy": {
@@ -1248,13 +1374,14 @@ $ curl -X POST 54.72.7.91:8888/pregnancies \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ## PUT /pregnancies/:ID
 
 ####Notes
-Update pregnancy
-
+* Updates details about a pregnancy
 
 ####Input
 ####Output 
@@ -1262,30 +1389,36 @@ Update pregnancy
 ####Example
 ```bash
 $ curl -X PUT 54.72.7.91:8888/pregnancies \
-  -d '{"pregnancy": {"service_user_id": 1, "estimated_delivery_date": "2014-07-23", "additional_info": "N/A", "birth_mode": ["Svd"], "perineum": "", "anti_d": "", "feeding": "", "last_menstrual_period": ""}}'
+  -d '{"pregnancy": {"service_user_id": 1, "estimated_delivery_date": "2014-07-23", \
+     "additional_info": "N/A", "birth_mode": ["Svd"], "perineum": "", "anti_d": "", \
+     "feeding": "", "last_menstrual_period": ""}}'
   -H "Content-Type: application/json" \
-  -H "Api-Key: 3g3tyh43gswe" \
-  -H "Auth-Token: S3cr3t"
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
+  -H "Auth-Token: S3cr3tT0k3n"
 
 {
   "pregnancy": {
     "id": 1,
-    "service_user_id": 1,
+    "service_user_id": 123,
     "estimated_delivery_date": "2014-07-23",
     "additional_info": "N/A",
     "birth_mode": ["Svd"],
-    "perineum": "",
+    "perineum": "1 degree without sutures",
     "anti_d": "",
-    "feeding": "",
-    "last_menstrual_period": "",
+    "feeding": "Breast ",
+    "last_menstrual_period": "2014-01-02",
     "gestation": "23 + 4"
   }
 }
 ```
+
+[Top of page ↑](#introduction)
+
 -----------
 
 #Babies Resources
 
+The following API calls give access to baby records and data within SMART.
 
 ## GET /babies
 
@@ -1294,62 +1427,74 @@ $ curl -X PUT 54.72.7.91:8888/pregnancies \
 
 
 ####Input
+* Nothing really
+
 ####Output 
+* List of all baby records and the data fields for each. See full list of [data field for a baby record](https://github.com/TheProductWorks/smart_client/blob/master/doc/DataFields#baby-fields)
 
 ####Example
 ```bash
 $ curl -X GET 54.72.7.91:8888/babies  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "babies": [
     {
       "id": 1,
-      "pregnancy_id": 1,
-      "hospital_number": "H9999999",
-      "gender": "male",
-      "weight": 3720,
-      "delivery_date_time": "2014-07-24 12:12:12",
-      "vitamin_k": "yes",
-      "hearing": "test passed",
-      "newborn_screening_test": "passed"
-    },
+		"pregnancy_id": 100,
+		"hospital_number": "H39999999",
+		"gender": "male",
+		"weight": 3720,
+		"delivery_date_time": "2014-07-24 12:12:12",
+		"vitamin_k": "Oral",
+		"hearing": "",
+		"newborn_screening_test": "Done",
+		"birth_outcome": "Liveborn"
+  }},
     ...
   ]
 }
 ```
+
+[Top of page ↑](#introduction)
+
 ----------
 
 ## GET /babies:ID
 
 ####Notes
-* Get a specific Baby Data
+* Get all data for a specified baby
 
 ####Input
+* The internal ID of the baby record
+
 ####Output 
+* Spits back out the data fields for that baby record. See full list of [data field for a baby record](https://github.com/TheProductWorks/smart_client/blob/master/doc/api.md#navigate-the-doc)
 
 ####Example
 ```bash
-$ curl -X GET 54.72.7.91:8888/babies/1  -d '{}' \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+$ curl -X GET 54.72.7.91:8888/babies/333  -d '{}' \
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "baby": {
-    "id": 1,
-    "pregnancy_id": 1,
-    "hospital_number": "H9999999",
+    "id": 333,
+    "pregnancy_id": 100,
+    "hospital_number": "H39999999",
     "gender": "male",
     "weight": 3720,
     "delivery_date_time": "2014-07-24 12:12:12",
-    "vitamin_k": "yes",
-    "hearing": "test passed",
-    "newborn_screening_test": "passed",
+    "vitamin_k": "Oral",
+    "hearing": "",
+    "newborn_screening_test": "Done",
     "birth_outcome": "Liveborn"
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ---------
 ## POST /babies
 
@@ -1357,62 +1502,76 @@ $ curl -X GET 54.72.7.91:8888/babies/1  -d '{}' \
 * Create a new Baby record
 
 ####Input
+* Any of the support fields for a baby. See full list of [data field for a baby record](https://github.com/TheProductWorks/smart_client/blob/master/doc/api.md#navigate-the-doc)
+
 ####Output 
+* Spits back out the data fields for that baby record. See full list of [data field for a baby record](https://github.com/TheProductWorks/smart_client/blob/master/doc/api.md#navigate-the-doc)
 
 ####Example
 ```bash
 $ curl -X POST 54.72.7.91:8888/babies \
-  -d '{"baby": {"pregnancy_id":1, "hospital_number": "H9999999", "gender": "male", "weight": 3720, "delivery_date_time": "2014-07-24 12:12:12", "vitamin_k": "yes", "hearing": "test passed","newborn_screening_test": "passed", "birth_outcome": "Liveborn"}}'
+  -d '{"baby": {"pregnancy_id":100, "hospital_number": "H9999999", "gender": "male", \
+  "weight": 3720, "delivery_date_time": "2014-07-24 12:12:12", "vitamin_k": "yes", \
+ "hearing": "test passed","newborn_screening_test": "passed", "birth_outcome": "Liveborn"}}'
   -H "Content-Type: application/json" \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "baby": {
-    "id": 1,
-    "pregnancy_id": 1,
-    "hospital_number": "H9999999",
+    "id": 333,
+    "pregnancy_id": 100,
+    "hospital_number": "H39999999",
     "gender": "male",
     "weight": 3720,
     "delivery_date_time": "2014-07-24 12:12:12",
-    "vitamin_k": "yes",
-    "hearing": "test passed",
-    "newborn_screening_test": "passed",
+    "vitamin_k": "Oral",
+    "hearing": "",
+    "newborn_screening_test": "Done",
     "birth_outcome": "Liveborn"
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
+
 ## PUT /babies/:ID
 
 #####Notes
-Update a Baby record
-
+* Ability to update a Baby record with edits made on the UI
+* ID is the unique number for that baby record
 
 ####Input
+* Any of the support fields for a baby. See full list of [data field for a baby record](https://github.com/TheProductWorks/smart_client/blob/master/doc/api.md#navigate-the-doc)
+
 ####Output 
+* Spits back out the data fields for that baby record. See full list of [data field for a baby record](https://github.com/TheProductWorks/smart_client/blob/master/doc/api.md#navigate-the-doc)
 
 ####Example
 ```bash
 $ curl -X PUT 54.72.7.91:8888/babies/1 \
-  -d '{"baby": {"pregnancy_id":1, "hospital_number": "H9999999", "gender": "male", "weight": 3720, "delivery_date_time": "2014-07-24 12:12:12", "vitamin_k": "yes", "hearing": "test passed","newborn_screening_test": "passed", "birth_outcome": "Liveborn"}}'
+  -d '{"baby": {"pregnancy_id":100, "hospital_number": "H9999999", "gender": "male", \
+  "weight": 3720, "delivery_date_time": "2014-07-24 12:12:12", "vitamin_k": "yes", \
+  "hearing": "test passed","newborn_screening_test": "passed", "birth_outcome": "Liveborn"}}'
   -H "Content-Type: application/json" \
-  -H "Auth-Token: S3cr3t" \
-  -H "Api-Key: 3g3tyh43gswe"
+  -H "Auth-Token: S3cr3tT0k3n" \
+  -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e"
 
 {
   "baby": {
-    "id": 1,
-    "pregnancy_id": 1,
-    "hospital_number": "H9999999",
+    "id": 333,
+    "pregnancy_id": 100,
+    "hospital_number": "H39999999",
     "gender": "male",
     "weight": 3720,
     "delivery_date_time": "2014-07-24 12:12:12",
-    "vitamin_k": "yes",
-    "hearing": "test passed",
-    "newborn_screening_test": "passed",
+    "vitamin_k": "Oral",
+    "hearing": "",
+    "newborn_screening_test": "Done",
     "birth_outcome": "Liveborn"
   }
 }
 ```
 -----------
+[Top of page ↑](#introduction)
