@@ -10,6 +10,24 @@ While we will try to keep this up-to-date, discrepancies will inevitably kick in
 
 - [Baby Fields](#baby-fields)
 
+## Pregnancy Fields
+
+Table "public.pregnancy"
+
+         Column          |          Type          |                       Details
+-------------------------|------------------------|--------------------------------------------------------
+ estimated_delivery_date | date                   | YYYY-MM-DD
+ additional_info         | character varying(500) | _TBC_
+ birth_mode              | character varying(50)  | One or more of the following: Svd \| Ventose \| Forceps \| Failed Ventose \| Failed forceps \| LSCS \|
+ perineum                | perineum_choice        | Single selection from following options: Intact \| 1 degree with sutures \| 1 degree without sutures \| 2 degree \| 3 degree \| 4 degree
+ service_user_id         | integer                | Internal ID of the mother's record
+ anti_d                  | character varying(50)  | _TBC_
+ created_at              | date                   | not null
+ last_menstrual_period   | date                   |
+ feeding                 | feeding_types          | Single selection from: Breast \| bottle \| Mixed
+
+ [Top of page ↑](#overview)
+ 
 ##Baby Fields
 
  Table "public.baby"
@@ -26,4 +44,4 @@ While we will try to keep this up-to-date, discrepancies will inevitably kick in
  name                   | character varying(40)       | _null_ \| Conor!
  birth_outcome          | character varying(20)       | _null_ \| Liveborn \| Stillborn \| Neo-natal death \| Complete Miss \| Incomplete Miss \| Ectopic \| TOP
 
-[Top of page ↑](#overview)
+ [Top of page ↑](#overview)
