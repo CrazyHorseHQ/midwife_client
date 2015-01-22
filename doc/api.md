@@ -1,3 +1,6 @@
+- [/login](##POST /login)
+- [/logout](##POST /logout)
+
 #Authentication
 
 All requests to the SMART API must be within the bounds of an authenticated user session. The Client must make the necessary request for a secret token; this must then be sent in every subsequent API requests as a header, ``Auth-Token````.
@@ -11,7 +14,7 @@ In order to create and destroy a session, the following calls are supported:
 
 If the ```Auth-Token``` becomes invalid or expired for any reason, such as a ```service_provider``` becoming inactive, then the API will return a 401 response to any authenticated request. At that point any client should destroy any stored data on the device and show the login screen.
 
-## POST /login
+##POST /login
 
 * Allows that a SMART client to login to SMART backend with username and password. 
 * Returns the ID of the client user and a unique auth token to be used in all subsequent API calls.
@@ -31,7 +34,7 @@ Example:
   }
 ```
 
-## POST /logout
+##POST /logout
 
 Logout from the SMART application.
 
