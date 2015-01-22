@@ -46,7 +46,7 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
     - [POST /service_providers](#post-service_providers)
     - [PUT /service-providers](#put-service_providersid)
 - [Pregnancy Information](#pregnancies-resources)
-    - [GET /pregnancies](#get-pregnancies]
+    - [GET /pregnancies](#get-pregnancies)
     - [GET /pregnancies/:ID](#GET /pregnancies/:ID)
     - [POST /pregnancies](#post-pregnancies)
     - [PUT /pregnancies/:ID](#put-pregnanciesid)
@@ -67,7 +67,9 @@ In order to create and destroy a session, the following calls are supported:
 **NOTE** 
 
 If the ```Auth-Token``` becomes invalid or expired for any reason, such as a ```service_provider``` becoming inactive, then the API will return a 401 response to any authenticated request. At that point any client should destroy any stored data on the device and show the login screen.
+
 ----------
+
 ##POST /login
 
 ####Notes
@@ -96,6 +98,8 @@ If the ```Auth-Token``` becomes invalid or expired for any reason, such as a ```
     }
   }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 ##POST /logout
 
@@ -120,10 +124,11 @@ If the ```Auth-Token``` becomes invalid or expired for any reason, such as a ```
     }
   }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 # Authorization
-=============
 
 The SMART API will only talk to clients that it knows - strangers aren't welcome! This is achieved by using an [``Api-Key``](https://github.com/TheProductWorks/smart_app#api-key) ("api_key"). A unique api_key is manually generated for a legitimate client and stored securely in an API_key directory in the SMART server backend. Then, when that client makes a request to the API with the api_key, the SMART server will lookup the api_key in its internal directory. If it's valid, then the API will respond nicely; if it's not, then it's 401 all the way!
 
@@ -162,6 +167,7 @@ $ curl -X POST 54.72.7.91:8888/reset_passwords \
   }
 }
 ```
+[Top of page ↑](#introduction)
 
 ----------
 
@@ -193,6 +199,8 @@ $ curl -X PUT 54.72.7.91:8888/reset_passwords/S3cr3tT0k3nT0k3n \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 #Appointments
@@ -237,6 +245,7 @@ $ curl -X GET 54.72.7.91:8888/appointments -d '{}' \
     ]
 }
 ```
+[Top of page ↑](#introduction)
 
 ----------
 
@@ -278,6 +287,7 @@ $ curl -X POST 54.72.7.91:8888/appointments \
     }
 }
 ```
+[Top of page ↑](#introduction)
 
 ----------
 
@@ -312,6 +322,7 @@ $ curl -X GET 54.72.7.91:8888/appointments/1  -d '{}' \
     },
 }
 ```
+[Top of page ↑](#introduction)
 
 ---------
 
@@ -344,6 +355,7 @@ $ curl -X PUT 54.72.7.91:8888/appointments/1 \
     }
 }
 ```
+[Top of page ↑](#introduction)
 
 ----------
 
@@ -374,6 +386,8 @@ $ curl -X DELETE 54.72.7.91:8888/appointments/1 \
     }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 #ServiceOptions Resource
@@ -405,6 +419,8 @@ $ curl -X GET 54.72.7.91:8888/service_options  -d '{}' \
   ]
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## GET /service_options/:ID
@@ -430,10 +446,11 @@ $ curl -X GET 54.72.7.91:8888/service_options/1  -d '{}' \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ---------
 
-Appointment ServiceOptions Resource
-=========================
+#Appointment ServiceOptions Resource
 
 Nested endpoint to list, apply or remove service options from Appointments.
 
@@ -462,6 +479,8 @@ $ curl -X get 54.72.7.91:8888/appointments/1/service_options  -d '{}' \
     ]
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## POST /appointments/:ID/service_options
@@ -487,7 +506,10 @@ $ curl -X POST 54.72.7.91:8888/appointments/1/service_options \
     }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
+
 ## DELETE /appointments/:ID/service_options/:ID
 
 ####Notes
@@ -511,6 +533,8 @@ $ curl -X DELETE 54.72.7.91:8888/appointments/1/service_options/1 \
     }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 #Clinic Resource
@@ -559,6 +583,8 @@ $ curl -X GET 54.72.7.91:8888/clinics  -d '{}' \
   ]
 }
 ```
+[Top of page ↑](#introduction)
+
 ------------
 
 ### Query string params
@@ -605,6 +631,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1  -d '{}' \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## PUT /clinics/:ID
@@ -647,6 +675,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1 \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -------------
 
 ## DELETE /clinics/:ID
@@ -689,6 +719,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1 \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## POST /clinics
@@ -729,6 +761,8 @@ $ curl -X POST 54.72.7.91:8888/clinics \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 #Clinic Announcements Resource
@@ -763,6 +797,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1/announcements  -d '{}' \
   ]
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## GET /clinics/:ID/announcements/:ID
@@ -790,6 +826,8 @@ $ curl -X GET 54.72.7.91:8888/clinics/1/announcements/2  -d '{}' \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## POST /clinics/:ID/announcements
@@ -821,6 +859,8 @@ $ curl -X POST 54.72.7.91:8888/clinics/1/announcements \
   ]
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ## DELETE /clinics/:ID/announcements/:ID
@@ -848,6 +888,8 @@ $ curl -X DELETE 54.72.7.91:8888/clinics/1/announcements/2 \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ---------
 
 #Service Users Resource
