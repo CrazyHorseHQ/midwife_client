@@ -7,16 +7,53 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
 #Navigate the doc
 
 - [Authentication](#authentication)
-	- [/login](#post-login)
-	- [/logout](#post-logout)
+    - [/login](#post-login)
+    - [/logout](#post-logout)
 - [User Account Management](#user-account-management)
     - [/reset_passwords](#post-reset_passwords)
-	- [/reset_passwords/:TOKEN](#put-reset_passwordstoken)
-	
+    - [/reset_passwords/:TOKEN](#put-reset_passwordstoken)
+- [Appointments](#appointments)
+    - [GET /appointments](#get-appointments)
+    - [POST /appointments](#post-appointments)
+    - [GET /appointments/:APPOINTMENT_ID](#get-appointmentsappointment_id)
+    - [PUT /appointments/:APPOINTMENT_ID](#put-appointmentsappointment_id)
+    - [DELETE /appointments/:APPOINTMENT_ID](#delete-appointmentsappointment_id)
+- [Service Options](#serviceoptions-resource)
+    - [GET /service_options](#get-service_options)
+    - [GET /service_options/:ID](#get-service_optionsid)
+- [Appointments for a Service Option](#appointment-serviceoptions-resource)
+    - [GET /appointments/:ID/service_options](#get-appointmentsidservice_options)
+    - [POST /appointments/:ID/service_options](#post-appointmentsidservice_options)
+    - [DELETE /appointments/:ID/service_options/:ID](#delete-appointmentsidservice_optionsid)
+- [Clinics](#clinic-resource)
+    - [GET /clinics](#get-clinics)
+    - [GET /clinics/:ID](#get-clinicsid)
+    - [PUT /clinics/:ID](#put-clinicsid)
+    - [DELETE /clinics/:ID](#delete-clinicsid)
+    - [POST /clinics](#post-clinics)
+- [Clinic Announcements](#clinic-announcements-resource)
+    - [GET /clinics/:ID/announcements/:ID](#get-clinicsidannouncementsid)
+    - [POST /clinics/:ID/announcements](#post-clinicsidannouncements)
+    - [DELETE /clinics/:ID/announcements/:ID](#delete-clinicsidannouncementsid)
+- [Service Users](#service-users-resource)
+    - [GET /service_user](#get-service_users)
+    - [GET /service_users/:ID](#get-service_usersid)
+    - [POST /service_users](#post-service_users)
+    - [PUT /service_users/:ID](#put-service_usersid)
+- [Service Providers](#service-providers-resource)
+    - [GET /service_providers](#get-service_providers)
+    - [GET /service_providers/:ID](#get-service_providersid)
+    - [POST /service_providers](#post-service_providers)
+    - [PUT /service-providers](#put-service_providersid)
+- [Pregnancy Information](#pregnancies-resources)
+    - [GET /pregnancies](#get-pregnancies]
+    - [GET /pregnancies/:ID](#GET /pregnancies/:ID)
+    - [POST /pregnancies](#post-pregnancies)
+    - [PUT /pregnancies/:ID](#put-pregnanciesid)
 - [Babies](#baby-resources)
-    - [GET /babies](#getbabies]
-	- [POST /babies](#postbabies)
-	- [PUT /babies/:ID](#putbabiesid)
+    - [GET /babies](#get-babiesid)
+    - [POST /babies](#post-babies)
+    - [PUT /babies/:ID](#put-babiesid)
 
 #Authentication
 
@@ -859,6 +896,8 @@ $ curl -X GET 54.72.7.91:8888/service_users  -d '{}' \
   "babies": [...],
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ### Query string params
@@ -874,6 +913,8 @@ Exact match lookup for Service User date of birth.
 #### hospital_number
 
 Hospital number lookup.
+
+[Top of page ↑](#introduction)
 
 ----------
 ## GET /service_users/:ID
@@ -921,6 +962,7 @@ $ curl -X GET 54.72.7.91:8888/service_users/1  -d '{}' \
   "babies": [ ... ],
 }
 ```
+[Top of page ↑](#introduction)
 
 -----------
 
@@ -935,7 +977,10 @@ $ curl -X GET 54.72.7.91:8888/service_users/1  -d '{}' \
 ####Example
 ```
 $ curl -X POST 54.72.7.91:8888/service_users \
-  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"},"personal_fields":{"home_address":"Scapemanus\nNavan\nCo Meath", "home_post_code": "D2", "home_type": "apartment", "home_county": "Dublin","directions": "Turn left at the thing","dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234","name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
+  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"},"personal_fields":{"home_address":"Scapemanus\nNavan\nCo Meath", \
+  "home_post_code": "D2", "home_type": "apartment", "home_county": "Dublin","directions": "Turn left at the thing", \
+  "dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234", \
+  "name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
   -H "Content-Type: application/json" \
   -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H "Auth-Token: S3cr3tT0k3n" \
@@ -965,6 +1010,8 @@ $ curl -X POST 54.72.7.91:8888/service_users \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 ----------
 
 ## PUT /service_users/:ID
@@ -979,7 +1026,10 @@ $ curl -X POST 54.72.7.91:8888/service_users \
 ####Example
 ```
 $ curl -X PUT 54.72.7.91:8888/service_users/1 \
-  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"},"personal_fields":{"home_address":"Scapemanus\nNavan\nCo Meath","directions": "Turn left at the thing","dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234","name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
+  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"}, \
+	 "personal_fields":{"home_address":"Scapemanus\nNavan\nCo Meath","directions": "Turn left at the thing", \
+	 "dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234",   \
+	 "name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
   -H "Content-Type: application/json" \
   -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H "Auth-Token: S3cr3tT0k3n" \
@@ -1008,6 +1058,9 @@ $ curl -X PUT 54.72.7.91:8888/service_users/1 \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
+----------
 
 #Service Providers Resource
 
@@ -1018,8 +1071,8 @@ CRUD interface for Service Providers. The API is locked down for Admin users onl
 ####Notes
 * List all service_providers
 
-
 ####Input
+
 ####Output 
 
 ####Example
@@ -1047,6 +1100,7 @@ $ curl -X GET 54.72.7.91:8888/service_providers  -d '{}' \
   ]
 }
 ```
+[Top of page ↑](#introduction)
 
 ## GET /service_providers/:ID
 
@@ -1079,6 +1133,8 @@ $ curl -X GET 54.72.7.91:8888/service_providers/1  -d '{}' \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ## POST /service_providers
@@ -1092,7 +1148,10 @@ $ curl -X GET 54.72.7.91:8888/service_providers/1  -d '{}' \
 ####Example
 ```
 $ curl -X POST 54.72.7.91:8888/service_providers \
-  -d '{"service_provider": {"id": 1, "name": "Mary Murray", "username": "Mary M", "email": "caprisun@nmh.ie", "password": "*********", "active": true, "admin": true, "job_occupation": "Community Midwife", "job_level": "Resident", "primary_phone": "0865656777", "secondary_phone": "0865656777"}}'\
+  -d '{"service_provider": {"id": 1, "name": "Mary Murray", "username": "Mary M", \
+     "email": "caprisun@nmh.ie", "password": "*********", "active": true, "admin": true, 
+	 "job_occupation": "Community Midwife", "job_level": "Resident", "primary_phone": "0865656777", \
+	 "secondary_phone": "0865656777"}}'\
   -H "Content-Type: application/json" \
   -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H "Auth-Token: S3cr3tT0k3n" \
@@ -1113,6 +1172,8 @@ $ curl -X POST 54.72.7.91:8888/service_providers \
   }
 }
 ```
+[Top of page ↑](#introduction)
+
 -----------
 
 ## PUT /service_providers/:ID
@@ -1127,7 +1188,10 @@ $ curl -X POST 54.72.7.91:8888/service_providers \
 ####Example
 ```
 $ curl -X PUT 54.72.7.91:8888/service_providers/1 \
-  -d '{"service_provider": {"id": 1, "name": "Mary Murray", "username": "Mary M", "email": "caprisun@nmh.ie", "password": "*********", "active": true, "admin": true, "job_occupation": "Community Midwife", "job_level": "Resident", "primary_phone": "0865656777", "secondary_phone": "0865656777"}}'\
+  -d '{"service_provider": {"id": 1, "name": "Mary Murray", "username": "Mary M", \
+     "email": "caprisun@nmh.ie", "password": "*********", "active": true, "admin": true, \
+	 "job_occupation": "Community Midwife", "job_level": "Resident", "primary_phone": "0865656777", \
+	 "secondary_phone": "0865656777"}}'\
   -H "Content-Type: application/json" \
   -H "Api-Key: t5sample-1234-9c22-a2a2-ap1k3ysamp1e" \
   -H "Auth-Token: S3cr3tT0k3n" \
@@ -1269,6 +1333,7 @@ $ curl -X POST 54.72.7.91:8888/pregnancies \
 }
 ```
 [Top of page ↑](#introduction)
+
 -----------
 
 ## PUT /pregnancies/:ID
@@ -1304,6 +1369,7 @@ $ curl -X PUT 54.72.7.91:8888/pregnancies \
   }
 }
 ```
+
 [Top of page ↑](#introduction)
 
 -----------
@@ -1348,6 +1414,7 @@ $ curl -X GET 54.72.7.91:8888/babies  -d '{}' \
   ]
 }
 ```
+
 [Top of page ↑](#introduction)
 
 ----------
