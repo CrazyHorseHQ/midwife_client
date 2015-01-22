@@ -1,33 +1,34 @@
-Authorization
-=============
+#Authentication
 
-The API requires that all clients send an Api-Key on all requests. You can request one or use a test key in a local installation of this API by inserting into the ```api_key``` table.
+All requests to the SMART API must be within the bounds of an authenticated user session. The Client must make the necessary request for a secret token; this must then be sent in every subsequent API requests as a header, ``Auth-Token````.
 
-In the header of each request send ```Api-Key``` and the value equal to the key.
+In order to create and destroy a session, the following calls are supported:
 
-Authentication
-==============
+  1. `login`: returns a unique ``Auth-Token`; this must be use in all subsequent API requests to the server.
+  2. `logout`: destroys the user session and effectively disables the Auth-Token from further use.
 
-Managing `login` and `logout` on the SMART app. Generates a secret token to be used on all sensitive calls. Said token has to be sent back on each call as a header `Auth-Token` and gets authenticated.
+**NOTE** 
 
 If the ```Auth-Token``` becomes invalid or expired for any reason, such as a ```service_provider``` becoming inactive, then the API will return a 401 response to any authenticated request. At that point any client should destroy any stored data on the device and show the login screen.
 
 ## POST /login
 
-Login to the SMART application with username and password. Returns the logged in Service Provider ID.
+* Allows that a SMART client to login to SMART backend with username and password. 
+* Returns the ID of the client user and a unique auth token to be used in all subsequent API calls.
 
 Example:
-```
-$ curl -X POST 0.0.0.0:5000/login \
-  -d '{"login":{"username":"mate","password":"secret"}}' \
-  -H "Content-Type: application/json"
 
-{
-  "login": {
-    "token": "S3cr3t",
-    "id": 1
+```bash
+  $ curl -X POST http://54.72.7.91:8888/login \
+    -d '{"login":{"username":"mate","password":"secret"}}' \
+    -H "Content-Type: application/json"
+
+  {
+    "login": {
+      "token": "S3cr3t",
+      "id": 1
+    }
   }
-}
 ```
 
 ## POST /logout
@@ -35,16 +36,26 @@ $ curl -X POST 0.0.0.0:5000/login \
 Logout from the SMART application.
 
 Example:
-```
-$ curl -X POST 0.0.0.0:5000/logout \
-  -H "Auth-Token: S3cr3t"
 
-{
-  "login": {
-    "token": null
+```bash
+  $ curl -X POST http://54.72.7.91:8888/logout \
+    -H "Auth-Token: S3cr3t"
+
+  {
+    "login": {
+      "token": null
+    }
   }
-}
 ```
+# Authorization
+=============
+
+The API requires that all clients send an Api-Key on all requests. You can request one or use a test key in a local installation of this API by inserting into the ```api_key``` table.
+
+In the header of each request send ```Api-Key``` and the value equal to the key.
+
+
+
 
 Reset Password Resource
 =====================
