@@ -12,6 +12,10 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
 - [User Account Management](#user-account-management)
     - [/reset_password](#post-reset_password)
 	- [/reset_passwords/:TOKEN](#put-reset_passwords-token)
+- [Appointments](#appointments)
+    - [Get info on all appointments - GET /appointments](#get-appointments)
+    - [Make an appointment - POST /appointments](#post-appointments)
+    - [Get info on a single appointment - GET /appointments/:APPOINTMENT_ID](#get-appointments_appointment-id)
 
 
 #Authentication
@@ -218,24 +222,37 @@ $ curl -X GET 54.72.7.91:8888/appointments -d '{}' \
 ####Example:
 ```
 $ curl -X POST 54.72.7.91:8888/appointments \
-  -d '{"date":"2014-12-12","time":"13:00:00","priority":"scheduled","visit_type":"post-natal","service_provider_id":125,"service_user_id":345,"clinic_id":1}'\
+  -d '{"appointment":{"date":"2015-03-12","time":"09:00","service_provider_id":"1","service_user_id":"1","clinic_id":"7","priority":"scheduled","visit_type":"ante-natal"}}'\
   -H "Auth-Token: S3cr3t" \
   -H "Content-Type: application/json" \
   -H "Api-Key: 3g3tyh43gswe" \
   -b /tmp/cookies.txt
 
 {
-    "appointments": {
-        "date": "2014-12-12",
-        "id": "1",
-        "service_provider_id": "125",
-        "service_user_id": "345",
+    "appointment": {
+        "clinic_id": 7,
+        "date": "2015-03-12",
+        "id": 62,
+        "links": {
+            "service_options": "/appointments/62/service_options",
+            "service_provider": "service_providers/1",
+            "service_user": "service_users/1"
+        },
         "priority": "scheduled",
-        "time": "13:00:00",
-        "visit_type": "post-natal",
-        "clinic_id": 1
+        "service_option_ids": [],
+        "service_provider_id": 1,
+        "service_user": {
+            "gestation": null,
+            "id": 1,
+            "name": "Shannon Mercury"
+        },
+        "service_user_id": 1,
+        "time": "09:00:00",
+        "visit_logs": [],
+        "visit_type": "post-natal"
     }
 }
+
 ```
 
 ----------
@@ -251,7 +268,7 @@ Show details of appointment looked up by `Appointment ID`
 ####Example
 
 ```
-$ curl -X GET 54.72.7.91:8888/appointments/1  -d '{}' \
+$ curl -X GET 54.72.7.91:8888/appointments/62  -d '{}' \
   -H "Auth-Token: S3cr3t" \
   -H "Api-Key: 3g3tyh43gswe"
 
