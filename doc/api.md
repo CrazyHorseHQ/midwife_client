@@ -20,7 +20,7 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
     - [Get info on all pregnancies - GET /pregnancies](#get-pregnancies)
     - [Get info on a specific pregnancy - GET /pregnancies/:ID](#get-pregnanciesid)
     - [Make an new pregnancy record - POST /pregnancies](#post-pregnancies)
-    - [Update a pregnancy record - PUT /pregnancies](#put-pregnancies)
+    - [Update a pregnancy record - PUT /pregnancies/:ID](#put-pregnanciesid)
 - [Baby Record Resources](#babies-resources)
     - [Get all baby records - GET /babies](#get-babies)
     - [Get a single baby record - GET /babies:ID](#get-babiesid)
