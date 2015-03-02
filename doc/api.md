@@ -11,11 +11,20 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
 	- [/logout](#post-logout)
 - [User Account Management](#user-account-management)
     - [/reset_password](#post-reset_password)
-	- [/reset_passwords/:TOKEN](#put-reset_passwords-token)
+    - [/reset_passwords/:TOKEN](#put-reset_passwords-token)
 - [Appointments](#appointments)
     - [Get info on all appointments - GET /appointments](#get-appointments)
     - [Make an appointment - POST /appointments](#post-appointments)
-    - [Get info on a single appointment - GET /appointments/:APPOINTMENT_ID](#get-appointments_appointment-id)
+    - [Get info on a single appointment - GET /appointments/:APPOINTMENT_ID](#get-appointmentsappointment_id)
+- [Pregnancy Resources](#pregnancies-resource)
+    - [Get info on all pregnancies - GET /pregnancies](#get-pregnancies)
+    - [Get info on a specific pregnancy - GET /pregnancies/:ID](#get-pregnancies_id)
+    - [Make an new pregnancy record - POST /pregnancies](#post-pregnancies)
+    - [Update a pregnancy record - PUT /pregnancies](#put-pregnancies)
+- [Baby Record Resources](#babies-resources)
+    - [Get all baby records - GET /babies](#get-babies)
+    - [Get a single baby record - GET /babies:ID](#get-babies_id)
+    - [Create a new baby record - POST /babies](#post-babies)
 
 
 #Authentication
@@ -1303,12 +1312,10 @@ $ curl -X PUT 54.72.7.91:8888/pregnancies \
 
 #Babies Resources
 
-
 ## GET /babies
 
 ####Notes
-* Get list of babies in the system
-
+* Get a full list of all baby records in the system
 
 ####Input
 ####Output 
@@ -1341,7 +1348,8 @@ $ curl -X GET 54.72.7.91:8888/babies  -d '{}' \
 ## GET /babies:ID
 
 ####Notes
-* Get a specific Baby Data
+* Get a baby record for a given baby in the system
+
 
 ####Input
 ####Output 
