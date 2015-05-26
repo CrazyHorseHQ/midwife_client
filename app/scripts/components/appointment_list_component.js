@@ -79,6 +79,12 @@ SmartClient.AppointmentListComponent = Ember.Component.extend({
     },
     closeModal: function () {
       this.sendAction('closeModal')
+    },
+    markAttended: function (appointment_id) {
+      this.get('store').find('appointment', appointment_id).then(function (ap) {
+        ap.set('attended', true);
+        ap.save();
+      });
     }
   },
 
