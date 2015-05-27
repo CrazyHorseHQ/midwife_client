@@ -1,4 +1,6 @@
 SmartClient.BookingModalComponent = Ember.Component.extend({
+  new_or_return: 'new',
+
   formattedDate: function () {
     return moment(this.get('selectedDate')).format('dddd, Do MMMM YYYY')
   }.property(),
@@ -22,12 +24,19 @@ SmartClient.BookingModalComponent = Ember.Component.extend({
         service_user: this.get('service_user'),
         priority: 'scheduled',
         visit_type: 'ante-natal',
+        return_type: this.get('new_or_return'),
         clinic_id: model.get('id')
       });
 
       new_apt.save().then(function () {
         self.get('aptComponent').sendAction('closeModal')
         self.get('aptComponent').toggleProperty('forceToggle')
+      }, function (data) {
+        if (data.errors) {
+          for (var key in data.errors) {
+            alert(data.errors[key])
+          }
+        }
       });
     }
   }

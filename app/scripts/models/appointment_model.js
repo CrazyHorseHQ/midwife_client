@@ -11,6 +11,7 @@ SmartClient.Appointment = DS.Model.extend({
   priority: DS.attr(),
   visit_type: DS.attr(),
   attended: DS.attr(),
+  return_type: DS.attr(),
   visit_logs: DS.attr(),
   service_option_ids: DS.attr(),
   service_options: DS.hasMany('serviceOption', {async: true}),
