@@ -36,6 +36,10 @@
           <td>{{#if time}}{{time}}{{else}}N/A{{/if}}</td>
         </tr>
         <tr>
+          <td>Type</td>
+          <td>{{radio-button name='booking_type' value='new' checked=new_or_return}} New (30min) {{radio-button name='booking_type' value='returning' checked=new_or_return}} Follow-up (15min)</td>
+        </tr>
+        <tr>
           <td>Email To</td>
           <td>{{service_user.personal_fields.email}}</td>
         </tr>
