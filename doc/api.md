@@ -234,6 +234,7 @@ $ curl -X GET 54.72.7.91:8888/appointments -d '{}' \
 * 'time' of the appointment
 * 'priority' of the appointment. One of: 'drop-in', 'scheduled'.
 * 'visit_type' says if it's "post-natal" or "ante-natal"
+* 'return_type' says if it's a new visit or a return visit. One of ['returning', 'new'] 
 * 'service_provider_id' is the internal ID of the Service Provider trying to book this appointment
 * 'service_user_id' is the internal ID of the client for whom the appointment is for
 * 'clinic_id' is the internal ID of the clinics that are geographically spread across Dublin & [Wicklow](https://www.google.ie/search?q=beautiful+wicklow&es_sm=122&source=lnms&tbm=isch&sa=X&ei=R9nAVK7HDIq2UfeJg_AG&ved=0CAgQ_AUoAQ&biw=1366&bih=643#tbm=isch&q=beautiful+enniskerry&imgdii=_).
@@ -241,7 +242,7 @@ $ curl -X GET 54.72.7.91:8888/appointments -d '{}' \
 ####Example:
 ```
 $ curl -X POST 54.72.7.91:8888/appointments \
-  -d '{"appointment":{"date":"2015-03-12","time":"09:00","service_provider_id":"1","service_user_id":"1","clinic_id":"7","priority":"scheduled","visit_type":"ante-natal"}}'\
+  -d '{"appointment":{"date":"2015-03-12","time":"09:00","service_provider_id":"1","service_user_id":"1","clinic_id":"7","priority":"scheduled","visit_type":"ante-natal", "return_type": "returning"}}'\
   -H "Auth-Token: S3cr3t" \
   -H "Content-Type: application/json" \
   -H "Api-Key: 3g3tyh43gswe" \
@@ -272,6 +273,16 @@ $ curl -X POST 54.72.7.91:8888/appointments \
     }
 }
 
+```
+
+NOTE:
+
+Any validation errors will appear in an errors key like so
+
+```
+"errors": {
+  "Appointment taken": "A slot for a further 15 minute appointment has already been taken"
+}
 ```
 
 ----------
