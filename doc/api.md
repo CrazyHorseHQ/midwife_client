@@ -329,6 +329,9 @@ $ curl -X GET 54.72.7.91:8888/appointments/62  -d '{}' \
 
 ####Input
 
+* 'date' of the appointment
+* 'time' of the appointment
+* 'service_provider_id' is the internal ID of the Service Provider trying to book this appointment
 * 'attended' says if the appointment was attended. Either true or false, false by default until made true.
 
 ####Output
