@@ -37,9 +37,9 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
     - [Get a single baby record - GET /babies:ID](#get-babiesid)
     - [Create a new baby record - POST /babies](#post-babies)
 
-- [Clinic Time Record Resources](#)
-    - [Get times for a clinic and date - GET /clinics/:CLINIC_ID/time_records?date=2015-05-29](#get-babies)
-    - [Update a single clinic's times based on date - PUT /clinics/2/time_records](#get-babiesid)
+- [Clinic Time Record Resources](#clinic-time-records-resource)
+    - [Get times for a clinic and date - GET /clinics/:CLINIC_ID/time_records?date=2015-05-29](#get-clinicsclinic_idtime_recordsdate2015-05-29)
+    - [Update a single clinic's times based on date - PUT /clinics/:CLINIC_ID/time_records](#put-clinicsclinic_idtime_records)
 
 
 #Authentication
