@@ -236,7 +236,6 @@ $ curl -X GET 54.72.7.91:8888/appointments -d '{}' \
 * 'priority' of the appointment. One of: 'drop-in', 'scheduled'.
 * 'visit_type' says if it's "post-natal" or "ante-natal"
 * 'return_type' says if it's a new visit or a return visit. One of ['returning', 'new'] 
-* 'attended' says if the appointment was attended. Either true or false, false by default until made true.
 * 'service_provider_id' is the internal ID of the Service Provider trying to book this appointment
 * 'service_user_id' is the internal ID of the client for whom the appointment is for
 * 'clinic_id' is the internal ID of the clinics that are geographically spread across Dublin & [Wicklow](https://www.google.ie/search?q=beautiful+wicklow&es_sm=122&source=lnms&tbm=isch&sa=X&ei=R9nAVK7HDIq2UfeJg_AG&ved=0CAgQ_AUoAQ&biw=1366&bih=643#tbm=isch&q=beautiful+enniskerry&imgdii=_).
@@ -329,12 +328,15 @@ $ curl -X GET 54.72.7.91:8888/appointments/62  -d '{}' \
  * Update details of appointment looked up by `ID`
 
 ####Input
+
+* 'attended' says if the appointment was attended. Either true or false, false by default until made true.
+
 ####Output
 
 ####Example:
 ```
 $ curl -X PUT 54.72.7.91:8888/appointments/1 \
-  -d '{"date":"2014-12-12","time":"13:00:00","service_provider_id":1}'\
+  -d '{"date":"2014-12-12","time":"13:00:00","service_provider_id":1,"attended":true}'\
   -H "Content-Type: application/json"\
   -H "Auth-Token: S3cr3t" \
   -H "Api-Key: 3g3tyh43gswe" \
