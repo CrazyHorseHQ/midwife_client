@@ -16,7 +16,7 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
     - [Get info on all appointments - GET /appointments](#get-appointments)
     - [Make an appointment - POST /appointments](#post-appointments)
     - [Get info on a single appointment - GET /appointments/:APPOINTMENT_ID](#get-appointmentsappointment_id)
-    - [Update an appointment - PUT /appointments/:APPOINTMENT_ID](#put-appointments)
+    - [Update an appointment - PUT /appointments/:APPOINTMENT_ID](#put-appointmentsappointment_id)
 - [Service Users](#service-users-resource)
     - [Get info on all service users - GET /service_users](#get-service_users)
     - [Get info on a specific  service user - GET /service_users/:ID](#get-service_usersid)
