@@ -37,6 +37,10 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
     - [Get a single baby record - GET /babies:ID](#get-babiesid)
     - [Create a new baby record - POST /babies](#post-babies)
 
+- [Clinic Time Record Resources](#)
+    - [Get times for a clinic and date - GET /clinics/:CLINIC_ID/time_records?date=2015-05-29](#get-babies)
+    - [Update a single clinic's times based on date - PUT /clinics/2/time_records](#get-babiesid)
+
 
 #Authentication
 
@@ -862,6 +866,79 @@ $ curl -X DELETE 54.72.7.91:8888/clinics/1/announcements/2 \
   }
 }
 ```
+
+#Clinic Time Records Resource
+
+These records are updated through the API to allow the hospital to perform reporting on when midwives started and ended their clinics.
+
+## GET /clinics/:CLINIC_ID/time_records?date=2015-05-29
+
+####Notes
+* Get start_time and end_time for a particular date and clinic
+
+
+####Input
+
+* 'date': as a GET param to specify what date the client currently has open
+* 'clinic_id': as part of the resource to specify what clinic to query
+
+####Output 
+
+####Example
+```bash
+$ curl -X GET 54.72.7.91:8888/clinics/1/time_records?date=2015-05-29  -d '{}' \
+  -H "Auth-Token: S3cr3t" \
+  -H "Api-Key: 3g3tyh43gswe" \
+  -H 'Content-Type: application/json'
+
+{
+  "clinic_time_records": [
+    {
+      "id": 1,
+      "start_time": "2015-05-28 13:00:00",
+      "end_time": "2015-05-28 17:00:00",
+      "clinic_id": 2
+    },
+    ...
+  ]
+}
+```
+
+## PUT /clinics/:CLINIC_ID/time_records
+
+####Notes
+* Update start_time and end_time for a clinic and date
+
+
+####Input
+
+* 'date': The date that the client is currently looking at
+* 'start_time': The start time that the client wants to submit
+* 'end_time': The end time that the client wants to submit
+* 'clinic_id': The clinic that the client is currently looking at
+
+####Output 
+
+####Example
+```bash
+$ curl -X PUT 54.72.7.91:8888/clinics/2/time_records  -d '{"date":"2015-06-04","start_time":"2015-06-04 14:00:00","end_time":"2015-06-04 16:00:00"' \
+  -H "Auth-Token: S3cr3t" \
+  -H "Api-Key: 3g3tyh43gswe" \
+  -H 'Content-Type: application/json'
+
+{
+  "clinic_time_record": [
+    {
+      "id": 1,
+      "start_time": "2015-05-28 13:00:00",
+      "end_time": "2015-05-28 17:00:00",
+      "clinic_id": 2
+    },
+    ...
+  ]
+}
+```
+
 ---------
 
 #Service Users Resource
