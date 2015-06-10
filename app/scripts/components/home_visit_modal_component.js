@@ -1,5 +1,5 @@
 SmartClient.HomeVisitModalComponent = Ember.Component.extend({
-  new_or_return: 'new',
+  new_or_return: 'return',
 
   formattedDate: function () {
     return moment(this.get('selectedDate')).format('dddd, Do MMMM YYYY')
