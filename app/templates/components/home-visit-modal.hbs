@@ -1,0 +1,58 @@
+{{#modal-dialog action="closeModal"}}
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" {{action "closeModal"}}>
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <h2 class="modal-title">
+      {{#if time}}
+        Appointment Slot - {{#if service_user}}Summary{{else}}{{time}}{{/if}}
+      {{else}}
+        Home Visit - {{#if service_user}}Summary{{else}}Create{{/if}}
+      {{/if}}
+    </h2>
+  </div>
+  <div class="modal-body">
+    {{#unless service_user}}
+      {{auto-search store=store resultSelected='suChosen' placeholderString='Hospital Number. Or name with/without date-of-birth'}}
+    {{/unless}}
+
+    {{#if service_user}}
+      <table class="table">
+        <tr>
+          <td>Service User</td>
+          <td>{{service_user.personal_fields.name}}</td>
+        </tr>
+        <tr>
+          <td>Served By</td>
+          <td>{{service_option.name}}</td>
+        </tr>
+        <tr>
+          <td>Date</td>
+          <td>{{formattedDate}}</td>
+        </tr>
+        <tr>
+          <td>Time</td>
+          <td>{{#if time}}{{time}}{{else}}N/A{{/if}}</td>
+        </tr>
+        <tr>
+          <td>Email To</td>
+          <td>{{service_user.personal_fields.email}}</td>
+        </tr>
+        <tr>
+          <td>SMS To</td>
+          <td>{{service_user.personal_fields.mobile_phone}}</td>
+        </tr>
+      </table>
+    {{/if}}
+  </div>
+  <div class="modal-footer">
+    {{#if service_user}}
+      <button class="btn btn-inverse btn-small btn-default" {{action 'searchAgain'}}><i class="icon-white icon-search"></i> Search again</button>
+    {{/if}}
+    <button type="button" class="btn btn-default" data-dismiss="modal" {{action "closeModal"}}>Close</button>
+    {{#if service_user}}
+      <button type="button" class="btn btn-primary" {{action "bookServiceUser"}}>Book</button>
+    {{/if}}
+  </div>
+{{/modal-dialog}}

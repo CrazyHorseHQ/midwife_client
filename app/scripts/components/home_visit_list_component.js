@@ -42,7 +42,7 @@ SmartClient.HomeVisitListComponent = Ember.Component.extend({
       }));
     },
     openBookingModal: function (time) {
-      this.sendAction('openModal', 'components/booking-modal', SmartClient.BookingModalComponent.create({
+      this.sendAction('openModal', 'components/booking-modal', SmartClient.HomeVisitModalComponent.create({
         store: this.get('store'),
         model: this.get('model'),
         aptComponent: this,
