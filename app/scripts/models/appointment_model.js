@@ -29,6 +29,10 @@ SmartClient.Appointment = DS.Model.extend({
   isDropIn: function() {
     return this.get('priority') == 'drop-in';
   }.property('priority'),
+
+  isHomeVisit: function() {
+    return this.get('priority') == 'home-visit';
+  }.property('priority'),
 });
 
 // probably should be mixed-in...
