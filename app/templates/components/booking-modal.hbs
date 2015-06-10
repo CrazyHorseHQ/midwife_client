@@ -4,7 +4,13 @@
       <span aria-hidden="true">&times;</span>
       <span class="sr-only">Close</span>
     </button>
-    <h2 class="modal-title">Appointment Slot - {{#if service_user}}Summary{{else}}{{time}}{{/if}}</h2>
+    <h2 class="modal-title">
+      {{#if time}}
+        Appointment Slot - {{#if service_user}}Summary{{else}}{{time}}{{/if}}
+      {{else}}
+        Home Visit - {{#if service_user}}Summary{{else}}Create{{/if}}
+      {{/if}}
+    </h2>
   </div>
   <div class="modal-body">
     {{#unless service_user}}
@@ -18,8 +24,8 @@
           <td>{{service_user.personal_fields.name}}</td>
         </tr>
         <tr>
-          <td>Location</td>
-          <td>{{clinic.name}}</td>
+          <td>Served By</td>
+          <td>{{service_option.name}}</td>
         </tr>
         <tr>
           <td>Date</td>
@@ -27,11 +33,7 @@
         </tr>
         <tr>
           <td>Time</td>
-          <td>{{time}}</td>
-        </tr>
-        <tr>
-          <td>Type</td>
-          <td>{{radio-button name='booking_type' value='new' checked=new_or_return}} New (30min) {{radio-button name='booking_type' value='returning' checked=new_or_return}} Follow-up (15min)</td>
+          <td>{{#if time}}{{time}}{{else}}N/A{{/if}}</td>
         </tr>
         <tr>
           <td>Email To</td>

@@ -1,0 +1,81 @@
+{{#if showList}}
+    <b>You can use the buttons below to jump quickly between the next 6 weeks for this clinic:</b>
+    <div class="btn-toolbar" role="toolbar">
+      <div class="btn-group-justified">
+        {{#each days.firstThree}}
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" {{action 'dateChosen' date}}>In {{day}} days - {{formattedDate}}</button>
+          </div>
+        {{/each}}
+      </div>
+      <div class="btn-group-justified">
+        {{#each days.secondThree}}
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" {{action 'dateChosen' date}}>In {{day}} days - {{formattedDate}}</button>
+          </div>
+        {{/each}}
+      </div>
+      <div class="btn-group-justified">
+        {{#each days.thirdThree}}
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" {{action 'dateChosen' date}}>In {{day}} days - {{formattedDate}}</button>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+  <a href="" class="pull-right" {{action openPicker}}>Choose a particular date</a>
+  {{date-field selectedDate=selectedDate defaultDate=defaultDate type=showPicker}}
+
+  <br/>
+  <table class="table">
+    <thead>
+      <h3 style="text-align: center;">{{selectedDateFormatted}}</h3>
+      <ul class="pager">
+        <li {{action dateForward}}><a href=""><span class="glyphicon glyphicon-step-backward"></span>Prev</a></li>
+        <li {{action dateBackward}}><a href="">Next<span class="glyphicon glyphicon-step-forward"></span></a></li>
+      </ul>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="2">
+          <div {{action 'openBookingModal' }}
+            <span class="glyphicon glyphicon-plus-sign"></span> Add New
+          </div>
+        <td>
+        <td></td>
+        <td></td>
+      </tr>
+      {{#each appointments}}
+        <tr>
+          <td>
+            {{time}}
+          </td>
+          <td>
+            {{#link-to 'service_user.personal' service_user.id}}
+              {{service_user.personal_fields.name}}
+            {{/link-to}}
+          </td>
+          <td>
+            {{service_user.gestation}}
+          </td>
+          <td>
+            <button class="btn btn-xs btn-info" {{action 'openAppointmentModal' appointment}}>
+              <span class="glyphicon glyphicon-edit"></span> Change
+            </button>
+          </td>
+          {{#if appointment.attended}}
+            <td>Attended</td>
+          {{else}}
+            <td>
+              Not attended
+              <button class="btn btn-xs btn-info" {{action 'markAttended' appointment.id}}>
+                <span class="glyphicon glyphicon-ok"></span> Mark Attended
+              </button>
+            </td>
+          {{/if}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{/if}}

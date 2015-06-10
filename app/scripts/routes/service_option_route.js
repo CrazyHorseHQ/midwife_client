@@ -4,6 +4,13 @@ SmartClient.ServiceOptionRoute = SmartClient.AuthenticatedRoute.extend({
     return sos.findBy('id', params.service_option_id);
   },
 
+  renderTemplate: function () {
+    this.render('service_option', {
+      into: 'application',
+      outlet: 'content_column'
+    })
+  },
+
   setupController: function (controller, model) {
     controller.setProperties({
       model: model,
