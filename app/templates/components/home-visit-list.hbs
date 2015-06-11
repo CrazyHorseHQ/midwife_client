@@ -38,7 +38,7 @@
     </thead>
     <tbody>
       <tr>
-        <td colspan="2">
+        <td>
           <div {{action 'openBookingModal' }}
             <span class="glyphicon glyphicon-plus-sign"></span> Add New
           </div>
@@ -49,9 +49,6 @@
       {{#each appointments}}
         <tr>
           <td>
-            {{time}}
-          </td>
-          <td>
             {{#link-to 'service_user.personal' service_user.id}}
               {{service_user.personal_fields.name}}
             {{/link-to}}
@@ -60,20 +57,14 @@
             {{service_user.gestation}}
           </td>
           <td>
-            <button class="btn btn-xs btn-info" {{action 'openAppointmentModal' appointment}}>
+            <button class="btn btn-xs btn-info" {{action 'openAppointmentModal' this}}>
               <span class="glyphicon glyphicon-edit"></span> Change
             </button>
           </td>
-          {{#if appointment.attended}}
-            <td>Attended</td>
-          {{else}}
-            <td>
-              Not attended
-              <button class="btn btn-xs btn-info" {{action 'markAttended' appointment.id}}>
-                <span class="glyphicon glyphicon-ok"></span> Mark Attended
-              </button>
-            </td>
-          {{/if}}
+          <td>
+            {{service_user.personal_fields.home_address}} -
+            {{service_user.personal_fields.home_phone}}
+          </td>
         </tr>
       {{/each}}
     </tbody>

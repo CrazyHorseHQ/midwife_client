@@ -30,7 +30,7 @@ SmartClient.HomeVisitListComponent = Ember.Component.extend({
     openAppointmentModal: function (appointment) {
       var selected_time = moment("2010-12-12T" + appointment.get('time')).format("HH:mm");
 
-      this.sendAction('openModal', 'components/appointment-modal', SmartClient.AppointmentModalComponent.create({
+      this.sendAction('openModal', 'components/home-visit-edit-modal', SmartClient.HomeVisitEditModalComponent.create({
         store: this.get('store'),
         model: appointment,
         selected_sp: appointment.get('service_provider'),
@@ -42,7 +42,7 @@ SmartClient.HomeVisitListComponent = Ember.Component.extend({
       }));
     },
     openBookingModal: function (time) {
-      this.sendAction('openModal', 'components/booking-modal', SmartClient.HomeVisitModalComponent.create({
+      this.sendAction('openModal', 'components/home-visit-modal', SmartClient.HomeVisitModalComponent.create({
         store: this.get('store'),
         model: this.get('model'),
         aptComponent: this,
