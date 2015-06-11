@@ -6,6 +6,7 @@ SmartClient.AppointmentSerializer = DS.ActiveModelSerializer.extend({
     });
 
     //setup the relations
+    json['service_option_id'] = record.get('service_option.id');
     json['service_user_id'] = record.get('service_user.id');
     json['service_provider_id'] = record.get('service_provider.id');
     // Delete

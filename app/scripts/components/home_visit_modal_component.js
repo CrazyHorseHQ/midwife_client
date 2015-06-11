@@ -20,6 +20,7 @@ SmartClient.HomeVisitModalComponent = Ember.Component.extend({
       var new_apt = this.get('store').createRecord('appointment', {
         date: this.get('selectedDate'),
         time: this.get('time'),
+        service_option: model,
         service_provider: sp,
         service_user: this.get('service_user'),
         priority: 'home-visit',
