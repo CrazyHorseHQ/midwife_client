@@ -24,8 +24,20 @@
         </td>
       </tr>
       <tr>
+        <td>Phone</td>
+        <td>
+          {{model.service_user.personal_fields.home_phone}}
+        </td>
+      </tr>
+      <tr>
         <td>Location</td>
-        <td>{{model.clinic.name}}</td>
+        <td>
+          {{model.service_user.personal_fields.home_address}} <br/>
+          {{model.service_user.personal_fields.home_county}} <br/>
+          {{#if model.service_user.personal_fields.directions}}
+            Directions: {{model.service_user.personal_fields.directions}} <br/>
+          {{/if}}
+        </td>
       </tr>
       <tr>
         <td>Date</td>
