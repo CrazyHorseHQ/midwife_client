@@ -77,7 +77,7 @@ SmartClient.HomeVisitListComponent = Ember.Component.extend({
     var collection = [],
         currentDayDate = moment(this.get('defaultDate')).add(1, 'day');
 
-    for (var i = 0;i < 7;i++) {
+    for (var i = 0;i < 10;i++) {
       collection.push({
         day: i + 1,
         date: currentDayDate.format("YYYY-MM-DD"),
@@ -90,7 +90,8 @@ SmartClient.HomeVisitListComponent = Ember.Component.extend({
     return {
       firstThree: collection.slice(0, 3),
       secondThree: collection.slice(3, 6),
-      thirdThree: collection.slice(6, 7)
+      thirdThree: collection.slice(6, 9),
+      fourthThree: collection.slice(9, 10),
     }
   }.property(),
 
