@@ -261,9 +261,6 @@ module.exports = function (grunt) {
           dev: {
             options: {
               variables: {
-                'TEST': false,
-                'UNIT_TEST': false,
-                'INTEGRATION_TEST': false,
                 'environment': 'development',
                 'host': 'http://127.0.0.1:5000',
                 'apiKey': '<%= yeoman.fs.readFileSync(".api_key") %>'
@@ -273,9 +270,6 @@ module.exports = function (grunt) {
           prod: {
             options: {
               variables: {
-                'TEST': false,
-                'UNIT_TEST': false,
-                'INTEGRATION_TEST': false,
                 'environment': 'production',
                 'host': 'http://54.72.7.91:8888',
                 'apiKey': '<%= yeoman.fs.readFileSync(".prod_api_key") %>'
