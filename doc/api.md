@@ -39,9 +39,9 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
 - [Clinic Time Record Resources](#clinic-time-records-resource)
     - [Get times for a clinic and date - GET /clinics/:CLINIC_ID/time_records?date=2015-05-29](#get-clinicsclinic_idtime_recordsdate2015-05-29)
     - [Update a single clinic's times based on date - PUT /clinics/:CLINIC_ID/time_records](#put-clinicsclinic_idtime_records)
-- [Anti D History Resources](#)
-    - [Get history for a pregnancy - GET /anti_dhistories?pregnancy_id=1](#)
-    - [Get info for a particular history object - GET /anti_dhistories/1](#)
+- [Anti D History Resources](#anti-d-histories-resources)
+    - [Get history for a pregnancy - GET /anti_dhistories?pregnancy_id=1](#get-anti_dhistoriespregnancy_id1)
+    - [Get info for a particular history object - GET /anti_dhistories/1](#get-anti_dhistories1)
 
 #Authentication
 
@@ -1579,7 +1579,7 @@ $ curl -X GET 54.72.7.91:8888/anti_dhistories?pregnancy_id=1  -d '{}' \
 ```
 ----------
 
-## GET /anti_dhistories?pregnancy_id=1
+## GET /anti_dhistories/1
 
 ####Notes
 * Get a list of all history for a particular id
