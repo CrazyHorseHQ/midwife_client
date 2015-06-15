@@ -35,15 +35,24 @@
         <td>{{editable-select selectValue=personal_fields.home_type selectContent=home_types}}</td>
       </tr>
       <tr>
-        <td>Address</td>
+        <td>Address Line 1</td>
         <td>
           {{view SmartClient.InplaceTextArea contentBinding="personal_fields.home_address_line1"}}
+        </td>
+      </tr>
+      <tr>
+        <td>Address Line 2</td>
+        <td>
           {{view SmartClient.InplaceTextArea contentBinding="personal_fields.home_address_line2"}}
         </td>
       </tr>
       <tr>
         <td>Home Post Code</td>
         <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.home_post_code"}}</td>
+      </tr>
+      <tr>
+        <td>Home City</td>
+        <td>{{view SmartClient.InplaceTextField contentBinding="personal_fields.home_city"}}</td>
       </tr>
       <tr>
         <td>Home county</td>
