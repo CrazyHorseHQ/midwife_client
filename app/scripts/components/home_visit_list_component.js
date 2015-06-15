@@ -28,12 +28,18 @@ SmartClient.HomeVisitListComponent = Ember.Component.extend({
       this.set('selectedDate', date)
     },
     openAppointmentModal: function (appointment) {
-      var selected_time = moment("2010-12-12T" + appointment.get('time')).format("HH:mm");
+      var selected_time = moment("2010-12-12T" + appointment.get('time')).format("HH:mm"),
+          sp = appointment.get('service_provider');
+      // fall back to the current user
+      if (Ember.isEmpty(sp)) {
+        sp = SmartClient.__container__.lookup('controller:application').get('currentUser');
+      }
+
 
       this.sendAction('openModal', 'components/home-visit-edit-modal', SmartClient.HomeVisitEditModalComponent.create({
         store: this.get('store'),
         model: appointment,
-        selected_sp: appointment.get('service_provider'),
+        selected_sp: sp,
         selected_time: selected_time,
         aptComponent: this,
         service_providers: this.get('service_providers'),
