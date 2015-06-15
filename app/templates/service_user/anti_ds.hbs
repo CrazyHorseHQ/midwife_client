@@ -12,21 +12,17 @@
         {{#each pregnancy in model.pregnancies}}
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">{{pregnancy.gestation}} - {{pregnancy.created_at}}</h3>
+              <h3 class="panel-title">{{pregnancy.gestation}}</h3>
             </div>
 
             <table class="table">
-              <thead>
-                <tr>
-                  <td>Value</td>
-                  <td>Created At</td>
-                </tr>
-              </thead>
+              <th>Value</th>
+              <th>Time changed at</th>
               <tbody>
                 {{#each anti_d in pregnancy.anti_d_histories}}
                   <tr>
                     <td>{{anti_d.anti_d}}</td>
-                    <td>{{anti_d.created_at}}</td>
+                    <td>{{anti_d.formatted_time}}</td>
                   </tr>
                 {{/each}}
               </tbody>

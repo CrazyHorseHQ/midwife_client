@@ -54,11 +54,16 @@
               </button>
             </td>
             {{#if appointment.attended}}
-              <td>Attended</td>
+              <td>
+                Attended
+                <button class="btn btn-xs btn-info" {{action 'toggleAttended' appointment.id}}>
+                  <span class="glyphicon glyphicon-ok"></span> Mark Unattended
+                </button>
+              </td>
             {{else}}
               <td>
                 Not attended
-                <button class="btn btn-xs btn-info" {{action 'markAttended' appointment.id}}>
+                <button class="btn btn-xs btn-info" {{action 'toggleAttended' appointment.id}}>
                   <span class="glyphicon glyphicon-ok"></span> Mark Attended
                 </button>
               </td>
