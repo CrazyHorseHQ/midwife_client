@@ -7,7 +7,8 @@ SmartClient.HomeVisitListComponent = Ember.Component.extend({
   appointments: function () {
     return this.get('store').find('appointment', {
       priority: 'home-visit',
-      date: this.get('selectedDate')
+      date: this.get('selectedDate'),
+      service_option_id: this.get('model.id')
     });
   }.property('selectedDate', 'forceToggle'),
 
