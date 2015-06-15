@@ -36,11 +36,12 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
     - [Get all baby records - GET /babies](#get-babies)
     - [Get a single baby record - GET /babies:ID](#get-babiesid)
     - [Create a new baby record - POST /babies](#post-babies)
-
 - [Clinic Time Record Resources](#clinic-time-records-resource)
     - [Get times for a clinic and date - GET /clinics/:CLINIC_ID/time_records?date=2015-05-29](#get-clinicsclinic_idtime_recordsdate2015-05-29)
     - [Update a single clinic's times based on date - PUT /clinics/:CLINIC_ID/time_records](#put-clinicsclinic_idtime_records)
-
+- [Anti D History Resources](#)
+    - [Get history for a pregnancy - GET /anti_dhistories?pregnancy_id=1](#)
+    - [Get info for a particular history object - GET /anti_dhistories/1](#)
 
 #Authentication
 
@@ -1547,3 +1548,60 @@ $ curl -X PUT 54.72.7.91:8888/babies/1 \
 }
 ```
 -----------
+
+#Anti D Histories Resources
+
+## GET /anti_dhistories?pregnancy_id=1
+
+####Notes
+* Get a list of all history for a pregnancy
+
+####Input
+####Output 
+
+####Example
+```bash
+$ curl -X GET 54.72.7.91:8888/anti_dhistories?pregnancy_id=1  -d '{}' \
+  -H "Auth-Token: S3cr3t" \
+  -H "Api-Key: 3g3tyh43gswe"
+
+{
+  "anti_d_histories": [
+    {
+      "id": 1,
+      "anti_d": "No",
+      "created_at": "2015-06-15T14:59:09.463984+00:00",
+      "pregnancy_id": 1
+    },
+    ...
+  ]
+}
+```
+----------
+
+## GET /anti_dhistories?pregnancy_id=1
+
+####Notes
+* Get a list of all history for a particular id
+
+####Input
+####Output 
+
+####Example
+```bash
+$ curl -X GET 54.72.7.91:8888/anti_dhistories/1  -d '{}' \
+  -H "Auth-Token: S3cr3t" \
+  -H "Api-Key: 3g3tyh43gswe"
+
+{
+  "anti_d_histories": [
+    {
+      "id": 1,
+      "anti_d": "No",
+      "created_at": "2015-06-15T14:59:09.463984+00:00",
+      "pregnancy_id": 1
+    },
+    ...
+  ]
+}
+```
