@@ -51,5 +51,11 @@ SmartClient.ApplicationRoute = Ember.Route.extend({
         parentView: 'application'
       });
     },
+    modal_should_open: function (id) {
+      Ember.$("#" + id).modal('show');
+    },
+    modal_should_close: function (id) {
+      Ember.$("#" + id).modal('hide');
+    }
   }
 });

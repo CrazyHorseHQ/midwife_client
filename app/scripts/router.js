@@ -22,6 +22,7 @@ SmartClient.Router.map(function () {
     this.resource('service_user.ante', {path: '/ante'})
     this.resource('service_user.post', {path: '/post'})
     this.resource('service_user.parity', {path: '/parity'})
+    this.resource('service_user.anti_ds', {path: '/anti_ds'})
 
     this.resource('service_user.service_options', {path: '/service_options'}, function() {
       this.resource('service_user.service_option', {path: '/:service_option_id'}, function () {

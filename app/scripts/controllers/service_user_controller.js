@@ -41,6 +41,12 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
     {label: "3 degree", value: "3 degree"},
     {label: "4 degree", value: "4 degree"}
   ],
+  anti_d_choices: [
+    {label: "Yes", value: "Yes"},
+    {label: "No", value: "No"},
+    {label: "Refused", value: "Refused"},
+    {label: "Date of Injection", value: "Date of Injection"}
+  ],
 
   actions: {
     save: function(){

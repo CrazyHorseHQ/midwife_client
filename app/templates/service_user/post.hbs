@@ -20,7 +20,16 @@
       </tr>
       <tr>
         <td>Anti D</td>
-        <td>{{view SmartClient.InplaceTextField contentBinding="current_pregnancy.anti_d"}}</td>
+        <td>{{editable-select selectValue=current_pregnancy.anti_d selectContent=anti_d_choices}}</td>
+        <td>
+          <a class="pull-right">
+            <h3 style="display: inline;" data-toggle="modal" data-target="#anti_d_su_{{unbound model.id}}">
+              <span class="glyphicon glyphicon-info-sign"></span>
+            </h3>
+          </a>
+
+          {{render "service_user/anti_ds" model}}
+        </td>
       </tr>
       <tr>
         <td>Feeding</td>

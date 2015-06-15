@@ -9,5 +9,6 @@ SmartClient.Pregnancy = DS.Model.extend({
   last_menstrual_period: DS.attr(),
   created_at: DS.attr(),
   babies: DS.hasMany('baby'),
+  anti_d_histories: DS.hasMany('antiDHistory'),
   service_user: DS.belongsTo('serviceUser')
 });
