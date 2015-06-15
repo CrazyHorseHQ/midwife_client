@@ -18,11 +18,13 @@
             <table class="table">
               <th>Value</th>
               <th>Time changed at</th>
+              <th>Changed by</th>
               <tbody>
                 {{#each anti_d in pregnancy.anti_d_histories}}
                   <tr>
                     <td>{{anti_d.anti_d}}</td>
                     <td>{{anti_d.formatted_time}}</td>
+                    <td>{{anti_d.service_provider.name}}</td>
                   </tr>
                 {{/each}}
               </tbody>
