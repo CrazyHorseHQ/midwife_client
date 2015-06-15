@@ -36,7 +36,10 @@
       </tr>
       <tr>
         <td>Address</td>
-        <td>{{view SmartClient.InplaceTextArea contentBinding="personal_fields.home_address"}}</td>
+        <td>
+          {{view SmartClient.InplaceTextArea contentBinding="personal_fields.home_address_line1"}}
+          {{view SmartClient.InplaceTextArea contentBinding="personal_fields.home_address_line2"}}
+        </td>
       </tr>
       <tr>
         <td>Home Post Code</td>

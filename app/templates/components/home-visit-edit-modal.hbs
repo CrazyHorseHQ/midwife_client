@@ -32,7 +32,8 @@
       <tr>
         <td>Location</td>
         <td>
-          {{model.service_user.personal_fields.home_address}} <br/>
+          {{model.service_user.personal_fields.home_address_line1}} <br/>
+          {{model.service_user.personal_fields.home_address_line2}} <br/>
           {{model.service_user.personal_fields.home_county}} <br/>
           {{#if model.service_user.personal_fields.directions}}
             Directions: {{model.service_user.personal_fields.directions}} <br/>

@@ -11,7 +11,8 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
         personal_fields: {
           name: self.get('name'),
           email: self.get('email'),
-          home_address: self.get('home_address'),
+          home_address_line1: self.get('home_address_line1'),
+          home_address_line2: self.get('home_address_line2'),
           home_type: self.get('home_type'),
           home_county: self.get('home_county'),
           home_post_code: self.get('home_post_code'),
@@ -31,7 +32,8 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
         self.setProperties({
           'name': '',
           'email': '',
-          'home_address': '',
+          'home_address_line1': '',
+          'home_address_line2': '',
           'home_type': '',
           'home_county': '',
           'home_post_code': '',

@@ -69,8 +69,11 @@
             </button>
           </td>
           <td>
-            {{service_user.personal_fields.home_address}} -
-            {{service_user.personal_fields.home_phone}}
+            {{service_user.personal_fields.home_address_line1}}
+            {{#if service_user.personal_fields.home_post_code}}
+              , {{service_user.personal_fields.home_post_code}}
+            {{/if}}
+            , {{service_user.personal_fields.home_city}}
           </td>
         </tr>
       {{/each}}
