@@ -986,6 +986,7 @@ $ curl -X GET 54.72.7.91:8888/service_users  -d '{}' \
   ],
   "pregnancies": [...],
   "babies": [...],
+  "anti_d_histories": [...]
 }
 ```
 -----------
@@ -1048,6 +1049,7 @@ $ curl -X GET 54.72.7.91:8888/service_users/1  -d '{}' \
   ],
   "pregnancies": [ ... ],
   "babies": [ ... ],
+  "anti_d_histories": [...]
 }
 ```
 
