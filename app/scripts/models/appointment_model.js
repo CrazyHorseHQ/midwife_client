@@ -2,6 +2,8 @@ SmartClient.Appointment = DS.Model.extend({
   //model attr here
   date: DS.attr(),
   time: DS.attr(),
+  service_option_id: DS.attr(),
+  service_option: DS.belongsTo('ServiceOption', {async: true}),
   service_provider_id: DS.attr(),
   service_provider: DS.belongsTo('ServiceProvider', {async: true}),
   service_user_id: DS.attr(),
@@ -10,6 +12,8 @@ SmartClient.Appointment = DS.Model.extend({
   clinic: DS.belongsTo('clinic'),
   priority: DS.attr(),
   visit_type: DS.attr(),
+  attended: DS.attr(),
+  return_type: DS.attr(),
   visit_logs: DS.attr(),
   service_option_ids: DS.attr(),
   service_options: DS.hasMany('serviceOption', {async: true}),
@@ -26,6 +30,10 @@ SmartClient.Appointment = DS.Model.extend({
 
   isDropIn: function() {
     return this.get('priority') == 'drop-in';
+  }.property('priority'),
+
+  isHomeVisit: function() {
+    return this.get('priority') == 'home-visit';
   }.property('priority'),
 });
 

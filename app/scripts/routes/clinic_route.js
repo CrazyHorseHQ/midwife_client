@@ -5,13 +5,6 @@ SmartClient.ClinicRoute = SmartClient.AuthenticatedRoute.extend({
     return clinics_model.findBy('id', params.clinic_id)
   },
 
-  setupController: function (controller, model) {
-    controller.setProperties({
-      model: model,
-      suModel: null,
-    })
-  },
-
   renderTemplate: function () {
     this.render('clinic', {
       into: 'application',

@@ -1,5 +1,5 @@
-SmartClient.BookingModalComponent = Ember.Component.extend({
-  new_or_return: 'new',
+SmartClient.HomeVisitModalComponent = Ember.Component.extend({
+  new_or_return: 'return',
 
   formattedDate: function () {
     return moment(this.get('selectedDate')).format('dddd, Do MMMM YYYY')
@@ -20,12 +20,12 @@ SmartClient.BookingModalComponent = Ember.Component.extend({
       var new_apt = this.get('store').createRecord('appointment', {
         date: this.get('selectedDate'),
         time: this.get('time'),
+        service_option: model,
         service_provider: sp,
         service_user: this.get('service_user'),
-        priority: 'scheduled',
+        priority: 'home-visit',
         visit_type: 'ante-natal',
         return_type: this.get('new_or_return'),
-        clinic_id: model.get('id')
       });
 
       new_apt.save().then(function () {

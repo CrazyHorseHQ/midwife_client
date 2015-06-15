@@ -1,1 +1,7 @@
+{{#if home_visit}}
+  <div class="well">
+    <h2>Appointments for {{name}}</h2>
+    {{home-visit-list model=model store=store showList=true service_user=suModel forceToggle=forceToggle openModal="openModal" closeModal="closeModal"}}
+  </div>
+{{/if}}
 {{outlet}}
