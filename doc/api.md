@@ -1584,7 +1584,9 @@ $ curl -X GET 54.72.7.91:8888/anti_dhistories?pregnancy_id=1  -d '{}' \
       "id": 1,
       "anti_d": "No",
       "created_at": "2015-06-15T14:59:09.463984+00:00",
-      "pregnancy_id": 1
+      "pregnancy_id": 1,
+      "service_provider_id": 1,
+      "service_provider_name": "John"
     },
     ...
   ]
@@ -1612,7 +1614,9 @@ $ curl -X GET 54.72.7.91:8888/anti_dhistories/1  -d '{}' \
       "id": 1,
       "anti_d": "No",
       "created_at": "2015-06-15T14:59:09.463984+00:00",
-      "pregnancy_id": 1
+      "pregnancy_id": 1,
+      "service_provider_id": 1,
+      "service_provider_name": "John"
     },
     ...
   ]
