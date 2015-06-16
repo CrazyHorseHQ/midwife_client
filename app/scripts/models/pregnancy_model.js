@@ -10,5 +10,6 @@ SmartClient.Pregnancy = DS.Model.extend({
   created_at: DS.attr(),
   babies: DS.hasMany('baby'),
   anti_d_histories: DS.hasMany('antiDHistory'),
+  notes: DS.hasMany('pregnancyNote', {async: true}),
   service_user: DS.belongsTo('serviceUser')
 });

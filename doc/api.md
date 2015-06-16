@@ -972,9 +972,11 @@ $ curl -X GET 54.72.7.91:8888/service_users  -d '{}' \
       "id": 1,
       "hospital_number": "H2345245",
       "personal_fields": {
-        "home_address": "Scapemanus\nNavan\nCo Meath",
+        "home_address_line1": "Scapemanus",
+        "home_address_line2": "Navan\nCo Meath",
         "home_type": "apartment",
         "home_county": "Dublin",
+        "home_city": "Dublin",
         "home_post_code": "D2",
         "directions": "Turn left at the thing",
         "dob": "1988-04-03",
@@ -1035,9 +1037,11 @@ $ curl -X GET 54.72.7.91:8888/service_users/1  -d '{}' \
       "id": 1,
       "hospital_number": "H2345245",
       "personal_fields": {
-        "home_address": "Scapemanus\nNavan\nCo Meath",
+        "home_address_line1": "Scapemanus Meath",
+        "home_address_line2": "Navan\nCo Meath",
         "home_type": "apartment",
         "home_county": "Dublin",
+        "home_city": "Dublin",
         "home_post_code": "D2",
         "directions": "Turn left at the thing",
         "dob": "1988-04-03",
@@ -1069,7 +1073,7 @@ $ curl -X GET 54.72.7.91:8888/service_users/1  -d '{}' \
 ####Example
 ```
 $ curl -X POST 54.72.7.91:8888/service_users \
-  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"},"personal_fields":{"home_address":"Scapemanus\nNavan\nCo Meath", "home_post_code": "D2", "home_type": "apartment", "home_county": "Dublin","directions": "Turn left at the thing","dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234","name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
+  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"},"personal_fields":{"home_address_line1":"Scapemanus", "home_address_line2": "Navan co Meath", "home_post_code": "D2", "home_type": "apartment", "home_county": "Dublin", "home_city": "Dublin","directions": "Turn left at the thing","dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234","name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
   -H "Content-Type: application/json" \
   -H "Api-Key: 3g3tyh43gswe" \
   -H "Auth-Token: S3cr3t" \
@@ -1083,9 +1087,11 @@ $ curl -X POST 54.72.7.91:8888/service_users \
     "id": 1,
     "hospital_number": "H2345245",
     "personal_fields": {
-      "home_address": "Scapemanus\nNavan\nCo Meath",
+      "home_address_line1": "Scapemanus",
+      "home_address_line2": "Navan\nCo Meath",
       "home_type": "apartment",
       "home_county": "Dublin",
+      "home_city": "Dublin",
       "home_post_code": "D2",
       "directions": "Turn left at the thing",
       "dob": "1988-04-03",
@@ -1113,7 +1119,7 @@ $ curl -X POST 54.72.7.91:8888/service_users \
 ####Example
 ```
 $ curl -X PUT 54.72.7.91:8888/service_users/1 \
-  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"},"personal_fields":{"home_address":"Scapemanus\nNavan\nCo Meath","directions": "Turn left at the thing","dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234","name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
+  -d '{"service_user":{"hospital_number":"H2345245", "clinical_fields":{"blood_type":"A+","estimated_delivery_date":"2015-03-03"},"personal_fields":{"home_address_line1":"Scapemanus", "home_addresS_line2": "Navan, Co Meath","directions": "Turn left at the thing","dob": "1988-04-03","email":"smyth@gmail.com","home_phone":"0852351234","mobile_phone": "0852351234","name": "John Smyth","next_of_kin_phone": "0852351234", "next_of_kin_name": "John Smith"}}}'\
   -H "Content-Type: application/json" \
   -H "Api-Key: 3g3tyh43gswe" \
   -H "Auth-Token: S3cr3t" \
@@ -1127,9 +1133,11 @@ $ curl -X PUT 54.72.7.91:8888/service_users/1 \
     "id": 1,
     "hospital_number": "H2345245",
     "personal_fields": {
-      "home_address": "Scapemanus\nNavan\nCo Meath",
+      "home_address_line1": "Scapemanus",
+      "home_address_line2": "Navan\nCo Meath",
       "home_type": "apartment",
       "home_county": "Dublin",
+      "home_city": "Dublin",
       "home_post_code": "D2",
       "directions": "Turn left at the thing",
       "dob": "1988-04-03",
@@ -1627,7 +1635,7 @@ $ curl -X GET http://localhost:5000/pregnancies/1/notes \
   -H "Auth-Token: TEST"
 
 {
-    "notes": [
+    "pregnancy_notes": [
         {
             "created_at": "2015-06-16",
             "id": 2,
@@ -1669,7 +1677,7 @@ $ curl -X POST http://localhost:5000/pregnancies/1/notes \
   -d '{"note":{"note": "test"}}' \
 
 {
-    "note": {
+    "pregnancy_note": {
         "created_at": "2015-06-16",
         "id": 4,
         "note": "test",
