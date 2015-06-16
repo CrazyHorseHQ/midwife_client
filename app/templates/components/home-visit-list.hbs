@@ -52,6 +52,7 @@
         <td>
         <td></td>
         <td></td>
+        <td></td>
       </tr>
       {{#each appointments}}
         <tr>
@@ -74,6 +75,13 @@
               , {{service_user.personal_fields.home_post_code}}
             {{/if}}
             , {{service_user.personal_fields.home_city}}
+          </td>
+          <td>
+            {{#if pregnancy_notes}}
+              <div {{action 'openNotesModal' this}}
+                <span class="glyphicon glyphicon-list"></span> Notes
+              </div>
+            {{/if}}
           </td>
         </tr>
       {{/each}}

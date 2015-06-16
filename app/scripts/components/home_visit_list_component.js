@@ -28,6 +28,12 @@ SmartClient.HomeVisitListComponent = Ember.Component.extend({
     dateChosen: function (date) {
       this.set('selectedDate', date)
     },
+    openNotesModal: function(appointment) {
+      this.sendAction('openModal', 'components/pregnancy-notes-modal', SmartClient.PregnancyNotesModalComponent.create({
+        store: this.get('store'),
+        model: appointment
+      }));
+    },
     openAppointmentModal: function (appointment) {
       var selected_time = moment("2010-12-12T" + appointment.get('time')).format("HH:mm"),
           sp = appointment.get('service_provider');

@@ -17,8 +17,7 @@ SmartClient.Appointment = DS.Model.extend({
   visit_logs: DS.attr(),
   service_option_ids: DS.attr(),
   service_options: DS.hasMany('serviceOption', {async: true}),
-  note_ids: DS.attr(),
-  notes: DS.hasMany('pregnancyNote', {async: true}),
+  pregnancy_notes: DS.attr(),
 
   // Allow deletion if entry is in the future
   canDelete: function() {
