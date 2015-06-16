@@ -1666,7 +1666,7 @@ $ curl -X POST http://localhost:5000/pregnancies/1/notes \
   -H "Api-Key: de0404688099d3088baa" \
   -H "Auth-Token: TEST" \
   -H "Content-Type: application/json"
-  -d '{"note":{"note": "test","service_provider_id":1}}' \
+  -d '{"note":{"note": "test"}}' \
 
 {
     "note": {
