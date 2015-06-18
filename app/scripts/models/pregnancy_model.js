@@ -11,5 +11,10 @@ SmartClient.Pregnancy = DS.Model.extend({
   babies: DS.hasMany('baby'),
   anti_d_histories: DS.hasMany('antiDHistory'),
   pregnancy_notes: DS.attr(),
-  service_user: DS.belongsTo('serviceUser')
+  pregnancy_actions: DS.hasMany('pregnancyAction'),
+  service_user: DS.belongsTo('serviceUser'),
+
+  sorted_pregnancy_actions: function () {
+    return this.get('pregnancy_actions').sortBy('created_at')
+  }.property('pregnancy_actions.@each')
 });

@@ -5,7 +5,11 @@
         <i class="icon-white icon-calendar"></i> New appointment
       </button>
     {{/link-to}}
+    <button class="btn btn-primary btn-large pull-right" {{action 'modal_should_open' 'pregnancy_action_modal'}}>
+      <i class="icon-white icon-calendar"></i> Create an action
+    </button>
   </h1>
+  {{render "service_user/pregnancy_action" model}}
   <h4>{{age}} yrs, P: {{clinical_fields.parity}}, G: {{gestation}}</h4>
 
   <hr/>

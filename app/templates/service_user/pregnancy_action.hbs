@@ -1,0 +1,50 @@
+<div class="modal share-modal fade" id="pregnancy_action_modal" aria-hidden="true" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h3>Select actions for {{model.personal_fields.name}}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Click the buttons to record an action required for this woman</h3>
+          </div>
+          <div class="btn-group-justified" role="group">
+            <div class="btn-group">
+              {{#each sua in service_user_actions}}
+                <button type="button" class="btn btn-default" {{bind-attr data-sua="sua.short_code_normalized"}} {{action 'create_action' sua.short_code}}>{{sua.short_code}}</button>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">List of actions taken recently for this woman</h3>
+          </div>
+          <table class="table">
+            <th>Action</th>
+            <th>Time requested</th>
+            <th>Requested by</th>
+            <tbody>
+              {{#each action in model.current_pregnancy.sorted_pregnancy_actions}}
+                <tr>
+                  <td>{{action.action}}</td>
+                  <td>{{action.formatted_time}}</td>
+                  <td>{{action.service_provider.name}}</td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

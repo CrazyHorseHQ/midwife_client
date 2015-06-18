@@ -37,6 +37,8 @@ SmartClient.Router.map(function () {
     this.resource('service_option', {path: '/:service_option_id'}, function(){});
   });
 
+  this.resource('pregnancy_actions', function() {});
+
   this.resource('service_options', function () {
     this.resource('service_option', {path: '/:service_option_id'}, function () {
       this.resource('clinics', function () {

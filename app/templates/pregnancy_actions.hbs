@@ -1,0 +1,28 @@
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">Actions created recently that need to be completed</h3>
+  </div>
+
+  <table class="table">
+    <th>Action</th>
+    <th>Requested For</th>
+    <th>Requested By</th>
+    <th>Mark as complete</th>
+    <tbody>
+      {{#each action in model}}
+        {{#unless action.complete}}
+          <tr {{bind-attr data-preg-action="action.id"}}>
+            <td>{{action.action}}</td>
+            <td>{{action.pregnancy.service_user.personal_fields.name}}</td>
+            <td>{{action.service_provider.name}} ({{action.formatted_time}})</td>
+            <td>
+              <button class="btn btn-xs btn-info" {{action 'mark_complete' action.id}}>
+                <span class="glyphicon glyphicon-ok"></span> Mark Complete
+              </button>
+            </td>
+          </tr>
+        {{/unless}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>
