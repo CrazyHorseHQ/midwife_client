@@ -49,6 +49,8 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
     - [Get actions for a pregnancy - GET /pregnancies/1/actions](#get-pregnancies1actions)
     - [Create new action for a pregnancy - POST /pregnancies/1/actions](#post-pregnancies1actions)
     - [Update an action for a pregnancy - PUT /pregnancies/1/actions/1](#put-pregnancies1actions1)
+- [Service User Action Resources](#service-user-action-resources)
+    - [Get all SU actions - GET /service_user_actions](#get-service_user_actions)
 
 #Authentication
 
