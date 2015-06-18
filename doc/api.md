@@ -45,6 +45,10 @@ As with anything, this is far from perfect or 100% accurate, so if you spot an i
 - [Pregnancy Note Resources](#pregnancy-note-resources)
     - [Get notes for a pregnancy - GET /pregnancies/1/notes](#get-pregnancies1notes)
     - [Create new note for a pregnancy - POST /pregnancies/1/notes](#post-pregnancies1notes)
+- [Pregnancy Action Resources](#pregnancy-action-resources)
+    - [Get actions for a pregnancy - GET /pregnancies/1/actions](#get-pregnancies1actions)
+    - [Create new action for a pregnancy - POST /pregnancies/1/actions](#post-pregnancies1actions)
+    - [Update an action for a pregnancy - PUT /pregnancies/1/actions/1](#put-pregnancies1actions1)
 
 #Authentication
 
@@ -1691,3 +1695,85 @@ $ curl -X POST http://localhost:5000/pregnancies/1/notes \
 }
 ```
 
+# Pregnancy Action Resources
+
+## GET /pregnancies/1/actions
+
+####Notes
+
+Return a list of actions for the pregnancy
+
+####Example
+
+```bash
+$ curl -X GET http://localhost:5000/pregnancies/1/actions \
+  -H "Api-Key: de0404688099d3088baa" \
+  -H "Auth-Token: TEST"
+
+{
+    "pregnancy_actions": [
+    	{
+	    	action: "Booking Bloods",
+			complete: false,
+			created_at: "2015-06-18T17:16:13.031631+00:00",
+			id: 36,
+			pregnancy_id: 1,
+			service_provider_id: 1
+		}
+	]
+}
+```
+
+## POST /pregnancies/1/actions
+
+####Notes
+
+Create a new action for a pregnancy
+
+####Example
+
+```bash
+$ curl -X POST http://localhost:5000/pregnancies/1/actions \
+  -H "Api-Key: de0404688099d3088baa" \
+  -H "Auth-Token: TEST" \
+  -H "Content-Type: application/json"
+  -d '{"pregnancy_action":{"action": "Booking Bloods"}}' \
+
+{
+    "pregnancy_action": {
+	    action: "Booking Bloods",
+		complete: false,
+		created_at: "2015-06-18T17:16:13.031631+00:00",
+		id: 36,
+		pregnancy_id: 1,
+		service_provider_id: 1
+	}
+}
+```
+
+## PUT /pregnancies/1/actions
+
+####Notes
+
+Update an existing action for a pregnancy. Only used for updating the complete flag.
+
+####Example
+
+```bash
+$ curl -X PUT http://localhost:5000/pregnancies/1/actions/1 \
+  -H "Api-Key: de0404688099d3088baa" \
+  -H "Auth-Token: TEST" \
+  -H "Content-Type: application/json"
+  -d '{"pregnancy_action":{"complete": true}}' \
+
+{
+    "pregnancy_action": {
+	    action: "Booking Bloods",
+		complete: false,
+		created_at: "2015-06-18T17:16:13.031631+00:00",
+		id: 36,
+		pregnancy_id: 1,
+		service_provider_id: 1
+	}
+}
+```
