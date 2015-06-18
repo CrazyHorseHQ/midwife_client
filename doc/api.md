@@ -1751,7 +1751,7 @@ $ curl -X POST http://localhost:5000/pregnancies/1/actions \
 }
 ```
 
-## PUT /pregnancies/1/actions
+## PUT /pregnancies/1/actions/1
 
 ####Notes
 
@@ -1775,5 +1775,31 @@ $ curl -X PUT http://localhost:5000/pregnancies/1/actions/1 \
 		pregnancy_id: 1,
 		service_provider_id: 1
 	}
+}
+```
+
+# Service User Action Resources
+
+## GET /service_user_actions
+
+####Notes
+
+Return a list of actions for presenting to the service users. These options are submitted as a string to the pregnancy_actions resource.
+
+####Example
+
+```bash
+$ curl -X GET http://localhost:5000/service_user_actions \
+  -H "Api-Key: de0404688099d3088baa" \
+  -H "Auth-Token: TEST"
+
+{
+    service_user_actions: [
+    	{
+			description: "Collective term for the total combination of tests: FBC + Group and antibodies, and Rhesus Factor + Serology. This is typically ordered for Service Users attending their first visit",
+			id: 6,
+			short_code: "Booking Bloods"
+		}
+	]
 }
 ```
