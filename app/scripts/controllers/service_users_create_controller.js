@@ -20,6 +20,7 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
           directions: self.get('directions'),
           home_phone: self.get('home_phone'),
           mobile_phone: self.get('mobile_phone'),
+          next_of_kin_name: self.get('next_of_kin_name'),
           next_of_kin_phone: self.get('next_of_kin_phone'),
           dob: self.get('dob')
         },
@@ -43,6 +44,7 @@ SmartClient.ServiceUsersCreateController = Ember.ObjectController.extend({
           'hospital_number': '',
           'home_phone': '',
           'mobile_phone': '',
+          'next_of_kin_name': '',
           'next_of_kin_phone': '',
           'estimated_delivery_date': '',
           'dob': '',
