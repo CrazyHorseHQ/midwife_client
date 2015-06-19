@@ -14,10 +14,14 @@ SmartClient.EditableMultiSelectComponent = SmartClient.EditableFieldComponent.ex
   didInsertElement: function () {
     // Setup the selected values based on the content and selectValue
     var values = this.get('selectValue');
-    var selectedObj = this.get('selectContent').filter(function(item, index, enumerable) {
-      return values.contains(item.value);
-    });
-    this.set('selectedValues', selectedObj);
+
+    if (values && values.length) {
+      var selectedObj = this.get('selectContent').filter(function(item, index, enumerable) {
+        return values.contains(item.value);
+      });
+      this.set('selectedValues', selectedObj);
+    }
+
     this._super();
   }
 });
