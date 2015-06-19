@@ -72,7 +72,7 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
       self.get('store').find('pregnancy', pregnancyId).then(function(model) {
 
         var latest_mp = Ember.$('#last_menstrual_period').val()
-        model.set('last_menstrual_period', latest_mp)
+        model.set('last_menstrual_period', latest_mp || null)
 
         model.save().then(function () {
           Ember.$('#su_success').show()
