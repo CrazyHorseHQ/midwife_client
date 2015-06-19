@@ -13,13 +13,15 @@
     {{em-input property="name" label="Full Name" placeholder="Enter a full name"}}
     {{em-input property="email" label="Email" placeholder="Enter an email"}}
     {{em-input property="hospital_number" label="Hospital Number" placeholder="Can be left blank until later"}}
-    {{em-text property="address" label="Address" placeholder="Full Address"}}
+    {{em-input property="home_address_line1" label="Address" placeholder="Address Line 1"}}
+    {{em-input property="home_address_line2" label="Address" placeholder="Address Line 2"}}
     {{em-select property="home_county" label="Home County" content=homeCountyOptions
             optionValuePath="content.type"
             optionLabelPath="content.type"
             prompt="Choose a County"
     }}
     {{em-input property="home_post_code" label="Post Code" placeholder="Post Code if applicable"}}
+    {{em-input property="home_city" label="City/Town/Village" placeholder="City"}}
     {{em-input property="home_phone" label="Home Phone" placeholder="Primary contact number"}}
     {{em-input property="mobile_phone" label="Personal Phone" placeholder="Secondary contact number"}}
     {{em-input property="next_of_kin_name" label="Next Of Kin Name" placeholder="Next of kin's full name"}}
