@@ -63,7 +63,7 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
 
       model.save().then(function () {
         Ember.$('#su_success').show()
-      }, function () {
+      }, function (resp) {
         self.setErrors(resp, "su_edit_errors")
       });
     },
