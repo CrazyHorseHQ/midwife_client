@@ -1329,7 +1329,8 @@ $ curl -X GET 54.72.7.91:8888/pregnancies  -d '{}' \
       "anti_d": "",
       "feeding": "",
       "last_menstrual_period": "",
-      "gestation": "23 + 4"
+      "gestation": "23 + 4",
+      "baby_age": "D"
     }
   ]
 }
@@ -1362,7 +1363,8 @@ $ curl -X GET 54.72.7.91:8888/pregnancies/1  -d '{}' \
     "anti_d": "",
     "feeding": "",
     "last_menstrual_period": "",
-    "gestation": "23 + 4"
+    "gestation": "23 + 4",
+    "baby_age": "D + 1"
   }
 }
 ```
