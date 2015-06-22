@@ -52,6 +52,15 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
     {label: "IM", value: "IM"},
     {label: "Declined", value: "Declined"}
   ],
+  hearing_choices: [
+    {label: "Complete", value: "Complete"},
+    {label: "Appt given", value: "Appt given"},
+    {label: "Declined", value: "Declined"}
+  ],
+  nbst_choices: [
+    {label: "Done", value: "Done"},
+    {label: "Declined", value: "Declined"}
+  ],
 
   actions: {
     save: function(){

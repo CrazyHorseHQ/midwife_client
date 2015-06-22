@@ -5,12 +5,14 @@ SmartClient.Baby = DS.Model.extend({
   weight: DS.attr(),
   vit_k: DS.attr(),
   hearing: DS.attr(),
-  newborn_screening_test: DS.attr(),
+  nbst: DS.attr(),
   birth_outcome: DS.attr(),
   delivery_date_time: DS.attr(),
   pregnancy: DS.belongsTo('pregnancy'),
   service_user: DS.belongsTo('serviceUser'),
   vit_k_histories: DS.hasMany('vitKHistory', {async: true}),
+  hearing_histories: DS.hasMany('hearingHistory', {async: true}),
+  nbst_histories: DS.hasMany('nbstHistory', {async: true}),
 
   delivery_date: function () {
     return moment(this.get('delivery_date_time')).format("YYYY-MM-DD");
