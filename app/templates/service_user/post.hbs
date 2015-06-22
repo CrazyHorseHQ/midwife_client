@@ -93,7 +93,16 @@
         </tr>
         <tr>
           <td>Hearing</td>
-          <td>{{view SmartClient.InplaceTextField contentBinding="baby.hearing"}}</td>
+          <td>{{editable-select selectValue=baby.hearing selectContent=hearing_choices}}</td>
+          <td>
+            <a class="pull-right">
+              <h3 style="display: inline;" data-toggle="modal" data-target="#hearing_su_{{unbound baby.id}}">
+                <span class="glyphicon glyphicon-info-sign"></span>
+              </h3>
+            </a>
+
+            {{render "service_user/hearings" baby}}
+          </td>
         </tr>
         <tr>
           <td>Birth Outcome</td>
@@ -101,7 +110,16 @@
         </tr>
         <tr>
           <td>NBST</td>
-          <td>{{view SmartClient.InplaceTextField contentBinding="baby.newborn_screening_test"}}</td>
+          <td>{{editable-select selectValue=baby.nbst selectContent=nbst_choices}}</td>
+          <td>
+            <a class="pull-right">
+              <h3 style="display: inline;" data-toggle="modal" data-target="#nbst_su_{{unbound baby.id}}">
+                <span class="glyphicon glyphicon-info-sign"></span>
+              </h3>
+            </a>
+
+            {{render "service_user/nbsts" baby}}
+          </td>
         </tr>
       </tbody>
     </table>
