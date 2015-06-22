@@ -3,6 +3,6 @@ SmartClient.ServiceUserAction = DS.Model.extend({
   description: DS.attr(),
 
   short_code_normalized: function () {
-    return this.get('short_code').replace(/ /g,'')
+    return this.get('short_code').replace(/[\W_]+/g,'')
   }.property()
 });

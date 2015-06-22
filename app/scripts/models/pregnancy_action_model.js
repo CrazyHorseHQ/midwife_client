@@ -10,6 +10,6 @@ SmartClient.PregnancyAction = DS.Model.extend({
   }.property(),
 
   action_normalized: function () {
-    return this.get('action').replace(/ /g,'')
+    return this.get('action').replace(/[\W_]+/g,'')
   }.property()
 });
