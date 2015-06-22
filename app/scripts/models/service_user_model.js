@@ -51,6 +51,10 @@ SmartClient.ServiceUser = DS.Model.extend({
     return compiled_pregnancies
   }.property(),
 
+  baby_age: function () {
+    return this.get('current_pregnancy.baby_age')
+  }.property(),
+
   gestation: function () {
     return this.get('current_pregnancy.gestation')
   }.property()

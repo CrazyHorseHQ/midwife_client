@@ -8,6 +8,7 @@ SmartClient.Pregnancy = DS.Model.extend({
   feeding: DS.attr(),
   last_menstrual_period: DS.attr(),
   created_at: DS.attr(),
+  baby_age: DS.attr(),
   babies: DS.hasMany('baby'),
   anti_d_histories: DS.hasMany('antiDHistory'),
   pregnancy_notes: DS.hasMany('pregnancyNote'),

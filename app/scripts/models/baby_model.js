@@ -16,18 +16,12 @@ SmartClient.Baby = DS.Model.extend({
   }.property(),
 
   delivery_time: function () {
-    return moment(this.get('delivery_date_time')).format("HH:mm");
+    return moment(this.get('delivery_date_time')).utc().format("HH:mm");
   }.property(),
 
   days_since_birth: function () {
-    var ddt = this.get('delivery_date_time')
-
-    if (ddt) {
-      return moment().diff(ddt, 'days')
-    } else {
-      return "Delivery date not set"
-    }
-  }.property(),
+    return this.get('pregnancy.baby_age');
+  }.property('pregnancy'),
 
   kg_weight: function () {
     return this.get('weight') / 1000
