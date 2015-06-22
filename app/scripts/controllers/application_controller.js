@@ -2,6 +2,14 @@ SmartClient.ApplicationController = Ember.ArrayController.extend({
   // Implement your controller here.
   needs: ['login'],
 
+  currentPath: function() {
+    return SmartClient.__container__.lookup('router:main').location.location.hash;
+  }.property(),
+
+  hideNav: function() {
+    return this.get('currentPath') == "about";
+  }.property(),
+
   currentUser: function() {
     if (localStorage.getItem('loggedinUser')) {
       var json_sp = JSON.parse(localStorage.getItem('loggedinUser'));

@@ -1,4 +1,5 @@
 SmartClient.Router.map(function () {
+  this.route('about');
   this.route('login');
   this.route('logout');
   this.route('reset_passwords');
