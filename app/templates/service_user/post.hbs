@@ -34,6 +34,15 @@
       <tr>
         <td>Feeding</td>
         <td>{{editable-select selectValue=current_pregnancy.feeding selectContent=feeding_types}}</td>
+        <td>
+          <a class="pull-right">
+            <h3 style="display: inline;" data-toggle="modal" data-target="#feeding_su_{{unbound model.id}}">
+              <span class="glyphicon glyphicon-info-sign"></span>
+            </h3>
+          </a>
+
+          {{render "service_user/feedings" model}}
+        </td>
       </tr>
       <tr>
         <td>Last Menstrual Period</td>

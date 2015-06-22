@@ -1,0 +1,40 @@
+<div class="modal share-modal fade" id="feeding_su_{{unbound model.id}}" aria-hidden="true" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h3>Feeding History for {{model.personal_fields.name}}</h3>
+      </div>
+      <div class="modal-body">
+        {{#each pregnancy in model.pregnancies}}
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{pregnancy.gestation}}</h3>
+            </div>
+
+            <table class="table">
+              <th>Value</th>
+              <th>Time changed at</th>
+              <th>Changed by</th>
+              <tbody>
+                {{#each feeding in pregnancy.feeding_histories}}
+                  <tr>
+                    <td>{{feeding.feeding}}</td>
+                    <td>{{feeding.formatted_time}}</td>
+                    <td>{{feeding.service_provider.name}}</td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        {{/each}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
