@@ -47,6 +47,11 @@ SmartClient.ServiceUserController = Ember.ObjectController.extend({
     {label: "Not Required", value: "Not Required"},
     {label: "Declined", value: "Declined"}
   ],
+  vit_k_choices: [
+    {label: "Oral", value: "Oral"},
+    {label: "IM", value: "IM"},
+    {label: "Declined", value: "Declined"}
+  ],
 
   actions: {
     save: function(){

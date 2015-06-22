@@ -51,7 +51,7 @@
 
 <hr/>
 
-{{#each current_pregnancy.babies}}
+{{#each baby in current_pregnancy.babies}}
   <div class="panel panel-info">
     <div class="panel-heading">
       <h3 class="panel-title">Baby</h3>
@@ -60,43 +60,52 @@
       <tbody>
         <tr>
           <td>Date Of Delivery</td>
-          <td><input id="delivery_date" type="date" value="{{unbound delivery_date}}"></td>
+          <td><input id="delivery_date" type="date" value="{{unbound baby.delivery_date}}"></td>
         </tr>
         <tr>
           <td>Time Of Delivery</td>
-          <td><input id="delivery_time" type="time" value="{{unbound delivery_time}}"></td>
+          <td><input id="delivery_time" type="time" value="{{unbound baby.delivery_time}}"></td>
         </tr>
         <tr>
           <td>Days Since Birth</td>
-          <td>{{days_since_birth}}</td>
+          <td>{{baby.days_since_birth}}</td>
         </tr>
         <tr>
           <td>Sex Of Baby</td>
-          <td>{{view SmartClient.InplaceTextField contentBinding="gender"}}</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="baby.gender"}}</td>
         </tr>
         <tr>
           <td>Weight</td>
-          <td>{{editable-field contentBinding="weight" customDisplayBinding="kg_weight"}} kgs</td>
+          <td>{{editable-field contentBinding="weight" customDisplayBinding="baby.kg_weight"}} kgs</td>
         </tr>
         <tr>
           <td>Vitamin K</td>
-          <td>{{view SmartClient.InplaceTextField contentBinding="vitamin_k"}}</td>
+          <td>{{editable-select selectValue=baby.vit_k selectContent=vit_k_choices}}</td>
+          <td>
+            <a class="pull-right">
+              <h3 style="display: inline;" data-toggle="modal" data-target="#vit_k_su_{{unbound baby.id}}">
+                <span class="glyphicon glyphicon-info-sign"></span>
+              </h3>
+            </a>
+
+            {{render "service_user/vit_ks" baby}}
+          </td>
         </tr>
         <tr>
           <td>Hearing</td>
-          <td>{{view SmartClient.InplaceTextField contentBinding="hearing"}}</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="baby.hearing"}}</td>
         </tr>
         <tr>
           <td>Birth Outcome</td>
-          <td>{{view SmartClient.InplaceTextField contentBinding="birth_outcome"}}</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="baby.birth_outcome"}}</td>
         </tr>
         <tr>
           <td>NBST</td>
-          <td>{{view SmartClient.InplaceTextField contentBinding="newborn_screening_test"}}</td>
+          <td>{{view SmartClient.InplaceTextField contentBinding="baby.newborn_screening_test"}}</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <button {{action 'saveBaby' id}} class="btn btn-success">Save Baby Details</button>
+  <button {{action 'saveBaby' baby.id}} class="btn btn-success">Save Baby Details</button>
 {{/each}}
